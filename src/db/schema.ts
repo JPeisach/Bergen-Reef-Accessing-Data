@@ -1,4 +1,4 @@
-import { mysqlTable, mysqlSchema, AnyMySqlColumn, primaryKey, unique, int, varchar, timestamp, float, foreignKey, text } from "drizzle-orm/mysql-core"
+import { mysqlTable, mysqlSchema, AnyMySqlColumn, primaryKey, unique, int, varchar, datetime, float, foreignKey, date, text } from "drizzle-orm/mysql-core"
 import { sql } from "drizzle-orm"
 
 export const accounts = mysqlTable("accounts", {
@@ -17,7 +17,7 @@ export const accounts = mysqlTable("accounts", {
 export const coralData = mysqlTable("coral_data", {
 	recordId: int("record_id").autoincrement().notNull(),
 	tankNumber: int("tank_number").notNull(),
-	timestamp: timestamp({ mode: 'string' }).notNull(),
+	datetime: datetime({ mode: 'string'}).notNull(),
 	temperature: float(),
 	ph: float(),
 	orp: int(),
@@ -63,7 +63,8 @@ export const coralDataObservationsTable = mysqlTable("coral_data_observations_ta
 export const observations = mysqlTable("observations", {
 	observationId: int("observation_id").autoincrement().notNull(),
 	authorId: int("author_id").notNull().references(() => accounts.accountId),
-	timestamp: timestamp({ mode: 'string' }).notNull(),
+	// you can use { mode: 'date' }, if you want to have Date as type for this column
+	timestamp: date({ mode: 'string' }).notNull(),
 	observationText: text("observation_text"),
 	// Warning: Can't parse blob from database
 	// blobType: blob("image_data"),
