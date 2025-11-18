@@ -24,7 +24,7 @@ export default async function getMostRecentElements() {
       var result = await db
         .select()
         .from(coralData)
-        .orderBy(desc(coralData.timestamp))
+        .orderBy(desc(coralData.datetime))
         .limit(1);
 
       values.push(result[0]);

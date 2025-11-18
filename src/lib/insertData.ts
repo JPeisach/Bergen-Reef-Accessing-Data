@@ -9,14 +9,16 @@ export default async function insertData(
   date: string,
 ) {
   const getProbeValue = (probeName: string) => {
-    return data.probe.find((probe) => probe.name === probeName).value;
+    return data["probe"].find((probe: any) => probe.name === probeName).value;
   };
 
   const entry: typeof coralData.$inferInsert = {
     // FIXME: When we work with multiple tanks, report correctly
     tankNumber: 1,
-    datetime: new Date(date),
+    datetime: date,
 
+    // FIXME: ts2353
+    // @ts-ignore
     temperature: getProbeValue("Tmp"),
     ph: getProbeValue("pH"),
     orp: getProbeValue("ORP"),

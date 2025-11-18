@@ -10,7 +10,7 @@ export default async function getMostRecentData(type: string) {
     const result = await db
       .select()
       .from(coralData)
-      .orderBy(desc(coralData.timestamp)) // Order by most recent first
+      .orderBy(desc(coralData.datetime)) // Order by most recent first
       .limit(240); // Get only the most recent per type
 
     //console.log(`Fetched most recent values for types: ${type}.`);
