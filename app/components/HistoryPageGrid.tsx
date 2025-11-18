@@ -250,7 +250,7 @@ const saveChanges = async () => {
     const editedRowList = Object.values(editedRows);
     const unsavedNewRows = editedRowList.filter((row) => row.isNewRow);
     const rowsToUpdate = editedRowList.filter((row) => !row.isNewRow);
-    var error = null;
+    let error = null;
 
     if (unsavedNewRows.length > 0) {
       for (let i = 0; i < unsavedNewRows.length; i++) {
@@ -374,7 +374,7 @@ return (
                     headerCheckboxSelection: true,
                     width: 40,
                     suppressMenu: true,
-                    pinned: "left" as "left",
+                    pinned: "left" as const,
                     editable: false,
                     filter: false,
                   },                  
@@ -454,7 +454,7 @@ return (
             });
             }}
             postSortRows= {(params) => {
-              let rowNodes = params.nodes;
+              const rowNodes = params.nodes;
               let nextInsertPos = 0;
 
               for (let i = 0; i < rowNodes.length; i++) {

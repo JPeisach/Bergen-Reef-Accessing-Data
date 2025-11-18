@@ -18,10 +18,10 @@ export default async function getMostRecentElements() {
       "Nitrite",
       "Phosphate",
     ];
-    let values = [];
+    const values = [];
 
     for (let i = 0; i < elements.length; i++) {
-      var result = await db
+      const result = await db
         .select()
         .from(coralData)
         .orderBy(desc(coralData.datetime))

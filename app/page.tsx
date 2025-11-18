@@ -6,7 +6,6 @@ import "./globals.css";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
-import { headers } from "next/headers";
 
 import {
   LineChart,
@@ -52,7 +51,7 @@ const infoContent = {
 const styles = {
   container: {
     display: "flex",
-    flexDirection: "row" as "row", // Explicitly cast the type
+    flexDirection: "row" as const, // Explicitly cast the type
     gap: "10px",
     padding: "0 20px",
   },
