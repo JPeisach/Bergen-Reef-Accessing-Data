@@ -51,7 +51,7 @@ const infoContent = {
 const styles = {
   container: {
     display: "flex",
-    flexDirection: "row" as "row", // Explicitly cast the type
+    flexDirection: "row" as const, // Explicitly cast the type
     gap: "10px",
     padding: "0 20px",
   },

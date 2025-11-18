@@ -6,7 +6,7 @@ interface ZoomSliderProps {
 }
 
 const ZoomSlider: React.FC<ZoomSliderProps> = ({ value, onChange }) => {
-  let [sliderValue, setSliderValue] = useState(value);
+  const [sliderValue, setSliderValue] = useState(value);
   return (
     <div className="w-full">
           <div className="mt-[265px] ml-4 text-left text-m font-semibold">Zoom: {sliderValue}%</div>

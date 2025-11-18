@@ -16,7 +16,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
             try {
                 const response = await fetch("/api/getMostRecentElements");
                 const rawData = await response.json();
-                var elementData = [];
+                const elementData = [];
 
                 console.log("Fetched data:", rawData);
 
@@ -26,7 +26,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 }
 
                 for (let i = 0; i < rawData.length; i++) {
-                    var value = 0;
+                    let value = 0;
 
                     if (i == 3 || i == 5) {
                         value = Math.round(rawData[i].value);

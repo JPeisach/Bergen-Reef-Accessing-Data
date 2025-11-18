@@ -553,12 +553,12 @@ export default function DataLineGraph() {
 
   const handleWeeksChange = (weeks: number) => {
     const today = new Date();
-    let newNumWeeks = weeks;
+    const newNumWeeks = weeks;
     let newEndDate = new Date(endDate);
     if (newEndDate > today) {
       newEndDate = today;
     }
-    let newStartDate = new Date(newEndDate);
+    const newStartDate = new Date(newEndDate);
     newStartDate.setDate(newEndDate.getDate() - newNumWeeks * 7);
     setNumWeeks(newNumWeeks);
     setStartDate(newStartDate);
