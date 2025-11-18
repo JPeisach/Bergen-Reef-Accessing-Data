@@ -6,7 +6,6 @@ import "./globals.css";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
-import { headers } from "next/headers";
 
 import {
   LineChart,
