@@ -30,7 +30,7 @@
     "xml2js": "^0.6.2"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
