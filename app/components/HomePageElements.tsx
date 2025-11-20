@@ -18,33 +18,27 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 const rawData = await response.json();
                 var elementData = [];
 
-                console.log("Fetched data:", rawData);
+                console.log("Fetched recent elements data:", rawData);
 
                 if (!Array.isArray(rawData)) {
                     console.error("Unexpected API response:", rawData);
                     return;
                 }
 
-                for (let i = 0; i < rawData.length; i++) {
-                    var value = 0;
-
-                    if (i == 3 || i == 5) {
-                        value = Math.round(rawData[i].value);
-                    }
-                    else if (rawData[i]) {
-                        value = rawData[i].value;
-                    }
-
-                    elementData.push(value);
-                }
+                elementData.push(rawData[0].ph);
+                elementData.push(rawData[0].salt);
+                elementData.push(rawData[0].temperature);
+                elementData.push(rawData[0].orp);
+                elementData.push(rawData[0].alkalinity);
+                elementData.push(rawData[0].calcium);
 
                 setElementData(elementData);
-            } 
+            }
             catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
-    
+
         fetchData();
         const interval = setInterval(fetchData, 300000);
         return () => clearInterval(interval);
@@ -60,7 +54,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
         <div className="h-screen overflow-hidden p-2">
             <div className="h-full grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 grid-rows-3 gap-3">
                 {/* PH */}
-                <div 
+                <div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("pH")}
@@ -72,7 +66,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 </div>
 
                 {/* SALINITY */}
-                <div 
+                <div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("Salinity")}
@@ -84,7 +78,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 </div>
 
                 {/* TEMPERATURE */}
-                <div 
+                <div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("Temperature")}
@@ -96,7 +90,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 </div>
 
                 {/* ORP */}
-                <div 
+                <div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("ORP")}
@@ -108,7 +102,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 </div>
 
                 {/* ALKALINITY */}
-                <div 
+                <div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("Alkalinity")}
@@ -120,7 +114,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 </div>
 
                 {/* CALCIUM */}
-                <div 
+                <div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("Calcium")}
@@ -131,8 +125,10 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                     <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">ppm</div>
                 </div>
 
+                {/* Manual input data - currently stubbed. */}
+
                 {/* NITRATE */}
-                <div 
+                {/*<div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("Nitrate")}
@@ -144,7 +140,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                 </div>
 
                 {/* NITRITE */}
-                <div 
+                {/*<div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("Nitrite")}
@@ -153,10 +149,10 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                     <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">NITRITE</div>
                     <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">{elementData[7]}</div>
                     <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">ppm</div>
-                </div>
+                </div>*/}
 
                 {/* PHOSPHATE */}
-                <div 
+                {/*<div
                     className={panelClasses}
                     style={{ fontSize: '1.8vw' }}
                     onClick={() => handlePanelClick("Phosphate")}
@@ -165,7 +161,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
                     <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">PHOSPHATE</div>
                     <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">{elementData[8]}</div>
                     <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">ppm</div>
-                </div>
+                </div>*/}
             </div>
         </div>
     );
