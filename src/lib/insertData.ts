@@ -19,7 +19,7 @@ export default async function insertData(
   const entry = {
     // FIXME: When we work with multiple tanks, report correctly
     tankNumber: 1,
-    datetime: date,
+    datetime: new Date(date),
 
     // FIXME: ts2353
     // @ts-ignore
