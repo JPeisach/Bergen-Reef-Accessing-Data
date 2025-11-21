@@ -6,11 +6,12 @@ const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function insertData(
   data: Array<Record<string, any>>,
-  date: string,
+  date: Date,
 ) {
   const getProbeValue = (probeName: string) => {
-    console.log(probeName);
-    const val = data["probe"].find((probe: any) => probe.name === probeName);
+    const val = data["probe"].find((probe: any) =>
+      probe.name.toLowerCase().startsWith(probeName.toLowerCase()),
+    );
 
     // FIXME: Some values may not be reported under the same name
     return val == null ? null : val.value;
@@ -19,7 +20,9 @@ export default async function insertData(
   const entry = {
     // FIXME: When we work with multiple tanks, report correctly
     tankNumber: 1,
-    datetime: new Date(date),
+
+    // FIXME: convert to datetime format without changing timezone
+    datetime: date.toISOString(),
 
     // FIXME: ts2353
     // @ts-ignore
@@ -53,10 +56,10 @@ export default async function insertData(
     wavePumpW: getProbeValue("WavepumpW"),
 
     // TODO: what is "Tmpx4" and is it worth reporting?
-    salt: getProbeValue("SALT"),
-    alkalinity: getProbeValue("Alkx5"),
-    calcium: getProbeValue("Cax5"),
-    magnesium: getProbeValue("Mgx5"),
+    salt: getProbeValue("Salt"),
+    alkalinity: getProbeValue("Alkx"),
+    calcium: getProbeValue("Cax"),
+    magnesium: getProbeValue("Mgx"),
 
     volt2: getProbeValue("Volt_2"),
   };

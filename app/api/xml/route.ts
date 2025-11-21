@@ -13,7 +13,10 @@ export async function POST(request: Request) {
     const parsed_xml = await parser.parseStringPromise(raw_xml);
 
     console.log("Parsed XML:", parsed_xml);
-    await insertData(parsed_xml.status.probes, parsed_xml.status.date);
+    await insertData(
+      parsed_xml.status.probes,
+      new Date(parsed_xml.status.date),
+    );
 
     return NextResponse.json({ status: 200 });
   } catch (error) {
