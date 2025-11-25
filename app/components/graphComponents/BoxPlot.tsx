@@ -492,7 +492,7 @@ export default function BoxPlot() {
 
   const setRangeModeWithDates = (mode: "day" | "week" | "twoWeeks") => {
     setRangeMode(mode);
-    let newEndDate = new Date(endDate || new Date());
+    const newEndDate = new Date(endDate || new Date());
     let newStartDate = new Date(endDate || new Date());
 
     switch (mode) {

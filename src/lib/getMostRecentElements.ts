@@ -7,7 +7,7 @@ const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function getMostRecentElements() {
   try {
-    var result = await db.select().from(coralData).orderBy(desc(coralData.datetime)).limit(1);
+    const result = await db.select().from(coralData).orderBy(desc(coralData.datetime)).limit(1);
 
     return result;
   } catch (error) {
