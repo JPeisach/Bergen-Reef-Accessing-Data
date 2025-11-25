@@ -16,7 +16,7 @@ export default function HomePageElements({ selectedType, onTypeSelectAction }: H
             try {
                 const response = await fetch("/api/getMostRecentElements");
                 const rawData = await response.json();
-                var elementData = [];
+                const elementData = [];
 
                 console.log("Fetched recent elements data:", rawData);
 

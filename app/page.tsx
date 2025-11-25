@@ -6,7 +6,6 @@ import "./globals.css";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
-import { headers } from "next/headers";
 
 import {
   LineChart,
@@ -52,7 +51,7 @@ const infoContent = {
 const styles = {
   container: {
     display: "flex",
-    flexDirection: "row" as "row", // Explicitly cast the type
+    flexDirection: "row" as const, // Explicitly cast the type
     gap: "10px",
     padding: "0 20px",
   },
@@ -108,21 +107,30 @@ export default function Page() {
 
   return (
     <div>
-      <NavigationBar defaultIndex={0} username={(user) ? user.name : "Guest"}/>
+      <NavigationBar defaultIndex={0} username={user ? user.name : "Guest"} />
 
       <br></br>
 
       {/*CONTAINER HOLDING ELEMENTS AND GRAPH IN HALVES OF THE SCREEN*/}
       <div style={styles.container}>
         {/*ELEMENTS*/}
-        <div style={{ position: "relative", zIndex: 1 } }>
-          <HomePageElements selectedType={selectedType} onTypeSelectAction={setSelectedType} />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <HomePageElements
+            selectedType={selectedType}
+            onTypeSelectAction={setSelectedType}
+          />
         </div>
 
         {/*CHART*/}
-        <div className="w-3/5 rounded-lg p-3 ml-1" style={{ position: "relative", zIndex: 1 }}>
+        <div
+          className="w-3/5 rounded-lg p-3 ml-1"
+          style={{ position: "relative", zIndex: 1 }}
+        >
           <ResponsiveContainer width={"100%"} height={"auto"}>
-            <HomePageGraph selectedType={selectedType} onTypeSelectAction={setSelectedType} />
+            <HomePageGraph
+              selectedType={selectedType}
+              onTypeSelectAction={setSelectedType}
+            />
           </ResponsiveContainer>
         </div>
       </div>
