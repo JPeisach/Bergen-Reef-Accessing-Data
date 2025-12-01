@@ -35,7 +35,7 @@ const CustomTooltip = ({ active, payload, label, selectedType }: CustomTooltipPr
     // Parse the datetime string and add 6 hours
     const date = new Date(label);
     date.setHours(date.getHours() + 6);
-
+    
     return (
       <div className="bg-white p-2 border border-gray-200 rounded shadow">
         <p className="text-sm">{date.toLocaleString()}</p>
@@ -54,7 +54,7 @@ export default function HomePageGraph({ selectedType, onTypeSelectAction }: Home
     onTypeSelectAction(e.target.value);
     setSelectedInfo(infoContent[e.target.value]);
   };
-
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -72,47 +72,15 @@ export default function HomePageGraph({ selectedType, onTypeSelectAction }: Home
 
         // Filter and format data
         const filteredData = result
-          .map((record) => {
-            const date = new Date(record.datetime);
+          .filter((item) => selectedType.includes(item.name))
+          .map((item) => {
+            const date = new Date(item.datetime);
             date.setHours(date.getHours() - 2);
-
-            switch(selectedType) {
-              case "pH":
-                return {
-                  datetime: date.toLocaleString(),
-                  value: record.ph,
-                };
-              case "Salinity":
-                return {
-                  datetime: date.toLocaleString(),
-                  value: record.salt,
-                };
-              case "Temperature":
-                return {
-                  datetime: date.toLocaleString(),
-                  value: record.temperature,
-                };
-              case "ORP":
-                return {
-                  datetime: date.toLocaleString(),
-                  value: record.orp,
-                };
-              case "Temperature":
-                return {
-                  datetime: date.toLocaleString(),
-                  value: record.temperature,
-                };
-              case "Alkalinity":
-                return {
-                  datetime: date.toLocaleString(),
-                  value: record.alkalinity,
-                };
-              case "Calcium":
-                return {
-                  datetime: date.toLocaleString(),
-                  value: record.calcium,
-                };
-            }
+            
+            return {
+              ...item,
+              datetime: date.toLocaleString(),
+            };
           });
 
         console.log("Filtered data:", filteredData);
