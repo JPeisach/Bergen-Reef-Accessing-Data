@@ -11,6 +11,7 @@ export default async function getMostRecentData(type: string) {
     const result = await db
       .select()
       .from(coralData)
+      .where(eq(coralData.name, type)) // Filter by types
       .orderBy(desc(coralData.datetime)) // Order by most recent first
       .limit(240); // Get only the most recent per type
 

@@ -7,9 +7,28 @@ const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function getMostRecentElements() {
   try {
-    const result = await db.select().from(coralData).orderBy(desc(coralData.datetime)).limit(1);
+    const elements = [
+      "pH",
+      "Salinity",
+      "Temperature",
+      "ORP",
+      "Alkalinity",
+      "Calcium",
+    ];
+    const values = [];
 
-    return result;
+    for (let i = 0; i < elements.length; i++) {
+      const result = await db
+        .select()
+        .from(coralData)
+        .where(eq(coralData.name, elements[i]))
+        .orderBy(desc(coralData.datetime))
+        .limit(1);
+
+      values.push(result[0]);
+    }
+
+    return values;
   } catch (error) {
     console.error("Error fetching most recent elements:", error);
     throw new Error("Failed to fetch most recent elements.");
