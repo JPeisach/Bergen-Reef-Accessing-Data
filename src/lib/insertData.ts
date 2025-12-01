@@ -50,11 +50,11 @@ export default async function insertData(
 
     // Construct row of the current data node with all its attributes
     const entry: typeof coralData.$inferInsert = {
-      datetime: date,
+      datetime: new Date(date).toISOString(),
       name: name,
       unit: unit,
       value: data[i].value,
-      updatedAt: date,
+      updatedAt: new Date(date).toISOString(),
     };
 
     // Insert row into the database
