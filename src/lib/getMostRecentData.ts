@@ -6,11 +6,11 @@ import { coralData } from "src/db/schema";
 const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function getMostRecentData(type: string) {
-  // TODO: Map type argument to a list of columns we want to select, or replace this endpoint
   try {
     const result = await db
       .select()
       .from(coralData)
+      .where(eq(coralData.name, type)) // Filter by types
       .orderBy(desc(coralData.datetime)) // Order by most recent first
       .limit(240); // Get only the most recent per type
 
