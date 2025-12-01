@@ -16,11 +16,11 @@ export default async function insertData(
       name = "Salinity";
     } else if (data[i].name === "Tmp") {
       name = "Temperature";
-    } else if (data[i].name === "Alkx4") {
+    } else if (data[i].name.startsWith("Alkx")) {
       name = "Alkalinity";
-    } else if (data[i].name === "Cax4") {
+    } else if (data[i].name.startsWith("Cax")) {
       name = "Calcium";
-    } else if (data[i].name === "Mgx4") {
+    } else if (data[i].name.startsWith("Mgx")) {
       name = "Magnesium";
     } else {
       name = data[i].name;
@@ -50,11 +50,11 @@ export default async function insertData(
 
     // Construct row of the current data node with all its attributes
     const entry: typeof coralData.$inferInsert = {
-      datetime: new Date(date),
+      datetime: date,
       name: name,
       unit: unit,
       value: data[i].value,
-      updated_at: new Date(date),
+      updatedAt: date,
     };
 
     // Insert row into the database

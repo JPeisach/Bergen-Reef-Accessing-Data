@@ -3,8 +3,8 @@ import { coralData, coralDataObservationsTable, observations, accounts } from ".
 
 export const coralDataObservationsTableRelations = relations(coralDataObservationsTable, ({one}) => ({
 	coralDatum: one(coralData, {
-		fields: [coralDataObservationsTable.recordId],
-		references: [coralData.recordId]
+		fields: [coralDataObservationsTable.dataId],
+		references: [coralData.id]
 	}),
 	observation: one(observations, {
 		fields: [coralDataObservationsTable.observationId],
