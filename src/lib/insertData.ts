@@ -6,69 +6,63 @@ const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function insertData(
   data: Array<Record<string, any>>,
-  date: Date,
+  date: string,
 ) {
-  const getProbeValue = (probeName: string) => {
-    const val = data["probe"].find((probe: any) =>
-      probe.name.toLowerCase().startsWith(probeName.toLowerCase()),
-    );
+  // Iterate over all pieces of data (nodes) in the array from the JSON
+  for (let i = 0; i < data.length; i++) {
+    // Check name of the current data node to determine its corresponding name
+    let name = "";
+    if (data[i].name === "Salt") {
+      name = "Salinity";
+    } else if (data[i].name === "Tmp") {
+      name = "Temperature";
+    } else if (data[i].name === "Alkx4") {
+      name = "Alkalinity";
+    } else if (data[i].name === "Cax4") {
+      name = "Calcium";
+    } else if (data[i].name === "Mgx4") {
+      name = "Magnesium";
+    } else {
+      name = data[i].name;
+    }
 
-    // FIXME: Some values may not be reported under the same name
-    return val == null ? null : val.value;
-  };
+    // Check type / name of the current data node to determine its type
+    let unit = "";
+    if (data[i].type === "Cond") {
+      unit = "ppt";
+    } else if (data[i].type === "Temp") {
+      unit = "°F";
+    } else if (data[i].type === "alk") {
+      unit = "dkH";
+    } else if (data[i].type === "ca" || data[i].type === "mg") {
+      unit = "ppm";
+    } else if (data[i].name === "LLS") {
+      unit = "in";
+    } else if (data[i].name === "Volt_2") {
+      unit = "Volts";
+    } else if (data[i].name.slice(data[i].name.length - 1) === "A") {
+      unit = "Amps";
+    } else if (data[i].name.slice(data[i].name.length - 1) === "W") {
+      unit = "Watts";
+    } else {
+      unit = data[i].type;
+    }
 
-  const entry = {
-    // FIXME: When we work with multiple tanks, report correctly
-    tankNumber: 1,
+    // Construct row of the current data node with all its attributes
+    const entry: typeof coralData.$inferInsert = {
+      datetime: new Date(date),
+      name: name,
+      unit: unit,
+      value: data[i].value,
+      updated_at: new Date(date),
+    };
 
-    // FIXME: convert to datetime format without changing timezone
-    datetime: date.toISOString(),
-
-    // FIXME: ts2353
-    // @ts-ignore
-    temperature: getProbeValue("Tmp"),
-    ph: getProbeValue("pH"),
-    orp: getProbeValue("ORP"),
-    lls: getProbeValue("LLS"),
-
-    sumpReturnA: getProbeValue("SUMPRETURNA"),
-    sumpReturnW: getProbeValue("SUMPRETURNW"),
-
-    skimmerA: getProbeValue("SKIMMERA"),
-    skimmerW: getProbeValue("SKIMMERW"),
-
-    uvA: getProbeValue("UVA"),
-    uvW: getProbeValue("UVW"),
-
-    heaterA: getProbeValue("HeaterA"),
-    heaterW: getProbeValue("HeaterW"),
-
-    ledLampA: getProbeValue("LEDLampA"),
-    ledLampW: getProbeValue("LEDLampW"),
-
-    emptyA: getProbeValue("EMPTYA"),
-    emptyW: getProbeValue("EMPTYW"),
-
-    atkPowerA: getProbeValue("ATKpowerA"),
-    atkPowerW: getProbeValue("ATKpowerW"),
-
-    wavePumpA: getProbeValue("WavepumpA"),
-    wavePumpW: getProbeValue("WavepumpW"),
-
-    // TODO: what is "Tmpx4" and is it worth reporting?
-    salt: getProbeValue("Salt"),
-    alkalinity: getProbeValue("Alkx"),
-    calcium: getProbeValue("Cax"),
-    magnesium: getProbeValue("Mgx"),
-
-    volt2: getProbeValue("Volt_2"),
-  };
-
-  // Insert row into the database
-  try {
-    await db.insert(coralData).values(entry);
-    console.log("Insertion successful:", entry);
-  } catch (error) {
-    console.error("Database Insertion Error:", error);
+    // Insert row into the database
+    try {
+      await db.insert(coralData).values(entry);
+      console.log("Insertion successful:", entry);
+    } catch (error) {
+      console.error("Database Insertion Error:", error);
+    }
   }
 }
