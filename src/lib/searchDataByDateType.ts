@@ -18,8 +18,8 @@ export default async function searchDataByDateType(
         and(
           between(
             coralData.datetime,
-            datetimeStart.toString(),
-            datetimeEnd.toString(),
+            datetimeStart.toISOString(),
+            datetimeEnd.toISOString(),
           ),
           // dataTable.name has the more accurate types to filter by (multiple different names can have the same type of data)
           inArray(coralData.name, types),
