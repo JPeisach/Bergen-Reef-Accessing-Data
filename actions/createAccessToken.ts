@@ -12,18 +12,18 @@ interface AccessTokenResponse {
 export async function createAccessToken(): Promise<string> {
   try {
     const response = await axios.post<AccessTokenResponse>(
-      `${process.env.AUTH0_ISSUER_BASE_URL}/oauth/token`,
+      `${process.env.APP_BASE_URL}/oauth/token`,
       new URLSearchParams({
         grant_type: "client_credentials",
         client_id: process.env.AUTH0_CLIENT_ID!,
         client_secret: process.env.AUTH0_CLIENT_SECRET!,
-        audience: `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/`,
+        audience: `${process.env.APP_BASE_URL}/api/v2/`,
       }),
       {
         headers: {
           "content-type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     );
 
     return response.data.access_token;
