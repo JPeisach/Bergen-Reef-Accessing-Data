@@ -16,16 +16,16 @@ export default function Page() {
     "placeholder",
     "placeholder",
     "placeholder",
-    "Other"
+    "Other",
   ];
 
   const variables = ["pH", "Calcium", "Temperature", "None of the above"];
 
   const handleVariableChange = (variable: string) => {
-    setSelectedVariables(prev =>
+    setSelectedVariables((prev) =>
       prev.includes(variable)
-        ? prev.filter(v => v !== variable)
-        : [...prev, variable]
+        ? prev.filter((v) => v !== variable)
+        : [...prev, variable],
     );
   };
 
@@ -33,12 +33,12 @@ export default function Page() {
 
   return (
     <div>
-      <NavigationBar defaultIndex={3} username={(user) ? user.name : "Guest"}/>
+      <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
 
       {/* Content */}
       <div className="p-8">
         <h1 className="text-2xl font-bold text-dark-orange mb-4">Notes</h1>
-        
+
         {/* Filters Section */}
         <div className="mb-6 space-y-4">
           {/* Coral Type Dropdown */}
@@ -88,7 +88,9 @@ export default function Page() {
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder={canWrite ? "Write note here" : "Please select stuff first"}
+          placeholder={
+            canWrite ? "Write note here" : "Please select stuff first"
+          }
           disabled={!canWrite}
           className={`w-full h-96 p-4 border-2 rounded-xl resize-none focus:outline-none text-gray font-medium ${
             canWrite
@@ -110,4 +112,3 @@ export default function Page() {
     </div>
   );
 }
-

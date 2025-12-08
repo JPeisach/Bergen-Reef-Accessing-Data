@@ -1,30 +1,34 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/mysql2";
 import { and, between, inArray } from "drizzle-orm";
-import { dataTable } from "src/db/data-schema";
+import { coralData } from "src/db/schema";
 
 const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function searchDataByDateType(
   datetimeStart: Date,
   datetimeEnd: Date,
-  types: string[]
+  types: string[],
 ) {
   try {
     const result = await db
       .select()
-      .from(dataTable)
+      .from(coralData)
       .where(
         and(
-          between(dataTable.datetime, datetimeStart, datetimeEnd),
+          between(
+            coralData.datetime,
+            datetimeStart.toISOString(),
+            datetimeEnd.toISOString(),
+          ),
           // dataTable.name has the more accurate types to filter by (multiple different names can have the same type of data)
-          inArray(dataTable.name, types)
-        )
+          inArray(coralData.name, types),
+        ),
       )
-      .orderBy(dataTable.datetime); // Order by datetime
+      .orderBy(coralData.datetime); // Order by datetime
 
     console.log(
-      `Successfully filtered for data of types ${types} between ${datetimeStart} and ${datetimeEnd}.`
+      `Successfully filtered for data of types ${types} between ${datetimeStart} and ${datetimeEnd}.`,
     );
 
     return result;
