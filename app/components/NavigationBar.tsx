@@ -146,6 +146,24 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                   )}
                 </Tab>
               </a>
+              <a href="/info">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item px-6 py-2 rounded-xl transition",
+                        isDefaultIndexNegative
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                      )}
+                    >
+                      Info
+                    </button>
+                  )}
+                </Tab>
+              </a>
             </TabList>
           </TabGroup>
         ) : (
@@ -249,6 +267,24 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                       )}
                     >
                       Notes
+                    </button>
+                  )}
+                </Tab>
+              </a>
+              <a href="/info">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item px-6 py-2 rounded-xl transition",
+                        isDefaultIndexNegative || defaultIndex === 1 || defaultIndex === 2 || defaultIndex === 3
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                      )}
+                    >
+                      Info
                     </button>
                   )}
                 </Tab>

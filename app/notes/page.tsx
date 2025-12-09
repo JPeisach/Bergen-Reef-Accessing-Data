@@ -7,6 +7,7 @@ import NavigationBar from "../components/NavigationBar";
 export default function Page() {
   const { user } = useUser();
   const [notes, setNotes] = useState("");
+  const [tankNumber, setTankNumber] = useState("");
   const [coralType, setCoralType] = useState("");
   const [selectedVariables, setSelectedVariables] = useState<string[]>([]);
 
@@ -29,7 +30,7 @@ export default function Page() {
     );
   };
 
-  const canWrite = coralType !== "" && selectedVariables.length > 0;
+  const canWrite = tankNumber !== "" && coralType !== "" && selectedVariables.length > 0;
 
   return (
     <div>
@@ -41,6 +42,25 @@ export default function Page() {
 
         {/* Filters Section */}
         <div className="mb-6 space-y-4">
+          {/* Tank Number Dropdown */}
+          <div>
+            <label className="block text-gray font-semibold mb-2">
+              Tank Number
+            </label>
+            <select
+              value={tankNumber}
+              onChange={(e) => setTankNumber(e.target.value)}
+              className="w-full p-3 border-2 border-medium-gray rounded-xl focus:outline-none focus:border-dark-orange text-gray font-medium bg-white"
+            >
+              <option value="">Select tank number...</option>
+              {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
+                <option key={num} value={num}>
+                  {num}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Coral Type Dropdown */}
           <div>
             <label className="block text-gray font-semibold mb-2">
@@ -52,8 +72,8 @@ export default function Page() {
               className="w-full p-3 border-2 border-medium-gray rounded-xl focus:outline-none focus:border-dark-orange text-gray font-medium bg-white"
             >
               <option value="">Select coral type...</option>
-              {coralTypes.map((type) => (
-                <option key={type} value={type}>
+              {coralTypes.map((type, index) => (
+                <option key={`${type}-${index}`} value={type}>
                   {type}
                 </option>
               ))}
