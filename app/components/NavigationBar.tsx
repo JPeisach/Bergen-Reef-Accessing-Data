@@ -141,7 +141,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                           : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                       )}
                     >
-                      Notes
+                      Observations
                     </button>
                   )}
                 </Tab>
@@ -266,7 +266,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                           : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                       )}
                     >
-                      Notes
+                      Observations
                     </button>
                   )}
                 </Tab>
