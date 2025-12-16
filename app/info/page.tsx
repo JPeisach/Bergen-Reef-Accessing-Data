@@ -58,11 +58,12 @@ export default function Page() {
               <h2 className="text-xl font-semibold text-dark-orange mb-3">
                 Tank {tankNumber} Picture
               </h2>
-              <div className="bg-light-gray border-2 border-medium-gray rounded-xl p-8 flex items-center justify-center min-h-[300px]">
-                <div className="text-center text-gray">
-                  <p className="text-lg font-medium mb-2">Tank Image Placeholder</p>
-                  <p className="text-sm">Image will be displayed here</p>
-                </div>
+              <div className="bg-light-gray border-2 border-medium-gray rounded-xl p-4 flex items-center justify-center min-h-[300px] overflow-hidden">
+                <img
+                  src="https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg"
+                  alt={`Tank ${tankNumber} coral reef aquarium`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
             </div>
 
@@ -95,7 +96,7 @@ export default function Page() {
         {!tankNumber && (
           <div className="bg-light-gray border-2 border-medium-gray rounded-xl p-8 text-center">
             <p className="text-gray font-medium text-lg">
-              Select a tank number to view information
+              choose tank to see info
             </p>
           </div>
         )}
