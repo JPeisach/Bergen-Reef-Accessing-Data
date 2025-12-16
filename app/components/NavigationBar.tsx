@@ -10,7 +10,10 @@ interface NavigationBarProps {
   username: string;
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username }) => {
+const NavigationBar: React.FC<NavigationBarProps> = ({
+  defaultIndex,
+  username,
+}) => {
   const isDefaultIndexNegative = defaultIndex === -1;
   return (
     <div
@@ -18,25 +21,27 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
       style={{ position: "relative", zIndex: 10 }}
     >
       <a href="/">
-      <div className="flex items-center gap-3 min-w-0">
-        <img
-          src="/images/coral-reef-logo.png"
-          className="w-8 sm:w-10 md:w-12 h-auto"
-          alt="Coral Reef Logo"
-        />
-        <h1 className="text-dark-orange font-semibold text-base sm:text-xl md:text-2xl whitespace-nowrap truncate min-w-0">
-          Bergen Reef Accessing Data
-        </h1>
-      </div>
+        <div className="flex items-center gap-3 min-w-0">
+          <img
+            src="/images/coral-reef-logo.png"
+            className="w-8 sm:w-10 md:w-12 h-auto"
+            alt="Coral Reef Logo"
+          />
+          <h1 className="text-dark-orange font-semibold text-base sm:text-xl md:text-2xl whitespace-nowrap truncate min-w-0">
+            Bergen Reef Accessing Data
+          </h1>
+        </div>
       </a>
       <div className="flex items-right justify-between">
-      <h1 className="text-base sm:text-lg md:text-xl text-dark-orange font-semibold pr-5 pt-2 whitespace-nowrap">Welcome {username}!</h1>
+        <h1 className="text-base sm:text-lg md:text-xl text-dark-orange font-semibold pr-5 pt-2 whitespace-nowrap">
+          Welcome {username}!
+        </h1>
         <a href="/profile">
           <div className="pt-1.5 pr-8">
             <UserCircleIcon
               className={clsx(
                 "size-8",
-                isDefaultIndexNegative ? "text-dark-orange" : "text-orange"
+                isDefaultIndexNegative ? "text-dark-orange" : "text-orange",
               )}
             />
           </div>
@@ -53,8 +58,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                         isDefaultIndexNegative
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Home
@@ -69,8 +74,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                     isDefaultIndexNegative
                       ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                       : defaultIndex === 1
-                      ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                      : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                        ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                        : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                   )}
                 >
                   <span>Graphs</span>
@@ -119,8 +124,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                         isDefaultIndexNegative
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       History
@@ -137,8 +142,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                         isDefaultIndexNegative
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Observations
@@ -155,11 +160,29 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                         isDefaultIndexNegative
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Info
+                    </button>
+                  )}
+                </Tab>
+              </a>
+              <a href="/dashboard">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item px-6 py-2 rounded-xl transition",
+                        isDefaultIndexNegative
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                      )}
+                    >
+                      Dashboard
                     </button>
                   )}
                 </Tab>
@@ -178,8 +201,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                         isDefaultIndexNegative
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Home
@@ -194,8 +217,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                     isDefaultIndexNegative
                       ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                       : defaultIndex === 1
-                      ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                      : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                        ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                        : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                   )}
                 >
                   <span>Graphs</span>
@@ -244,8 +267,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                         isDefaultIndexNegative || defaultIndex === 1
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       History
@@ -259,11 +282,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                     <button
                       className={clsx(
                         "tab-item px-6 py-2 rounded-xl transition",
-                        isDefaultIndexNegative || defaultIndex === 1 || defaultIndex === 2
+                        isDefaultIndexNegative ||
+                          defaultIndex === 1 ||
+                          defaultIndex === 2
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Observations
@@ -277,14 +302,38 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                     <button
                       className={clsx(
                         "tab-item px-6 py-2 rounded-xl transition",
-                        isDefaultIndexNegative || defaultIndex === 1 || defaultIndex === 2 || defaultIndex === 3
+                        isDefaultIndexNegative ||
+                          defaultIndex === 1 ||
+                          defaultIndex === 2 ||
+                          defaultIndex === 3
                           ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                           : selected
-                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Info
+                    </button>
+                  )}
+                </Tab>
+              </a>
+              <a href="/dashboard">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item px-6 py-2 rounded-xl transition",
+                        isDefaultIndexNegative ||
+                          defaultIndex === 1 ||
+                          defaultIndex === 2 ||
+                          defaultIndex === 3
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                      )}
+                    >
+                      Dashboard
                     </button>
                   )}
                 </Tab>
