@@ -164,6 +164,24 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                   )}
                 </Tab>
               </a>
+              <a href="/indiv_tanks">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item px-6 py-2 rounded-xl transition",
+                        isDefaultIndexNegative
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                      )}
+                    >
+                      Individual Tanks
+                    </button>
+                  )}
+                </Tab>
+              </a>
             </TabList>
           </TabGroup>
         ) : (
@@ -285,6 +303,24 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ defaultIndex, username })
                       )}
                     >
                       Info
+                    </button>
+                  )}
+                </Tab>
+              </a>
+              <a href="/indiv_tanks">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item px-6 py-2 rounded-xl transition",
+                        isDefaultIndexNegative || defaultIndex === 1 || defaultIndex === 6
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                          ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                          : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                      )}
+                    >
+                      Individual Tanks
                     </button>
                   )}
                 </Tab>
