@@ -13,11 +13,10 @@ export default function Page() {
     if (!tankNum) return null;
     return {
       coralTypes: [
-        "coral type",
-        "coral type",
-        "coral type",
+        "Mushroom Coral",
+        "Brain Coral",
+        "Jolene Coral",
       ],
-      imageUrl: "/images/placeholder-tank.png", // Placeholder image path
     };
   };
 
@@ -96,7 +95,7 @@ export default function Page() {
         {!tankNumber && (
           <div className="bg-light-gray border-2 border-medium-gray rounded-xl p-8 text-center">
             <p className="text-gray font-medium text-lg">
-              choose tank to see info
+              Select tank number to view information.
             </p>
           </div>
         )}
