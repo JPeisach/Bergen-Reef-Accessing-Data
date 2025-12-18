@@ -1,157 +1,121 @@
 "use client";
+import "../globals.css";
 import React, { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import "../globals.css";
 import NavigationBar from "../components/NavigationBar";
-
-interface OptionType {
-  label: string;
-  value: string;
-}
-
+import TankBox from "app/components/TankBox";
 
 export default function Page() {
   const { user } = useUser();
   const [notes, setNotes] = useState("");
-  const [tank, setTank] = useState("");
-  const [time, setTime] = useState("");
-  const [graph, setGraph] = useState("");
-  const [parameters, setParameters] = useState("");
 
+  const [parameter, setParameter] = useState("");
+  const [timeRange, setTimeRange] = useState("");
 
-  const tanks = [
-    "Tank 1",
-    "Tank 2",
-    "Tank 3",
-    "Tank 4",
-    "Tank 5",
-    "Tank 6",
-    "Tank 7",
-    "Tank 8",
-    "Tank 9",
-  ];
-
-  const times = [
-    "Last Week",
-    "Last Two Weeks",
-    "Last Month",
-    "Last Six Months",
-    "Custom"
-  ];
-
-  const graphs = [
-    "Line Graph",
-    "Sankey Chart",
-    "Bar Graph",
-    "Other"
-  ];
-
-  const parametersList = ["pH", "Salinity", "Temperature", "Orp", "Alkalinity", "Nitrate", "Nitrite", "Phosphate"];
+  const panelClass = "bg-light-blue/40 p-5 shadow-lg";
 
   return (
-    <div>
+    <div className="min-h-screen bg-light-blue/30">
       <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
 
-      {/* Content */}
-      <div className="p-8">
-        <h1 className="text-2xl font-bold text-dark-orange mb-4">Individual Tank View</h1>
+      <div className="p-8 max-w-7xl mx-auto">
+        
+        <div className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}>
+          {[ 
+            { label: "Tank", options: ["Tank 1","Tank 2","Tank 3","Tank 4","Tank 5","Tank 6","Tank 7","Tank 8","Tank 9"] },
+            { label: "Parameters", options: ["pH","Salinity","Temperature","ORP","Alkalinity","Calcium","Nitrate","Nitrite","Phosphate"] },
+            { label: "Time Range", options: ["Yesterday","Last Week","Last Month","Custom"] },
+            { label: "Graph Type", options: ["Line","Bar","Sankey","Other"] },
+          ].map((item) => (
+            <div key={item.label} className="min-w-[160px]">
+              <label className="block text-dark-blue font-bold mb-1 text-sm">
+                {item.label}
+              </label>
+                      <select
+          value={parameter}
+          onChange={(e) => setParameter(e.target.value)}
+          className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-blue focus:outline-none focus:ring-2 focus:ring-light-blue shadow-inner"
+        >
+          <option value="">Select…</option>
+          {item.options.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
+        </select>
 
-        {/* Filters Section */}
-        <div className="mb-6 space-y-4">
-          {/* Tank Dropdown */}
-          <div>
-            <label className="block text-gray font-semibold mb-2">
-              Tank
-            </label>
-            <select
-              value={tank}
-              onChange={(e) => setTank(e.target.value)}
-              className="w-full p-3 border-2 border-medium-gray rounded-xl focus:outline-none focus:border-dark-orange text-gray font-medium bg-white"
-            > 
-              <option value="">Select Tank...</option>
-              {tanks.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+          <div className={panelClass}>
+            <h2 className="text-lg font-bold text-dark-blue mb-3">Tank 1</h2>
+            <ul className="space-y-1.5 text-sm text-dark-blue/80 font-medium">
+              <li>pH: 8.08</li>
+              <li>Salinity: 27.7 ppt</li>
+              <li>Temperature: 76.9°F</li>
+              <li>ORP: 308 mV</li>
+              <li>Alkalinity: 9.4 dKH</li>
+              <li>Calcium: 306 ppm</li>
+              <li>Nitrate: 0 ppm</li>
+              <li>Nitrite: 0 ppm</li>
+              <li>Phosphate: 6.5 ppb</li>
+            </ul>
+            <div className="mt-4 bg-white p-3 shadow-inner">
+              <h3 className="font-bold text-dark-blue text-sm mb-1">Pinned Notes</h3>
+              <h4 className="font-bold text-dark-blue text-xs mb-1">🙍 Mr. Ramirez</h4>
+              <p className="text-xs text-dark-blue/70 leading-relaxed">
+                Tank 1 has been struggling lately. We suspect that the addition of the new supplement, "GroCoral", has negatively impacted the tank's vitality. Increased algae bloom observed.
+              </p>
+              <p className="font-bold text-dark-blue text-xs mt-2 underline">
+                <a href="/notes">Open in Observations</a>
+              </p>
+            </div>
+          </div>
+        <div className="bg-light-blue/40 p-5 shadow-lg">
+          <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-blue shadow-inner flex justify-between">
+            <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-blue shadow-inner flex justify-between">
+              <span className="text-dark-blue/60">{parameter||"Parameter"}</span>
+              {/*
+              <span className="text-dark-blue/60">{timeRange||"Time Range"}</span>
+              */}
+            </div>
+          </div> 
+          
+
+
+          <div className="h-[280px] bg-white shadow-inner p-2">
+            <TankBox tankNumber={1} />
+          </div>
+
+          <div className="mt-6 text-sm text-dark-blue/70 text-center italic">
+            Tank 1 houses numerous types of corals, including mushroom corals,
+            button polyps, leather corals, and bubble corals.
+          </div>
+        </div>
           </div>
         </div>
 
-        {/* Time Dropdown */}
-          <div>
-            <label className="block text-gray font-semibold mb-2">
-              Time Range
-            </label>
-            <select
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="w-full p-3 border-2 border-medium-gray rounded-xl focus:outline-none focus:border-dark-orange text-gray font-medium bg-white"
-            > 
-              <option value="">Select Time Range...</option>
-              {times.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className={`p-8 max-w-7xl mx-auto ${panelClass}`}>
+        <div className={`p-8 max-w-7xl mx-auto`}>
+          <label className="block mb-2 text-sm font-bold text-dark-blue">
+            Open Notes & Observations
+          </label>
+          <textarea
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Write observations here…"
+            className="w-full h-32 resize-none bg-white p-4 text-sm font-medium text-dark-blue focus:outline-none focus:ring-2 focus:ring-light-blue shadow-inner"
+          />
+        </div>
+        </div>
 
-    {/* Time Dropdown */}
-          <div>
-            <label className="block text-gray font-semibold mb-2">
-              Parameters
-            </label>
-            <select
-              value={parameters}
-              onChange={(e) => setParameters(e.target.value)}
-              className="w-full p-3 border-2 border-medium-gray rounded-xl focus:outline-none focus:border-dark-orange text-gray font-medium bg-white"
-            > 
-              <option value="">Select Parameters...</option>
-              {parametersList.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-gray font-semibold mb-2">
-              Graph Type
-            </label>
-            <select
-              value={graph}
-              onChange={(e) => setGraph(e.target.value)}
-              className="w-full p-3 border-2 border-medium-gray rounded-xl focus:outline-none focus:border-dark-orange text-gray font-medium bg-white"
-            > 
-              <option value="">Select Graph Type...</option>
-              {graphs.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
-
-
-
-      {/* Notes Textarea */}
-        <textarea
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          ></textarea>
-
-        {/* Save Button */}
-        <div className="mt-4 flex justify-end">
-          <button
-            className="px-6 py-2 bg-dark-orange text-white font-semibold rounded-xl hover:bg-medium-orange transition disabled:bg-medium-gray disabled:cursor-not-allowed"
-            
-          >
+        <div className="mt-1 flex justify-end">
+          <button className="bg-blue px-8 py-3 text-sm font-bold text-white transition-all hover:shadow-lg hover:bg-blue">
             Save
           </button>
         </div>
       </div>
-    </div>
   );
 }
