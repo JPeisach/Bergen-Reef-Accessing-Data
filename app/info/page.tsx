@@ -27,26 +27,28 @@ export default function Page() {
       <NavigationBar defaultIndex={4} username={user ? user.name : "Guest"} />
 
       {/* Content */}
-      <div className="p-8">
-        <h1 className="text-2xl font-bold text-dark-orange mb-4">Tank Information</h1>
+      <div className="p-8 bg-light-orange/30 min-h-screen">
+        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">Tank Information</h1>
 
         {/* Tank Number Dropdown */}
-        <div className="mb-6">
-          <label className="block text-gray font-semibold mb-2">
-            Tank Number
-          </label>
-          <select
-            value={tankNumber}
-            onChange={(e) => setTankNumber(e.target.value)}
-            className="w-full max-w-xs p-3 border-2 border-medium-gray rounded-xl focus:outline-none focus:border-dark-orange text-gray font-medium bg-white"
-          >
-            <option value="">Select tank number...</option>
-            {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
-              <option key={num} value={num.toString()}>
-                {num}
-              </option>
-            ))}
-          </select>
+        <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-sm">
+          <div className="min-w-[200px]">
+            <label className="block text-dark-orange font-bold mb-2 text-sm">
+              Tank Number
+            </label>
+            <select
+              value={tankNumber}
+              onChange={(e) => setTankNumber(e.target.value)}
+              className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            >
+              <option value="">Select tank number...</option>
+              {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
+                <option key={num} value={num.toString()}>
+                  {num}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Tank Information Display */}
@@ -54,37 +56,37 @@ export default function Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Tank Picture */}
             <div>
-              <h2 className="text-xl font-semibold text-dark-orange mb-3">
+              <h2 className="text-xl font-bold text-dark-orange mb-4">
                 Tank {tankNumber} Picture
               </h2>
-              <div className="bg-light-gray border-2 border-medium-gray rounded-xl p-4 flex items-center justify-center min-h-[300px] overflow-hidden">
+              <div className="rounded-2xl bg-white/90 p-4 shadow-xl border border-light-orange/20 flex items-center justify-center min-h-[300px] overflow-hidden">
                 <img
                   src="https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg"
                   alt={`Tank ${tankNumber} coral reef aquarium`}
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-xl"
                 />
               </div>
             </div>
 
             {/* Coral Types Information */}
             <div>
-              <h2 className="text-xl font-semibold text-dark-orange mb-3">
+              <h2 className="text-xl font-bold text-dark-orange mb-4">
                 Coral Types in Tank {tankNumber}
               </h2>
-              <div className="bg-light-gray border-2 border-medium-gray rounded-xl p-6">
+              <div className="rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20">
                 {tankInfo && tankInfo.coralTypes.length > 0 ? (
-                  <ul className="space-y-3">
+                  <div className="space-y-3">
                     {tankInfo.coralTypes.map((coralType, index) => (
-                      <li
+                      <div
                         key={index}
-                        className="p-3 bg-white rounded-lg border border-medium-gray text-gray font-medium"
+                        className="rounded-lg bg-light-orange/40 px-4 py-3 text-dark-orange font-semibold shadow-sm border border-light-orange/30"
                       >
                         {coralType}
-                      </li>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 ) : (
-                  <p className="text-gray font-medium">No coral types available</p>
+                  <p className="text-gray font-medium text-center py-4">No coral types available</p>
                 )}
               </div>
             </div>
@@ -93,7 +95,7 @@ export default function Page() {
 
         {/* Placeholder message when no tank is selected */}
         {!tankNumber && (
-          <div className="bg-light-gray border-2 border-medium-gray rounded-xl p-8 text-center">
+          <div className="rounded-2xl bg-white/90 p-8 text-center shadow-xl border border-light-orange/20">
             <p className="text-gray font-medium text-lg">
               Select tank number to view information.
             </p>
