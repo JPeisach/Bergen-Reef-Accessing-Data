@@ -156,20 +156,20 @@ export default function Page() {
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-2.5">
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Tank #
+                    Tank 3
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    coral type
+                    Mushroom Coral
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    random variable
+                    Calcium
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    random variable
+                    Alkalinity
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  bla bla bla bla bla calcium bla fish
+                  The calcium levels dropped by a suspicious amount, but the Mushroom coral looks surprisingly healthy!
                 </p>
               </div>
 
@@ -185,20 +185,20 @@ export default function Page() {
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-2.5">
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Tank #
+                    Tank 8
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    random coral type
+                    Jolene Coral
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    random variable
+                    pH
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    random variable
+                    Temperature
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  bla bla bla coral bla bla bla healthy
+                  The Jolene coral appears to be thriving despite fluctuations in pH and temperature.
                 </p>
               </div>
             </div>
@@ -214,10 +214,10 @@ export default function Page() {
                     Observation Title
                   </label>
                   <input
-                    type="text"
+                    type="Enter text here..."
                     value={observationTitle}
                     onChange={(e) => setObservationTitle(e.target.value)}
-                    placeholder="title here"
+                    placeholder="Enter title here..."
                     className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
                   />
                 </div>
@@ -229,7 +229,7 @@ export default function Page() {
                   </p>
                   {selectedVariables.length === 0 ? (
                     <p className="text-sm text-medium-gray italic">
-                      variables here
+                      Variables appear here...
                     </p>
                   ) : (
                     <div className="flex flex-wrap gap-2">
