@@ -1,14 +1,13 @@
 "use client";
-import { string } from "prop-types"; // not used
 import React, { useEffect, useState } from "react";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   Tooltip,
   CartesianGrid,
   ResponsiveContainer,
+  AreaChart,
+  Area,
 } from "recharts";
 import "../globals.css";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -224,7 +223,7 @@ export default function HomePageGraph({
         <div className="w-full max-w-screen-2xl min-w-[750px] h-[65vh] 2xl:h-[73vh] bg-white rounded-lg p-3 overflow-hidden">
           <div className="w-full h-full">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={chartData}>
+              <AreaChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
                   dataKey="datetime"
@@ -243,14 +242,15 @@ export default function HomePageGraph({
                     <CustomTooltip {...props} selectedType={selectedType} />
                   )}
                 />
-                <Line
+                <Area
                   type="monotone"
                   dataKey="value"
                   stroke="#feb934"
                   dot={false}
+                  fill="#feb93499"
                   strokeWidth={2.5}
                 />
-              </LineChart>
+              </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
