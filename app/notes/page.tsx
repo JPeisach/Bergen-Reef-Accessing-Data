@@ -15,12 +15,11 @@ export default function Page() {
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
 
   const coralTypes = [
-    "placeholder",
-    "placeholder",
-    "placeholder",
-    "placeholder",
-    "placeholder",
-    "Other",
+    "Mushroom Coral",
+    "Brain Coral",
+    "Jolene Coral",
+    "Sarah Coral",
+    "Josh Coral",
   ];
 
   const variables = [
