@@ -15,11 +15,11 @@ export default function Page() {
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
 
   const coralTypes = [
-    "Mushroom Coral",
-    "Brain Coral",
-    "Jolene Coral",
-    "Sarah Coral",
-    "Josh Coral",
+    "placeholder",
+    "placeholder",
+    "placeholder",
+    "placeholder",
+    "placeholder",
     "Other",
   ];
 
@@ -27,7 +27,8 @@ export default function Page() {
     "pH",
     "Calcium",
     "Temperature",
-    "Salinity"
+    "Salinity",
+    "None of the above",
   ];
 
   const handleVariableChange = (variable: string) => {
@@ -155,20 +156,20 @@ export default function Page() {
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-2.5">
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Tank 3
+                    Tank #
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Mushroom Coral
+                    coral type
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    pH
+                    random variable
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Calcium
+                    random variable
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The calcium levels are stable, and the mushroom coral looks healthy.
+                  bla bla bla bla bla calcium bla fish
                 </p>
               </div>
 
@@ -184,20 +185,20 @@ export default function Page() {
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-2.5">
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Tank 7
+                    Tank #
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Jolene Coral
+                    random coral type
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Alkalinity
+                    random variable
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Nitrate
+                    random variable
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The Jolene Coral is looking suspiciously unhealthy today, could it be because of the high nitrate levels this morning?
+                  bla bla bla coral bla bla bla healthy
                 </p>
               </div>
             </div>
@@ -213,10 +214,10 @@ export default function Page() {
                     Observation Title
                   </label>
                   <input
-                    type="Enter text here..."
+                    type="text"
                     value={observationTitle}
                     onChange={(e) => setObservationTitle(e.target.value)}
-                    placeholder="Enter title here..."
+                    placeholder="title here"
                     className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
                   />
                 </div>
@@ -228,7 +229,7 @@ export default function Page() {
                   </p>
                   {selectedVariables.length === 0 ? (
                     <p className="text-sm text-medium-gray italic">
-                      Select Variables...
+                      variables here
                     </p>
                   ) : (
                     <div className="flex flex-wrap gap-2">
@@ -260,7 +261,7 @@ export default function Page() {
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Enter observation here..."
+                    placeholder="observation here"
                     className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
                   />
                 </div>
