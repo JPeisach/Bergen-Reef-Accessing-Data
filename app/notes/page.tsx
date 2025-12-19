@@ -20,14 +20,14 @@ export default function Page() {
     "Jolene Coral",
     "Sarah Coral",
     "Josh Coral",
-    "Other",
   ];
 
   const variables = [
     "pH",
     "Calcium",
     "Temperature",
-    "Salinity"
+    "Salinity",
+    "None of the above",
   ];
 
   const handleVariableChange = (variable: string) => {
@@ -161,14 +161,14 @@ export default function Page() {
                     Mushroom Coral
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    pH
+                    Calcium
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Calcium
+                    Alkalinity
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The calcium levels are stable, and the mushroom coral looks healthy.
+                  The calcium levels dropped by a suspicious amount, but the Mushroom coral looks surprisingly healthy!
                 </p>
               </div>
 
@@ -184,20 +184,20 @@ export default function Page() {
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-2.5">
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Tank 7
+                    Tank 8
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
                     Jolene Coral
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Alkalinity
+                    pH
                   </span>
                   <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Nitrate
+                    Temperature
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The Jolene Coral is looking suspiciously unhealthy today, could it be because of the high nitrate levels this morning?
+                  The Jolene coral appears to be thriving despite fluctuations in pH and temperature.
                 </p>
               </div>
             </div>
@@ -228,7 +228,7 @@ export default function Page() {
                   </p>
                   {selectedVariables.length === 0 ? (
                     <p className="text-sm text-medium-gray italic">
-                      Select Variables...
+                      Variables appear here...
                     </p>
                   ) : (
                     <div className="flex flex-wrap gap-2">
@@ -260,7 +260,7 @@ export default function Page() {
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Enter observation here..."
+                    placeholder="observation here"
                     className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
                   />
                 </div>

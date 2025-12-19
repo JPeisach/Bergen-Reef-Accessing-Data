@@ -78,3 +78,11 @@ h1 {
     width: 24rem;
     height: 10rem;
 }
+
+.navbar {
+    margin-top: auto;
+    position: inline;
+    padding: 0;
+    width: 200px;
+    float: left;
+}
