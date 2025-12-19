@@ -168,7 +168,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item px-6 py-2 rounded-xl transition",
+                        "tab-item w-full py-5 transition",
                         isDefaultIndexNegative ||
                           defaultIndex === 1 ||
                           defaultIndex === 6
