@@ -16,7 +16,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-light-orange/30">
-      <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
+      <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
 
       <div className="p-8 max-w-7xl mx-auto">
         <div className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}>

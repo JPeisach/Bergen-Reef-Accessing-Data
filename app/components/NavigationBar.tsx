@@ -56,7 +56,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   )}
                 </Tab>
               </a>
-              
+
               <a href="/dashboard">
                 <Tab as={Fragment}>
                   {({ selected }) => (
@@ -79,12 +79,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </Tab>
               </a>
 
-<a href="/indiv_tanks">
+              <a href="/indiv_tanks">
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item px-6 py-2 rounded-xl transition",
+                        "tab-item w-full py-5  transition",
                         isDefaultIndexNegative ||
                           defaultIndex === 1 ||
                           defaultIndex === 6
@@ -100,7 +100,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </Tab>
               </a>
 
-              
               <a href="/notes">
                 <Tab as={Fragment}>
                   {({ selected }) => (
@@ -142,7 +141,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   )}
                 </Tab>
               </a>
-            
+
               <a href="/history">
                 <Tab as={Fragment}>
                   {({ selected }) => (
@@ -162,11 +161,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </Tab>
               </a>
 
-
-<Menu as="div" className="relative inline-block text-left">
+              <Menu as="div" className="relative inline-block">
                 <MenuButton
                   className={clsx(
-                    "tab-item w-full py-5  transition flex items-center justify-between",
+                    "tab-item w-full py-5  transition flex items-center justify-center",
                     isDefaultIndexNegative
                       ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
                       : defaultIndex === 1
@@ -174,7 +172,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                         : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
                   )}
                 >
-                  <span>Graphs</span>
+                  Graphs
                   <ChevronDownIcon className="-mr-1 size-5 text-gray-400" />
                 </MenuButton>
                 <MenuItems
