@@ -10,13 +10,15 @@ import {
 import "../globals.css";
 import { useEffect, useState } from "react";
 
-export default function TankBox({ tankNumber }) {
+export default function TankBox({ tankNumber, variableType }) {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`/api/getMostRecentData?type=pH`);
+        const response = await fetch(
+          `/api/getMostRecentData?type=${variableType}`,
+        );
         const result = await response.json();
 
         console.log("Fetched data:", result);
@@ -48,10 +50,10 @@ export default function TankBox({ tankNumber }) {
     fetchData();
     const interval = setInterval(fetchData, 300000);
     return () => clearInterval(interval);
-  }, []); // pass the [] otherwise it will infinitely render; https://stackoverflow.com/questions/53715465/can-i-set-state-inside-a-useeffect-hook
+  }, [variableType]);
 
   return (
-    <a 
+    <a
       className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer"
       href="/info"
     >
@@ -76,7 +78,7 @@ export default function TankBox({ tankNumber }) {
               stroke="#757575"
               fontSize={12}
             />
-            <Tooltip 
+            <Tooltip
               contentStyle={{
                 backgroundColor: "white",
                 border: "1px solid #FCD98C",
