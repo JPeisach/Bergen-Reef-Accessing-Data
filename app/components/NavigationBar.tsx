@@ -56,7 +56,114 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   )}
                 </Tab>
               </a>
-              <Menu as="div" className="relative inline-block text-left">
+              
+              <a href="/dashboard">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item w-full py-5  transition",
+                        isDefaultIndexNegative ||
+                          defaultIndex === 1 ||
+                          defaultIndex === 2 ||
+                          defaultIndex === 3
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                      )}
+                    >
+                      Dashboard
+                    </button>
+                  )}
+                </Tab>
+              </a>
+
+<a href="/indiv_tanks">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item px-6 py-2 rounded-xl transition",
+                        isDefaultIndexNegative ||
+                          defaultIndex === 1 ||
+                          defaultIndex === 6
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                      )}
+                    >
+                      Individual Tanks
+                    </button>
+                  )}
+                </Tab>
+              </a>
+
+              
+              <a href="/notes">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item w-full py-5  transition",
+                        isDefaultIndexNegative ||
+                          defaultIndex === 1 ||
+                          defaultIndex === 2
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                      )}
+                    >
+                      Observations
+                    </button>
+                  )}
+                </Tab>
+              </a>
+              <a href="/info">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item w-full py-5  transition",
+                        isDefaultIndexNegative ||
+                          defaultIndex === 1 ||
+                          defaultIndex === 2 ||
+                          defaultIndex === 3
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                      )}
+                    >
+                      Info
+                    </button>
+                  )}
+                </Tab>
+              </a>
+            
+              <a href="/history">
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={clsx(
+                        "tab-item w-full py-5  transition",
+                        isDefaultIndexNegative || defaultIndex === 1
+                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          : selected
+                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
+                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                      )}
+                    >
+                      History
+                    </button>
+                  )}
+                </Tab>
+              </a>
+
+
+<Menu as="div" className="relative inline-block text-left">
                 <MenuButton
                   className={clsx(
                     "tab-item w-full py-5  transition flex items-center justify-between",
@@ -104,106 +211,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   </MenuItem>
                 </MenuItems>
               </Menu>
-              <a href="/history">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative || defaultIndex === 1
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
-                      )}
-                    >
-                      History
-                    </button>
-                  )}
-                </Tab>
-              </a>
-              <a href="/notes">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 2
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
-                      )}
-                    >
-                      Observations
-                    </button>
-                  )}
-                </Tab>
-              </a>
-              <a href="/info">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 2 ||
-                          defaultIndex === 3
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
-                      )}
-                    >
-                      Info
-                    </button>
-                  )}
-                </Tab>
-              </a>
-              <a href="/indiv_tanks">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={clsx(
-                        "tab-item w-full py-5 transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 6
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
-                      )}
-                    >
-                      Individual Tanks
-                    </button>
-                  )}
-                </Tab>
-              </a>
-              <a href="/dashboard">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 2 ||
-                          defaultIndex === 3
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
-                      )}
-                    >
-                      Dashboard
-                    </button>
-                  )}
-                </Tab>
-              </a>
+
               <a href="/profile" className="">
                 <div className="flex flex-row flex-wrap">
                   <UserCircleIcon
