@@ -1,11 +1,11 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import "./globals.css"; // These styles apply to every route in the application
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { Auth0Provider } from "@auth0/nextjs-auth0";
 
 export const metadata = {
   title: "Bergen Reef Accessing Data",
-  description: "Data Visualization Web Application for the BCA Coral Reef Research Lab ",
+  description:
+    "Data Visualization Web Application for the BCA Coral Reef Research Lab ",
 };
 
 export default function RootLayout({
@@ -15,9 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <UserProvider>
+      <Auth0Provider>
         <body>{children}</body>
-      </UserProvider>
+      </Auth0Provider>
     </html>
   );
 }
