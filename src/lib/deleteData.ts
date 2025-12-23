@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/mysql2";
-import { eq } from "drizzle-orm/expressions";
+import { eq } from "drizzle-orm";
 import { coralData } from "src/db/schema";
 
 const db = drizzle(process.env.DATABASE_URL!);
