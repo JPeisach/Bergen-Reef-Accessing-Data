@@ -133,7 +133,7 @@ export default function DataLineGraph() {
       adjustedStartDate.setHours(adjustedStartDate.getHours() - 5);
       adjustedEndDate.setHours(adjustedEndDate.getHours() - 5);
       const response = await fetch(
-        `/api/searchDataByDateType?startDate=${adjustedStartDate.toISOString()}&endDate=${adjustedEndDate.toISOString()}&names=${selectedNames.join(",")}`
+        `/api/searchDataByDateType?startDate=${adjustedStartDate.toISOString()}&endDate=${adjustedEndDate.toISOString()}&names=${selectedNames.join(",")}`,
       );
 
       if (!response.ok) {
@@ -143,20 +143,23 @@ export default function DataLineGraph() {
       const result: RawDataPoint[] = await response.json();
 
       // Group data points by datetime
-      const groupedByTime = result.reduce((acc, point) => {
-        if (!acc[point.datetime]) {
-          acc[point.datetime] = {};
-        }
-        acc[point.datetime][point.name] = point.value;
-        return acc;
-      }, {} as Record<string, Record<string, number>>);
+      const groupedByTime = result.reduce(
+        (acc, point) => {
+          if (!acc[point.datetime]) {
+            acc[point.datetime] = {};
+          }
+          acc[point.datetime][point.name] = point.value;
+          return acc;
+        },
+        {} as Record<string, Record<string, number>>,
+      );
 
       // Create paired data points
       const pairedData = Object.entries(groupedByTime)
         .filter(
           ([_, values]) =>
             values[selectedNames[0]] !== undefined &&
-            values[selectedNames[1]] !== undefined
+            values[selectedNames[1]] !== undefined,
         )
         .map(([datetime, values]) => ({
           datetime,
@@ -181,11 +184,11 @@ export default function DataLineGraph() {
     // Get the current dimensions of the container
     const containerWidth = parseInt(
       d3.select(svgRef.current.parentElement).style("width"),
-      10
+      10,
     );
     const containerHeight = parseInt(
       d3.select(svgRef.current.parentElement).style("height"),
-      10
+      10,
     );
 
     // Set the SVG dimensions to match the container independently
@@ -253,7 +256,7 @@ export default function DataLineGraph() {
         tooltip.style("visibility", "visible").html(
           `Time: ${d3.timeFormat("%Y-%m-%d %H:%M")(displayDate)}<br>
              ${d.name1}: ${d.x} ${units[d.name1]}<br>
-             ${d.name2}: ${d.y} ${units[d.name2]}`
+             ${d.name2}: ${d.y} ${units[d.name2]}`,
         );
       })
       .on("mousemove", (event) => {

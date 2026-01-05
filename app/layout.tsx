@@ -5,7 +5,8 @@ import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 export const metadata = {
   title: "Bergen Reef Accessing Data",
-  description: "Data Visualization Web Application for the BCA Coral Reef Research Lab ",
+  description:
+    "Data Visualization Web Application for the BCA Coral Reef Research Lab ",
 };
 
 export default function RootLayout({

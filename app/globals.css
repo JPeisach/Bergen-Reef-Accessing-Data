@@ -16,73 +16,73 @@
 } */
 
 @layer base {
-    @font-face {
-        font-family: "Montserrat";
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url(../public/fonts/Montserrat-VariableFont_wght.ttf) format("tff");
-    }
+  @font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../public/fonts/Montserrat-VariableFont_wght.ttf) format("tff");
+  }
 }
 
 body {
-    color: var(--foreground);
-    background: rgb(232, 232, 232);
+  color: var(--foreground);
+  background: rgb(232, 232, 232);
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .ag-theme-balham {
-    background-color: transparent;
-    margin-top: -30px;
+  background-color: transparent;
+  margin-top: -30px;
 }
 
 .ag-paging-panel > span {
-    color: black !important;
+  color: black !important;
 }
 
 .ag-root-wrapper {
-    position: relative !important;
+  position: relative !important;
 }
 
 .ag-root-wrapper-body {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .ag-paging-panel {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    border-top: none !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  border-top: none !important;
 }
 
 .rectangle {
-    width: "500px";
-    height: "70px";
-    borderradius: "15px";
-    backgroundcolor: "#ffe59b";
-    padding: "10px";
-    display: "flex";
-    flexdirection: "column";
-    justifycontent: "center";
-    alignitems: "center";
-    color: "#6fb1ba";
-    boxshadow: "0 4px 8px rgba(0, 0, 0, 0.1)";
-    border: "3px solid #73b8c1";
+  width: "500px";
+  height: "70px";
+  borderradius: "15px";
+  backgroundcolor: "#ffe59b";
+  padding: "10px";
+  display: "flex";
+  flexdirection: "column";
+  justifycontent: "center";
+  alignitems: "center";
+  color: "#6fb1ba";
+  boxshadow: "0 4px 8px rgba(0, 0, 0, 0.1)";
+  border: "3px solid #73b8c1";
 }
 
 .tankbox {
-    background-color: lightgray;
-    width: 24rem;
-    height: 10rem;
+  background-color: lightgray;
+  width: 24rem;
+  height: 10rem;
 }
 
 .navbar {
-    margin-top: auto;
-    position: inline;
-    padding: 0;
-    width: 200px;
-    float: left;
+  margin-top: auto;
+  position: inline;
+  padding: 0;
+  width: 200px;
+  float: left;
 }

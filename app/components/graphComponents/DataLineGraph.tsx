@@ -130,11 +130,11 @@ export default function DataLineGraph() {
       setWindowHeight(window.innerHeight);
     };
     updateHeight();
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
-  const availableHeight = windowHeight - 120
+  const availableHeight = windowHeight - 120;
 
   async function fetchData() {
     try {
@@ -170,8 +170,14 @@ export default function DataLineGraph() {
     svg.selectAll("*").remove();
 
     // Get the current dimensions of the container
-    const containerWidth = parseInt(d3.select(svgRef.current.parentElement).style("width"), 10);
-    const containerHeight = parseInt(d3.select(svgRef.current.parentElement).style("height"), 10);
+    const containerWidth = parseInt(
+      d3.select(svgRef.current.parentElement).style("width"),
+      10,
+    );
+    const containerHeight = parseInt(
+      d3.select(svgRef.current.parentElement).style("height"),
+      10,
+    );
 
     // Set the SVG dimensions to match the container independently
     svg
@@ -197,7 +203,7 @@ export default function DataLineGraph() {
     // Calculate y-axis for the first selected name
     const yDomain = d3.extent(
       data.filter((d) => d.name === selectedNames[0]),
-      (d) => +d.value
+      (d) => +d.value,
     ) as [number, number];
     const y = d3.scaleLinear().domain(yDomain).nice().range([height, 0]);
 
@@ -208,15 +214,15 @@ export default function DataLineGraph() {
           .domain(
             d3.extent(
               data.filter((d) => d.name === selectedNames[1]),
-              (d) => +d.value
-            ) as [number, number]
+              (d) => +d.value,
+            ) as [number, number],
           )
           .nice()
           .range([height, 0])
       : null;
 
     const dayCount = Math.ceil(
-      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
     );
 
     // Calculate tick values with a staggered approach
@@ -390,8 +396,7 @@ export default function DataLineGraph() {
 
       // Only add points if not using interpolation
       if (!useInterpolation) {
-        const pointsGroup = g
-          .append("g");
+        const pointsGroup = g.append("g");
         pointsGroup
           .selectAll(`circle.series-${index}`)
           .data(nameData)
@@ -400,7 +405,7 @@ export default function DataLineGraph() {
           .attr("class", `series-${index}`)
           .attr("cx", (d) => x(new Date(d.datetime)))
           .attr("cy", (d) =>
-            index === 0 ? y(d.value) : yRight ? yRight(d.value) : y(d.value)
+            index === 0 ? y(d.value) : yRight ? yRight(d.value) : y(d.value),
           )
           .attr("r", 4)
           .attr("fill", d3.schemeCategory10[index])
@@ -412,8 +417,8 @@ export default function DataLineGraph() {
               .style("visibility", "visible")
               .html(
                 `ID: ${d.id}<br>Date: ${d3.timeFormat("%Y-%m-%d %H:%M")(
-                  displayDate
-                )}<br>Name: ${d.name}<br>Unit: ${d.unit}<br>Value: ${d.value}`
+                  displayDate,
+                )}<br>Name: ${d.name}<br>Unit: ${d.unit}<br>Value: ${d.value}`,
               );
           })
           .on("mousemove", (event) => {
@@ -459,16 +464,19 @@ export default function DataLineGraph() {
 
   return (
     <div className="grid grid-cols-4 gap-4 p-4 h-full">
-      <div className="col-span-3 bg-white ml-8 pr-8 pt-3 pb-3 rounded-lg justify-center items-center" style={{ height: `${availableHeight}px` }}>
-        <div className="w-full h-full relative"> 
-          <svg
-            ref={svgRef}
-            style={{ width: '100%', height: '100%' }}
-          ></svg>
+      <div
+        className="col-span-3 bg-white ml-8 pr-8 pt-3 pb-3 rounded-lg justify-center items-center"
+        style={{ height: `${availableHeight}px` }}
+      >
+        <div className="w-full h-full relative">
+          <svg ref={svgRef} style={{ width: "100%", height: "100%" }}></svg>
         </div>
       </div>
 
-      <div className="flex flex-col col-span-1 bg-white drop-shadow-md mr-8 pb-3 flex flex-col space-y-6 rounded-lg" style={{ maxHeight: `${availableHeight}px` }}>
+      <div
+        className="flex flex-col col-span-1 bg-white drop-shadow-md mr-8 pb-3 flex flex-col space-y-6 rounded-lg"
+        style={{ maxHeight: `${availableHeight}px` }}
+      >
         <h1 className="text-xl bg-teal drop-shadow-xl text-white text-center font-semibold rounded-lg p-4">
           Line Plot
         </h1>
@@ -479,26 +487,40 @@ export default function DataLineGraph() {
               key={index}
               className="relative inline-block text-left m-3"
             >
-              <MenuButton className={(index === 0) 
-                                    ? "outline-medium-blue bg-light-blue inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2" 
-                                    : "outline-medium-red-orange bg-light-red-orange inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2"}>
+              <MenuButton
+                className={
+                  index === 0
+                    ? "outline-medium-blue bg-light-blue inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2"
+                    : "outline-medium-red-orange bg-light-red-orange inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2"
+                }
+              >
                 <span style={{ color: colorScale(index) }}>
                   {name || "Select Name"}
                 </span>
-                <ChevronDownIcon className="-mr-1 size-6" style={{ color: colorScale(index) }}/>
+                <ChevronDownIcon
+                  className="-mr-1 size-6"
+                  style={{ color: colorScale(index) }}
+                />
               </MenuButton>
-              <MenuItems className={(index === 0) 
-                                    ? "absolute left-1/2 -translate-x-1/2 bg-light-blue w-full z-50 right-1/2 transform mt-2 w-56 rounded-xl shadow-lg ring-1 ring-black/5" 
-                                    : "absolute left-1/2 -translate-x-1/2 bg-light-red-orange w-full z-50 right-1/2 transform mt-2 w-56 rounded-xl shadow-lg ring-1 ring-black/5"}>
+              <MenuItems
+                className={
+                  index === 0
+                    ? "absolute left-1/2 -translate-x-1/2 bg-light-blue w-full z-50 right-1/2 transform mt-2 w-56 rounded-xl shadow-lg ring-1 ring-black/5"
+                    : "absolute left-1/2 -translate-x-1/2 bg-light-red-orange w-full z-50 right-1/2 transform mt-2 w-56 rounded-xl shadow-lg ring-1 ring-black/5"
+                }
+              >
                 {availableNames
                   .filter((n) => !selectedNames.includes(n))
                   .map((n) => (
                     <MenuItem key={n}>
                       <button
                         onClick={() => handleNameSelect(index, n)}
-                        className={(index === 0) 
-                                    ? "text-blue block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"
-                                    : "text-red-orange block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"}>
+                        className={
+                          index === 0
+                            ? "text-blue block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"
+                            : "text-red-orange block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"
+                        }
+                      >
                         {n}
                       </button>
                     </MenuItem>
@@ -542,10 +564,7 @@ export default function DataLineGraph() {
               <span className="text-white font-semibold text-center">to</span>
             </div>
 
-            <DateBoundElement
-              value={endDate}
-              onChange={handleEndDateChange}
-            />
+            <DateBoundElement value={endDate} onChange={handleEndDateChange} />
           </div>
 
           <div className="flex items-center justify-center mt-4 mx-3">
