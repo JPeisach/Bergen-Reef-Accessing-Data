@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import "../globals.css";
 import { AgGridReact } from "ag-grid-react";
 import { isUserAdmin } from "../../actions/isUserAdmin";
-import { useUser } from "@auth0/nextjs-auth0";
+import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
 
 import {
   CellClassParams,

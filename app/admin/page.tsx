@@ -8,6 +8,7 @@ import {
   UserCircleIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
+import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Page() {
   return (

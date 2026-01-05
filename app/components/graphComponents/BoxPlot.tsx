@@ -158,10 +158,12 @@ export default function BoxPlot() {
       // Only adjust for local time offset here
       const adjustedStartDate = startDate ? new Date(startDate) : null;
       const adjustedEndDate = endDate ? new Date(endDate) : null;
-      if (adjustedStartDate) adjustedStartDate.setHours(adjustedStartDate.getHours() - 5);
-      if (adjustedEndDate) adjustedEndDate.setHours(adjustedEndDate.getHours() - 5);
+      if (adjustedStartDate)
+        adjustedStartDate.setHours(adjustedStartDate.getHours() - 5);
+      if (adjustedEndDate)
+        adjustedEndDate.setHours(adjustedEndDate.getHours() - 5);
       const response = await fetch(
-        `/api/searchDataByDateType?startDate=${adjustedStartDate?.toISOString()}&endDate=${adjustedEndDate?.toISOString()}&names=${selectedName}`
+        `/api/searchDataByDateType?startDate=${adjustedStartDate?.toISOString()}&endDate=${adjustedEndDate?.toISOString()}&names=${selectedName}`,
       );
 
       if (!response.ok) {
@@ -200,7 +202,7 @@ export default function BoxPlot() {
       max,
       outliers,
       timeRange: `${d3.timeFormat("%Y-%m-%d")(
-        startDate || new Date()
+        startDate || new Date(),
       )} to ${d3.timeFormat("%Y-%m-%d")(endDate || new Date())}`,
     };
   };
@@ -214,11 +216,11 @@ export default function BoxPlot() {
     // Get the current dimensions of the container
     const containerWidth = parseInt(
       d3.select(svgRef.current.parentElement).style("width"),
-      10
+      10,
     );
     const containerHeight = parseInt(
       d3.select(svgRef.current.parentElement).style("height"),
-      10
+      10,
     );
 
     // Set the SVG dimensions to match the container independently
@@ -281,10 +283,10 @@ export default function BoxPlot() {
           .style("visibility", "visible")
           .html(
             `Q1: ${Number(boxPlotData.q1).toFixed(2)}<br/>Q3: ${Number(
-              boxPlotData.q3
+              boxPlotData.q3,
             ).toFixed(2)}<br/>IQR: ${Number(
-              boxPlotData.q3 - boxPlotData.q1
-            ).toFixed(2)}`
+              boxPlotData.q3 - boxPlotData.q1,
+            ).toFixed(2)}`,
           );
       })
       .on("mousemove", (event) => {
@@ -381,11 +383,11 @@ export default function BoxPlot() {
             .style("visibility", "visible")
             .html(
               `<strong>Outlier Value:</strong> ${Number(outlier).toFixed(
-                2
+                2,
               )}<br/><br/>` +
                 `<strong>Expected Range:</strong><br/>` +
                 `Lower bound: ${lowerBound.toFixed(2)}<br/>` +
-                `Upper bound: ${upperBound.toFixed(2)}<br/>`
+                `Upper bound: ${upperBound.toFixed(2)}<br/>`,
             );
         })
         .on("mousemove", (event) => {
@@ -418,7 +420,7 @@ export default function BoxPlot() {
     // Add x-axis label with date range
     const formatDateTime = d3.timeFormat("%m/%d/%Y %H:%M:%S");
     const dateLabel = `${formatDateTime(
-      startDate || new Date()
+      startDate || new Date(),
     )} - ${formatDateTime(endDate || new Date())}`;
 
     g.append("text")
