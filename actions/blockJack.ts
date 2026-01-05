@@ -1,8 +1,7 @@
 "use server";
 
 import React from "react";
-import { createAccessToken } from "./createAccessToken";
-import { getSession } from "@auth0/nextjs-auth0";
+import { auth0 } from "src/lib/auth0";
 import { NextResponse } from "next/server";
 import { isUserAdmin } from "./isUserAdmin";
 
@@ -15,7 +14,7 @@ type Role = {
 // Get the roles for the current user in Auth0 Management API
 export async function blockJack(): Promise<Role[]> {
   try {
-    const session = await getSession();
+    const session = await auth0.getSession();
     const user = session?.user;
 
     const ses = await isUserAdmin();
@@ -26,7 +25,7 @@ export async function blockJack(): Promise<Role[]> {
       throw new Error("User not authenticated");
     }
 
-    const token = await createAccessToken();
+    const token = await auth0.getAccessToken();
 
     const response = await fetch(
       `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users/${user.sub}/roles`,
@@ -36,7 +35,7 @@ export async function blockJack(): Promise<Role[]> {
           Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
