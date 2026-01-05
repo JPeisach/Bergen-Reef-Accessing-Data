@@ -35,8 +35,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "format": "npx prettier . --write",
-    "format-check": "npx prettier . --check",
-    "prepare": "husky install"
+    "format-check": "npx prettier . --check"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.8",
