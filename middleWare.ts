@@ -19,5 +19,11 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/api/assignRoles", "/api/createData", "/api/deleteData","/api/getUserList","/api/takeRoles"],
+  matcher: [
+    "/api/assignRoles",
+    "/api/createData",
+    "/api/deleteData",
+    "/api/getUserList",
+    "/api/takeRoles",
+  ],
 };

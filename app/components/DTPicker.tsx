@@ -40,8 +40,8 @@ export class DTPicker implements IDateComp {
       closeOnSelect: false,
       onReady: (selectedDates, dateStr, instance) => {
         // Add custom buttons to the calendar
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.className = 'flatpickr-buttons';
+        const buttonsContainer = document.createElement("div");
+        buttonsContainer.className = "flatpickr-buttons";
         buttonsContainer.style.cssText = `
           display: flex;
           justify-content: space-between;
@@ -51,8 +51,8 @@ export class DTPicker implements IDateComp {
           border-radius: 0 0 4px 4px;
         `;
 
-        const cancelButton = document.createElement('button');
-        cancelButton.textContent = 'Cancel';
+        const cancelButton = document.createElement("button");
+        cancelButton.textContent = "Cancel";
         cancelButton.style.cssText = `
           padding: 6px 12px;
           background: #f0f0f0;
@@ -62,11 +62,13 @@ export class DTPicker implements IDateComp {
           font-size: 14px;
           color: #666;
         `;
-        cancelButton.onmouseover = () => cancelButton.style.background = '#e0e0e0';
-        cancelButton.onmouseout = () => cancelButton.style.background = '#f0f0f0';
+        cancelButton.onmouseover = () =>
+          (cancelButton.style.background = "#e0e0e0");
+        cancelButton.onmouseout = () =>
+          (cancelButton.style.background = "#f0f0f0");
 
-        const updateButton = document.createElement('button');
-        updateButton.textContent = 'Update';
+        const updateButton = document.createElement("button");
+        updateButton.textContent = "Update";
         updateButton.style.cssText = `
           padding: 6px 12px;
           background: #4CAF50;
@@ -76,14 +78,16 @@ export class DTPicker implements IDateComp {
           font-size: 14px;
           color: white;
         `;
-        updateButton.onmouseover = () => updateButton.style.background = '#45a049';
-        updateButton.onmouseout = () => updateButton.style.background = '#4CAF50';
+        updateButton.onmouseover = () =>
+          (updateButton.style.background = "#45a049");
+        updateButton.onmouseout = () =>
+          (updateButton.style.background = "#4CAF50");
 
         cancelButton.onclick = () => {
           instance.close();
           this.tempDate = this.date;
           if (this.eInput) {
-            this.eInput.value = this.date ? this.date.toLocaleString() : '';
+            this.eInput.value = this.date ? this.date.toLocaleString() : "";
           }
         };
 
@@ -100,7 +104,7 @@ export class DTPicker implements IDateComp {
 
         // Add the buttons container to the calendar
         instance.calendarContainer.appendChild(buttonsContainer);
-      }
+      },
     });
 
     this.picker.calendarContainer.classList.add("ag-custom-component-popup");

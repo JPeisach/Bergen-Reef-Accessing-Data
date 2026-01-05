@@ -23,7 +23,7 @@ export async function createAccessToken(): Promise<string> {
         headers: {
           "content-type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     );
 
     return response.data.access_token;

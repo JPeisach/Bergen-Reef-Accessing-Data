@@ -8,12 +8,11 @@ import { ArrowUpRightIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
 import ProfileClient from "../components/ProfileClient";
 import NavigationBar from "../components/NavigationBar";
-import { isUserAdmin } from '../../actions/isUserAdmin';
+import { isUserAdmin } from "../../actions/isUserAdmin";
 import { redirect } from "next/navigation";
 import { ResponsiveContainer } from "recharts";
-import { getUsersRoles } from "../../actions/getUsersRoles"
+import { getUsersRoles } from "../../actions/getUsersRoles";
 import UserList from "app/components/UserList";
-
 
 export default function Page() {
   const { user, error, isLoading } = useUser();
@@ -35,7 +34,7 @@ export default function Page() {
 
   return (
     <div>
-      <NavigationBar defaultIndex={-1} username={(user) ? user.name : "Guest"}/>
+      <NavigationBar defaultIndex={-1} username={user ? user.name : "Guest"} />
       <br></br>
       <br></br>
 
@@ -74,14 +73,14 @@ export default function Page() {
                 href="/api/auth/login"
                 className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-orange-600 transition text-center"
                 style={{
-              padding: "8px 16px",
-              fontSize: "16px",
-              color: "white",
-              border: "none",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              }}
+                  padding: "8px 16px",
+                  fontSize: "16px",
+                  color: "white",
+                  border: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
                 Login
               </a>
@@ -94,24 +93,28 @@ export default function Page() {
           href="https://docs.google.com/spreadsheets/d/1BF5JBYV3v2brBQQaRBo6X_J-uPCdDtzE4UUCDKtLPJA/edit?usp=sharing"
           className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-medium-teal transition"
         >
-          View Data Backup Spreadsheet <ArrowUpRightIcon className="inline w-4 h-4 text-white ml-1 align-text-bottom"/>
+          View Data Backup Spreadsheet{" "}
+          <ArrowUpRightIcon className="inline w-4 h-4 text-white ml-1 align-text-bottom" />
         </a>
       </div>
-      
-      <br></br>  
+
+      <br></br>
 
       {isAdmin && (
         <div className="flex justify-center">
-          <div className="rounded-md justify-content-center w-1/2 bg-gray-100 p-4" style={{height:400}}>
+          <div
+            className="rounded-md justify-content-center w-1/2 bg-gray-100 p-4"
+            style={{ height: 400 }}
+          >
             <ResponsiveContainer>
-              <UserList/>
+              <UserList />
             </ResponsiveContainer>
           </div>
 
           <div className="ml-4">
-            <iframe 
+            <iframe
               src="https://docs.google.com/spreadsheets/d/1BF5JBYV3v2brBQQaRBo6X_J-uPCdDtzE4UUCDKtLPJA/edit?usp=sharing&embedded=true"
-              style={{width: '600px', height: '400px', outline: 'none'}}
+              style={{ width: "600px", height: "400px", outline: "none" }}
               frameBorder="0"
               className="rounded-xl shadow-lg"
             />

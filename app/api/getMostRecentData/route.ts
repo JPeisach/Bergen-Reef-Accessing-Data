@@ -4,7 +4,6 @@ import getMostRecentData from "src/lib/getMostRecentData"; // Import function
 export async function GET(request: Request) {
   console.log("api being called");
   try {
-
     const { searchParams } = new URL(request.url);
     const type = searchParams.get("type");
 
@@ -14,7 +13,7 @@ export async function GET(request: Request) {
       ORP: "ORP",
       Alkalinity: "Alkalinity",
       Calcium: "Calcium",
-      pH: "pH"
+      pH: "pH",
     };
 
     if (!type || type.length === 0) {
@@ -30,6 +29,9 @@ export async function GET(request: Request) {
     return NextResponse.json(result);
   } catch (error) {
     console.error("Error fetching data:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
   }
 }

@@ -3,17 +3,23 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/themes/confetti.css";
 
 function formatDate(date: Date | null) {
-  if (!date) return '';
-  const mm = String(date.getMonth() + 1).padStart(2, '0');
-  const dd = String(date.getDate()).padStart(2, '0');
+  if (!date) return "";
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
   const yy = String(date.getFullYear()).slice(-2);
-  const hh = String(date.getHours()).padStart(2, '0');
-  const min = String(date.getMinutes()).padStart(2, '0');
-  const ss = String(date.getSeconds()).padStart(2, '0');
+  const hh = String(date.getHours()).padStart(2, "0");
+  const min = String(date.getMinutes()).padStart(2, "0");
+  const ss = String(date.getSeconds()).padStart(2, "0");
   return `${mm}/${dd}/${yy} ${hh}:${min}:${ss}`;
 }
 
-const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (date: Date | null) => void }) => {
+const DateBoundElement = ({
+  value,
+  onChange,
+}: {
+  value: Date | null;
+  onChange: (date: Date | null) => void;
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const fpRef = useRef<any>(null);
   const [tempDate, setTempDate] = useState<Date | null>(value);
@@ -45,12 +51,12 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
       disable: [
         {
           from: new Date(new Date().setDate(new Date().getDate() + 1)),
-          to: new Date(9999, 12, 31)
-        }
+          to: new Date(9999, 12, 31),
+        },
       ],
       onReady: (selectedDates: Date[], dateStr: string, instance: any) => {
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.className = 'flatpickr-buttons';
+        const buttonsContainer = document.createElement("div");
+        buttonsContainer.className = "flatpickr-buttons";
         buttonsContainer.style.cssText = `
           display: flex;
           justify-content: space-between;
@@ -60,8 +66,8 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
           border-radius: 0 0 4px 4px;
         `;
 
-        const cancelButton = document.createElement('button');
-        cancelButton.textContent = 'Cancel';
+        const cancelButton = document.createElement("button");
+        cancelButton.textContent = "Cancel";
         cancelButton.style.cssText = `
           padding: 6px 12px;
           background: #f0f0f0;
@@ -71,11 +77,13 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
           font-size: 14px;
           color: #666;
         `;
-        cancelButton.onmouseover = () => cancelButton.style.background = '#e0e0e0';
-        cancelButton.onmouseout = () => cancelButton.style.background = '#f0f0f0';
+        cancelButton.onmouseover = () =>
+          (cancelButton.style.background = "#e0e0e0");
+        cancelButton.onmouseout = () =>
+          (cancelButton.style.background = "#f0f0f0");
 
-        const updateButton = document.createElement('button');
-        updateButton.textContent = 'Update';
+        const updateButton = document.createElement("button");
+        updateButton.textContent = "Update";
         updateButton.style.cssText = `
           padding: 6px 12px;
           background: #4CAF50;
@@ -85,8 +93,10 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
           font-size: 14px;
           color: white;
         `;
-        updateButton.onmouseover = () => updateButton.style.background = '#45a049';
-        updateButton.onmouseout = () => updateButton.style.background = '#4CAF50';
+        updateButton.onmouseover = () =>
+          (updateButton.style.background = "#45a049");
+        updateButton.onmouseout = () =>
+          (updateButton.style.background = "#4CAF50");
 
         cancelButton.onclick = () => {
           instance.close();
@@ -99,7 +109,10 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
 
         updateButton.onclick = () => {
           // Always get the selected date from flatpickr instance
-          const selected = instance.selectedDates && instance.selectedDates[0] ? instance.selectedDates[0] : tempDate;
+          const selected =
+            instance.selectedDates && instance.selectedDates[0]
+              ? instance.selectedDates[0]
+              : tempDate;
           if (selected) {
             onChange(selected);
             if (inputRef.current) {
@@ -114,7 +127,7 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
 
         // Add the buttons container to the calendar
         instance.calendarContainer.appendChild(buttonsContainer);
-      }
+      },
     };
 
     // Initialize flatpickr
@@ -131,7 +144,7 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
       }
     };
 
-    inputRef.current.addEventListener('input', updateWidth);
+    inputRef.current.addEventListener("input", updateWidth);
     updateWidth();
 
     // Cleanup function
@@ -140,7 +153,7 @@ const DateBoundElement = ({ value, onChange }: { value: Date | null; onChange: (
         fpRef.current.destroy();
       }
       if (inputRef.current) {
-        inputRef.current.removeEventListener('input', updateWidth);
+        inputRef.current.removeEventListener("input", updateWidth);
       }
     };
   }, [value, onChange]);

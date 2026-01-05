@@ -6,10 +6,10 @@ import NavigationBar from "../components/NavigationBar";
 
 export default function Page() {
   const { user } = useUser();
-  
+
   return (
     <div>
-      <NavigationBar defaultIndex={1} username={(user) ? user.name : "Guest"}/>
+      <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
       <br></br>
       <div
         style={{

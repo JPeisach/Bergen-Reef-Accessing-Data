@@ -1,60 +1,59 @@
 # Coral-Reef-Capstone
 
-An [interactive web application](https://youtu.be/zMg2eBdIiAI?si=2iS7eD4Ko_oFpAut) that not only displays graphical representations of coral reef information, but also manages the data of the coral reef tanks. The application will be used in parallel with Apex Fusion in the lab, and displayed on TVS for viewers in the Makerspace. 
+An [interactive web application](https://youtu.be/zMg2eBdIiAI?si=2iS7eD4Ko_oFpAut) that not only displays graphical representations of coral reef information, but also manages the data of the coral reef tanks. The application will be used in parallel with Apex Fusion in the lab, and displayed on TVS for viewers in the Makerspace.
 
 ## Technologies used:
 
 - [Raspberry Pi](https://www.raspberrypi.org/), [Python](https://www.python.org/), [Cron-Job](https://cron-job.org/)
-    The tech stack used to pull data from Apex Fusion in the Coral Reef Lab and push it to the server at regular intervals
+  The tech stack used to pull data from Apex Fusion in the Coral Reef Lab and push it to the server at regular intervals
 
 - [xml2js](https://www.npmjs.com/package/xml2js)
-    A package used to convert data from Apex Fusion from XML format to JSON format
+  A package used to convert data from Apex Fusion from XML format to JSON format
 
 - [MySQL Relational Database](https://www.mysql.com/)
-    The database used to store data pulled from Apex Fusion 
+  The database used to store data pulled from Apex Fusion
 
 - [Drizzle](https://orm.drizzle.team/)
-    An ORM used to query data from the database, chosen for its more lightweight and SQL-centric approach
+  An ORM used to query data from the database, chosen for its more lightweight and SQL-centric approach
 
 - [HTML/JS/CSS](https://developer.mozilla.org/en-US/docs/Web/HTML) with [Tailwind CSS](https://tailwindcss.com/) framework
-    The languages and framework used for visuals and styling within the UI
+  The languages and framework used for visuals and styling within the UI
 
 - [Headless UI](https://headlessui.dev/)
-    A library used for building accessible menu components – works seamlessly with Tailwind CSS
+  A library used for building accessible menu components – works seamlessly with Tailwind CSS
 
 - [Heroicons](https://heroicons.com/)
-    SVG icons that work well with Tailwind CSS
+  SVG icons that work well with Tailwind CSS
 
 - [Next.js](https://nextjs.org/)
-    A React framework used to build full stack web applications
+  A React framework used to build full stack web applications
 
 - [Vercel](https://vercel.com/)
-    A cloud platform used to deploy web applications – integrates seamlessly with Next.js
-    
+  A cloud platform used to deploy web applications – integrates seamlessly with Next.js
 - [Recharts](https://recharts.org/), [D3](https://d3js.org/)
-    The libraries used for creation of graphical visuals
+  The libraries used for creation of graphical visuals
 
 - [AG Grid](https://www.ag-grid.com/)
-    A library for handling large datasets, customizable rows, and pagination
+  A library for handling large datasets, customizable rows, and pagination
 
 - [flatpickr](https://reactdatepicker.com/)
-    A React package used for date selection features, including datetime filtering
-    
+  A React package used for date selection features, including datetime filtering
 - [Auth0](https://auth0.com/)
-    An authorization and authentication service
+  An authorization and authentication service
 
 - [Axios](https://www.npmjs.com/package/axios)
-    A promise-based HTTP client that simplifies making API requests in React application
+  A promise-based HTTP client that simplifies making API requests in React application
 
 - [Google Sheets](https://workspace.google.com/products/sheets/)
-    Used for the database backup, with tabs to keep track of recenty backed-up data and soft-deleted data
+  Used for the database backup, with tabs to keep track of recenty backed-up data and soft-deleted data
 
 - [Google App Scripts](https://developers.google.com/apps-script)
-    Used alongside Google Sheets for database backups (not in sync with the Cron Job)
+  Used alongside Google Sheets for database backups (not in sync with the Cron Job)
 
 ## Installation and Setup
 
 ### Prerequisites
+
 - Node.js (v18 or higher)
 <!-- - MySQL Server  --> could be outdated
 - Python 3.x (for Raspberry Pi scripts)
@@ -62,7 +61,9 @@ An [interactive web application](https://youtu.be/zMg2eBdIiAI?si=2iS7eD4Ko_oFpAu
 - Auth0 account and application setup
 
 ### Database Setup
+
 The following is an example database setup readme ...
+
 <!-- The project uses a MySQL database. Since the school-issued MySQL databases will be taken down, you'll need to:
 
 1. Export the database schema and data:
@@ -78,7 +79,9 @@ The following is an example database setup readme ...
    ``` -->
 
 ### Environment Configuration
+
 Create a `.env.local` file in the root directory with the following variables (with real values, do not include the single quotes):
+
 ```env
 # Database Configuration
 DATABASE_URL=mysql://user:password@localhost:3306/coral_reef_db
@@ -99,12 +102,14 @@ APEX_FUSION_URL='your-apex-fusion-url'
 ### Installation Steps
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/Coral-Reef-Capstone.git
    cd Coral-Reef-Capstone
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -123,14 +128,17 @@ APEX_FUSION_URL='your-apex-fusion-url'
    ```
 
 ### Additional Resources
+
 - The Python scripts for data collection using the Raspberry Pis are maintained in a separate repository: [Coral-Reef-Data-Collection](https://github.com/vrigue/Coral-Reef-Data-Collection)
 - Database schema and models are located in `/database/`
 - Package dependencies are managed through `package.json`
 
 ### Deployment
+
 The application is deployed on Vercel @ [https://bergen-reef-accessing-data-coral-reef-capstone.vercel.app/](https://bergen-reef-accessing-data-coral-reef-capstone.vercel.app/)
 
 ### Third-Party Services
+
 1. **Auth0**
    - Authentication and authorization service
    - Configuration required in Auth0 dashboard
@@ -145,16 +153,19 @@ The application is deployed on Vercel @ [https://bergen-reef-accessing-data-cora
    - TBA
 
 ### Requirements Documentation
+
 - Node.js dependencies are managed through `package.json`
 - Python dependencies for the Raspberry Pi scripts are listed in the [Coral-Reef-Data-Collection](https://github.com/vrigue/Coral-Reef-Data-Collection) repository
 
 ### Configuration Files
+
 - `.env.local` - Environment variables (see sample above)
 - `next.config.js` - Next.js configuration
 - `tailwind.config.js` - Tailwind CSS configuration
 - `drizzle.config.ts` - Database ORM configuration
 
 ### Additional Notes
+
 - The application requires a running MySQL server
 - The Raspberry Pi must be configured with the correct network access to reach both Apex Fusion and the database server
 - Database backups occur separately from the data pushed to the base

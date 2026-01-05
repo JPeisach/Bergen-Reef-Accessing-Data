@@ -11,13 +11,12 @@ export const GET = async () => {
     const admin = await isUserAdmin();
 
     if (!admin) {
-      return Response.json({ error: 'Unauthorized' }, { status: 400 });
+      return Response.json({ error: "Unauthorized" }, { status: 400 });
     }
 
     return Response.json(users, { status: 200 });
   } catch (error) {
-    console.error('Error fetching users:', error);
-    return Response.json({ error: 'Failed to fetch users' }, { status: 500 });
+    console.error("Error fetching users:", error);
+    return Response.json({ error: "Failed to fetch users" }, { status: 500 });
   }
 };
-

@@ -36,7 +36,7 @@ export async function blockJack(): Promise<Role[]> {
           Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {

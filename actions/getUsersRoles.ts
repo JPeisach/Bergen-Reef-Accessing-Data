@@ -32,7 +32,7 @@ export async function getUsersRoles(): Promise<Role[]> {
           Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
