@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import "../globals.css";
 import { AgGridReact } from "ag-grid-react";
 import { isUserAdmin } from "../../actions/isUserAdmin";
-import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 import {
   CellClassParams,
@@ -544,7 +544,7 @@ export default function HistoryPageGrid() {
                     </div>
                     <button
                       onClick={handleCreateRow}
-                      className={`bg-white outline outline-1 outline-dark-orange drop-shadow-xl text-orange font-semibold px-4 py-2 rounded-xl shadow 
+                      className={`bg-white outline outline-1 outline-dark-orange drop-shadow-xl text-orange font-semibold px-4 py-2 rounded-xl shadow
                             ${selectedRows.length > 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-light-orange"}`}
                       disabled={selectedRows.length > 0}
                     >

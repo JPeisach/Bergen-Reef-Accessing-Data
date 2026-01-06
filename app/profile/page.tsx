@@ -5,7 +5,7 @@ import { GetServerSideProps } from "next";
 import "../globals.css";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { ArrowUpRightIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import ProfileClient from "../components/ProfileClient";
 import NavigationBar from "../components/NavigationBar";
 import { isUserAdmin } from "../../actions/isUserAdmin";
@@ -48,7 +48,7 @@ export default function Page() {
                 <h3 className="text-sm">{user.email}</h3>
               </div>
               <a
-                href="/api/auth/logout"
+                href="/auth/logout"
                 className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-medium-teal transition"
                 style={{
                   padding: "8px 16px",
@@ -70,7 +70,7 @@ export default function Page() {
                 <p className="text-sm">Login for User Info!</p>
               </div>
               <a
-                href="/api/auth/login"
+                href="/auth/login"
                 className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-orange-600 transition text-center"
                 style={{
                   padding: "8px 16px",

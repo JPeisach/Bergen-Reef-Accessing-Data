@@ -12,22 +12,22 @@ interface AccessTokenResponse {
 export async function createAccessToken(): Promise<string> {
   try {
     const response = await axios.post<AccessTokenResponse>(
-      `${process.env.AUTH0_ISSUER_BASE_URL}/oauth/token`,
-      new URLSearchParams({
+      `${process.env.AUTH0_DOMAIN}/oauth/token`,
+      JSON.stringify({
         grant_type: "client_credentials",
         client_id: process.env.AUTH0_CLIENT_ID!,
-        client_secret: process.env.AUTH0_CLIENT_SECRET!,
-        audience: `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/`,
+        client_secret: process.env.AUTH0_CLIENT_SECRET,
+        audience: `${process.env.AUTH0_DOMAIN}/api/v2/`,
       }),
       {
         headers: {
-          "content-type": "application/x-www-form-urlencoded",
+          "content-type": "application/json",
         },
       },
     );
 
     return response.data.access_token;
   } catch (error) {
-    throw new Error("Failed to get Auth0 management token");
+    throw new Error("Failed to get Auth0 management token", error);
   }
 }

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { createAccessToken } from "./createAccessToken";
-import { getSession } from "@auth0/nextjs-auth0";
+import { auth0 } from "../src/lib/auth0";
 import { NextResponse } from "next/server";
 
 type Role = {
@@ -14,7 +14,7 @@ type Role = {
 // Get the roles for the current user in Auth0 Management API
 export async function getUsersRoles(): Promise<Role[]> {
   try {
-    const session = await getSession();
+    const session = await auth0.getSession();
     const user = session?.user;
 
     if (!user) {
@@ -25,7 +25,7 @@ export async function getUsersRoles(): Promise<Role[]> {
     const token = await createAccessToken();
 
     const response = await fetch(
-      `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users/${user.sub}/roles`,
+      `${process.env.AUTH0_DOMAIN}/api/v2/users/${user.sub}/roles`,
       {
         method: "GET",
         headers: {
