@@ -3,17 +3,18 @@ import { Fragment } from "react";
 import clsx from "clsx";
 import { Tab, TabGroup, TabList } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 export default function Page() {
   return (
     <div>
       <div className="flex items-center justify-between bg-teal p-4 shadow-lg rounded-lg">
-        <a href="/">
+        <Link href="/">
           <div className="text-3xl">
             {" "}
             <img src="/images/coral-logo.png"></img>
           </div>
-        </a>
+        </Link>
         <div className="flex items-right justify-between">
           <a href="/admin">
             <div className="pt-1.5 pr-8">
@@ -22,7 +23,7 @@ export default function Page() {
           </a>
           <TabGroup defaultIndex={0}>
             <TabList className="flex space-x-4">
-              <a href="/">
+              <Link href="/">
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
@@ -37,7 +38,7 @@ export default function Page() {
                     </button>
                   )}
                 </Tab>
-              </a>
+              </Link>
               <a href="/data">
                 <Tab as={Fragment}>
                   {({ selected }) => (
