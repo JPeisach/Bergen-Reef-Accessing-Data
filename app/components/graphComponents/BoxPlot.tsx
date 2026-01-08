@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import "../../globals.css";
+import "../../css/graphComponents.css";
 import DateBoundElement from "../DateBoundElement";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -82,7 +83,7 @@ export default function BoxPlot() {
     "pH",
   ];
 
-  const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+  // const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
   useEffect(() => {
     const handleResize = () => {
@@ -172,7 +173,7 @@ export default function BoxPlot() {
 
       const result: DataPoint[] = await response.json();
       setData(result);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error searching for data: ", error);
     }
   }
@@ -533,7 +534,7 @@ export default function BoxPlot() {
       </div>
 
       <div
-        className="flex flex-col col-span-1 bg-white drop-shadow-md mr-8 pb-3 flex flex-col space-y-6 rounded-lg"
+        className="graph-settings-panel"
         style={{ height: `${availableHeight}px` }}
       >
         <h1 className="text-xl bg-teal drop-shadow-xl text-white text-center font-semibold rounded-lg p-4">
@@ -547,7 +548,7 @@ export default function BoxPlot() {
               </span>
               <ChevronDownIcon className="-mr-1 size-6 text-blue" />
             </MenuButton>
-            <MenuItems className="w-full z-50 right-1/2 transform mt-2 w-56 bg-light-blue rounded-xl shadow-lg ring-1 ring-black/5">
+            <MenuItems className="w-full z-50 right-1/2 transform mt-2 bg-light-blue rounded-xl shadow-lg ring-1 ring-black/5">
               {availableNames.map((name) => (
                 <MenuItem key={name}>
                   <button
@@ -562,7 +563,7 @@ export default function BoxPlot() {
           </Menu>
         </div>
 
-        <div className="flex flex-col bg-light-teal m-3 pb-5 rounded-lg">
+        <div className="date-constraints-box">
           <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
             Date Constraints
           </div>
@@ -602,30 +603,30 @@ export default function BoxPlot() {
           <div className="flex justify-center space-x-4 mt-4">
             <button
               onClick={() => setRangeModeWithDates("day")}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+              className={`date-range-button ${
                 rangeMode === "day"
-                  ? "bg-teal text-white"
-                  : "bg-white text-teal hover:bg-medium-teal hover:text-white"
+                  ? "date-range-button-selected"
+                  : "date-range-button-unselected"
               }`}
             >
               Day
             </button>
             <button
               onClick={() => setRangeModeWithDates("week")}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+              className={`date-range-button ${
                 rangeMode === "week"
-                  ? "bg-teal text-white"
-                  : "bg-white text-teal hover:bg-medium-teal hover:text-white"
+                  ? "date-range-button-selected"
+                  : "date-range-button-unselected"
               }`}
             >
               Week
             </button>
             <button
               onClick={() => setRangeModeWithDates("twoWeeks")}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+              className={`date-range-button ${
                 rangeMode === "twoWeeks"
-                  ? "bg-teal text-white"
-                  : "bg-white text-teal hover:bg-medium-teal hover:text-white"
+                  ? "date-range-button-selected"
+                  : "date-range-button-unselected"
               }`}
             >
               Two Weeks

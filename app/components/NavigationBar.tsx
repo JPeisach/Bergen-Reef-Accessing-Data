@@ -1,4 +1,4 @@
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { Tab, TabGroup, TabList } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { Fragment } from "react";
@@ -195,7 +195,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   </MenuItem>
                   <MenuItem>
                     <a href="/data/boxplot">
-                      <button className="block w-full w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
                         Box Plot
                       </button>
                     </a>
