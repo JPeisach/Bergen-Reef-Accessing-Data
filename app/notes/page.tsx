@@ -42,11 +42,11 @@ export default function Page() {
     <div>
       <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
 
-    
       <div className="p-8 bg-light-orange/30 min-h-screen">
-        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">Observations</h1>
+        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">
+          Observations
+        </h1>
 
-      
         <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-sm">
           {/* Tank numnber dropdown menu */}
           <div className="min-w-[160px]">
@@ -168,7 +168,8 @@ export default function Page() {
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The calcium levels dropped by a suspicious amount, but the Mushroom coral looks surprisingly healthy!
+                  The calcium levels dropped by a suspicious amount, but the
+                  Mushroom coral looks surprisingly healthy!
                 </p>
               </div>
 
@@ -197,7 +198,8 @@ export default function Page() {
                   </span>
                 </div>
                 <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The Jolene coral appears to be thriving despite fluctuations in pH and temperature.
+                  The Jolene coral appears to be thriving despite fluctuations
+                  in pH and temperature.
                 </p>
               </div>
             </div>

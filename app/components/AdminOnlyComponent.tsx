@@ -1,5 +1,5 @@
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { useEffect, useState } from 'react';
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useEffect, useState } from "react";
 
 export default function AdminOnly() {
   const { user, isLoading } = useUser();
@@ -7,7 +7,7 @@ export default function AdminOnly() {
 
   useEffect(() => {
     if (user) {
-      const roles = user['https://coralreefwebapp/roles'] || [];
+      const roles = user["https://coralreefwebapp/roles"] || [];
       //setIsAdmin(roles.includes('administrator'));
     }
   }, [user]);

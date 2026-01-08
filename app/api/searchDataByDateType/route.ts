@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import searchDataByDateType from "src/lib/searchDataByDateType";
 
 export async function GET(request: Request) {
-  console.log("THIS IS HISTORY REQUEST")
+  console.log("THIS IS HISTORY REQUEST");
   console.log(request);
   try {
     const { searchParams } = new URL(request.url);
@@ -12,8 +12,14 @@ export async function GET(request: Request) {
 
     if (!startDate || !endDate || !names || names.length === 0) {
       return NextResponse.json(
-        { error: "Missing required parameters ", startDate, endDate, startDateObj: startDate ? new Date(startDate) : null, endDateObj: endDate ? new Date(endDate) : null },
-        { status: 400 }
+        {
+          error: "Missing required parameters ",
+          startDate,
+          endDate,
+          startDateObj: startDate ? new Date(startDate) : null,
+          endDateObj: endDate ? new Date(endDate) : null,
+        },
+        { status: 400 },
       );
     }
 
@@ -25,15 +31,19 @@ export async function GET(request: Request) {
     console.log("startDateObj:", startDateObj);
     console.log("endDateObj:", endDateObj);
 
-    if (isNaN(startDateObj.getTime()) || isNaN(endDateObj.getTime()) || startDateObj > endDateObj) {
+    if (
+      isNaN(startDateObj.getTime()) ||
+      isNaN(endDateObj.getTime()) ||
+      startDateObj > endDateObj
+    ) {
       return NextResponse.json(
         { error: "Invalid date format" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const result = await searchDataByDateType(startDateObj, endDateObj, names);
-    
+
     // console.log("Search result:", result); // for debugging purposes
 
     return NextResponse.json(result);
@@ -41,7 +51,7 @@ export async function GET(request: Request) {
     console.error("Error fetching data:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

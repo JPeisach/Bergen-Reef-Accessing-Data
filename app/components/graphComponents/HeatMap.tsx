@@ -42,9 +42,9 @@ function formatLocalDateTime(date: Date) {
   adjustedDate.setHours(adjustedDate.getHours() + 5);
   const pad = (n: number) => n.toString().padStart(2, "0");
   return `${adjustedDate.getFullYear()}-${pad(adjustedDate.getMonth() + 1)}-${pad(
-    adjustedDate.getDate()
+    adjustedDate.getDate(),
   )}T${pad(adjustedDate.getHours())}:${pad(adjustedDate.getMinutes())}:${pad(
-    adjustedDate.getSeconds()
+    adjustedDate.getSeconds(),
   )}`;
 }
 
@@ -141,8 +141,8 @@ export default function DataLineGraph() {
     try {
       const response = await fetch(
         `/api/searchDataByDateType?startDate=${formatLocalDateTime(
-          startDate
-        )}&endDate=${formatLocalDateTime(endDate)}&names=${selectedName}`
+          startDate,
+        )}&endDate=${formatLocalDateTime(endDate)}&names=${selectedName}`,
       );
 
       if (!response.ok) {
@@ -162,15 +162,15 @@ export default function DataLineGraph() {
     // Calculate the start of the first week
     const firstWeekStart = new Date(startDate);
     firstWeekStart.setHours(0, 0, 0, 0);
-    
+
     // Create a map to store values for each week/day combination
     const valueMap = new Map<string, number[]>();
-    
+
     // Group data by week and day
     nameData.forEach((d) => {
       const date = new Date(d.datetime);
       const week = Math.floor(
-        (date.getTime() - firstWeekStart.getTime()) / (7 * 24 * 60 * 60 * 1000)
+        (date.getTime() - firstWeekStart.getTime()) / (7 * 24 * 60 * 60 * 1000),
       );
       if (week >= 0 && week < numWeeks) {
         const day = date.getDay();
@@ -217,11 +217,11 @@ export default function DataLineGraph() {
     // Get the current dimensions of the container
     const containerWidth = parseInt(
       d3.select(svgRef.current.parentElement).style("width"),
-      10
+      10,
     );
     const containerHeight = parseInt(
       d3.select(svgRef.current.parentElement).style("height"),
-      10
+      10,
     );
 
     // Set the SVG dimensions to match the container independently
@@ -328,9 +328,7 @@ export default function DataLineGraph() {
         const formattedDate = d3.timeFormat("%Y-%m-%d")(cellDate);
         tooltip.transition().duration(200).style("opacity", 0.9);
         tooltip
-          .html(
-            `${formattedDate}<br/>No data available`
-          )
+          .html(`${formattedDate}<br/>No data available`)
           .style("left", event.pageX + 10 + "px")
           .style("top", event.pageY - 28 + "px");
       })
@@ -352,8 +350,8 @@ export default function DataLineGraph() {
         return d.value > upperBound
           ? "#67000d"
           : d.value < lowerBound
-          ? "#053061"
-          : colorScale(d.value);
+            ? "#053061"
+            : colorScale(d.value);
       })
       .attr("stroke", "white")
       .attr("stroke-width", 1)
@@ -370,12 +368,12 @@ export default function DataLineGraph() {
           Median: ${d.value.toFixed(2)} ${units[selectedName]}<br/>
           Min: ${d.minValue.toFixed(2)} ${units[selectedName]}<br/>
           Max: ${d.maxValue.toFixed(2)} ${units[selectedName]}${
-              d.value > upperBound
-                ? "<br/>(High Outlier)"
-                : d.value < lowerBound
+            d.value > upperBound
+              ? "<br/>(High Outlier)"
+              : d.value < lowerBound
                 ? "<br/>(Low Outlier)"
                 : ""
-            }`
+          }`,
           )
           .style("left", event.pageX + 10 + "px")
           .style("top", event.pageY - 28 + "px");
@@ -402,9 +400,10 @@ export default function DataLineGraph() {
     });
 
     // Filter week labels if needed
-    const filteredWeekLabels = isSmallScreen && numWeeks > 7 
-      ? weekLabels.filter((_, i) => i % 2 === 0)
-      : weekLabels;
+    const filteredWeekLabels =
+      isSmallScreen && numWeeks > 7
+        ? weekLabels.filter((_, i) => i % 2 === 0)
+        : weekLabels;
 
     g.selectAll(".week-label")
       .data(filteredWeekLabels)

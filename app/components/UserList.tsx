@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import HistoryPageDialog from './HistoryPageDialog'; // Adjust the path based on your folder structure
+import { useEffect, useState } from "react";
+import HistoryPageDialog from "./HistoryPageDialog"; // Adjust the path based on your folder structure
 
 type User = {
   roles: string[];
@@ -18,11 +18,11 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch('/api/getUserList');
+        const res = await fetch("/api/getUserList");
         const data = await res.json();
         setUsers(data);
       } catch (err) {
-        console.error('Failed to fetch users:', err);
+        console.error("Failed to fetch users:", err);
       }
     };
 
@@ -32,20 +32,20 @@ const UserList = () => {
   const handleAssignAdmin = async (userId: string) => {
     try {
       setLoading(true);
-      const res = await fetch('/api/assignRoles', {
-        method: 'POST',
+      const res = await fetch("/api/assignRoles", {
+        method: "POST",
         body: JSON.stringify({ userId }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
-      if (!res.ok) throw new Error('Failed to assign admin role');
+      if (!res.ok) throw new Error("Failed to assign admin role");
 
-      alert('Admin role assigned successfully!');
+      alert("Admin role assigned successfully!");
     } catch (err) {
-      console.error('Failed to assign admin role:', err);
-      alert('Failed to assign admin role.');
+      console.error("Failed to assign admin role:", err);
+      alert("Failed to assign admin role.");
     } finally {
       setLoading(false);
     }
@@ -54,20 +54,20 @@ const UserList = () => {
   const handleRemoveAdmin = async (userId: string) => {
     try {
       setLoading(true);
-      const res = await fetch('/api/takeRoles', {
-        method: 'POST',
+      const res = await fetch("/api/takeRoles", {
+        method: "POST",
         body: JSON.stringify({ userId }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
-      if (!res.ok) throw new Error('Failed to remove admin role');
+      if (!res.ok) throw new Error("Failed to remove admin role");
 
-      alert('Admin role removed successfully!');
+      alert("Admin role removed successfully!");
     } catch (err) {
-      console.error('Failed to remove admin role:', err);
-      alert('Failed to remove admin role!');
+      console.error("Failed to remove admin role:", err);
+      alert("Failed to remove admin role!");
     } finally {
       setLoading(false);
     }
@@ -78,21 +78,23 @@ const UserList = () => {
 
     try {
       setLoading(true);
-      const res = await fetch('/api/removeUser', {
-        method: 'POST',
+      const res = await fetch("/api/removeUser", {
+        method: "POST",
         body: JSON.stringify({ userId: userToDelete.user_id }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
-      if (!res.ok) throw new Error('Failed to delete user');
+      if (!res.ok) throw new Error("Failed to delete user");
 
-      alert('Successfully deleted user!');
-      setUsers((prev) => prev.filter((u) => u.user_id !== userToDelete.user_id));
+      alert("Successfully deleted user!");
+      setUsers((prev) =>
+        prev.filter((u) => u.user_id !== userToDelete.user_id),
+      );
     } catch (err) {
-      console.error('Failed to delete user:', err);
-      alert('Failed to delete user!');
+      console.error("Failed to delete user:", err);
+      alert("Failed to delete user!");
     } finally {
       setDialogOpen(false);
       setUserToDelete(null);
@@ -110,22 +112,31 @@ const UserList = () => {
               key={user.user_id}
               className="flex justify-between items-center px-2 py-2 bg-white rounded shadow-sm"
             >
-              <button onClick={() => { setUserToDelete(user); setDialogOpen(true); }}>
+              <button
+                onClick={() => {
+                  setUserToDelete(user);
+                  setDialogOpen(true);
+                }}
+              >
                 <img
                   src="/images/delete-button.png"
-                  style={{ width: '15%', height: '15%' }}
+                  style={{ width: "15%", height: "15%" }}
                   alt="Delete"
                 />
               </button>
               {user.email}
               <select
                 value={
-                  ["pive@gmail.com", "coralreeves760@gmail.com","bergen.capstone.2025@gmail.com"].includes(user.email)
-                    ? 'admin'
-                    : 'user'
+                  [
+                    "pive@gmail.com",
+                    "coralreeves760@gmail.com",
+                    "bergen.capstone.2025@gmail.com",
+                  ].includes(user.email)
+                    ? "admin"
+                    : "user"
                 }
                 onChange={(e) => {
-                  if (e.target.value === 'admin') {
+                  if (e.target.value === "admin") {
                     handleAssignAdmin(user.user_id);
                   } else {
                     handleRemoveAdmin(user.user_id);

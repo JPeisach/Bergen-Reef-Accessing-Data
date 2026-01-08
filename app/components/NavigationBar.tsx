@@ -220,7 +220,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                         : "text-orange",
                     )}
                   />
-                  <p className="text-base sm:text-lg md:text-xl text-dark-orange font-semibold px-2 py-0.5 whitespace-nowrap">
+                  {/* FIXME: wrap text neatly with the icon */}
+                  <p className="text-base sm:text-lg md:text-xl text-dark-orange font-semibold px-2 py-0.5 whitespace-pre-wrap">
                     Welcome {username}!
                   </p>
                 </div>
