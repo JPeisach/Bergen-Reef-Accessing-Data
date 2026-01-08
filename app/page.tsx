@@ -1,52 +1,15 @@
 "use client";
-import React, { useEffect, useState, Fragment } from "react";
-import clsx from "clsx";
-import { GetServerSideProps } from "next";
+
 import "./globals.css";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { UserCircleIcon } from "@heroicons/react/24/solid";
+
+import { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { ResponsiveContainer } from "recharts";
 
 import HomePageGraph from "./components/HomePageGraph";
 import HomePageElements from "./components/HomePageElements";
 import NavigationBar from "./components/NavigationBar";
-/*
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'your_user',
-  password: 'your_password',
-  database: 'your_database'
-});
-
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected!');
-});
-
-*/
-//static datasets for the interactive graph
-
-//write ups for the text area
-const infoContent = {
-  ph: "This is the pH info!",
-  calc: "This is the calcium info!",
-  alk: "This is the alkalinity info!",
-  orp: "This is the ORP info!",
-  temp: "This is the temperature info!",
-  salinity: "This is the salinity info!",
-};
 
 const styles = {
   container: {
@@ -76,34 +39,7 @@ const styles = {
 
 export default function Page() {
   const { user } = useUser();
-  const [data, setData] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState("Salinity");
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("/api/data");
-        const result = await response.json();
-        setData(result);
-      } catch (error: any) {
-        setError(error.message);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  const temp = data[0]?.data;
-  const pH = data[1]?.data;
-
-  //stuff for selecting data according to dropdown in graph
-  const [selectedInfo, setSelectedInfo] = React.useState(infoContent.ph);
-
-  const handleChange = (e) => {
-    setSelectedType(e.target.value);
-    setSelectedInfo(infoContent[e.target.value]);
-  };
 
   return (
     <div>

@@ -1,5 +1,4 @@
 import { blockJack } from "actions/blockJack";
-import { getUsersRoles } from "actions/getUsersRoles";
 import { NextResponse } from "next/server";
 import deleteData from "src/lib/deleteData";
 import { isUserAdmin } from "actions/isUserAdmin";

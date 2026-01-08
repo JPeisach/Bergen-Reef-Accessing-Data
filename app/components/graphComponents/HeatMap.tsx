@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import "../../globals.css";
+import "../../css/graphComponents.css";
 import DateBoundElement from "../DateBoundElement";
 import ZoomSlider from "../ZoomSlider";
 import StepSlider from "../StepSlider";
@@ -151,7 +152,7 @@ export default function DataLineGraph() {
 
       const result: DataPoint[] = await response.json();
       setData(result);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error searching for data: ", error);
     }
   }
@@ -581,7 +582,7 @@ export default function DataLineGraph() {
       </div>
 
       <div
-        className="flex flex-col col-span-1 bg-white drop-shadow-md mr-8 pb-3 flex flex-col space-y-6 rounded-lg"
+        className="graph-settings-panel"
         style={{ height: `${availableHeight}px` }}
       >
         <h1 className="text-xl bg-teal drop-shadow-xl text-white text-center font-semibold rounded-lg p-4">
@@ -595,7 +596,7 @@ export default function DataLineGraph() {
               </span>
               <ChevronDownIcon className="-mr-1 size-6 text-blue" />
             </MenuButton>
-            <MenuItems className="w-full z-50 right-1/2 transform mt-2 w-56 bg-light-blue rounded-xl shadow-lg ring-1 ring-black/5">
+            <MenuItems className="w-full z-50 right-1/2 transform mt-2 bg-light-blue rounded-xl shadow-lg ring-1 ring-black/5">
               {availableNames.map((name) => (
                 <MenuItem key={name}>
                   <button
@@ -610,7 +611,7 @@ export default function DataLineGraph() {
           </Menu>
         </div>
 
-        <div className="flex flex-col bg-light-teal m-3 pb-5 rounded-lg">
+        <div className="date-constraints-box">
           <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit group relative">
             Date Constraints
             <div className="absolute left-1/2 top-full z-10 mt-2 w-[290px] -translate-x-1/3 bg-white p-3 rounded-lg self-left shadow-sm text-center text-sm text-medium-teal opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
@@ -659,8 +660,4 @@ export default function DataLineGraph() {
       </div>
     </div>
   );
-}
-
-function setData(newData: DataPoint[]) {
-  setData(newData);
 }

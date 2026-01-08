@@ -1,11 +1,5 @@
 import { Fragment } from "react";
-import {
-  Description,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  Transition,
-} from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   CheckCircleIcon,
   XCircleIcon,

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import "../globals.css";
 import { AgGridReact } from "ag-grid-react";
 import { isUserAdmin } from "../../actions/isUserAdmin";
@@ -37,7 +37,6 @@ import { DTPicker } from "./DTPicker";
 import { format, toZonedTime } from "date-fns-tz";
 import {
   ArrowPathIcon,
-  ChartBarIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid";
 

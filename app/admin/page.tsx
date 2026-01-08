@@ -1,13 +1,8 @@
 "use client";
-import React, { useEffect, useState, Fragment } from "react";
+import { Fragment } from "react";
 import clsx from "clsx";
-import { GetServerSideProps } from "next";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import {
-  NewspaperIcon,
-  UserCircleIcon,
-  UserIcon,
-} from "@heroicons/react/24/solid";
+import { Tab, TabGroup, TabList } from "@headlessui/react";
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 
 export default function Page() {
   return (
