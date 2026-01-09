@@ -18,14 +18,18 @@ export const GET = async () => {
   }
 };
 
-export const POST = async (request: Request) => {
-  try {
-    const observation: Observation = await request.json();
+// Putting here for reference.
+// DO NOT OPEN THIS ROUTE!!!
+// In React components, call insertObservation from there.
+//
+// export const POST = async (request: Request) => {
+//   try {
+//     const observation: Observation = await request.json();
 
-    const result = await insertObservation(observation);
+//     const result = await insertObservation(observation);
 
-    return NextResponse.json(result);
-  } catch (error) {
-    console.log("API: Observations GET error:", error);
-  }
-};
+//     return NextResponse.json(result);
+//   } catch (error) {
+//     console.log("API: Observations GET error:", error);
+//   }
+// };
