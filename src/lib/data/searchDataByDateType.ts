@@ -1,9 +1,6 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
+import { db } from "src/db/drizzle";
 import { and, between, inArray } from "drizzle-orm";
 import { coralData } from "src/db/schema";
-
-const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function searchDataByDateType(
   datetimeStart: Date,

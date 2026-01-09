@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import getMostRecentData from "src/lib/getMostRecentData"; // Import function
+import getMostRecentData from "src/lib/data/getMostRecentData"; // Import function
 
 export async function GET(request: Request) {
   console.log("api being called");

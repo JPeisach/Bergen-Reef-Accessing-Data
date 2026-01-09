@@ -1,9 +1,6 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
+import { db } from "src/db/drizzle";
 import { eq, sql } from "drizzle-orm";
 import { coralData } from "src/db/schema"; // eventually change back to data-schema
-
-const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function updateValue(id: number, value: number) {
   try {

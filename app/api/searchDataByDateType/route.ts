@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import searchDataByDateType from "src/lib/searchDataByDateType";
+import searchDataByDateType from "src/lib/data/searchDataByDateType";
 
 export async function GET(request: Request) {
   console.log("THIS IS HISTORY REQUEST");

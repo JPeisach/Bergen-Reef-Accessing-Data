@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import xml2js from "xml2js";
-import insertData from "src/lib/insertData";
+import insertData from "src/lib/data/insertData";
 
 export async function POST(request: Request) {
   try {

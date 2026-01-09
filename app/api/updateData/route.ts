@@ -1,6 +1,6 @@
 import { getUsersRoles } from "actions/getUsersRoles";
 import { NextResponse } from "next/server";
-import editValueData from "src/lib/editValueData";
+import editValueData from "src/lib/data/editValueData";
 
 export async function PUT(request: Request) {
   const roles = await getUsersRoles();
