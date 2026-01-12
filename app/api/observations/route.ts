@@ -3,33 +3,41 @@ import getObservations from "src/lib/observations/getObservations";
 import insertObservation from "src/lib/observations/insertObservation";
 
 interface Observation {
-  authorId: number;
+  authorId?: number;
   observationText: string;
+  observationTitle?: string;
 }
 
-export const GET = async () => {
+export const GET = async (request: Request) => {
   try {
-    // TODO: Querying specific observations
-    const observations = await getObservations();
+    const { searchParams } = new URL(request.url);
+    const limit = searchParams.get("limit");
+    const limitNum = limit ? parseInt(limit, 10) : undefined;
+    
+    const observations = await getObservations(limitNum);
 
     return NextResponse.json(observations);
   } catch (error) {
     console.log("API: Observations GET error:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch observations" },
+      { status: 500 }
+    );
   }
 };
 
-// Putting here for reference.
-// DO NOT OPEN THIS ROUTE!!!
-// In React components, call insertObservation from there.
-//
-// export const POST = async (request: Request) => {
-//   try {
-//     const observation: Observation = await request.json();
+export const POST = async (request: Request) => {
+  try {
+    const observation: Observation = await request.json();
 
-//     const result = await insertObservation(observation);
+    const result = await insertObservation(observation);
 
-//     return NextResponse.json(result);
-//   } catch (error) {
-//     console.log("API: Observations GET error:", error);
-//   }
-// };
+    return NextResponse.json({ status: 200, message: "Observation saved successfully", result });
+  } catch (error) {
+    console.log("API: Observations POST error:", error);
+    return NextResponse.json(
+      { status: 500, error: "Failed to save observation" },
+      { status: 500 }
+    );
+  }
+};
