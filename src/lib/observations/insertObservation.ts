@@ -1,11 +1,8 @@
+import { db } from "src/db/drizzle";
 import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
 import { observations, accounts } from "src/db/schema"; // eventually change back to data-schema
 import { eq } from "drizzle-orm";
 import NewObservation from "src/db/types";
-
-// TODO: Have one db connection, instead of spawning new ones
-const db = drizzle(process.env.DATABASE_URL!);
 
 // TODO: move this somewhere common/shared
 interface Observation {

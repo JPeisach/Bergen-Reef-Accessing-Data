@@ -1,10 +1,7 @@
+import { db } from "src/db/drizzle";
 import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
 import { desc } from "drizzle-orm";
 import { observations } from "src/db/schema"; // eventually change back to data-schema
-
-// TODO: Have one db connection, instead of spawning new ones
-const db = drizzle(process.env.DATABASE_URL!);
 
 // TODO: Get a specific observation based on a certain filter
 export default async function getObservations(limit?: number) {
