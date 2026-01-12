@@ -231,9 +231,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         </div>
         <div className="mt-auto">
           <a href="/settings">
-            <button
-              className="tab-item w-full py-5 transition flex items-center justify-center gap-2 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-            >
+            <button className="tab-item w-full py-5 transition flex items-center justify-center gap-2 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">
               <Cog6ToothIcon className="size-5" />
               Settings
             </button>
