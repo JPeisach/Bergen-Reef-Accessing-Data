@@ -21,7 +21,7 @@ async function getOrCreateAccountId(): Promise<number> {
   try {
     // Try to get the first existing account
     const existingAccounts = await db.select().from(accounts).limit(1);
-    
+
     if (existingAccounts.length > 0) {
       return existingAccounts[0].accountId;
     }
@@ -54,7 +54,7 @@ export default async function insertObservation(observation: Observation) {
   try {
     // Get or create an account ID (use provided one if valid, otherwise get/create one)
     let authorId = observation.authorId;
-    
+
     if (!authorId) {
       authorId = await getOrCreateAccountId();
     } else {
@@ -64,7 +64,7 @@ export default async function insertObservation(observation: Observation) {
         .from(accounts)
         .where(eq(accounts.accountId, authorId))
         .limit(1);
-      
+
       if (accountCheck.length === 0) {
         // Provided ID doesn't exist, get/create one instead
         authorId = await getOrCreateAccountId();
@@ -74,7 +74,7 @@ export default async function insertObservation(observation: Observation) {
     // Format timestamp as YYYY-MM-DD for date type (MySQL DATE format)
     // If the database column is actually DATETIME, this will still work (MySQL accepts date strings)
     const now = new Date();
-    const timestamp = now.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const timestamp = now.toISOString().split("T")[0]; // Format: YYYY-MM-DD
 
     // Store title with text if provided (prepend title with separator)
     // Format: "TITLE: [title]\n\n[text]" or just "[text]" if no title

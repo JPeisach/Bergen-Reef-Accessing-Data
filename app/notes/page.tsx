@@ -26,9 +26,12 @@ export default function Page() {
   >([]);
 
   // Extract title from observation text (if stored in TITLE: format)
-  const extractTitle = (text: string | null, observationId: number): { title: string; text: string } => {
+  const extractTitle = (
+    text: string | null,
+    observationId: number,
+  ): { title: string; text: string } => {
     if (!text) return { title: `Observation #${observationId}`, text: "" };
-    
+
     const titleMatch = text.match(/^TITLE:\s*(.+?)\n\n/);
     if (titleMatch) {
       return {
@@ -36,7 +39,7 @@ export default function Page() {
         text: text.replace(/^TITLE:\s*.+?\n\n/, "").trim(),
       };
     }
-    
+
     return { title: `Observation #${observationId}`, text: text };
   };
   const [isLoadingObservations, setIsLoadingObservations] = useState(true);
@@ -89,7 +92,7 @@ export default function Page() {
   const formatTimestamp = (timestamp: string) => {
     try {
       // Handle date-only strings (YYYY-MM-DD format)
-      const date = timestamp.includes("T") 
+      const date = timestamp.includes("T")
         ? new Date(timestamp)
         : new Date(timestamp + "T00:00:00");
       return date.toLocaleDateString("en-US", {
@@ -146,7 +149,9 @@ export default function Page() {
       setTimeout(() => setSaveSuccess(false), 3000);
     } catch (error) {
       console.error("Error saving observation:", error);
-      setSaveError(error instanceof Error ? error.message : "Failed to save observation");
+      setSaveError(
+        error instanceof Error ? error.message : "Failed to save observation",
+      );
     } finally {
       setIsSaving(false);
     }
@@ -266,13 +271,17 @@ export default function Page() {
               ) : observations.length === 0 ? (
                 <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
                   <p className="text-sm text-gray/90 text-center py-4">
-                    No observations yet. Create your first observation using the notepad!
+                    No observations yet. Create your first observation using the
+                    notepad!
                   </p>
                 </div>
               ) : (
                 observations.map((obs, index) => {
-                  const { title, text } = extractTitle(obs.observationText, obs.observationId);
-                  
+                  const { title, text } = extractTitle(
+                    obs.observationText,
+                    obs.observationId,
+                  );
+
                   return (
                     <div
                       key={obs.observationId}

@@ -13,7 +13,7 @@ export const GET = async (request: Request) => {
     const { searchParams } = new URL(request.url);
     const limit = searchParams.get("limit");
     const limitNum = limit ? parseInt(limit, 10) : undefined;
-    
+
     const observations = await getObservations(limitNum);
 
     return NextResponse.json(observations);
@@ -21,7 +21,7 @@ export const GET = async (request: Request) => {
     console.log("API: Observations GET error:", error);
     return NextResponse.json(
       { error: "Failed to fetch observations" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 };
@@ -32,12 +32,16 @@ export const POST = async (request: Request) => {
 
     const result = await insertObservation(observation);
 
-    return NextResponse.json({ status: 200, message: "Observation saved successfully", result });
+    return NextResponse.json({
+      status: 200,
+      message: "Observation saved successfully",
+      result,
+    });
   } catch (error) {
     console.log("API: Observations POST error:", error);
     return NextResponse.json(
       { status: 500, error: "Failed to save observation" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 };
