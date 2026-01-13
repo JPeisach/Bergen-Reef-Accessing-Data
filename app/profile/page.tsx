@@ -1,21 +1,15 @@
 "use client";
-import React, { useEffect, useState, Fragment } from "react";
-import clsx from "clsx";
-import { GetServerSideProps } from "next";
+import { useEffect, useState } from "react";
 import "../globals.css";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { ArrowUpRightIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import ProfileClient from "../components/ProfileClient";
 import NavigationBar from "../components/NavigationBar";
 import { isUserAdmin } from "../../actions/isUserAdmin";
-import { redirect } from "next/navigation";
 import { ResponsiveContainer } from "recharts";
-import { getUsersRoles } from "../../actions/getUsersRoles";
 import UserList from "app/components/UserList";
 
 export default function Page() {
-  const { user, error, isLoading } = useUser();
+  const { user, isLoading } = useUser();
 
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -39,7 +33,7 @@ export default function Page() {
       <br></br>
 
       {/* top white box*/}
-      <div className="bg-white rounded shadow-sm p-6 rounded-lg flex justify-between items-center w-3/4 mx-auto">
+      <div className="bg-white rounded shadow-sm p-6 flex justify-between items-center w-3/4 mx-auto">
         <div className="flex items-center gap-4">
           {user ? (
             <>
@@ -114,8 +108,12 @@ export default function Page() {
           <div className="ml-4">
             <iframe
               src="https://docs.google.com/spreadsheets/d/1BF5JBYV3v2brBQQaRBo6X_J-uPCdDtzE4UUCDKtLPJA/edit?usp=sharing&embedded=true"
-              style={{ width: "600px", height: "400px", outline: "none" }}
-              frameBorder="0"
+              style={{
+                width: "600px",
+                height: "400px",
+                outline: "none",
+                border: "0px",
+              }}
               className="rounded-xl shadow-lg"
             />
           </div>

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { formatInTimeZone } from "date-fns-tz";
-import createData from "src/lib/createData";
+import createData from "src/lib/data/createData";
 import { getUsersRoles } from "actions/getUsersRoles";
 import { isUserAdmin } from "actions/isUserAdmin";
 

@@ -1,7 +1,6 @@
 import { blockJack } from "actions/blockJack";
-import { getUsersRoles } from "actions/getUsersRoles";
 import { NextResponse } from "next/server";
-import deleteData from "src/lib/deleteData";
+import deleteData from "src/lib/data/deleteData";
 import { isUserAdmin } from "actions/isUserAdmin";
 
 export async function DELETE(request: Request) {

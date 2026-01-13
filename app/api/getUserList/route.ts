@@ -1,7 +1,4 @@
 import { getUsers } from "src/lib/auth0";
-import { NextResponse } from "next/server";
-import { getUsersRoles } from "actions/getUsersRoles";
-import { blockJack } from "actions/blockJack";
 import { isUserAdmin } from "actions/isUserAdmin";
 
 export const GET = async () => {

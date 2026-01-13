@@ -1,0 +1,21 @@
+@import "../globals.css";
+
+.graph-settings-panel {
+  @apply flex flex-col col-span-1 bg-white drop-shadow-md mr-8 pb-3 space-y-6 rounded-lg;
+}
+
+.date-constraints-box {
+  @apply flex flex-col bg-light-teal m-3 pb-5 rounded-l;
+}
+
+.date-range-button {
+  @apply px-4 py-2 rounded-lg font-semibold transition-colors;
+}
+
+.date-range-button-selected {
+  @apply bg-teal text-white;
+}
+
+.date-range-button-unselected {
+  @apply bg-white text-teal hover:bg-medium-teal hover:text-white;
+}

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import getMostRecentElements from "src/lib/getMostRecentElements";
+import getMostRecentElements from "src/lib/data/getMostRecentElements";
 
 export async function GET(request: Request) {
   try {

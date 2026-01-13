@@ -1,6 +1,4 @@
 "use client";
-import { raw } from "mysql2";
-import { string } from "prop-types";
 import React, { useEffect, useState } from "react";
 
 interface HomePageElementsProps {

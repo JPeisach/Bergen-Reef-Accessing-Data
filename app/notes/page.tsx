@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import "../globals.css";
 import NavigationBar from "../components/NavigationBar";
@@ -13,6 +13,36 @@ export default function Page() {
   const [observationTitle, setObservationTitle] = useState("");
   const [observationTime, setObservationTime] = useState("");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [observations, setObservations] = useState<
+    Array<{
+      observationId: number;
+      authorId: number;
+      timestamp: string;
+      observationText: string | null;
+    }>
+  >([]);
+
+  // Extract title from observation text (if stored in TITLE: format)
+  const extractTitle = (
+    text: string | null,
+    observationId: number,
+  ): { title: string; text: string } => {
+    if (!text) return { title: `Observation #${observationId}`, text: "" };
+
+    const titleMatch = text.match(/^TITLE:\s*(.+?)\n\n/);
+    if (titleMatch) {
+      return {
+        title: titleMatch[1].trim(),
+        text: text.replace(/^TITLE:\s*.+?\n\n/, "").trim(),
+      };
+    }
+
+    return { title: `Observation #${observationId}`, text: text };
+  };
+  const [isLoadingObservations, setIsLoadingObservations] = useState(true);
 
   const coralTypes = [
     "Mushroom Coral",
@@ -36,6 +66,95 @@ export default function Page() {
         ? prev.filter((v) => v !== variable)
         : [...prev, variable],
     );
+  };
+
+  const fetchObservations = async () => {
+    setIsLoadingObservations(true);
+    try {
+      const response = await fetch("/api/observations?limit=5");
+      if (!response.ok) {
+        throw new Error("Failed to fetch observations");
+      }
+      const data = await response.json();
+      setObservations(data || []);
+    } catch (error) {
+      console.error("Error fetching observations:", error);
+      setObservations([]);
+    } finally {
+      setIsLoadingObservations(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchObservations();
+  }, []);
+
+  const formatTimestamp = (timestamp: string) => {
+    try {
+      // Handle date-only strings (YYYY-MM-DD format)
+      const date = timestamp.includes("T")
+        ? new Date(timestamp)
+        : new Date(timestamp + "T00:00:00");
+      return date.toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+    } catch {
+      return timestamp;
+    }
+  };
+
+  const handleSave = async () => {
+    if (notes.trim() === "") return;
+
+    setIsSaving(true);
+    setSaveError(null);
+    setSaveSuccess(false);
+
+    try {
+      const response = await fetch("/api/observations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          authorId: 1, // TODO: Replace with actual user ID from Auth0
+          observationText: notes.trim(),
+          observationTitle: observationTitle.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to save observation");
+      }
+
+      // Success - reset form and refresh observations
+      setSaveSuccess(true);
+      setNotes("");
+      setObservationTitle("");
+      setSelectedVariables([]);
+      setObservationTime("");
+      setTankNumber("");
+      setCoralType("");
+
+      // Refresh observations list
+      fetchObservations();
+
+      // Clear success message after 3 seconds
+      setTimeout(() => setSaveSuccess(false), 3000);
+    } catch (error) {
+      console.error("Error saving observation:", error);
+      setSaveError(
+        error instanceof Error ? error.message : "Failed to save observation",
+      );
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -143,65 +262,50 @@ export default function Page() {
               Recent Observations
             </h2>
             <div className="space-y-4 max-h-[600px] overflow-y-auto">
-              {/* ex 1 */}
-              <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
-                <div className="flex items-start justify-between mb-2.5">
-                  <h3 className="text-base font-semibold text-dark-orange">
-                    Coral Observation #1
-                  </h3>
-                  <span className="text-xs text-medium-gray/80">
-                    12/15/2025 09:30 AM
-                  </span>
+              {isLoadingObservations ? (
+                <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
+                  <p className="text-sm text-gray/90 text-center py-4">
+                    Loading observations...
+                  </p>
                 </div>
-                <div className="flex flex-wrap gap-1.5 mb-2.5">
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Tank 3
-                  </span>
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Mushroom Coral
-                  </span>
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Calcium
-                  </span>
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Alkalinity
-                  </span>
+              ) : observations.length === 0 ? (
+                <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
+                  <p className="text-sm text-gray/90 text-center py-4">
+                    No observations yet. Create your first observation using the
+                    notepad!
+                  </p>
                 </div>
-                <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The calcium levels dropped by a suspicious amount, but the
-                  Mushroom coral looks surprisingly healthy!
-                </p>
-              </div>
+              ) : (
+                observations.map((obs, index) => {
+                  const { title, text } = extractTitle(
+                    obs.observationText,
+                    obs.observationId,
+                  );
 
-              {/* ex 2 */}
-              <div className="rounded-lg bg-white/85 p-3.5 shadow-lg border border-light-orange/15 ml-2">
-                <div className="flex items-start justify-between mb-2.5">
-                  <h3 className="text-base font-semibold text-dark-orange">
-                    Coral Observation #2
-                  </h3>
-                  <span className="text-xs text-medium-gray/80">
-                    12/15/2025 4:00 PM
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-1.5 mb-2.5">
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Tank 8
-                  </span>
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Jolene Coral
-                  </span>
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    pH
-                  </span>
-                  <span className="text-xs bg-light-orange/40 px-2 py-0.5 rounded-md text-dark-orange font-medium">
-                    Temperature
-                  </span>
-                </div>
-                <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                  The Jolene coral appears to be thriving despite fluctuations
-                  in pH and temperature.
-                </p>
-              </div>
+                  return (
+                    <div
+                      key={obs.observationId}
+                      className={`rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20 ${
+                        index % 2 === 1 ? "ml-2" : ""
+                      }`}
+                    >
+                      <div className="flex items-start justify-between mb-2.5">
+                        <h3 className="text-base font-semibold text-dark-orange">
+                          {title}
+                        </h3>
+                        <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
+                          {formatTimestamp(obs.timestamp)}
+                        </span>
+                      </div>
+                      {text && (
+                        <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
+                          {text}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
 
@@ -268,12 +372,23 @@ export default function Page() {
                 </div>
 
                 {/* Save Button */}
-                <div className="flex justify-end pt-2">
+                <div className="flex flex-col items-end gap-2 pt-2">
+                  {saveError && (
+                    <p className="text-sm text-red-600 font-medium">
+                      {saveError}
+                    </p>
+                  )}
+                  {saveSuccess && (
+                    <p className="text-sm text-green-600 font-medium">
+                      Observation saved successfully!
+                    </p>
+                  )}
                   <button
+                    onClick={handleSave}
                     className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
-                    disabled={notes.trim() === ""}
+                    disabled={notes.trim() === "" || isSaving}
                   >
-                    Save
+                    {isSaving ? "Saving..." : "Save"}
                   </button>
                 </div>
               </div>

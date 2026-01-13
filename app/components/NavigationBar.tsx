@@ -1,9 +1,10 @@
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { Tab, TabGroup, TabList } from "@headlessui/react";
+import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { Fragment } from "react";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 interface NavigationBarProps {
   defaultIndex: number;
@@ -18,7 +19,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   return (
     <>
       <div className="flex bg-white">
-        <a href="/">
+        <Link href="/">
           <div className="flex items-center gap-3 min-w-0 py-2">
             <img
               src="/images/coral-reef-logo.png"
@@ -29,7 +30,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               Bergen Reef Accessing Data
             </h1>
           </div>
-        </a>
+        </Link>
       </div>
       <div
         className="navbar flex flex-col items-center justify-between bg-white p-4 drop-shadow-orange rounded-lg h-screen"
@@ -38,7 +39,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex flex-col">
           <TabGroup vertical defaultIndex={defaultIndex}>
             <TabList className="flex flex-col">
-              <a href="/">
+              <Link href="/">
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
@@ -55,7 +56,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     </button>
                   )}
                 </Tab>
-              </a>
+              </Link>
 
               <a href="/dashboard">
                 <Tab as={Fragment}>
@@ -228,6 +229,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               </a>
             </TabList>
           </TabGroup>
+        </div>
+        <div className="mt-auto">
+          <a href="/settings">
+            <button className="tab-item w-full py-5 transition flex items-center justify-center gap-2 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">
+              <Cog6ToothIcon className="size-5" />
+              Settings
+            </button>
+          </a>
         </div>
       </div>
     </>

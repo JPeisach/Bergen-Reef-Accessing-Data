@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import "../../globals.css";
+import "../../css/graphComponents.css";
 import DateBoundElement from "../DateBoundElement";
 import ZoomSlider from "../ZoomSlider";
 import StepSlider from "../StepSlider";
@@ -170,7 +171,7 @@ export default function DataLineGraph() {
         }));
 
       setData(pairedData);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error searching for data: ", error);
     }
   }
@@ -337,7 +338,7 @@ export default function DataLineGraph() {
       </div>
 
       <div
-        className="flex flex-col col-span-1 bg-white drop-shadow-md mr-8 pb-3 flex flex-col space-y-6 rounded-lg"
+        className="graph-settings-panel"
         style={{ height: `${availableHeight}px` }}
       >
         <h1 className="text-xl bg-teal drop-shadow-xl text-white text-center font-semibold rounded-lg p-4">
@@ -368,8 +369,8 @@ export default function DataLineGraph() {
               <MenuItems
                 className={
                   index === 0
-                    ? "absolute left-1/2 -translate-x-1/2 bg-light-blue w-full z-50 right-1/2 transform mt-2 w-56 rounded-xl shadow-lg ring-1 ring-black/5"
-                    : "absolute left-1/2 -translate-x-1/2 bg-light-red-orange w-full z-50 right-1/2 transform mt-2 w-56 rounded-xl shadow-lg ring-1 ring-black/5"
+                    ? "absolute left-1/2 -translate-x-1/2 bg-light-blue w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-black/5"
+                    : "absolute left-1/2 -translate-x-1/2 bg-light-red-orange w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-black/5"
                 }
               >
                 {availableNames
@@ -409,7 +410,7 @@ export default function DataLineGraph() {
           )}
         </div>
 
-        <div className="flex flex-col bg-light-teal m-3 pb-5 rounded-lg">
+        <div className="date-constraints-box">
           <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
             Date Constraints
           </div>
@@ -451,8 +452,4 @@ export default function DataLineGraph() {
       </div>
     </div>
   );
-}
-
-function setData(newData: DataPoint[]) {
-  setData(newData);
 }
