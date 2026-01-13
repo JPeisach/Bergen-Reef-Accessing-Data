@@ -44,12 +44,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
+                        "navbar-tabitem",
                         isDefaultIndexNegative
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          ? "navbar-tabitem-unhighlighted"
                           : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                            ? "navbar-tabitem-highlighted"
+                            : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Home
@@ -63,15 +63,15 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
+                        "navbar-tabitem",
                         isDefaultIndexNegative ||
                           defaultIndex === 1 ||
                           defaultIndex === 2 ||
                           defaultIndex === 3
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          ? "navbar-tabitem-unhighlighted"
                           : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                            ? "navbar-tabitem-highlighted"
+                            : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Dashboard
@@ -85,14 +85,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
+                        "navbar-tabitem",
                         isDefaultIndexNegative ||
                           defaultIndex === 1 ||
                           defaultIndex === 6
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          ? "navbar-tabitem-unhighlighted"
                           : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                            ? "navbar-tabitem-highlighted"
+                            : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Individual Tanks
@@ -106,14 +106,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
+                        "navbar-tabitem",
                         isDefaultIndexNegative ||
                           defaultIndex === 1 ||
                           defaultIndex === 2
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          ? "navbar-tabitem-unhighlighted"
                           : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                            ? "navbar-tabitem-highlighted"
+                            : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Observations
@@ -126,15 +126,15 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
+                        "navbar-tabitem",
                         isDefaultIndexNegative ||
                           defaultIndex === 1 ||
                           defaultIndex === 2 ||
                           defaultIndex === 3
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          ? "navbar-tabitem-unhighlighted"
                           : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                            ? "navbar-tabitem-highlighted"
+                            : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Info
@@ -148,12 +148,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
+                        "navbar-tabitem",
                         isDefaultIndexNegative || defaultIndex === 1
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                          ? "navbar-tabitem-unhighlighted"
                           : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                            ? "navbar-tabitem-highlighted"
+                            : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       History
@@ -165,12 +165,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               <Menu as="div" className="relative inline-block">
                 <MenuButton
                   className={clsx(
-                    "tab-item w-full py-5  transition flex items-center justify-center",
+                    "navbar-tabitem flex items-center justify-center",
                     isDefaultIndexNegative
-                      ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
+                      ? "navbar-tabitem-unhighlighted"
                       : defaultIndex === 1
-                        ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                        : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                        ? "navbar-tabitem-highlighted"
+                        : "navbar-tabitem-unhighlighted",
                   )}
                 >
                   Graphs
@@ -182,28 +182,28 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 >
                   <MenuItem>
                     <a href="/data/linegraph">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Line Graph
                       </button>
                     </a>
                   </MenuItem>
                   <MenuItem>
                     <a href="/data/twodimgraph">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Two Dimension Plot
                       </button>
                     </a>
                   </MenuItem>
                   <MenuItem>
                     <a href="/data/boxplot">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Box Plot
                       </button>
                     </a>
                   </MenuItem>
                   <MenuItem>
                     <a href="/data/heatmap">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Heat Map
                       </button>
                     </a>
