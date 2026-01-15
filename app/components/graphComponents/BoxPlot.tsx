@@ -8,10 +8,7 @@ import DateBoundElement from "../DateBoundElement";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import {
-  fetchDataInDateRange,
-  fetchSingularDataTypeInDateRange,
-} from "app/services/dataService";
+import { fetchSingularDataTypeInDateRange } from "app/services/dataService";
 
 interface DataPoint {
   id: number;
