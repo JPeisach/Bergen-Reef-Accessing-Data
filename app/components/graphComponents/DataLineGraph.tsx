@@ -9,6 +9,7 @@ import ZoomSlider from "../ZoomSlider";
 import StepSlider from "../StepSlider";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { fetchDataInDateRange } from "app/services/dataService";
 
 interface DataPoint {
   id: number;
@@ -34,7 +35,6 @@ export default function DataLineGraph() {
   const [zoom, setZoom] = useState(50);
   const [step, setStep] = useState(50);
   const [shouldFetch, setShouldFetch] = useState(false);
-  const [lastFetchParams, setLastFetchParams] = useState<string>("");
   const svgRef = useRef<SVGSVGElement>(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [useInterpolation, setUseInterpolation] = useState(true);
@@ -104,7 +104,9 @@ export default function DataLineGraph() {
 
   useEffect(() => {
     if (shouldFetch) {
-      fetchData();
+      fetchDataInDateRange(startDate, endDate, selectedNames).then((result) =>
+        setData([...result]),
+      );
       setShouldFetch(false);
     }
   }, [shouldFetch, startDate, endDate, selectedNames]);
@@ -136,33 +138,6 @@ export default function DataLineGraph() {
   }, []);
 
   const availableHeight = windowHeight - 120;
-
-  async function fetchData() {
-    try {
-      const queryString = `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&names=${selectedNames.join(",")}`;
-
-      // Check if we're fetching the same data again
-      if (queryString === lastFetchParams) {
-        return; // Skip fetch if parameters haven't changed
-      }
-
-      const response = await fetch(`/api/searchDataByDateType?${queryString}`);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: DataPoint[] = await response.json();
-
-      // Update last fetch parameters
-      setLastFetchParams(queryString);
-
-      // Clear existing data and set new data
-      setData([...result]);
-    } catch (error) {
-      console.error("Error searching for data: ", error);
-    }
-  }
 
   const drawChart = () => {
     if (selectedNames.length < 1) return;
