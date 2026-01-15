@@ -9,7 +9,7 @@ export default async function getObservations(limit?: number) {
     const query = db
       .select()
       .from(observations)
-      .orderBy(desc(observations.timestamp));
+      .orderBy(desc(observations.datetime));
 
     if (limit) {
       const data = await query.limit(limit);

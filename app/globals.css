@@ -87,3 +87,18 @@ h1 {
   float: left;
 }
 
+.navbar-tabitem {
+  @apply w-full py-5 transition;
+}
+
+.navbar-tabitem-unhighlighted {
+  @apply bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange;
+}
+
+.navbar-tabitem-highlighted {
+  @apply bg-orange outline outline-2 outline-dark-orange text-white font-bold;
+}
+
+.navbar-graphs-dropdown-button {
+  @apply block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange;
+}

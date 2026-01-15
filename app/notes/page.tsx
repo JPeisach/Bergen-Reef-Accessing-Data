@@ -122,7 +122,7 @@ export default function Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          authorId: 1, // TODO: Replace with actual user ID from Auth0
+          authorId: user.sub,
           observationText: notes.trim(),
           observationTitle: observationTitle.trim(),
         }),
