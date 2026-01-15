@@ -26,24 +26,65 @@ export default function Page() {
       <div className="p-8 max-w-7xl mx-auto">
         <div className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}>
           {[
-            { label: "Tank", options: ["Tank 1","Tank 2","Tank 3","Tank 4","Tank 5","Tank 6","Tank 7","Tank 8","Tank 9"] },
-            { label: "Parameters", options: ["pH","Salinity","Temperature","ORP","Alkalinity","Calcium","Nitrate","Nitrite","Phosphate"] },
-            { label: "Time Range", options: ["Yesterday","Last Week","Last Month","Custom"] },
-            { label: "Graph Type", options: ["Line","Bar","Sankey","Other"] }
+            {
+              label: "Tank",
+              options: [
+                "Tank 1",
+                "Tank 2",
+                "Tank 3",
+                "Tank 4",
+                "Tank 5",
+                "Tank 6",
+                "Tank 7",
+                "Tank 8",
+                "Tank 9",
+              ],
+            },
+            {
+              label: "Parameters",
+              options: [
+                "pH",
+                "Salinity",
+                "Temperature",
+                "ORP",
+                "Alkalinity",
+                "Calcium",
+                "Nitrate",
+                "Nitrite",
+                "Phosphate",
+              ],
+            },
+            {
+              label: "Time Range",
+              options: ["Yesterday", "Last Week", "Last Month", "Custom"],
+            },
+            {
+              label: "Graph Type",
+              options: ["Line", "Bar", "Sankey", "Other"],
+            },
           ].map((item) => {
             let value, setValue;
 
             switch (item.label) {
               case "Tank":
-                value = selectedTank; setValue = setSelectedTank; break;
+                value = selectedTank;
+                setValue = setSelectedTank;
+                break;
               case "Parameters":
-                value = selectedParameter; setValue = setSelectedParameter; break;
+                value = selectedParameter;
+                setValue = setSelectedParameter;
+                break;
               case "Time Range":
-                value = selectedTimeRange; setValue = setSelectedTimeRange; break;
+                value = selectedTimeRange;
+                setValue = setSelectedTimeRange;
+                break;
               case "Graph Type":
-                value = selectedGraphType; setValue = setSelectedGraphType; break;
+                value = selectedGraphType;
+                setValue = setSelectedGraphType;
+                break;
               default:
-                value = ""; setValue = () => {};
+                value = "";
+                setValue = () => {};
             }
 
             return (
@@ -58,7 +99,9 @@ export default function Page() {
                 >
                   <option value="">Select…</option>
                   {item.options.map((opt) => (
-                    <option key={opt} value={opt}>{opt}</option>
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -101,10 +144,18 @@ export default function Page() {
 
           <div className={`${panelClass}`}>
             <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-orange shadow-inner flex justify-between rounded-lg">
-              <span className="text-dark-orange/60">{selectedTank || "Tank"}</span>
-              <span className="text-dark-orange/60">{selectedParameter || "Parameter"}</span>
-              <span className="text-dark-orange/60">{selectedTimeRange || "Time Range"}</span>
-              <span className="text-dark-orange/60">{selectedGraphType || "Graph Type"}</span>
+              <span className="text-dark-orange/60">
+                {selectedTank || "Tank"}
+              </span>
+              <span className="text-dark-orange/60">
+                {selectedParameter || "Parameter"}
+              </span>
+              <span className="text-dark-orange/60">
+                {selectedTimeRange || "Time Range"}
+              </span>
+              <span className="text-dark-orange/60">
+                {selectedGraphType || "Graph Type"}
+              </span>
             </div>
 
             <div className="h-[500px] bg-white shadow-inner p-5 rounded-lg">
