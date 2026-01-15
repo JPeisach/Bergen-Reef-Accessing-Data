@@ -9,6 +9,7 @@ import ZoomSlider from "../ZoomSlider";
 import StepSlider from "../StepSlider";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { fetchSingularDataTypeInDateRange } from "app/services/dataService";
 
 interface DataPoint {
   id: number;
@@ -115,7 +116,9 @@ export default function DataLineGraph() {
 
   useEffect(() => {
     if (shouldFetch) {
-      fetchData();
+      fetchSingularDataTypeInDateRange(startDate, endDate, selectedName).then(
+        (result) => setData(result),
+      );
       setShouldFetch(false);
     }
   }, [shouldFetch, startDate, endDate, selectedName]);
@@ -137,25 +140,6 @@ export default function DataLineGraph() {
   }, []);
 
   const availableHeight = windowHeight - 120;
-
-  async function fetchData() {
-    try {
-      const response = await fetch(
-        `/api/searchDataByDateType?startDate=${formatLocalDateTime(
-          startDate,
-        )}&endDate=${formatLocalDateTime(endDate)}&names=${selectedName}`,
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: DataPoint[] = await response.json();
-      setData(result);
-    } catch (error) {
-      console.error("Error searching for data: ", error);
-    }
-  }
 
   const processDataForHeatMap = (): HeatMapData[] => {
     const heatMapData: HeatMapData[] = [];

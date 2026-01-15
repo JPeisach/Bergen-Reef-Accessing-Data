@@ -8,6 +8,10 @@ import DateBoundElement from "../DateBoundElement";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  fetchDataInDateRange,
+  fetchSingularDataTypeInDateRange,
+} from "app/services/dataService";
 
 interface DataPoint {
   id: number;
@@ -118,7 +122,9 @@ export default function BoxPlot() {
 
   useEffect(() => {
     if (shouldFetch && hasParamsChanged()) {
-      fetchData();
+      fetchSingularDataTypeInDateRange(startDate, endDate, selectedName).then(
+        (result) => setData([...result]),
+      );
       setShouldFetch(false);
     } else if (shouldFetch) {
       // If parameters haven't changed, just reset the fetch flag
@@ -153,30 +159,6 @@ export default function BoxPlot() {
   }, []);
 
   const availableHeight = windowHeight - 120;
-
-  async function fetchData() {
-    try {
-      // Only adjust for local time offset here
-      const adjustedStartDate = startDate ? new Date(startDate) : null;
-      const adjustedEndDate = endDate ? new Date(endDate) : null;
-      if (adjustedStartDate)
-        adjustedStartDate.setHours(adjustedStartDate.getHours() - 5);
-      if (adjustedEndDate)
-        adjustedEndDate.setHours(adjustedEndDate.getHours() - 5);
-      const response = await fetch(
-        `/api/searchDataByDateType?startDate=${adjustedStartDate?.toISOString()}&endDate=${adjustedEndDate?.toISOString()}&names=${selectedName}`,
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: DataPoint[] = await response.json();
-      setData(result);
-    } catch (error) {
-      console.error("Error searching for data: ", error);
-    }
-  }
 
   const calculateBoxPlotData = (data: DataPoint[]): BoxPlotData => {
     const sortedData = [...data].map((d) => d.value).sort((a, b) => a - b);
