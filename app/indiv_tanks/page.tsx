@@ -12,7 +12,12 @@ export default function Page() {
   const [parameter, setParameter] = useState("");
   const [timeRange, setTimeRange] = useState("");
 
-  const panelClass = "bg-light-orange/40 p-5 shadow-lg";
+  const [selectedTank, setSelectedTank] = useState("");
+  const [selectedParameter, setSelectedParameter] = useState("");
+  const [selectedTimeRange, setSelectedTimeRange] = useState("");
+  const [selectedGraphType, setSelectedGraphType] = useState("");
+
+  const panelClass = "bg-light-orange/40 p-5 shadow-lg rounded-xl";
 
   return (
     <div className="min-h-screen bg-light-orange/30">
@@ -57,25 +62,51 @@ export default function Page() {
               label: "Graph Type",
               options: ["Line", "Bar", "Sankey", "Other"],
             },
-          ].map((item) => (
-            <div key={item.label} className="min-w-[160px]">
-              <label className="block text-dark-orange font-bold mb-1 text-sm">
-                {item.label}
-              </label>
-              <select
-                value={parameter}
-                onChange={(e) => setParameter(e.target.value)}
-                className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner"
-              >
-                <option value="">Select…</option>
-                {item.options.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ))}
+          ].map((item) => {
+            let value, setValue;
+
+            switch (item.label) {
+              case "Tank":
+                value = selectedTank;
+                setValue = setSelectedTank;
+                break;
+              case "Parameters":
+                value = selectedParameter;
+                setValue = setSelectedParameter;
+                break;
+              case "Time Range":
+                value = selectedTimeRange;
+                setValue = setSelectedTimeRange;
+                break;
+              case "Graph Type":
+                value = selectedGraphType;
+                setValue = setSelectedGraphType;
+                break;
+              default:
+                value = "";
+                setValue = () => {};
+            }
+
+            return (
+              <div key={item.label} className="min-w-[160px]">
+                <label className="block text-dark-orange font-bold mb-1 text-sm">
+                  {item.label}
+                </label>
+                <select
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                >
+                  <option value="">Select…</option>
+                  {item.options.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            );
+          })}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
@@ -92,7 +123,8 @@ export default function Page() {
               <li>Nitrite: 0 ppm</li>
               <li>Phosphate: 6.5 ppb</li>
             </ul>
-            <div className="mt-4 bg-white p-3 shadow-inner">
+
+            <div className="mt-4 bg-white p-3 shadow-inner rounded-lg">
               <h3 className="font-bold text-dark-orange text-sm mb-1">
                 Pinned Notes
               </h3>
@@ -109,19 +141,24 @@ export default function Page() {
               </p>
             </div>
           </div>
-          <div className="bg-light-orange/40 p-5 shadow-lg">
-            <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-orange shadow-inner flex justify-between">
-              <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-orange shadow-inner flex justify-between">
-                <span className="text-dark-orange/60">
-                  {parameter || "Parameter"}
-                </span>
-                {/*
-              <span className="text-dark-orange/60">{timeRange||"Time Range"}</span>
-              */}
-              </div>
+
+          <div className={`${panelClass}`}>
+            <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-orange shadow-inner flex justify-between rounded-lg">
+              <span className="text-dark-orange/60">
+                {selectedTank || "Tank"}
+              </span>
+              <span className="text-dark-orange/60">
+                {selectedParameter || "Parameter"}
+              </span>
+              <span className="text-dark-orange/60">
+                {selectedTimeRange || "Time Range"}
+              </span>
+              <span className="text-dark-orange/60">
+                {selectedGraphType || "Graph Type"}
+              </span>
             </div>
 
-            <div className="h-[500px] bg-white shadow-inner p-5">
+            <div className="h-[500px] bg-white shadow-inner p-5 rounded-lg">
               <TankBox tankNumber={1} variableType={parameter} />
             </div>
 
@@ -134,7 +171,7 @@ export default function Page() {
       </div>
 
       <div className={`p-8 max-w-7xl mx-auto ${panelClass}`}>
-        <div className={`p-8 max-w-7xl mx-auto`}>
+        <div className="p-8 max-w-7xl mx-auto">
           <label className="block mb-2 text-sm font-bold text-dark-orange">
             Open Notes & Observations
           </label>
@@ -142,13 +179,13 @@ export default function Page() {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Write observations here…"
-            className="w-full h-32 resize-none bg-white p-4 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner"
+            className="w-full h-32 resize-none bg-white p-4 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
           />
         </div>
       </div>
 
       <div className="mt-1 flex justify-end">
-        <button className="bg-orange px-8 py-3 text-sm font-bold text-white transition-all hover:shadow-lg hover:bg-orange">
+        <button className="bg-orange px-8 py-3 text-sm font-bold text-white rounded-lg transition-all hover:shadow-lg hover:bg-orange">
           Save
         </button>
       </div>
