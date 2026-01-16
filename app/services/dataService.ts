@@ -23,7 +23,7 @@ export async function fetchSingularDataTypeInDateRange(
   data: string,
 ) {
   // TODO: "names" is a bad name for this parameter
-  const queryString = `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&names=${data}}`;
+  const queryString = `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&names=${data}`;
 
   const response = await fetch(`/api/searchDataByDateType?${queryString}`);
 
