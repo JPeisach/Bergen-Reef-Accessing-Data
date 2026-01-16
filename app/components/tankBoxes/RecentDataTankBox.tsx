@@ -10,7 +10,7 @@ import {
 import "../globals.css";
 import { useEffect, useState } from "react";
 
-export default function TankBox({ tankNumber, variableType }) {
+export default function RecentDataTankBox({ tankNumber, variableType }) {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {

@@ -2,8 +2,9 @@
 import "../globals.css";
 import NavigationBar from "app/components/NavigationBar";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import TankBox from "app/components/TankBox";
+import HistoricDataTankBox from "app/components/tankBoxes/HistoricDataTankBox";
 import { useState } from "react";
+import RecentDataTankBox from "app/components/tankBoxes/RecentDataTankBox";
 
 export default function DashboardPage() {
   const { user } = useUser();
@@ -39,15 +40,42 @@ export default function DashboardPage() {
         </center>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          <TankBox tankNumber={1} variableType={variableType}></TankBox>
-          <TankBox tankNumber={2} variableType={variableType}></TankBox>
-          <TankBox tankNumber={3} variableType={variableType}></TankBox>
-          <TankBox tankNumber={4} variableType={variableType}></TankBox>
-          <TankBox tankNumber={5} variableType={variableType}></TankBox>
-          <TankBox tankNumber={6} variableType={variableType}></TankBox>
-          <TankBox tankNumber={7} variableType={variableType}></TankBox>
-          <TankBox tankNumber={8} variableType={variableType}></TankBox>
-          <TankBox tankNumber={9} variableType={variableType}></TankBox>
+          <RecentDataTankBox
+            tankNumber={1}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={2}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={3}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={4}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={5}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={6}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={7}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={8}
+            variableType={variableType}
+          ></RecentDataTankBox>
+          <RecentDataTankBox
+            tankNumber={9}
+            variableType={variableType}
+          ></RecentDataTankBox>
         </div>
       </div>
     </div>
