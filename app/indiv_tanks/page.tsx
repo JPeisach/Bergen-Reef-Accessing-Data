@@ -1,20 +1,21 @@
 "use client";
 import "../globals.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import NavigationBar from "../components/NavigationBar";
-import TankBox from "app/components/TankBox";
+import HistoricDataTankBox from "app/components/tankBoxes/HistoricDataTankBox";
+import "flatpickr/dist/themes/confetti.css";
+import Flatpickr from "react-flatpickr";
 
 export default function Page() {
   const { user } = useUser();
   const [notes, setNotes] = useState("");
 
   const [parameter, setParameter] = useState("");
-  const [timeRange, setTimeRange] = useState("");
 
+  const [dateRange, setDateRange] = useState([new Date()]);
   const [selectedTank, setSelectedTank] = useState("");
   const [selectedParameter, setSelectedParameter] = useState("");
-  const [selectedTimeRange, setSelectedTimeRange] = useState("");
   const [selectedGraphType, setSelectedGraphType] = useState("");
 
   const panelClass = "bg-light-orange/40 p-5 shadow-lg rounded-xl";
@@ -55,10 +56,6 @@ export default function Page() {
               ],
             },
             {
-              label: "Time Range",
-              options: ["Yesterday", "Last Week", "Last Month", "Custom"],
-            },
-            {
               label: "Graph Type",
               options: ["Line", "Bar", "Sankey", "Other"],
             },
@@ -73,10 +70,6 @@ export default function Page() {
               case "Parameters":
                 value = selectedParameter;
                 setValue = setSelectedParameter;
-                break;
-              case "Time Range":
-                value = selectedTimeRange;
-                setValue = setSelectedTimeRange;
                 break;
               case "Graph Type":
                 value = selectedGraphType;
@@ -107,6 +100,13 @@ export default function Page() {
               </div>
             );
           })}
+          {/* TODO: Theme */}
+          <Flatpickr
+            data-enable-time
+            options={{ enableSeconds: true, mode: "range" }}
+            value={dateRange}
+            onChange={(date) => setDateRange(date)}
+          ></Flatpickr>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
@@ -151,7 +151,7 @@ export default function Page() {
                 {selectedParameter || "Parameter"}
               </span>
               <span className="text-dark-orange/60">
-                {selectedTimeRange || "Time Range"}
+                {dateRange[0].toLocaleDateString() || "Time Range"}
               </span>
               <span className="text-dark-orange/60">
                 {selectedGraphType || "Graph Type"}
@@ -159,7 +159,11 @@ export default function Page() {
             </div>
 
             <div className="h-[500px] bg-white shadow-inner p-5 rounded-lg">
-              <TankBox tankNumber={1} variableType={parameter} />
+              <HistoricDataTankBox
+                tankNumber={1}
+                variableType={parameter}
+                dateRange={dateRange}
+              />
             </div>
 
             <div className="mt-6 text-sm text-dark-orange/70 text-center italic">
