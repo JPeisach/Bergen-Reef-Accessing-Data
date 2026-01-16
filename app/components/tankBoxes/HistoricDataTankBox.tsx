@@ -7,7 +7,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import "../globals.css";
+import "../../globals.css";
 import { useEffect, useState } from "react";
 import { fetchSingularDataTypeInDateRange } from "app/services/dataService";
 
