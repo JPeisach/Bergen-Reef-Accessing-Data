@@ -19,13 +19,16 @@ export default function HistoricDataTankBox({
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    // FIXME: Proper handling for when we are missing data
-    if (!variableType || dateRange.size != 2) {
+    // Ensure we have our data
+    if (!variableType || dateRange.length < 2) {
       return;
     }
 
+    // FIXME: stupid fix to ensure that we reload quickly for when we are waiting for valid params, but once we have data going through we aren't spamming the API
+    // Honestly, we should figure out how to handle being given invalid or incomplete params and where we want to handle it.
+    let delay = 1000;
+
     const interval = setInterval(() => {
-      console.log("Go!");
       fetchSingularDataTypeInDateRange(
         dateRange[0],
         dateRange[1],
@@ -44,9 +47,11 @@ export default function HistoricDataTankBox({
 
         console.log("Filtered data:", filteredData);
         const reversedData = filteredData.reverse();
+
         setChartData(reversedData);
+        delay = 30000;
       });
-    }, 300000);
+    }, delay);
     return () => clearInterval(interval);
   }, [dateRange, variableType]);
 
