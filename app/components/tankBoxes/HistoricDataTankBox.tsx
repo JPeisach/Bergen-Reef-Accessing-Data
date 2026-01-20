@@ -19,7 +19,13 @@ export default function HistoricDataTankBox({
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
+    // FIXME: Proper handling for when we are missing data
+    if (!variableType || dateRange.size != 2) {
+      return;
+    }
+
     const interval = setInterval(() => {
+      console.log("Go!");
       fetchSingularDataTypeInDateRange(
         dateRange[0],
         dateRange[1],
@@ -45,6 +51,7 @@ export default function HistoricDataTankBox({
   }, [dateRange, variableType]);
 
   return (
+    // TODO: Show something if dateRange[1] DNE and needs to be entered.
     <a
       className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer"
       href="/info"

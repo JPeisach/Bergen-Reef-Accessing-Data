@@ -11,8 +11,6 @@ export default function Page() {
   const { user } = useUser();
   const [notes, setNotes] = useState("");
 
-  const [parameter, setParameter] = useState("");
-
   const [dateRange, setDateRange] = useState([new Date()]);
   const [selectedTank, setSelectedTank] = useState("");
   const [selectedParameter, setSelectedParameter] = useState("");
@@ -161,7 +159,7 @@ export default function Page() {
             <div className="h-[500px] bg-white shadow-inner p-5 rounded-lg">
               <HistoricDataTankBox
                 tankNumber={1}
-                variableType={parameter}
+                variableType={selectedParameter}
                 dateRange={dateRange}
               />
             </div>
