@@ -12,7 +12,7 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
+      <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
       <div className="p-8 bg-light-orange/30 min-h-screen">
         <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">
