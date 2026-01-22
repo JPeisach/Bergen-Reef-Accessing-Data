@@ -8,7 +8,7 @@ export default function Page() {
 
   return (
     <div>
-      <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
+      <NavigationBar defaultIndex={6} username={user ? user.name : "Guest"} />
       <br></br>
       <div
         style={{

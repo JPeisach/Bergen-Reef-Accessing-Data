@@ -1,8 +1,5 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
+import { db } from "src/db/drizzle";
 import { coralData } from "src/db/schema";
-
-const db = drizzle(process.env.DATABASE_URL!);
 
 export default async function createData(
   data: Array<Record<string, any>>,

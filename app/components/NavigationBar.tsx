@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { Fragment } from "react";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 interface NavigationBarProps {
   defaultIndex: number;
@@ -14,11 +15,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   defaultIndex,
   username,
 }) => {
-  const isDefaultIndexNegative = defaultIndex === -1;
   return (
     <>
       <div className="flex bg-white">
-        <a href="/">
+        <Link href="/">
           <div className="flex items-center gap-3 min-w-0 py-2">
             <img
               src="/images/coral-reef-logo.png"
@@ -29,7 +29,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               Bergen Reef Accessing Data
             </h1>
           </div>
-        </a>
+        </Link>
       </div>
       <div
         className="navbar flex flex-col items-center justify-between bg-white p-4 drop-shadow-orange rounded-lg h-screen"
@@ -38,39 +38,32 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex flex-col">
           <TabGroup vertical defaultIndex={defaultIndex}>
             <TabList className="flex flex-col">
-              <a href="/">
+              <Link href="/">
                 <Tab as={Fragment}>
-                  {({ selected }) => (
+                  {() => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                        "navbar-tabitem",
+                        defaultIndex === 0
+                          ? "navbar-tabitem-highlighted"
+                          : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Home
                     </button>
                   )}
                 </Tab>
-              </a>
+              </Link>
 
               <a href="/dashboard">
                 <Tab as={Fragment}>
-                  {({ selected }) => (
+                  {() => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 2 ||
-                          defaultIndex === 3
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                        "navbar-tabitem",
+                        defaultIndex === 1
+                          ? "navbar-tabitem-highlighted"
+                          : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Dashboard
@@ -84,14 +77,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {({ selected }) => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 6
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                        "navbar-tabitem",
+                        defaultIndex === 2
+                          ? "navbar-tabitem-highlighted"
+                          : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Individual Tanks
@@ -102,17 +91,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
               <a href="/notes">
                 <Tab as={Fragment}>
-                  {({ selected }) => (
+                  {() => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 2
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                        "navbar-tabitem",
+                        defaultIndex === 3
+                          ? "navbar-tabitem-highlighted"
+                          : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Observations
@@ -122,18 +107,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               </a>
               <a href="/info">
                 <Tab as={Fragment}>
-                  {({ selected }) => (
+                  {() => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative ||
-                          defaultIndex === 1 ||
-                          defaultIndex === 2 ||
-                          defaultIndex === 3
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                        "navbar-tabitem",
+                        defaultIndex === 4
+                          ? "navbar-tabitem-highlighted"
+                          : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       Info
@@ -144,15 +124,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
               <a href="/history">
                 <Tab as={Fragment}>
-                  {({ selected }) => (
+                  {() => (
                     <button
                       className={clsx(
-                        "tab-item w-full py-5  transition",
-                        isDefaultIndexNegative || defaultIndex === 1
-                          ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                          : selected
-                            ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                            : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                        "navbar-tabitem",
+                        defaultIndex === 5
+                          ? "navbar-tabitem-highlighted"
+                          : "navbar-tabitem-unhighlighted",
                       )}
                     >
                       History
@@ -164,12 +142,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               <Menu as="div" className="relative inline-block">
                 <MenuButton
                   className={clsx(
-                    "tab-item w-full py-5  transition flex items-center justify-center",
-                    isDefaultIndexNegative
-                      ? "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange"
-                      : defaultIndex === 1
-                        ? "bg-orange outline outline-2 outline-dark-orange text-white font-bold"
-                        : "bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange",
+                    "navbar-tabitem flex items-center justify-center",
+                    defaultIndex === 6
+                      ? "navbar-tabitem-highlighted"
+                      : "navbar-tabitem-unhighlighted",
                   )}
                 >
                   Graphs
@@ -181,28 +157,28 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 >
                   <MenuItem>
                     <a href="/data/linegraph">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Line Graph
                       </button>
                     </a>
                   </MenuItem>
                   <MenuItem>
                     <a href="/data/twodimgraph">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Two Dimension Plot
                       </button>
                     </a>
                   </MenuItem>
                   <MenuItem>
                     <a href="/data/boxplot">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Box Plot
                       </button>
                     </a>
                   </MenuItem>
                   <MenuItem>
                     <a href="/data/heatmap">
-                      <button className="block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange">
+                      <button className="navbar-graphs-dropdown-button">
                         Heat Map
                       </button>
                     </a>
@@ -212,14 +188,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
               <a href="/profile" className="">
                 <div className="flex flex-row flex-wrap">
-                  <UserCircleIcon
-                    className={clsx(
-                      "size-8",
-                      isDefaultIndexNegative
-                        ? "text-dark-orange"
-                        : "text-orange",
-                    )}
-                  />
+                  <UserCircleIcon className={clsx("size-8", "text-orange")} />
                   {/* FIXME: wrap text neatly with the icon */}
                   <p className="text-base sm:text-lg md:text-xl text-dark-orange font-semibold px-2 py-0.5 whitespace-pre-wrap">
                     Welcome {username}!

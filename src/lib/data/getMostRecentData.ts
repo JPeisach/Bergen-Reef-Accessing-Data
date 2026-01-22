@@ -1,9 +1,7 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
-import { eq, desc, inArray } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { coralData } from "src/db/schema";
 
-const db = drizzle(process.env.DATABASE_URL!);
+import { db } from "src/db/drizzle";
 
 export default async function getMostRecentData(type: string) {
   try {

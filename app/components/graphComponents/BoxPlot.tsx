@@ -4,10 +4,10 @@ import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import "../../globals.css";
 import "../../css/graphComponents.css";
-import DateBoundElement from "../DateBoundElement";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { fetchSingularDataTypeInDateRange } from "app/services/dataService";
+import DateConstraintsBox from "./DateConstraintsBox";
 
 interface DataPoint {
   id: number;
@@ -39,7 +39,6 @@ const units = {
 export default function BoxPlot() {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [now, setNow] = useState<Date | null>(null);
   const [data, setData] = useState<DataPoint[]>([]);
   const [selectedName, setSelectedName] = useState<string>("Salinity");
   const [shouldFetch, setShouldFetch] = useState(false);
@@ -118,7 +117,9 @@ export default function BoxPlot() {
 
   useEffect(() => {
     if (shouldFetch && hasParamsChanged()) {
-      fetchData();
+      fetchSingularDataTypeInDateRange(startDate, endDate, selectedName).then(
+        (result) => setData([...result]),
+      );
       setShouldFetch(false);
     } else if (shouldFetch) {
       // If parameters haven't changed, just reset the fetch flag
@@ -138,7 +139,6 @@ export default function BoxPlot() {
     twoWeeksAgo.setDate(today.getDate() - 14);
     setStartDate(twoWeeksAgo);
     setEndDate(today);
-    setNow(today);
     setShouldFetch(true);
   }, []);
 
@@ -153,30 +153,6 @@ export default function BoxPlot() {
   }, []);
 
   const availableHeight = windowHeight - 120;
-
-  async function fetchData() {
-    try {
-      // Only adjust for local time offset here
-      const adjustedStartDate = startDate ? new Date(startDate) : null;
-      const adjustedEndDate = endDate ? new Date(endDate) : null;
-      if (adjustedStartDate)
-        adjustedStartDate.setHours(adjustedStartDate.getHours() - 5);
-      if (adjustedEndDate)
-        adjustedEndDate.setHours(adjustedEndDate.getHours() - 5);
-      const response = await fetch(
-        `/api/searchDataByDateType?startDate=${adjustedStartDate?.toISOString()}&endDate=${adjustedEndDate?.toISOString()}&names=${selectedName}`,
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: DataPoint[] = await response.json();
-      setData(result);
-    } catch (error) {
-      console.error("Error searching for data: ", error);
-    }
-  }
 
   const calculateBoxPlotData = (data: DataPoint[]): BoxPlotData => {
     const sortedData = [...data].map((d) => d.value).sort((a, b) => a - b);
@@ -563,76 +539,15 @@ export default function BoxPlot() {
           </Menu>
         </div>
 
-        <div className="date-constraints-box">
-          <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
-            Date Constraints
-          </div>
-          <div className="flex items-center justify-center space-x-2 px-3">
-            <button
-              onClick={() => adjustDateRange("backward")}
-              className="bg-white p-2 rounded-lg hover:bg-medium-teal disabled:opacity-50"
-            >
-              <ChevronLeftIcon className="h-5 w-5 text-teal hover:text-white" />
-            </button>
-            <div
-              className={`flex items-center flex-col justify-center rounded-lg pt-2 m-3 mt-1 text-lg text-neutral-700`}
-            >
-              <DateBoundElement
-                value={startDate || new Date()}
-                onChange={handleStartDateChange}
-              />
-
-              <div className="bg-teal p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
-                <span className="text-white font-semibold text-center">to</span>
-              </div>
-
-              <DateBoundElement
-                value={endDate || new Date()}
-                onChange={handleEndDateChange}
-              />
-            </div>
-            <button
-              onClick={() => adjustDateRange("forward")}
-              className="bg-white p-2 rounded-lg hover:bg-medium-teal disabled:opacity-50"
-              disabled={now && endDate && endDate >= now}
-            >
-              <ChevronRightIcon className="h-5 w-5 text-teal hover:text-white" />
-            </button>
-          </div>
-
-          <div className="flex justify-center space-x-4 mt-4">
-            <button
-              onClick={() => setRangeModeWithDates("day")}
-              className={`date-range-button ${
-                rangeMode === "day"
-                  ? "date-range-button-selected"
-                  : "date-range-button-unselected"
-              }`}
-            >
-              Day
-            </button>
-            <button
-              onClick={() => setRangeModeWithDates("week")}
-              className={`date-range-button ${
-                rangeMode === "week"
-                  ? "date-range-button-selected"
-                  : "date-range-button-unselected"
-              }`}
-            >
-              Week
-            </button>
-            <button
-              onClick={() => setRangeModeWithDates("twoWeeks")}
-              className={`date-range-button ${
-                rangeMode === "twoWeeks"
-                  ? "date-range-button-selected"
-                  : "date-range-button-unselected"
-              }`}
-            >
-              Two Weeks
-            </button>
-          </div>
-        </div>
+        <DateConstraintsBox
+          startDate={startDate}
+          endDate={endDate}
+          rangeMode={rangeMode}
+          handleStartDateChange={handleStartDateChange}
+          handleEndDateChange={handleEndDateChange}
+          setRangeModeWithDates={setRangeModeWithDates}
+          adjustDateRange={adjustDateRange}
+        ></DateConstraintsBox>
       </div>
     </div>
   );

@@ -1,39 +1,15 @@
 import {
   mysqlTable,
-  mysqlSchema,
-  AnyMySqlColumn,
   primaryKey,
-  unique,
   int,
   varchar,
   index,
   datetime,
   decimal,
-  float,
-  foreignKey,
-  date,
   text,
   tinyint,
+  varbinary,
 } from "drizzle-orm/mysql-core";
-
-export const accounts = mysqlTable(
-  "accounts",
-  {
-    accountId: int("account_id").autoincrement().notNull(),
-    email: varchar({ length: 100 }).notNull(),
-    permissionLevel: int("permission_level").notNull(),
-  },
-  (table) => {
-    return {
-      accountsAccountId: primaryKey({
-        columns: [table.accountId],
-        name: "accounts_account_id",
-      }),
-      accountIdUnique: unique("account_id_UNIQUE").on(table.accountId),
-      emailUnique: unique("email_UNIQUE").on(table.email),
-    };
-  },
-);
 
 export const coralData = mysqlTable(
   "coral_data",
@@ -79,14 +55,17 @@ export const observations = mysqlTable(
   "observations",
   {
     observationId: int("observation_id").autoincrement().notNull(),
-    authorId: int("author_id")
+    authorId: varchar({ length: 64 }).notNull(),
+    datetime: datetime({ mode: "date" }).notNull().default(new Date()),
+    observationTitle: varchar({ length: 100 })
       .notNull()
-      .references(() => accounts.accountId),
-    // you can use { mode: 'date' }, if you want to have Date as type for this column
-    timestamp: date({ mode: "string" }).notNull(),
-    observationText: text("observation_text"),
-    // Warning: Can't parse blob from database
-    // blobType: blob("image_data"),
+      .default("Unnamed observation (This should never happen..)"),
+    observationText: text("observation_text")
+      .notNull()
+      .default("Empty observation (This should never happen..)"),
+
+    // same as BLOB https://orm.drizzle.team/docs/column-types/mysql#varbinary
+    blobType: varbinary("image_data"),
   },
   (table) => {
     return {
