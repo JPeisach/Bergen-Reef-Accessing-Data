@@ -101,9 +101,12 @@ export default function Page() {
           {/* TODO: Theme */}
           <Flatpickr
             data-enable-time
-            options={{ enableSeconds: true, mode: "range" }}
+            options={{
+              mode: "range",
+              closeOnSelect: false,
+            }}
             value={dateRange}
-            onChange={(date) => setDateRange(date)}
+            onClose={(date) => setDateRange(date)} // TODO: Consider adding a close or reset button? See which functionality works the best
           ></Flatpickr>
         </div>
 
