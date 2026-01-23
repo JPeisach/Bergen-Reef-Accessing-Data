@@ -6,6 +6,7 @@ import NavigationBar from "../components/NavigationBar";
 import HistoricDataTankBox from "app/components/tankBoxes/HistoricDataTankBox";
 import "flatpickr/dist/themes/confetti.css";
 import Flatpickr from "react-flatpickr";
+import TankStatsPanel from "app/components/TankStatsPanel";
 
 export default function Page() {
   const { user } = useUser();
@@ -111,37 +112,7 @@ export default function Page() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-          <div className={panelClass}>
-            <h2 className="text-lg font-bold text-dark-orange mb-3">Tank 1</h2>
-            <ul className="space-y-1.5 text-sm text-dark-orange/80 font-medium">
-              <li>pH: 8.08</li>
-              <li>Salinity: 27.7 ppt</li>
-              <li>Temperature: 76.9°F</li>
-              <li>ORP: 308 mV</li>
-              <li>Alkalinity: 9.4 dKH</li>
-              <li>Calcium: 306 ppm</li>
-              <li>Nitrate: 0 ppm</li>
-              <li>Nitrite: 0 ppm</li>
-              <li>Phosphate: 6.5 ppb</li>
-            </ul>
-
-            <div className="mt-4 bg-white p-3 shadow-inner rounded-lg">
-              <h3 className="font-bold text-dark-orange text-sm mb-1">
-                Pinned Notes
-              </h3>
-              <h4 className="font-bold text-dark-orange text-xs mb-1">
-                🙍 Mr. Ramirez
-              </h4>
-              <p className="text-xs text-dark-orange/70 leading-relaxed">
-                Tank 1 has been struggling lately. We suspect that the addition
-                of the new supplement, "GroCoral", has negatively impacted the
-                tank's vitality. Increased algae bloom observed.
-              </p>
-              <p className="font-bold text-dark-orange text-xs mt-2 underline">
-                <a href="/notes">Open in Observations</a>
-              </p>
-            </div>
-          </div>
+          <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
 
           <div className={`${panelClass}`}>
             <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-orange shadow-inner flex justify-between rounded-lg">
