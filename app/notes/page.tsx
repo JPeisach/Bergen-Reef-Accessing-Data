@@ -20,7 +20,7 @@ export default function Page() {
     Array<{
       observationId: number;
       authorId: number;
-      timestamp: string;
+      datetime: Date;
       observationText: string | null;
     }>
   >([]);
@@ -85,28 +85,22 @@ export default function Page() {
     }
   };
 
+  const formatDate = (date: Date) => {
+    // Why is react gaslighting us into thinking these methods don't exist?
+    // Why is this..
+    // https://stackoverflow.com/questions/48101949/cannot-apply-todatestring-to-date-in-js
+    //
+    // ???????
+    const tempDate = new Date(date.toString());
+
+    return (
+      tempDate.toLocaleDateString() + " at " + tempDate.toLocaleTimeString()
+    );
+  };
+
   useEffect(() => {
     fetchObservations();
   }, []);
-
-  const formatTimestamp = (timestamp: string) => {
-    try {
-      // Handle date-only strings (YYYY-MM-DD format)
-      const date = timestamp.includes("T")
-        ? new Date(timestamp)
-        : new Date(timestamp + "T00:00:00");
-      return date.toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
-    } catch {
-      return timestamp;
-    }
-  };
 
   const handleSave = async () => {
     if (notes.trim() === "") return;
@@ -114,6 +108,10 @@ export default function Page() {
     setIsSaving(true);
     setSaveError(null);
     setSaveSuccess(false);
+
+    const date = new Date();
+    date.setHours(Number(observationTime.substring(0, 2)));
+    date.setMinutes(Number(observationTime.substring(2)));
 
     try {
       const response = await fetch("/api/observations", {
@@ -125,6 +123,7 @@ export default function Page() {
           authorId: user.sub,
           observationText: notes.trim(),
           observationTitle: observationTitle.trim(),
+          datetime: date,
         }),
       });
 
@@ -294,7 +293,7 @@ export default function Page() {
                           {title}
                         </h3>
                         <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
-                          {formatTimestamp(obs.timestamp)}
+                          {obs.datetime ? formatDate(obs.datetime) : ""}
                         </span>
                       </div>
                       {text && (

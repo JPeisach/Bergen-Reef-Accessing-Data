@@ -56,7 +56,7 @@ export const observations = mysqlTable(
   {
     observationId: int("observation_id").autoincrement().notNull(),
     authorId: varchar({ length: 64 }).notNull(),
-    datetime: datetime({ mode: "date" }).notNull().default(new Date()),
+    datetime: datetime({ mode: "date" }).notNull(),
     observationTitle: varchar({ length: 100 })
       .notNull()
       .default("Unnamed observation (This should never happen..)"),
@@ -65,7 +65,7 @@ export const observations = mysqlTable(
       .default("Empty observation (This should never happen..)"),
 
     // same as BLOB https://orm.drizzle.team/docs/column-types/mysql#varbinary
-    blobType: varbinary("image_data"),
+    // blobType: varbinary("image_data"),
   },
   (table) => {
     return {
