@@ -11,65 +11,46 @@ import HomePageGraph from "./components/HomePageGraph";
 import HomePageElements from "./components/HomePageElements";
 import NavigationBar from "./components/NavigationBar";
 
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "row" as const, // Explicitly cast the type
-    gap: "10px",
-    padding: "0 20px",
-  },
-  leftHalf: {
-    flex: 1,
-    justifyContent: "center",
-    padding: "10px",
-    backgroundColor: "#f9f9f9",
-  },
-  rightHalf: {
-    flex: 2, // Takes up the other 50%
-    display: "flex",
-    justifyContent: "center", // Centers the graph horizontally
-    alignItems: "center", // Centers the graph vertically
-  },
-  select: {
-    marginTop: "20px",
-    padding: "10px",
-    fontSize: "16px",
-  },
-};
-
 export default function Page() {
   const { user } = useUser();
   const [selectedType, setSelectedType] = useState("Salinity");
 
   return (
-    <div>
+    <div className="min-h-screen bg-light-orange/30">
       <NavigationBar defaultIndex={0} username={user ? user.name : "Guest"} />
 
-      <br></br>
+      <main className="p-8">
+        {/* CONTAINER HOLDING ELEMENTS AND GRAPH */}
+        <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-140px)]">
+          {/* LEFT COLUMN: ELEMENTS SELECTION */}
+          <div className="w-full lg:w-5/12 rounded-2xl bg-light-orange/40 p-6 shadow-lg backdrop-blur-sm overflow-hidden flex flex-col">
+            <h2 className="text-xl font-bold text-dark-orange mb-4">
+              Select Parameter
+            </h2>
+            <div className="relative z-10 flex-1">
+              <HomePageElements
+                selectedType={selectedType}
+                onTypeSelectAction={setSelectedType}
+              />
+            </div>
+          </div>
 
-      {/*CONTAINER HOLDING ELEMENTS AND GRAPH IN HALVES OF THE SCREEN*/}
-      <div style={styles.container}>
-        {/*ELEMENTS*/}
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <HomePageElements
-            selectedType={selectedType}
-            onTypeSelectAction={setSelectedType}
-          />
+          {/* RIGHT COLUMN: CHART */}
+          <div className="w-full lg:w-7/12 rounded-2xl bg-white/60 p-6 shadow-lg backdrop-blur-sm flex flex-col relative z-0">
+            <h2 className="text-xl font-bold text-dark-orange mb-4">
+              {selectedType} Overview
+            </h2>
+            <div className="flex-1 w-full min-h-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <HomePageGraph
+                  selectedType={selectedType}
+                  onTypeSelectAction={setSelectedType}
+                />
+              </ResponsiveContainer>
+            </div>
+          </div>
         </div>
-
-        {/*CHART*/}
-        <div
-          className="w-3/5 rounded-lg p-3 ml-1"
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          <ResponsiveContainer width={"100%"} height={"auto"}>
-            <HomePageGraph
-              selectedType={selectedType}
-              onTypeSelectAction={setSelectedType}
-            />
-          </ResponsiveContainer>
-        </div>
-      </div>
+      </main>
     </div>
   );
 }

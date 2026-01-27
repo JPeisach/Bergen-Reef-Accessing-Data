@@ -13,41 +13,30 @@ export default function SettingsPage() {
   return (
     <div>
       <NavigationBar defaultIndex={-1} username={user ? user.name : "Guest"} />
-      <br></br>
-      <br></br>
 
-      <br />
-      <br />
+      <div className="p-8 bg-light-orange/30 min-h-screen">
+        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">
+          Settings
+        </h1>
 
-      {/* Settings Box */}
-      <div
-        style={{
-          width: "150px",
-          height: "75px",
-          margin: "0 auto",
-          borderRadius: "5px",
-          border: "1px solid #ccc",
-          backgroundColor: isDark ? "rgb(250, 185, 100)" : "#f9fafb",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <button
-          onClick={() => setIsDark(!isDark)}
-          style={{
-            padding: "4px 6px",
-            borderRadius: "6px",
-            border: "none",
-            cursor: "pointer",
-            backgroundColor: isDark ? "#ecb45a" : "#f79736",
-            color: "white",
-            fontWeight: "500",
-          }}
-        >
-          Change Theme
-        </button>
+        <div className="mx-auto max-w-md rounded-2xl bg-light-orange/40 p-10 shadow-lg backdrop-blur-sm flex flex-col items-center justify-center gap-6">
+          <div
+            className={`w-full p-8 rounded-xl transition-all duration-300 flex flex-col items-center justify-center gap-4 ${
+              isDark ? "bg-dark-orange/20" : "bg-white/60"
+            }`}
+          >
+            <h2 className="text-xl font-bold text-dark-orange">
+              Theme Preferences
+            </h2>
+
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-orange shadow-md"
+            >
+              {isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
