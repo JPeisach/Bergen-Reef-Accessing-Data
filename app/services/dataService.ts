@@ -1,3 +1,14 @@
+// Elements
+export async function fetchLatestData() {
+  const response = await fetch("/api/getMostRecentElements");
+
+  if (!response.ok) {
+    throw new Error(`Failed to get recent elements: ${response.status}`);
+  }
+
+  return response.json();
+}
+
 // TODO: Check time information w/ timezones
 export async function fetchDataInDateRange(
   startDate: Date,
