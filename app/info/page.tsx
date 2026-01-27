@@ -16,6 +16,20 @@ export default function Page() {
     };
   };
 
+  const getTankImage = (tankNum: string) => {
+    switch (tankNum) {
+      case "2":
+        return "https://www.thesprucepets.com/thmb/M22UH3-0kR74sgHT91kkUn4wKco=/3100x0/filters:no_upscale():strip_icc()/GettyImages-1413740339-5aea18fdc25b41039fa8dc91d687f527.jpg";
+      case "3":
+        return "https://cdn11.bigcommerce.com/s-15h88fcyw7/product_images/uploaded_images/fishtanksdirect-136796-were-they-made-blogbanner1.jpg";
+      case "4":
+        return "https://i.pinimg.com/474x/f9/31/06/f93106fa1161221adf0d6761b82cca5f.jpg";
+      default:
+        // Default image (Tank 1 and others)
+        return "https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg";
+    }
+  };
+
   const tankInfo = getTankInfo(tankNumber);
 
   return (
@@ -59,7 +73,7 @@ export default function Page() {
               </h2>
               <div className="rounded-2xl bg-white/90 p-4 shadow-xl border border-light-orange/20 flex items-center justify-center min-h-[300px] overflow-hidden">
                 <img
-                  src="https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg"
+                  src={getTankImage(tankNumber)}
                   alt={`Tank ${tankNumber} coral reef aquarium`}
                   className="w-full h-full object-cover rounded-xl"
                 />
