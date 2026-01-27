@@ -21,8 +21,9 @@ export default function SettingsPage() {
 
         <div className="mx-auto max-w-md rounded-2xl bg-light-orange/40 p-10 shadow-lg backdrop-blur-sm flex flex-col items-center justify-center gap-6">
           <div
-            className={`w-full p-8 rounded-xl transition-all duration-300 flex flex-col items-center justify-center gap-4 ${isDark ? "bg-dark-orange/20" : "bg-white/60"
-              }`}
+            className={`w-full p-8 rounded-xl transition-all duration-300 flex flex-col items-center justify-center gap-4 ${
+              isDark ? "bg-dark-orange/20" : "bg-white/60"
+            }`}
           >
             <h2 className="text-xl font-bold text-dark-orange">
               Theme Preferences

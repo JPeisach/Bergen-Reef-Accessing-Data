@@ -76,7 +76,7 @@ export default function Page() {
                 break;
               default:
                 value = "";
-                setValue = () => { };
+                setValue = () => {};
             }
 
             return (

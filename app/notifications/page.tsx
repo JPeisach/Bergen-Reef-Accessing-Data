@@ -28,10 +28,7 @@ export default function NotificationsPage() {
 
   return (
     <div className="bg-[#F3E9D2] min-h-screen">
-      <NavigationBar
-        defaultIndex={-1}
-        username={user ? user.name : "Guest"}
-      />
+      <NavigationBar defaultIndex={-1} username={user ? user.name : "Guest"} />
 
       <main className="p-10">
         <div className="bg-white rounded-2xl orange shadow-lg p-8 max-w-6xl mx-auto">
@@ -65,8 +62,8 @@ export default function NotificationsPage() {
                       {tank.status === "yes"
                         ? "Yes"
                         : tank.status === "ok"
-                        ? "OK"
-                        : "Fail"}
+                          ? "OK"
+                          : "Fail"}
                     </span>
                   </td>
 
