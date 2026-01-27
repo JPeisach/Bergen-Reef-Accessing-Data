@@ -1,78 +1,51 @@
 import {
   mysqlTable,
-  primaryKey,
+  mysqlSchema,
+  AnyMySqlColumn,
   int,
-  varchar,
-  index,
   datetime,
+  varchar,
   decimal,
+  boolean,
   text,
-  tinyint,
-  varbinary,
+  blob,
+  primaryKey,
+  index,
 } from "drizzle-orm/mysql-core";
+import { sql } from "drizzle-orm";
 
 export const coralData = mysqlTable(
   "coral_data",
   {
-    id: int({ unsigned: true }).autoincrement().notNull(),
-    datetime: datetime({ mode: "string" }).notNull(),
+    id: int({ unsigned: true }).autoincrement().primaryKey(),
+    datetime: datetime().notNull(),
     name: varchar({ length: 45 }).notNull(),
     unit: varchar({ length: 45 }).notNull(),
     value: decimal({ precision: 6, scale: 2 }).notNull(),
-    deleted: tinyint().default(1).notNull(),
-    updatedAt: datetime("updated_at", { mode: "string" }).notNull(),
+    deleted: boolean().default(true).notNull(),
+    updatedAt: datetime("updated_at").notNull(),
   },
-  (table) => {
-    return {
-      dataId: index("data_id").on(table.id),
-      coralDataId: primaryKey({ columns: [table.id], name: "coral_data_id" }),
-    };
-  },
+  (table) => [index("data_id").on(table.id)],
 );
 
 export const coralDataObservationsTable = mysqlTable(
   "coral_data_observations_table",
   {
-    observationId: int("observation_id")
-      .notNull()
-      .references(() => observations.observationId),
-    dataId: int("data_id", { unsigned: true })
-      .notNull()
-      .references(() => coralData.id),
+    observationId: int("observation_id").notNull(),
+    dataId: int("data_id", { unsigned: true }).notNull(),
   },
-  (table) => {
-    return {
-      idIdx: index("id_idx").on(table.dataId),
-      coralDataObservationsTableObservationIdDataId: primaryKey({
-        columns: [table.observationId, table.dataId],
-        name: "coral_data_observations_table_observation_id_data_id",
-      }),
-    };
-  },
+  (table) => [primaryKey({ columns: [table.observationId, table.dataId] })],
 );
 
 export const observations = mysqlTable(
   "observations",
   {
-    observationId: int("observation_id").autoincrement().notNull(),
+    observationId: int("observation_id").autoincrement().primaryKey(),
     authorId: varchar({ length: 64 }).notNull(),
-    datetime: datetime({ mode: "date" }).notNull(),
-    observationTitle: varchar({ length: 100 })
-      .notNull()
-      .default("Unnamed observation (This should never happen..)"),
-    observationText: text("observation_text")
-      .notNull()
-      .default("Empty observation (This should never happen..)"),
-
-    // same as BLOB https://orm.drizzle.team/docs/column-types/mysql#varbinary
-    // blobType: varbinary("image_data"),
+    observationTitle: varchar({ length: 100 }),
+    datetime: datetime().notNull(),
+    observationText: text("observation_text"),
+    imageData: blob("image_data"),
   },
-  (table) => {
-    return {
-      observationsObservationId: primaryKey({
-        columns: [table.observationId],
-        name: "observations_observation_id",
-      }),
-    };
-  },
+  (table) => [index("account_id_key").on(table.authorId)],
 );

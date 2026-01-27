@@ -7,11 +7,13 @@ export default async function createData(
 ) {
   // Construct row of the current data node with all its attributes
   const entry: typeof coralData.$inferInsert = {
-    datetime: date.toString(),
+    datetime: date,
     name: data[0].name,
     unit: data[0].unit,
     value: data[0].value,
-    updatedAt: date.toString(),
+
+    // FIXME: date = now??
+    updatedAt: date,
   };
 
   // Insert row into the database
