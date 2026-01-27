@@ -75,7 +75,7 @@ export default function Page() {
                 break;
               default:
                 value = "";
-                setValue = () => {};
+                setValue = () => { };
             }
 
             return (
@@ -98,13 +98,18 @@ export default function Page() {
               </div>
             );
           })}
-          {/* TODO: Theme */}
-          <Flatpickr
-            data-enable-time
-            options={{ enableSeconds: true, mode: "range" }}
-            value={dateRange}
-            onChange={(date) => setDateRange(date)}
-          ></Flatpickr>
+          <div className="min-w-[160px]">
+            <label className="block text-dark-orange font-bold mb-1 text-sm">
+              Date Range
+            </label>
+            <Flatpickr
+              className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+              data-enable-time
+              options={{ enableSeconds: true, mode: "range" }}
+              value={dateRange}
+              onChange={(date) => setDateRange(date)}
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
