@@ -204,6 +204,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           </TabGroup>
         </div>
 
+        {/* FIXME: This should be in TabGroup */}
         <div className="mt-auto">
           <a href="/settings">
             <button className="tab-item w-full py-5 transition flex items-center justify-bottom gap-2 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">

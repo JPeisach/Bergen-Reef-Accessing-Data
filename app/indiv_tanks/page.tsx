@@ -117,28 +117,11 @@ export default function Page() {
           <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
 
           <div className={`${panelClass}`}>
-            <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-orange shadow-inner flex justify-between rounded-lg">
-              <span className="text-dark-orange/60">
-                {selectedTank || "Tank"}
-              </span>
-              <span className="text-dark-orange/60">
-                {selectedParameter || "Parameter"}
-              </span>
-              <span className="text-dark-orange/60">
-                {dateRange[0].toLocaleDateString() || "Time Range"}
-              </span>
-              <span className="text-dark-orange/60">
-                {selectedGraphType || "Graph Type"}
-              </span>
-            </div>
-
-            <div className="h-[500px] bg-white shadow-inner p-5 rounded-lg">
-              <HistoricDataTankBox
-                tankNumber={1}
-                variableType={selectedParameter}
-                dateRange={dateRange}
-              />
-            </div>
+            <HistoricDataTankBox
+              tankNumber={1}
+              variableType={selectedParameter}
+              dateRange={dateRange}
+            />
 
             <div className="mt-6 text-sm text-dark-orange/70 text-center italic">
               Tank 1 houses numerous types of corals, including mushroom corals,
@@ -160,12 +143,12 @@ export default function Page() {
             className="w-full h-32 resize-none bg-white p-4 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
           />
         </div>
-      </div>
 
-      <div className="mt-1 flex justify-end">
-        <button className="bg-orange px-8 py-3 text-sm font-bold text-white rounded-lg transition-all hover:shadow-lg hover:bg-orange">
-          Save
-        </button>
+        <div className="mt-1 flex justify-end">
+          <button className="bg-orange px-8 py-3 text-sm font-bold text-white rounded-lg transition-all hover:shadow-lg hover:bg-orange">
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );

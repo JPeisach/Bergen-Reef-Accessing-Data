@@ -156,6 +156,7 @@ export default function Page() {
     }
   };
 
+  // FIXME: Across all the pages, we should set it up so as far as the page div is concerned, it only has the right hand side of the page
   return (
     <div>
       <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
