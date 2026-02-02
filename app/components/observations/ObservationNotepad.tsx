@@ -1,5 +1,5 @@
 import { useUser } from "@auth0/nextjs-auth0";
-import { Textarea } from "@headlessui/react";
+import { Field, Input, Label, Textarea } from "@headlessui/react";
 import { useState } from "react";
 
 export default function ObservationNotepad({}) {
@@ -58,43 +58,47 @@ export default function ObservationNotepad({}) {
     <div>
       <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-sm">
         {/* Observation Title */}
-        <div>
-          <label className="mb-2 block text-sm font-bold text-dark-orange">
+
+        {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
+        <Field>
+          <Label className="mb-2 block text-sm font-bold text-dark-orange">
             Observation Title
-          </label>
-          <input
+          </Label>
+          <Input
             type="Enter text here..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title here..."
             className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
           />
-        </div>
+        </Field>
 
         {/* Tags Display */}
-        <div>
-          <p className="mb-2 text-sm font-bold text-dark-orange">Tags</p>
+        <Field>
+          <Label className="mb-2 text-sm font-bold text-dark-orange">
+            Tags
+          </Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
-          <Textarea
+          <Input
             name="tags"
             className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
             placeholder="Enter a list of tags separated by comma..."
             onChange={(e) => setTags(e.target.value.split(","))}
-          ></Textarea>
-        </div>
+          ></Input>
+        </Field>
 
         {/* Notes Textbox */}
-        <div>
-          <label className="mb-2 block text-sm font-bold text-dark-orange">
+        <Field>
+          <Label className="mb-2 block text-sm font-bold text-dark-orange">
             Notes
-          </label>
-          <textarea
+          </Label>
+          <Textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Enter any notes here..."
             className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
           />
-        </div>
+        </Field>
 
         {/* Save Button */}
         <div className="flex flex-col items-end gap-2 pt-2">
