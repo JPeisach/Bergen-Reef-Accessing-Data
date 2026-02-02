@@ -1,21 +1,15 @@
 import { useUser } from "@auth0/nextjs-auth0";
+import { Textarea } from "@headlessui/react";
 import { useState } from "react";
 
 export default function ObservationNotepad({}) {
   const { user } = useUser();
   const [title, setTitle] = useState("");
-  const [selectedVariables, setSelectedVariables] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
-
   const [status, setStatus] = useState("");
 
-  const variables = [
-    "pH",
-    "Calcium",
-    "Temperature",
-    "Salinity",
-    "None of the above",
-  ];
+  // TODO: Send tags.
+  const [tags, setTags] = useState<string[]>([]);
 
   const handleSave = async () => {
     if (notes.trim() === "") return;
@@ -49,7 +43,7 @@ export default function ObservationNotepad({}) {
       setStatus("success");
       setNotes("");
       setTitle("");
-      setSelectedVariables([]);
+      setTags([]);
 
       setTimeout(() => setStatus(""), 3000);
     } catch (error) {
@@ -77,39 +71,16 @@ export default function ObservationNotepad({}) {
           />
         </div>
 
-        {/* Variables Display */}
+        {/* Tags Display */}
         <div>
-          <p className="mb-2 text-sm font-bold text-dark-orange">Variables</p>
-          {selectedVariables.length === 0 ? (
-            <p className="text-sm text-medium-gray italic">
-              Variables appear here...
-            </p>
-          ) : (
-            <div className="flex flex-wrap gap-2">
-              {variables.map((variable) => (
-                <span
-                  key={variable}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-light-orange/50 px-4 py-1.5 text-xs font-bold text-dark-orange shadow-sm"
-                >
-                  {variable}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setSelectedVariables((prev) =>
-                        prev.includes(variable)
-                          ? prev.filter((v) => v !== variable)
-                          : [...prev, variable],
-                      )
-                    }
-                    className="text-sm text-dark-orange hover:text-orange hover:scale-125 transition-transform font-bold"
-                    aria-label={`Remove ${variable}`}
-                  >
-                    ×
-                  </button>
-                </span>
-              ))}
-            </div>
-          )}
+          <p className="mb-2 text-sm font-bold text-dark-orange">Tags</p>
+          {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
+          <Textarea
+            name="tags"
+            className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            placeholder="Enter a list of tags separated by comma..."
+            onChange={(e) => setTags(e.target.value.split(","))}
+          ></Textarea>
         </div>
 
         {/* Notes Textbox */}
@@ -120,7 +91,7 @@ export default function ObservationNotepad({}) {
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="observation here"
+            placeholder="Enter any notes here..."
             className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
           />
         </div>
