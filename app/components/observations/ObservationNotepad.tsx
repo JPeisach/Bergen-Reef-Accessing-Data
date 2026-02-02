@@ -17,8 +17,7 @@ export default function ObservationNotepad({}) {
     setStatus("sending");
 
     const date = new Date();
-    date.setHours(Number(title.substring(0, 2)));
-    date.setMinutes(Number(title.substring(2)));
+    // TODO: set date/time info of what the observation is talking about.
 
     try {
       const response = await fetch("/api/observations", {
