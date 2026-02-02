@@ -7,16 +7,10 @@ import ObservationNotepad from "app/components/observations/ObservationNotepad";
 
 export default function Page() {
   const { user } = useUser();
-  const [notes, setNotes] = useState("");
   const [tankNumber, setTankNumber] = useState("");
   const [coralType, setCoralType] = useState("");
-  const [selectedVariables, setSelectedVariables] = useState<string[]>([]);
-  const [observationTitle, setObservationTitle] = useState("");
   const [observationTime, setObservationTime] = useState("");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
-  const [saveSuccess, setSaveSuccess] = useState(false);
   const [observations, setObservations] = useState<
     Array<{
       observationId: number;
@@ -52,22 +46,6 @@ export default function Page() {
     "Sarah Coral",
     "Josh Coral",
   ];
-
-  const variables = [
-    "pH",
-    "Calcium",
-    "Temperature",
-    "Salinity",
-    "None of the above",
-  ];
-
-  const handleVariableChange = (variable: string) => {
-    setSelectedVariables((prev) =>
-      prev.includes(variable)
-        ? prev.filter((v) => v !== variable)
-        : [...prev, variable],
-    );
-  };
 
   const fetchObservations = async () => {
     setIsLoadingObservations(true);
@@ -113,6 +91,7 @@ export default function Page() {
             Observations
           </h1>
 
+          {/* TODO: Determine what this will be - a panel to filter observations? */}
           <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-sm">
             {/* Tank numnber dropdown menu */}
             <div className="min-w-[160px]">
@@ -163,31 +142,6 @@ export default function Page() {
                 onChange={(e) => setObservationTime(e.target.value)}
                 className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
               />
-            </div>
-
-            {/* var dropdown */}
-            <div className="min-w-[200px]">
-              <label className="block text-dark-orange font-bold mb-2 text-sm">
-                Variables
-              </label>
-              <select
-                value=""
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (!value) return;
-                  handleVariableChange(value);
-                  // Reset select back to placeholder
-                  e.target.value = "";
-                }}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
-              >
-                <option value="">Add variable...</option>
-                {variables.map((variable) => (
-                  <option key={variable} value={variable}>
-                    {variable}
-                  </option>
-                ))}
-              </select>
             </div>
 
             {/* button to open notepad */}
