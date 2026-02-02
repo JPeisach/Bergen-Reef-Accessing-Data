@@ -8,6 +8,7 @@ import {
   YAxis,
 } from "recharts";
 import "../../globals.css";
+import DownloadCSVButton from "../buttons/DownloadCSVButton";
 import { useEffect, useState } from "react";
 
 export default function RecentDataTankBox({ tankNumber, variableType }) {
@@ -53,10 +54,7 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
   }, [variableType]);
 
   return (
-    <a
-      className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer"
-      href="/info"
-    >
+    <div className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer">
       <h2 className="text-xl font-bold text-dark-orange mb-4 text-center">
         Tank {tankNumber}
       </h2>
@@ -96,6 +94,7 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-    </a>
+      <DownloadCSVButton data={chartData}></DownloadCSVButton>
+    </div>
   );
 }
