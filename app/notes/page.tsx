@@ -3,19 +3,14 @@ import { useState, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import "../globals.css";
 import NavigationBar from "../components/NavigationBar";
+import ObservationNotepad from "app/components/observations/ObservationNotepad";
 
 export default function Page() {
   const { user } = useUser();
-  const [notes, setNotes] = useState("");
   const [tankNumber, setTankNumber] = useState("");
   const [coralType, setCoralType] = useState("");
-  const [selectedVariables, setSelectedVariables] = useState<string[]>([]);
-  const [observationTitle, setObservationTitle] = useState("");
   const [observationTime, setObservationTime] = useState("");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
-  const [saveSuccess, setSaveSuccess] = useState(false);
   const [observations, setObservations] = useState<
     Array<{
       observationId: number;
@@ -38,22 +33,6 @@ export default function Page() {
     "Sarah Coral",
     "Josh Coral",
   ];
-
-  const variables = [
-    "pH",
-    "Calcium",
-    "Temperature",
-    "Salinity",
-    "None of the above",
-  ];
-
-  const handleVariableChange = (variable: string) => {
-    setSelectedVariables((prev) =>
-      prev.includes(variable)
-        ? prev.filter((v) => v !== variable)
-        : [...prev, variable],
-    );
-  };
 
   const fetchObservations = async () => {
     setIsLoadingObservations(true);
@@ -89,60 +68,6 @@ export default function Page() {
     fetchObservations();
   }, []);
 
-  const handleSave = async () => {
-    if (notes.trim() === "") return;
-
-    setIsSaving(true);
-    setSaveError(null);
-    setSaveSuccess(false);
-
-    const date = new Date();
-    date.setHours(Number(observationTime.substring(0, 2)));
-    date.setMinutes(Number(observationTime.substring(2)));
-
-    try {
-      const response = await fetch("/api/observations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          authorId: user.sub,
-          observationText: notes.trim(),
-          observationTitle: observationTitle.trim(),
-          datetime: date,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to save observation");
-      }
-
-      // Success - reset form and refresh observations
-      setSaveSuccess(true);
-      setNotes("");
-      setObservationTitle("");
-      setSelectedVariables([]);
-      setObservationTime("");
-      setTankNumber("");
-      setCoralType("");
-
-      // Refresh observations list
-      fetchObservations();
-
-      // Clear success message after 3 seconds
-      setTimeout(() => setSaveSuccess(false), 3000);
-    } catch (error) {
-      console.error("Error saving observation:", error);
-      setSaveError(
-        error instanceof Error ? error.message : "Failed to save observation",
-      );
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
   return (
     <div>
       <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
@@ -153,6 +78,7 @@ export default function Page() {
             Observations
           </h1>
 
+          {/* TODO: Determine what this will be - a panel to filter observations? */}
           <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-sm">
             {/* Tank numnber dropdown menu */}
             <div className="min-w-[160px]">
@@ -203,31 +129,6 @@ export default function Page() {
                 onChange={(e) => setObservationTime(e.target.value)}
                 className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
               />
-            </div>
-
-            {/* var dropdown */}
-            <div className="min-w-[200px]">
-              <label className="block text-dark-orange font-bold mb-2 text-sm">
-                Variables
-              </label>
-              <select
-                value=""
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (!value) return;
-                  handleVariableChange(value);
-                  // Reset select back to placeholder
-                  e.target.value = "";
-                }}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
-              >
-                <option value="">Add variable...</option>
-                {variables.map((variable) => (
-                  <option key={variable} value={variable}>
-                    {variable}
-                  </option>
-                ))}
-              </select>
             </div>
 
             {/* button to open notepad */}
@@ -299,90 +200,7 @@ export default function Page() {
             </div>
 
             {/* notepad */}
-            <div>
-              {isNotepadVisible && (
-                <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-sm">
-                  {/* Observation Title */}
-                  <div>
-                    <label className="mb-2 block text-sm font-bold text-dark-orange">
-                      Observation Title
-                    </label>
-                    <input
-                      type="Enter text here..."
-                      value={observationTitle}
-                      onChange={(e) => setObservationTitle(e.target.value)}
-                      placeholder="Enter title here..."
-                      className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
-                    />
-                  </div>
-
-                  {/* Variables Display */}
-                  <div>
-                    <p className="mb-2 text-sm font-bold text-dark-orange">
-                      Variables
-                    </p>
-                    {selectedVariables.length === 0 ? (
-                      <p className="text-sm text-medium-gray italic">
-                        Variables appear here...
-                      </p>
-                    ) : (
-                      <div className="flex flex-wrap gap-2">
-                        {selectedVariables.map((variable) => (
-                          <span
-                            key={variable}
-                            className="inline-flex items-center gap-1.5 rounded-full bg-light-orange/50 px-4 py-1.5 text-xs font-bold text-dark-orange shadow-sm"
-                          >
-                            {variable}
-                            <button
-                              type="button"
-                              onClick={() => handleVariableChange(variable)}
-                              className="text-sm text-dark-orange hover:text-orange hover:scale-125 transition-transform font-bold"
-                              aria-label={`Remove ${variable}`}
-                            >
-                              ×
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Notes Textbox */}
-                  <div>
-                    <label className="mb-2 block text-sm font-bold text-dark-orange">
-                      Notes
-                    </label>
-                    <textarea
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                      placeholder="observation here"
-                      className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
-                    />
-                  </div>
-
-                  {/* Save Button */}
-                  <div className="flex flex-col items-end gap-2 pt-2">
-                    {saveError && (
-                      <p className="text-sm text-red-600 font-medium">
-                        {saveError}
-                      </p>
-                    )}
-                    {saveSuccess && (
-                      <p className="text-sm text-green-600 font-medium">
-                        Observation saved successfully!
-                      </p>
-                    )}
-                    <button
-                      onClick={handleSave}
-                      className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
-                      disabled={notes.trim() === "" || isSaving}
-                    >
-                      {isSaving ? "Saving..." : "Save"}
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+            {isNotepadVisible && <ObservationNotepad></ObservationNotepad>}
           </div>
         </div>
       </div>
