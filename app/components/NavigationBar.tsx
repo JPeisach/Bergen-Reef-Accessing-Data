@@ -50,8 +50,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                       className={clsx(
                         "navbar-tabitem",
                         defaultIndex === 0
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
+                          ? "bg-orange outline outline-0 outline-dark-orange text-white font-bold"
+                          : "bg-white outline outline-0 outline-medium-gray text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Home
