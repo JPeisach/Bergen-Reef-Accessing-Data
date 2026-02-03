@@ -21,27 +21,14 @@ export default function Page() {
       observationId: number;
       authorId: number;
       datetime: Date;
+      observationTitle: string | null;
       observationText: string | null;
+
+      // Not in DB
+      author: string;
     }>
   >([]);
 
-  // Extract title from observation text (if stored in TITLE: format)
-  const extractTitle = (
-    text: string | null,
-    observationId: number,
-  ): { title: string; text: string } => {
-    if (!text) return { title: `Observation #${observationId}`, text: "" };
-
-    const titleMatch = text.match(/^TITLE:\s*(.+?)\n\n/);
-    if (titleMatch) {
-      return {
-        title: titleMatch[1].trim(),
-        text: text.replace(/^TITLE:\s*.+?\n\n/, "").trim(),
-      };
-    }
-
-    return { title: `Observation #${observationId}`, text: text };
-  };
   const [isLoadingObservations, setIsLoadingObservations] = useState(true);
 
   const coralTypes = [
@@ -277,11 +264,6 @@ export default function Page() {
                   </div>
                 ) : (
                   observations.map((obs, index) => {
-                    const { title, text } = extractTitle(
-                      obs.observationText,
-                      obs.observationId,
-                    );
-
                     return (
                       <div
                         key={obs.observationId}
@@ -291,15 +273,22 @@ export default function Page() {
                       >
                         <div className="flex items-start justify-between mb-2.5">
                           <h3 className="text-base font-semibold text-dark-orange">
-                            {title}
+                            {obs.observationTitle}
                           </h3>
-                          <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
-                            {obs.datetime ? formatDate(obs.datetime) : ""}
-                          </span>
+                          <div className="flex flex-col">
+                            <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
+                              {obs.author}
+                            </span>
+                            <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
+                              {obs.datetime ? formatDate(obs.datetime) : ""}
+                            </span>
+                          </div>
                         </div>
-                        {text && (
+
+                        {/* FIXME: unnecessary conditional? */}
+                        {obs.observationText && (
                           <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
-                            {text}
+                            {obs.observationText}
                           </p>
                         )}
                       </div>

@@ -23,6 +23,22 @@ export const getUsers = async () => {
   return await response.json();
 };
 
+export const getUserById = async (userId: string) => {
+  const token = await getAccessToken();
+
+  const response = await fetch(
+    `${process.env.AUTH0_DOMAIN}/api/v2/users/${userId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  if (!response.ok) throw new Error("Failed to fetch user");
+  return await response.json();
+};
+
 export const getUserRoles = async (userId: string) => {
   const token = await getAccessToken();
 
