@@ -2,16 +2,17 @@
 
 import axios from "axios";
 
-interface AccessTokenResponse {
+export interface AccessToken {
   access_token: string;
   expires_in: number;
   token_type: string;
 }
 
+// TODO: This is probably deprecated, we should probably use auth0.getAccessToken()
 // Create an access token for the Auth0 management API, this is used to fetch user roles
-export async function createAccessToken(): Promise<string> {
+export async function createAccessToken(): Promise<AccessToken> {
   try {
-    const response = await axios.post<AccessTokenResponse>(
+    const response = await axios.post<AccessToken>(
       `${process.env.AUTH0_DOMAIN}/oauth/token`,
       JSON.stringify({
         grant_type: "client_credentials",
@@ -26,7 +27,7 @@ export async function createAccessToken(): Promise<string> {
       },
     );
 
-    return response.data.access_token;
+    return response.data;
   } catch (error) {
     throw new Error("Failed to get Auth0 management token", error);
   }

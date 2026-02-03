@@ -1,13 +1,25 @@
 import { Auth0Client } from "@auth0/nextjs-auth0/server";
-import { createAccessToken } from "actions/createAccessToken";
+import { AccessToken, createAccessToken } from "actions/createAccessToken";
 
 import axios from "axios";
 
 export const auth0 = new Auth0Client();
 
-// FIXME: unnecessary overhead/access token requests..
+let accessToken: AccessToken = null;
+let accessTokenExpiryDate: Date = null;
+
 const getAccessToken = async () => {
-  return createAccessToken();
+  // Check if we need a new token.
+  if (new Date() > accessTokenExpiryDate) {
+    accessToken = await createAccessToken();
+
+    accessTokenExpiryDate = new Date();
+    accessTokenExpiryDate.setSeconds(
+      accessTokenExpiryDate.getSeconds() + accessToken.expires_in,
+    );
+  }
+
+  return accessToken.access_token;
 };
 
 export const getUsers = async () => {
