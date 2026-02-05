@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import "../globals.css";
 import NavigationBar from "../components/NavigationBar";
+import { link } from "fs";
 
 export default function Page() {
   const { user } = useUser();
@@ -18,15 +19,24 @@ export default function Page() {
 
   const getTankImage = (tankNum: string) => {
     switch (tankNum) {
+      case "1":
+        return "/TankImages/IMG_5941.jpeg";
       case "2":
-        return "https://www.thesprucepets.com/thmb/M22UH3-0kR74sgHT91kkUn4wKco=/3100x0/filters:no_upscale():strip_icc()/GettyImages-1413740339-5aea18fdc25b41039fa8dc91d687f527.jpg";
+        return "/TankImages/IMG_5954.jpeg";
       case "3":
-        return "https://cdn11.bigcommerce.com/s-15h88fcyw7/product_images/uploaded_images/fishtanksdirect-136796-were-they-made-blogbanner1.jpg";
+        return "/TankImages/IMG_5944.jpeg";
       case "4":
-        return "https://i.pinimg.com/474x/f9/31/06/f93106fa1161221adf0d6761b82cca5f.jpg";
-      default:
-        // Default image (Tank 1 and others)
-        return "https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg";
+        return "/TankImages/IMG_5980.jpeg";
+      case "5":
+        return "/TankImages/IMG_5963.jpeg";
+      case "6":
+        return "/TankImages/IMG_5966.jpeg";
+      case "7":
+        return "/TankImages/IMG_5975.jpeg";
+      case "8":
+        return "/TankImages/IMG_5980.jpeg";
+      case "9":
+        return "/TankImages/IMG_5980.jpeg";
     }
   };
 
