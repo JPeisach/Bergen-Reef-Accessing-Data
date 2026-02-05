@@ -23,44 +23,95 @@ export default function Page() {
     <div className="bg-light-orange/30">
       <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
 
-      <div className="flex relative min-h-screen">
-        <div className="p-8 max-w-7xl mx-auto">
-          <div className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}>
-            {[
-              {
-                label: "Tank",
-                options: [
-                  "Tank 1",
-                  "Tank 2",
-                  "Tank 3",
-                  "Tank 4",
-                  "Tank 5",
-                  "Tank 6",
-                  "Tank 7",
-                  "Tank 8",
-                  "Tank 9",
-                ],
-              },
-              {
-                label: "Parameters",
-                options: [
-                  "pH",
-                  "Salinity",
-                  "Temperature",
-                  "ORP",
-                  "Alkalinity",
-                  "Calcium",
-                  "Nitrate",
-                  "Nitrite",
-                  "Phosphate",
-                ],
-              },
-              {
-                label: "Graph Type",
-                options: ["Line", "Bar", "Sankey", "Other"],
-              },
-            ].map((item) => {
-              let value, setValue;
+      <div className="p-8 max-w-7xl mx-auto">
+        <div className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}>
+          {[
+            {
+              label: "Tank",
+              options: [
+                "Tank 1",
+                "Tank 2",
+                "Tank 3",
+                "Tank 4",
+                "Tank 5",
+                "Tank 6",
+                "Tank 7",
+                "Tank 8",
+                "Tank 9",
+              ],
+            },
+            {
+              label: "Parameters",
+              options: [
+                "pH",
+                "Salinity",
+                "Temperature",
+                "ORP",
+                "Alkalinity",
+                "Calcium",
+                "Nitrate",
+                "Nitrite",
+                "Phosphate",
+              ],
+            },
+            {
+              label: "Graph Type",
+              options: ["Line", "Bar", "Sankey", "Other"],
+            },
+          ].map((item) => {
+            let value, setValue;
+
+            switch (item.label) {
+              case "Tank":
+                value = selectedTank;
+                setValue = setSelectedTank;
+                break;
+              case "Parameters":
+                value = selectedParameter;
+                setValue = setSelectedParameter;
+                break;
+              case "Graph Type":
+                value = selectedGraphType;
+                setValue = setSelectedGraphType;
+                break;
+              default:
+                value = "";
+                setValue = () => { };
+            }
+
+            return (
+              <div key={item.label} className="min-w-[160px]">
+                <label className="block text-dark-orange font-bold mb-1 text-sm">
+                  {item.label}
+                </label>
+                <select
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                >
+                  <option value="">Select…</option>
+                  {item.options.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            );
+          })}
+          <div className="min-w-[160px]">
+            <label className="block text-dark-orange font-bold mb-1 text-sm">
+              Date Range
+            </label>
+            <Flatpickr
+              className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+              data-enable-time
+              options={{ enableSeconds: true, mode: "range" }}
+              value={dateRange}
+              onChange={(date) => setDateRange(date)}
+            />
+          </div>
+        </div>
 
               switch (item.label) {
                 case "Tank":
