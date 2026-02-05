@@ -5,8 +5,12 @@ import insertObservation from "src/lib/observations/insertObservation";
 interface Observation {
   authorId: string;
   datetime: Date;
+  observationDatetimeStart: Date;
+  observationDatetimeEnd: Date;
+  observationTagsArray: string[];
   observationText: string;
   observationTitle: string;
+  tankNumber: number;
 }
 
 export const GET = async (request: Request) => {
@@ -31,10 +35,18 @@ export const POST = async (request: Request) => {
   try {
     const observation: Observation = await request.json();
 
+    // surely there is a better way to validate this..
     if (observation.authorId == null) {
       return NextResponse.json({
         status: 400,
         message: "Missing account ID",
+      });
+    }
+
+    if (observation.tankNumber == null) {
+      return NextResponse.json({
+        status: 400,
+        message: "Missing tank number",
       });
     }
 
@@ -49,6 +61,13 @@ export const POST = async (request: Request) => {
       return NextResponse.json({
         status: 400,
         message: "Invalid observation title (does not exist or is too large)",
+      });
+    }
+
+    if (observation.observationTagsArray == null) {
+      return NextResponse.json({
+        status: 400,
+        message: "Missing observation tags",
       });
     }
 

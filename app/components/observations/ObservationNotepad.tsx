@@ -1,15 +1,17 @@
 import { useUser } from "@auth0/nextjs-auth0";
-import { Field, Input, Label, Textarea } from "@headlessui/react";
+import { Field, Input, Label, Select, Textarea } from "@headlessui/react";
 import { useState } from "react";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/confetti.css";
 
 export default function ObservationNotepad({}) {
   const { user } = useUser();
+  const [tankNumber, setTankNumber] = useState(1);
   const [title, setTitle] = useState("");
+  const [dateRange, setDateRange] = useState([new Date()]);
+  const [tags, setTags] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
   const [status, setStatus] = useState("");
-
-  // TODO: Send tags.
-  const [tags, setTags] = useState<string[]>([]);
 
   const handleSave = async () => {
     if (notes.trim() === "") return;
@@ -27,9 +29,15 @@ export default function ObservationNotepad({}) {
         },
         body: JSON.stringify({
           authorId: user.sub,
+          tankNumber: tankNumber,
+          datetime: date,
           observationText: notes.trim(),
           observationTitle: title.trim(),
-          datetime: date,
+          observationDatetimeStart: dateRange[0],
+          observationDatetimeEnd:
+            dateRange.length > 1 ? dateRange[1] : dateRange[0],
+
+          observationTagsArray: JSON.stringify(tags),
         }),
       });
 
@@ -56,6 +64,28 @@ export default function ObservationNotepad({}) {
   return (
     <div>
       <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-sm">
+        {/* Tank Number */}
+        <Field>
+          <Label className="mb-2 text-sm font-bold text-dark-orange">
+            Tank Number:
+          </Label>
+          <Select
+            name="tankNumber"
+            className="text-sm text-gray"
+            onChange={(e) => setTankNumber(Number(e.target.value))}
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+          </Select>
+        </Field>
+
         {/* Observation Title */}
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
@@ -69,6 +99,20 @@ export default function ObservationNotepad({}) {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title here..."
             className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+          />
+        </Field>
+
+        {/* Date Range */}
+        <Field>
+          <Label className="mb-2 text-sm font-bold text-dark-orange">
+            Date Range
+          </Label>
+          <Flatpickr
+            className="w-full bg-white px-2 py-2 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+            data-enable-time
+            options={{ enableSeconds: true, mode: "range" }}
+            value={dateRange}
+            onChange={(date) => setDateRange(date)}
           />
         </Field>
 
@@ -114,7 +158,9 @@ export default function ObservationNotepad({}) {
           <button
             onClick={handleSave}
             className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
-            disabled={notes.trim() === "" || status === "sending"}
+            disabled={
+              notes.trim() === "" || title === "" || status === "sending"
+            }
           >
             {status === "sending" ? "Saving..." : "Save"}
           </button>

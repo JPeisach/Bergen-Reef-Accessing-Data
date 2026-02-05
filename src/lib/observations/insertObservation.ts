@@ -7,8 +7,12 @@ import NewObservation from "src/db/types";
 interface Observation {
   authorId: string;
   datetime: Date;
+  observationDatetimeStart: Date;
+  observationDatetimeEnd: Date;
+  observationTagsArray: string[];
   observationText: string;
   observationTitle: string;
+  tankNumber: number;
 }
 
 export default async function insertObservation(observation: Observation) {
@@ -20,7 +24,11 @@ export default async function insertObservation(observation: Observation) {
 
     const observation_object: NewObservation = {
       authorId: authorId,
+      tankNumber: observation.tankNumber,
       datetime: observation.datetime,
+      observationDatetimeStart: observation.observationDatetimeStart,
+      observationDatetimeEnd: observation.observationDatetimeEnd,
+      observationTagsArray: observation.observationTagsArray,
       observationText: observationText,
       observationTitle: observationTitle,
     };
