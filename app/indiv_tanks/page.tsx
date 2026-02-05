@@ -20,7 +20,7 @@ export default function Page() {
   const panelClass = "bg-light-orange/40 p-5 shadow-lg rounded-xl";
 
   return (
-    <div className="min-h-screen bg-light-orange/30">
+    <div className="bg-light-orange/30">
       <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
 
       <div className="p-8 max-w-7xl mx-auto">
@@ -113,59 +113,95 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-          <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
+              switch (item.label) {
+                case "Tank":
+                  value = selectedTank;
+                  setValue = setSelectedTank;
+                  break;
+                case "Parameters":
+                  value = selectedParameter;
+                  setValue = setSelectedParameter;
+                  break;
+                case "Graph Type":
+                  value = selectedGraphType;
+                  setValue = setSelectedGraphType;
+                  break;
+                default:
+                  value = "";
+                  setValue = () => {};
+              }
 
-          <div className={`${panelClass}`}>
-            <div className="mb-3 bg-white px-4 py-2 text-sm font-semibold text-dark-orange shadow-inner flex justify-between rounded-lg">
-              <span className="text-dark-orange/60">
-                {selectedTank || "Tank"}
-              </span>
-              <span className="text-dark-orange/60">
-                {selectedParameter || "Parameter"}
-              </span>
-              <span className="text-dark-orange/60">
-                {dateRange[0].toLocaleDateString() || "Time Range"}
-              </span>
-              <span className="text-dark-orange/60">
-                {selectedGraphType || "Graph Type"}
-              </span>
+              return (
+                <div key={item.label} className="min-w-[160px]">
+                  <label className="block text-dark-orange font-bold mb-1 text-sm">
+                    {item.label}
+                  </label>
+                  <select
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                  >
+                    <option value="">Select…</option>
+                    {item.options.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              );
+            })}
+            <div className="min-w-[160px]">
+              <label className="block text-dark-orange font-bold mb-1 text-sm">
+                Date Range
+              </label>
+              <Flatpickr
+                className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                data-enable-time
+                options={{ enableSeconds: true, mode: "range" }}
+                value={dateRange}
+                onChange={(date) => setDateRange(date)}
+              />
             </div>
+          </div>
 
-            <div className="h-[500px] bg-white shadow-inner p-5 rounded-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+            <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
+
+            <div className={`${panelClass}`}>
               <HistoricDataTankBox
                 tankNumber={1}
                 variableType={selectedParameter}
                 dateRange={dateRange}
               />
-            </div>
 
-            <div className="mt-6 text-sm text-dark-orange/70 text-center italic">
-              Tank 1 houses numerous types of corals, including mushroom corals,
-              button polyps, leather corals, and bubble corals.
+              <div className="mt-6 text-sm text-dark-orange/70 text-center italic">
+                Tank 1 houses numerous types of corals, including mushroom
+                corals, button polyps, leather corals, and bubble corals.
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className={`p-8 max-w-7xl mx-auto ${panelClass}`}>
-        <div className="p-8 max-w-7xl mx-auto">
-          <label className="block mb-2 text-sm font-bold text-dark-orange">
-            Open Notes & Observations
-          </label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Write observations here…"
-            className="w-full h-32 resize-none bg-white p-4 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
-          />
+        <div className={`p-8 max-w-7xl mx-auto ${panelClass}`}>
+          <div className="p-8 max-w-7xl mx-auto">
+            <label className="block mb-2 text-sm font-bold text-dark-orange">
+              Open Notes & Observations
+            </label>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Write observations here…"
+              className="w-full h-32 resize-none bg-white p-4 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+            />
+          </div>
+
+          <div className="mt-1 flex justify-end">
+            <button className="bg-orange px-8 py-3 text-sm font-bold text-white rounded-lg transition-all hover:shadow-lg hover:bg-orange">
+              Save
+            </button>
+          </div>
         </div>
-      </div>
-
-      <div className="mt-1 flex justify-end">
-        <button className="bg-orange px-8 py-3 text-sm font-bold text-white rounded-lg transition-all hover:shadow-lg hover:bg-orange">
-          Save
-        </button>
       </div>
     </div>
   );

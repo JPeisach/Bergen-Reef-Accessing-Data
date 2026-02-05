@@ -1,5 +1,10 @@
 import { Tab, TabGroup, TabList } from "@headlessui/react";
-import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
+import {
+  UserCircleIcon,
+  Cog6ToothIcon,
+  BellIcon,
+} from "@heroicons/react/24/solid";
+
 import clsx from "clsx";
 import { Fragment } from "react";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
@@ -45,8 +50,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                       className={clsx(
                         "navbar-tabitem",
                         defaultIndex === 0
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
+                          ? "bg-orange outline outline-0 outline-dark-orange text-white font-bold"
+                          : "bg-white outline outline-0 outline-medium-gray text-gray font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Home
@@ -198,11 +203,21 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             </TabList>
           </TabGroup>
         </div>
+
+        {/* FIXME: This should be in TabGroup */}
         <div className="mt-auto">
           <a href="/settings">
-            <button className="tab-item w-full py-5 transition flex items-center justify-center gap-2 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">
+            <button className="tab-item w-full py-5 transition flex items-center justify-bottom gap-2 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">
               <Cog6ToothIcon className="size-5" />
               Settings
+            </button>
+          </a>
+        </div>
+        <div className="mt">
+          <a href="/notifications">
+            <button className="tab-item py-5 transition flex items-center justify-top gap-0 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">
+              <BellIcon className="size-5" />
+              Notifications
             </button>
           </a>
         </div>

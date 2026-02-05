@@ -92,7 +92,7 @@ h1 {
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange;
+  @apply bg-white outline outline-1 outline-medium-gray text-gray font-semibold hover:bg-medium-orange;
 }
 
 .navbar-tabitem-highlighted {
