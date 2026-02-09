@@ -3,17 +3,22 @@
 @tailwind utilities;
 
 /* dark mode options commented out */
-/* :root {
+:root {
   --background: #ffffff;
   --foreground: #171717;
-} */
+}
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-} */
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
 
 @layer base {
   @font-face {
@@ -27,7 +32,7 @@
 
 body {
   color: var(--foreground);
-  background: rgb(232, 232, 232);
+  background: var(--background);
 }
 
 h1 {
@@ -39,7 +44,7 @@ h1 {
   margin-top: -30px;
 }
 
-.ag-paging-panel > span {
+.ag-paging-panel>span {
   color: black !important;
 }
 
@@ -59,18 +64,18 @@ h1 {
 }
 
 .rectangle {
-  width: "500px";
-  height: "70px";
-  borderradius: "15px";
-  backgroundcolor: "#ffe59b";
-  padding: "10px";
-  display: "flex";
-  flexdirection: "column";
-  justifycontent: "center";
-  alignitems: "center";
-  color: "#6fb1ba";
-  boxshadow: "0 4px 8px rgba(0, 0, 0, 0.1)";
-  border: "3px solid #73b8c1";
+  width: 500px;
+  height: 70px;
+  border-radius: 15px;
+  background-color: #ffe59b;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #6fb1ba;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid #73b8c1;
 }
 
 .tankbox {
