@@ -45,10 +45,7 @@ export default function HistoricDataTankBox({
           };
         });
 
-        console.log("Filtered data:", filteredData);
-        const reversedData = filteredData.reverse();
-
-        setChartData(reversedData);
+        setChartData(filteredData);
         delay = 30000;
       });
     }, delay);

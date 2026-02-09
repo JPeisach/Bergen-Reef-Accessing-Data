@@ -7,6 +7,7 @@ import HistoricDataTankBox from "app/components/tankBoxes/HistoricDataTankBox";
 import "flatpickr/dist/themes/confetti.css";
 import Flatpickr from "react-flatpickr";
 import TankStatsPanel from "app/components/TankStatsPanel";
+import PredefinedObservationNotepad from "app/components/observations/PredefinedObservationNotepad";
 
 export default function Page() {
   const { user } = useUser();
@@ -130,25 +131,13 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={`p-8 max-w-7xl mx-auto ${panelClass}`}>
-          <div className="p-8 max-w-7xl mx-auto">
-            <label className="block mb-2 text-sm font-bold text-dark-orange">
-              Open Notes & Observations
-            </label>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Write observations here…"
-              className="w-full h-32 resize-none bg-white p-4 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
-            />
-          </div>
-
-          <div className="mt-1 flex justify-end">
-            <button className="bg-orange px-8 py-3 text-sm font-bold text-white rounded-lg transition-all hover:shadow-lg hover:bg-orange">
-              Save
-            </button>
+          {/* TODO: Add a button to only show the notepad as needed */}
+          <div className="py-6">
+            <PredefinedObservationNotepad
+              dateRange={dateRange}
+              tankNumber={selectedTank}
+            ></PredefinedObservationNotepad>
           </div>
         </div>
       </div>
