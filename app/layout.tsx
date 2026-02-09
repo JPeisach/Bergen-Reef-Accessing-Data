@@ -1,6 +1,7 @@
 import React from "react";
 import "./globals.css"; // These styles apply to every route in the application
 import { Auth0Provider } from "@auth0/nextjs-auth0";
+import { Providers } from "./providers";
 
 export const metadata = {
   title: "Bergen Reef Accessing Data",
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Auth0Provider>
-        <body>{children}</body>
+        <Providers>
+          <body>{children}</body>
+        </Providers>
       </Auth0Provider>
     </html>
   );
