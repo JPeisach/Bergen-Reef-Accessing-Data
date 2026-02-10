@@ -72,12 +72,15 @@ export default function Page() {
                 <h2 className="text-xl font-bold text-dark-orange mb-4">
                   Tank {tankNumber} Picture
                 </h2>
-                <div className="rounded-2xl bg-white/90 p-4 shadow-xl border border-light-orange/20 flex items-center justify-center min-h-[300px] overflow-hidden">
+                <div className="rounded-2xl bg-white/90 p-4 shadow-xl border border-light-orange/20 flex flex-col items-center justify-center min-h-[300px] overflow-hidden">
                   <img
                     src={getTankImage(tankNumber)}
                     alt={`Tank ${tankNumber} coral reef aquarium`}
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-auto object-cover rounded-xl mb-4"
                   />
+                  <p className="text-dark-orange font-bold text-lg text-center">
+                    2/3/2026
+                  </p>
                 </div>
               </div>
 
