@@ -1,12 +1,23 @@
 "use client";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { Dialog, Transition } from "@headlessui/react";
 import "../globals.css";
 import NavigationBar from "../components/NavigationBar";
 
 export default function Page() {
   const { user } = useUser();
   const [tankNumber, setTankNumber] = useState("");
+  const [selectedCoral, setSelectedCoral] = useState<string | null>(null);
+
+  const coralDetails: { [key: string]: string } = {
+    "Mushroom Coral":
+      "Mushroom coral are",
+    "Brain Coral":
+      "Brain corals are",
+    "Jolene Coral":
+      "Jolene corals are",
+  };
 
   // actual info will replace this later
   const getTankInfo = (tankNum: string) => {
@@ -93,12 +104,13 @@ export default function Page() {
                   {tankInfo && tankInfo.coralTypes.length > 0 ? (
                     <div className="space-y-3">
                       {tankInfo.coralTypes.map((coralType, index) => (
-                        <div
+                        <button
                           key={index}
-                          className="rounded-lg bg-light-orange/40 px-4 py-3 text-dark-orange font-semibold shadow-sm border border-light-orange/30"
+                          onClick={() => setSelectedCoral(coralType)}
+                          className="w-full text-left rounded-lg bg-light-orange/40 px-4 py-3 text-dark-orange font-semibold shadow-sm border border-light-orange/30 hover:bg-light-orange/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
                         >
                           {coralType}
-                        </div>
+                        </button>
                       ))}
                     </div>
                   ) : (
@@ -121,6 +133,65 @@ export default function Page() {
           )}
         </div>
       </div>
+      <Transition appear show={!!selectedCoral} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-50"
+          onClose={() => setSelectedCoral(null)}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25 backdrop-blur-sm" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all border border-light-orange">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-2xl font-bold leading-6 text-dark-orange mb-4"
+                  >
+                    {selectedCoral}
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <p className="text-gray-600">
+                      {selectedCoral && coralDetails[selectedCoral]
+                        ? coralDetails[selectedCoral]
+                        : "Information about this coral type is currently unavailable."}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 flex justify-end">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-xl bg-light-orange/20 px-4 py-2 text-sm font-bold text-dark-orange hover:bg-light-orange/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 transition-colors"
+                      onClick={() => setSelectedCoral(null)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </div>
   );
 }
