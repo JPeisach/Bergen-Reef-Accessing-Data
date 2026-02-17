@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 // TODO: Query specific tank data
 export default function ObservationList({}) {
   const [searchQuery, setSearchQuery] = useState("");
+
+  // TODO: Shared so we don't have to define this twice
   const [observations, setObservations] = useState<
     Array<{
       observationId: number;
@@ -10,6 +12,7 @@ export default function ObservationList({}) {
       datetime: Date;
       observationTitle: string | null;
       observationText: string | null;
+      observationTagsArray: string | null;
 
       // Not in DB
       author: string;
@@ -26,6 +29,7 @@ export default function ObservationList({}) {
         throw new Error("Failed to fetch observations");
       }
       const data = await response.json();
+      console.log(data);
       setObservations(data || []);
     } catch (error) {
       console.error("Error fetching observations:", error);
@@ -96,10 +100,19 @@ export default function ObservationList({}) {
                 key={obs.observationId}
                 className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20"
               >
-                <div className="flex items-start justify-between mb-2.5">
-                  <h3 className="text-base font-semibold text-dark-orange">
-                    {obs.observationTitle}
-                  </h3>
+                <div className="flex items justify-between mb-2.5">
+                  <div className="flex flex-col">
+                    <h3 className="text-base font-semibold text-dark-orange">
+                      {obs.observationTitle}
+                    </h3>
+                    <span className="text-xs text-medium-gray/80">
+                      {obs.observationTagsArray
+                        ? JSON.parse(obs.observationTagsArray, (_, value) => {
+                            return " " + value + "";
+                          })
+                        : ""}
+                    </span>
+                  </div>
                   <div className="flex flex-col">
                     <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
                       {obs.author}

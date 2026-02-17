@@ -11,7 +11,6 @@ import PredefinedObservationNotepad from "app/components/observations/Predefined
 
 export default function Page() {
   const { user } = useUser();
-  const [notes, setNotes] = useState("");
 
   const [dateRange, setDateRange] = useState([new Date()]);
   const [selectedTank, setSelectedTank] = useState("");
