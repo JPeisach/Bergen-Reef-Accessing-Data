@@ -187,8 +187,7 @@ export default function Page() {
                     return (
                       <div
                         key={obs.observationId}
-                        className={`rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20 ${index % 2 === 1 ? "ml-2" : ""
-                          }`}
+                        className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20"
                       >
                         <div className="flex items-start justify-between mb-2.5">
                           <h3 className="text-base font-semibold text-dark-orange">
