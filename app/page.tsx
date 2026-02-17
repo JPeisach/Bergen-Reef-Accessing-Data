@@ -37,17 +37,15 @@ export default function Page() {
           </div>
 
           {/* RIGHT COLUMN: CHART */}
-          <div className="w-full lg:w-7/12 rounded-2xl bg-white/60 p-6 shadow-lg backdrop-blur-sm flex flex-col relative z-0">
+          <div className="w-full lg:w-7/12 rounded-2xl bg-light-orange/40 p-6 shadow-lg backdrop-blur-sm flex flex-col relative z-0">
             <h2 className="text-xl font-bold text-dark-orange mb-4">
               {selectedType} Overview
             </h2>
-            <div className="flex-1 w-full min-h-0">
-              <ResponsiveContainer width="100%" height="100%">
-                <HomePageGraph
-                  selectedType={selectedType}
-                  onTypeSelectAction={setSelectedType}
-                />
-              </ResponsiveContainer>
+            <div className="flex-1 w-full min-h-0 overflow-hidden">
+              <HomePageGraph
+                selectedType={selectedType}
+                onTypeSelectAction={setSelectedType}
+              />
             </div>
           </div>
         </div>

@@ -128,7 +128,7 @@ export default function HomePageGraph({
     <>
       <div className="flex flex-col items-center w-full min-h-screen px-4">
         {/* DROPDOWN MENU */}
-        <div className="w-full max-w-screen-2xl min-w-[750px] mb-4">
+        <div className="w-full mb-4">
           <Menu as="div" className="relative inline-block text-left w-full">
             <MenuButton className="w-full h-10 text-center rounded-md bg-dark-orange md:text-lg text-white font-semibold ring-1 ring-black/5 transition focus:outline-none flex items-center justify-center">
               <span>{selectedType}</span>
@@ -220,9 +220,10 @@ export default function HomePageGraph({
         </div>
 
         {/* GRAPH CONTAINER */}
-        <div className="w-full max-w-screen-2xl min-w-[750px] h-[65vh] 2xl:h-[73vh] bg-white rounded-lg p-3 overflow-hidden">
+        <div className="w-full h-[65vh] 2xl:h-[73vh] bg-white rounded-lg p-3 overflow-hidden">
           <div className="w-full h-full">
-            <ResponsiveContainer width="100%" height="100%">
+            {/* stupid height = 90 so it stays in the box*/}
+            <ResponsiveContainer width="100%" height="90%">
               <AreaChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
@@ -256,7 +257,7 @@ export default function HomePageGraph({
         </div>
 
         {/* TEXT AREA */}
-        <div className="mt-4 w-full max-w-screen-2xl min-w-[750px] p-4 bg-white drop-shadow-orange rounded-lg text-base md:text-lg">
+        <div className="mt-4 w-full p-4 bg-white drop-shadow-orange rounded-lg text-base md:text-lg">
           {selectedInfo}
         </div>
       </div>

@@ -32,8 +32,9 @@ export default function SettingsPage() {
 
         <div className="mx-auto max-w-md rounded-2xl bg-light-orange/40 p-10 shadow-lg backdrop-blur-sm flex flex-col items-center justify-center gap-6 dark:bg-gray-800/50 transition-colors duration-300">
           <div
-            className={`w-full p-8 rounded-xl transition-all duration-300 flex flex-col items-center justify-center gap-4 ${theme === "dark" ? "bg-dark-orange/20" : "bg-white/60"
-              }`}
+            className={`w-full p-8 rounded-xl transition-all duration-300 flex flex-col items-center justify-center gap-4 ${
+              theme === "dark" ? "bg-dark-orange/20" : "bg-white/60"
+            }`}
           >
             <h2 className="text-xl font-bold text-dark-orange dark:text-orange">
               Theme Preferences
@@ -43,7 +44,9 @@ export default function SettingsPage() {
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-orange shadow-md dark:bg-orange dark:hover:bg-light-orange dark:text-gray-900"
             >
-              {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              {theme === "dark"
+                ? "Switch to Light Mode"
+                : "Switch to Dark Mode"}
             </button>
           </div>
         </div>

@@ -11,12 +11,9 @@ export default function Page() {
   const [selectedCoral, setSelectedCoral] = useState<string | null>(null);
 
   const coralDetails: { [key: string]: string } = {
-    "Mushroom Coral":
-      "Mushroom coral are",
-    "Brain Coral":
-      "Brain corals are",
-    "Jolene Coral":
-      "Jolene corals are",
+    "Mushroom Coral": "Mushroom coral are",
+    "Brain Coral": "Brain corals are",
+    "Jolene Coral": "Jolene corals are",
   };
 
   // actual info will replace this later
