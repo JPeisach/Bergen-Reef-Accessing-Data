@@ -222,7 +222,8 @@ export default function HomePageGraph({
         {/* GRAPH CONTAINER */}
         <div className="w-full h-[65vh] 2xl:h-[73vh] bg-white rounded-lg p-3 overflow-hidden">
           <div className="w-full h-full">
-            <ResponsiveContainer width="100%" height="100%">
+            {/* stupid height = 90 so it stays in the box*/}
+            <ResponsiveContainer width="100%" height="90%">
               <AreaChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
