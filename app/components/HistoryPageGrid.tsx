@@ -352,13 +352,13 @@ export default function HistoryPageGrid() {
   };
 
   return (
-    <div className="relative flex gap-8 mt-6">
+    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-light-orange/30">
       {/* Left Panel: Ag Grid */}
-      <div
-        className="flex-1 rounded-lg p-4 overflow-visible"
-        style={{ marginRight: "35%" }}
-      >
-        <div className="ag-theme-quartz" style={{ height: "600px" }}>
+      <div className="w-full lg:w-3/4 flex flex-col">
+        <div
+          className="ag-theme-quartz w-full shadow-lg rounded-xl overflow-hidden border border-light-orange/20 bg-white"
+          style={{ height: "70vh" }}
+        >
           <AgGridReact
             rowData={rowData}
             rowSelection={"multiple" as any}
@@ -370,7 +370,7 @@ export default function HistoryPageGrid() {
                   headerName: "",
                   checkboxSelection: true,
                   headerCheckboxSelection: true,
-                  width: 40,
+                  width: 50,
                   suppressMenu: true,
                   pinned: "left" as const,
                   editable: false,
@@ -380,7 +380,7 @@ export default function HistoryPageGrid() {
                   field: "datetime",
                   sortable: true,
                   filter: "agDateColumnFilter",
-                  minWidth: 225,
+                  minWidth: 220,
                   filterParams: {
                     defaultOption: "inRange",
                     inRangeInclusive: true,
@@ -436,9 +436,9 @@ export default function HistoryPageGrid() {
                 buttons: ["apply", "clear", "reset"],
               },
             }}
-            domLayout="autoHeight"
+            domLayout="normal"
             pagination={true}
-            paginationPageSize={10}
+            paginationPageSize={20}
             paginationPageSizeSelector={[10, 20, 50, 100]}
             onGridReady={(params) => {
               gridApiRef.current = params.api;
@@ -478,82 +478,71 @@ export default function HistoryPageGrid() {
       </div>
 
       {/* Right Panel: Actions */}
-      <div className="fixed top-24 right-6 w-[28vw] max-w-[700px] min-w-[260px] bg-white drop-shadow-gray drop-shadow-lg rounded-lg shadow-md max-h-[80vh] overflow-y-auto mx-7 mt-6">
-        <div className="flex flex-col h-full justify-start">
-          <div className="bg-teal drop-shadow-gray drop-shadow-lg rounded-lg p-4">
-            <h2 className="flex justify-center text-xl text-white font-semibold">
+      <div className="w-full lg:w-1/4 flex flex-col gap-6">
+        <div className="bg-white rounded-2xl shadow-xl p-6 border border-light-orange/20 sticky top-6">
+          <div className="bg-teal rounded-xl p-4 mb-6 shadow-md">
+            <h2 className="text-xl text-white font-bold text-center">
               Actions
             </h2>
           </div>
-          <div className="flex flex-col gap-4 p-6">
+
+          <div className="flex flex-col gap-4">
             <button
               onClick={handleGuideClick}
-              className="bg-medium-teal outline outline-1 outline-dark-teal drop-shadow-xl text-white font-medium px-4 py-2 rounded-xl shadow hover:bg-dark-teal"
-              style={{
-                padding: "8px 16px",
-                fontSize: "16px",
-                color: "white",
-                border: "none",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="flex items-center justify-center w-full bg-medium-teal text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-dark-teal hover:shadow-lg"
             >
-              <QuestionMarkCircleIcon className="w-6 h-6 text-gray-600 hover:text-gray-800 cursor-pointer mr-2" />
+              <QuestionMarkCircleIcon className="w-6 h-6 mr-2" />
               How to Use
             </button>
 
             <button
               onClick={() => gridApiRef.current?.setFilterModel(null)}
-              className="bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-medium px-4 py-2 rounded-xl hover:bg-medium-gray"
+              className="w-full bg-light-gray text-gray font-semibold px-4 py-3 rounded-xl shadow-md border border-medium-gray/30 transition-all hover:bg-medium-gray hover:text-white"
             >
               Clear Filters
             </button>
 
             <button
               onClick={fetchData}
-              className="bg-orange text-white outline outline-1 outline-dark-orange drop-shadow-xl font-medium px-4 py-2 rounded-xl shadow hover:bg-dark-orange"
-              style={{
-                padding: "8px 16px",
-                fontSize: "16px",
-                color: "white",
-                border: "none",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="flex items-center justify-center w-full bg-orange text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-dark-orange hover:shadow-lg"
             >
-              <ArrowPathIcon className="w-6 h-6 text-gray-600 hover:text-gray-800 cursor-pointer mr-2" />
+              <ArrowPathIcon className="w-6 h-6 mr-2" />
               Refresh
             </button>
 
             {isAdmin && (
-              <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex flex-col gap-4 mt-4 pt-4 border-t border-gray/20">
                 <button
                   onClick={() => setIsEditing((prev) => !prev)}
-                  className="bg-neutral-600 text-white font-medium px-4 py-2 rounded-xl shadow hover:bg-neutral-700"
+                  className="w-full bg-neutral-600 text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-neutral-700"
                 >
                   {isEditing ? "Exit Edit Mode" : "Enter Edit Mode"}
                 </button>
 
                 {isEditing && (
-                  <div className="w-full flex flex-col gap-3 bg-light-teal p-4 rounded-lg mt-2">
-                    <div className="w-1/3 bg-teal text-white font-semibold text-center p-1 rounded-xl">
+                  <div className="w-full flex flex-col gap-3 bg-light-teal/20 p-4 rounded-xl border border-teal/20">
+                    <div className="text-teal font-bold text-center mb-2 uppercase text-sm tracking-wider">
                       Edit Controls
                     </div>
                     <button
                       onClick={handleCreateRow}
-                      className={`bg-white outline outline-1 outline-dark-orange drop-shadow-xl text-orange font-semibold px-4 py-2 rounded-xl shadow
-                            ${selectedRows.length > 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-light-orange"}`}
+                      className={`w-full bg-white text-dark-orange border border-dark-orange font-bold px-4 py-2 rounded-xl shadow-sm transition-all
+                            ${selectedRows.length > 0
+                          ? "opacity-50 cursor-not-allowed"
+                          : "hover:bg-dark-orange hover:text-white"
+                        }`}
                       disabled={selectedRows.length > 0}
                     >
-                      Create
+                      Create New Row
                     </button>
 
                     <button
                       onClick={handleDeleteSelectedRows}
-                      className={`bg-white outline outline-1 outline-red-500 drop-shadow-xl text-red-500 font-semibold px-4 py-2 rounded-xl shadow hover:bg-red-200
-                            ${selectedRows.length === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-light-orange"}`}
+                      className={`w-full bg-white text-red-500 border border-red-500 font-bold px-4 py-2 rounded-xl shadow-sm transition-all
+                            ${selectedRows.length === 0
+                          ? "opacity-50 cursor-not-allowed"
+                          : "hover:bg-red-500 hover:text-white"
+                        }`}
                       disabled={selectedRows.length === 0}
                     >
                       Delete Selected
@@ -561,7 +550,11 @@ export default function HistoryPageGrid() {
 
                     <button
                       onClick={saveChanges}
-                      className="bg-white outline outline-1 outline-green-500 drop-shadow-xl text-green-500 font-semibold px-4 py-2 rounded-xl shadow hover:bg-green-200"
+                      className={`w-full bg-green-500 text-white font-bold px-4 py-2 rounded-xl shadow-md transition-all hover:bg-green-600
+                          ${Object.keys(editedRows).length === 0
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
+                        }`}
                       disabled={Object.keys(editedRows).length === 0}
                     >
                       Save Changes

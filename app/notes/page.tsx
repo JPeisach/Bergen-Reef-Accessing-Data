@@ -11,6 +11,7 @@ export default function Page() {
   const [coralType, setCoralType] = useState("");
   const [observationTime, setObservationTime] = useState("");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [observations, setObservations] = useState<
     Array<{
       observationId: number;
@@ -63,6 +64,13 @@ export default function Page() {
       tempDate.toLocaleDateString() + " at " + tempDate.toLocaleTimeString()
     );
   };
+
+  const filteredObservations = observations.filter((obs) => {
+    const query = searchQuery.toLowerCase();
+    const titleMatch = obs.observationTitle?.toLowerCase().includes(query);
+    const textMatch = obs.observationText?.toLowerCase().includes(query);
+    return titleMatch || textMatch;
+  });
 
   useEffect(() => {
     fetchObservations();
@@ -149,6 +157,16 @@ export default function Page() {
               <h2 className="text-xl font-bold text-dark-orange mb-4">
                 Recent Observations
               </h2>
+              {/* Search Bar */}
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="Search observations..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+                />
+              </div>
               <div className="space-y-4 max-h-[600px] overflow-y-auto">
                 {isLoadingObservations ? (
                   <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
@@ -156,21 +174,21 @@ export default function Page() {
                       Loading observations...
                     </p>
                   </div>
-                ) : observations.length === 0 ? (
+                ) : filteredObservations.length === 0 ? (
                   <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
                     <p className="text-sm text-gray/90 text-center py-4">
-                      No observations yet. Create your first observation using
-                      the notepad!
+                      {searchQuery
+                        ? "No observations found matching your search."
+                        : "No observations yet. Create your first observation using the notepad!"}
                     </p>
                   </div>
                 ) : (
-                  observations.map((obs, index) => {
+                  filteredObservations.map((obs, index) => {
                     return (
                       <div
                         key={obs.observationId}
-                        className={`rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20 ${
-                          index % 2 === 1 ? "ml-2" : ""
-                        }`}
+                        className={`rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20 ${index % 2 === 1 ? "ml-2" : ""
+                          }`}
                       >
                         <div className="flex items-start justify-between mb-2.5">
                           <h3 className="text-base font-semibold text-dark-orange">

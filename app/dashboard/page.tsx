@@ -5,6 +5,8 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import HistoricDataTankBox from "app/components/tankBoxes/HistoricDataTankBox";
 import { useState } from "react";
 import RecentDataTankBox from "app/components/tankBoxes/RecentDataTankBox";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 export default function DashboardPage() {
   const { user } = useUser();
@@ -19,25 +21,40 @@ export default function DashboardPage() {
           Tank Dashboard
         </h1>
 
-        <center className="py-5">
-          <div className="variable-select">
-            <label className="text-2xl font-bold text-dark-orange text-center drop-shadow-sm">
-              Variable:{" "}
-            </label>
-            <select
-              onChange={(e) => {
-                setVariableType(e.target.value);
-              }}
-            >
-              <option value="pH">pH</option>
-              <option value="Calcium">Calcium</option>
-              <option value="Alkalinity">Alkalinity</option>
-              <option value="ORP">ORP</option>
-              <option value="Temperature">Temperature</option>
-              <option value="Salinity">Salinity</option>
-            </select>
+        <div className="flex flex-col items-center py-5 gap-4">
+          <label className="text-2xl font-bold text-dark-orange text-center drop-shadow-sm">
+            Variable
+          </label>
+          <div className="w-full max-w-xs relative z-10">
+            <Menu as="div" className="relative inline-block text-left w-full">
+              <MenuButton className="w-full h-10 text-center rounded-xl bg-dark-orange text-lg text-white font-semibold shadow-md transition-all hover:bg-orange focus:outline-none flex items-center justify-center">
+                <span>{variableType}</span>
+                <ChevronDownIcon className="-mr-1 size-6 text-white ml-2" />
+              </MenuButton>
+              <MenuItems className="absolute left-0 mt-2 w-full origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+                <div className="px-1 py-1">
+                  {[
+                    "pH",
+                    "Calcium",
+                    "Alkalinity",
+                    "ORP",
+                    "Temperature",
+                    "Salinity",
+                  ].map((type) => (
+                    <MenuItem key={type}>
+                      <button
+                        onClick={() => setVariableType(type)}
+                        className="group flex w-full items-center rounded-lg px-2 py-2 text-sm font-semibold text-dark-orange hover:bg-light-orange"
+                      >
+                        {type}
+                      </button>
+                    </MenuItem>
+                  ))}
+                </div>
+              </MenuItems>
+            </Menu>
           </div>
-        </center>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           <RecentDataTankBox
