@@ -8,6 +8,7 @@ import "flatpickr/dist/themes/confetti.css";
 import Flatpickr from "react-flatpickr";
 import TankStatsPanel from "app/components/TankStatsPanel";
 import PredefinedObservationNotepad from "app/components/observations/PredefinedObservationNotepad";
+import { Dialog } from "@headlessui/react";
 
 export default function Page() {
   const { user } = useUser();
@@ -16,6 +17,7 @@ export default function Page() {
   const [selectedTank, setSelectedTank] = useState("");
   const [selectedParameter, setSelectedParameter] = useState("");
   const [selectedGraphType, setSelectedGraphType] = useState("");
+  const [isNotepadVisible, setIsNotepadVisible] = useState(false);
 
   const panelClass = "bg-light-orange/40 p-5 shadow-lg rounded-xl";
 
@@ -112,6 +114,15 @@ export default function Page() {
                 onChange={(date) => setDateRange(date)}
               />
             </div>
+
+            <button
+              type="button"
+              onClick={() => setIsNotepadVisible((prev) => !prev)}
+              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
+              aria-label={isNotepadVisible ? "Hide notepad" : "Open notepad"}
+            >
+              {isNotepadVisible ? "−" : "+"}
+            </button>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
@@ -131,13 +142,12 @@ export default function Page() {
             </div>
           </div>
 
-          {/* TODO: Add a button to only show the notepad as needed */}
-          <div className="py-6">
+          {isNotepadVisible && (
             <PredefinedObservationNotepad
               dateRange={dateRange}
               tankNumber={selectedTank}
             ></PredefinedObservationNotepad>
-          </div>
+          )}
         </div>
       </div>
     </div>
