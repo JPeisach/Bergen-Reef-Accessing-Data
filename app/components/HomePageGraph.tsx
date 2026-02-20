@@ -24,12 +24,6 @@ const infoContent = {
     "Temperature is one of the most prominent concerns in coral reefs, causing many massive bleaching events from global temperature rise. A substantial increase in temperature can cause corals to expel zooxanthellae, causing them to turn white and die quickly.",
   Salinity:
     "Salt provides the necessary minerals to maintain the environment in a reef tank. Keeping a desirable salinity level and selecting a high-quality reef salt mix provides an opportunity to replicate seawater conditions.",
-  Nitrate:
-    "Nitrate results in a reef tank from the breakdown of organic matter. It is an important nutrient due to its use by zooxanthellae, a microscopic algae housed in coral polyps which has a symbiotic relationship with coral. Too much nitrate can result in algae blooms and cause corals to lose their vibrant colors.",
-  Nitrite:
-    "Nitrite is harmful to many of the organisms in a reef tank and needs to be managed so that its levels stay almost undetectable. This is done by establishing beneficial bacteria in the tank through a dark cycle before any animals are placed in it.",
-  Phosphate:
-    "Phosphate presence is necessary for coral tissue growth, but too much can actually reduce growth and bring algae to the tank which will compete with the corals for nutrients. Regular water changes and proper filtration allow reef keepers to regulate these levels.",
 };
 
 interface HomePageGraphProps {
@@ -104,6 +98,7 @@ export default function HomePageGraph({
             return {
               ...item,
               datetime: date.toLocaleString(),
+              timestamp: date.getTime(),
             };
           });
 
@@ -189,32 +184,6 @@ export default function HomePageGraph({
                   Calcium
                 </button>
               </MenuItem>
-              <MenuItem>
-                <button
-                  onClick={() => handleChange({ target: { value: "Nitrate" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
-                >
-                  Nitrate
-                </button>
-              </MenuItem>
-              <MenuItem>
-                <button
-                  onClick={() =>
-                    handleChange({ target: { value: "Phosphate" } })
-                  }
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
-                >
-                  Phosphate
-                </button>
-              </MenuItem>
-              <MenuItem>
-                <button
-                  onClick={() => handleChange({ target: { value: "Nitrite" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
-                >
-                  Nitrite
-                </button>
-              </MenuItem>
             </MenuItems>
           </Menu>
         </div>
@@ -224,7 +193,10 @@ export default function HomePageGraph({
           <div className="w-full h-full">
             {/* stupid height = 90 so it stays in the box*/}
             <ResponsiveContainer width="100%" height="90%">
-              <AreaChart data={chartData}>
+              <AreaChart
+                data={chartData}
+                margin={{ left: -10, right: 15, top: 15 }}
+              >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
                   dataKey="datetime"
@@ -235,7 +207,8 @@ export default function HomePageGraph({
                 />
                 <YAxis
                   domain={["dataMin - 1", "dataMax + 1"]}
-                  tickFormatter={(tick) => tick.toString().split(".")[0]}
+                  tickFormatter={(tick) => tick.toFixed(1).toString()}
+                  scale="sequential"
                   stroke="#000000"
                 />
                 <Tooltip
