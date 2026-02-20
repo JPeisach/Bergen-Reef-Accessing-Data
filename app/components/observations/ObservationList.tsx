@@ -78,7 +78,7 @@ export default function ObservationList({}) {
           className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
         />
       </div>
-      <div className="space-y-4 max-h-[600px] overflow-y-auto">
+      <div className="space-y-4">
         {isLoadingObservations ? (
           <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
             <p className="text-sm text-gray/90 text-center py-4">
@@ -98,7 +98,7 @@ export default function ObservationList({}) {
             return (
               <div
                 key={obs.observationId}
-                className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20"
+                className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20 overflow-scroll"
               >
                 <div className="flex items justify-between mb-2.5">
                   <div className="flex flex-col">

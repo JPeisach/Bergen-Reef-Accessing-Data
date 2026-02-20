@@ -20,7 +20,7 @@ export default function Page() {
       <NavigationBar defaultIndex={0} username={user ? user.name : "Guest"} />
 
       {/* FIXME: Consider where we put the "open notes/observations" panel */}
-      <main className="relative flex p-8">
+      <main className="relative flex p-8 h-screen overflow-hidden">
         {/* CONTAINER HOLDING ELEMENTS AND GRAPH */}
         <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-140px)]">
           {/* LEFT COLUMN: ELEMENTS SELECTION */}

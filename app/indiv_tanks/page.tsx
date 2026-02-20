@@ -8,7 +8,6 @@ import "flatpickr/dist/themes/confetti.css";
 import Flatpickr from "react-flatpickr";
 import TankStatsPanel from "app/components/TankStatsPanel";
 import PredefinedObservationNotepad from "app/components/observations/PredefinedObservationNotepad";
-import { Dialog } from "@headlessui/react";
 
 export default function Page() {
   const { user } = useUser();
@@ -22,132 +21,136 @@ export default function Page() {
   const panelClass = "bg-light-orange/40 p-5 shadow-lg rounded-xl";
 
   return (
-    <div className="bg-light-orange/30">
+    <div>
       <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
 
-      <div className="flex relative min-h-screen">
-        <div className="p-8 max-w-7xl mx-auto">
-          <div className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}>
-            {[
-              {
-                label: "Tank",
-                options: [
-                  "Tank 1",
-                  "Tank 2",
-                  "Tank 3",
-                  "Tank 4",
-                  "Tank 5",
-                  "Tank 6",
-                  "Tank 7",
-                  "Tank 8",
-                  "Tank 9",
-                ],
-              },
-              {
-                label: "Parameters",
-                options: [
-                  "pH",
-                  "Salinity",
-                  "Temperature",
-                  "ORP",
-                  "Alkalinity",
-                  "Calcium",
-                  "Nitrate",
-                  "Nitrite",
-                  "Phosphate",
-                ],
-              },
-              {
-                label: "Graph Type",
-                options: ["Line", "Bar", "Sankey", "Other"],
-              },
-            ].map((item) => {
-              let value, setValue;
+      <div className="bg-light-orange/30 h-screen overflow-scroll">
+        <div className="flex relative">
+          <div className="p-8 max-w-7xl mx-auto">
+            <div
+              className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}
+            >
+              {[
+                {
+                  label: "Tank",
+                  options: [
+                    "Tank 1",
+                    "Tank 2",
+                    "Tank 3",
+                    "Tank 4",
+                    "Tank 5",
+                    "Tank 6",
+                    "Tank 7",
+                    "Tank 8",
+                    "Tank 9",
+                  ],
+                },
+                {
+                  label: "Parameters",
+                  options: [
+                    "pH",
+                    "Salinity",
+                    "Temperature",
+                    "ORP",
+                    "Alkalinity",
+                    "Calcium",
+                    "Nitrate",
+                    "Nitrite",
+                    "Phosphate",
+                  ],
+                },
+                {
+                  label: "Graph Type",
+                  options: ["Line", "Bar", "Sankey", "Other"],
+                },
+              ].map((item) => {
+                let value, setValue;
 
-              switch (item.label) {
-                case "Tank":
-                  value = selectedTank;
-                  setValue = setSelectedTank;
-                  break;
-                case "Parameters":
-                  value = selectedParameter;
-                  setValue = setSelectedParameter;
-                  break;
-                case "Graph Type":
-                  value = selectedGraphType;
-                  setValue = setSelectedGraphType;
-                  break;
-                default:
-                  value = "";
-                  setValue = () => {};
-              }
+                switch (item.label) {
+                  case "Tank":
+                    value = selectedTank;
+                    setValue = setSelectedTank;
+                    break;
+                  case "Parameters":
+                    value = selectedParameter;
+                    setValue = setSelectedParameter;
+                    break;
+                  case "Graph Type":
+                    value = selectedGraphType;
+                    setValue = setSelectedGraphType;
+                    break;
+                  default:
+                    value = "";
+                    setValue = () => {};
+                }
 
-              return (
-                <div key={item.label} className="min-w-[160px]">
-                  <label className="block text-dark-orange font-bold mb-1 text-sm">
-                    {item.label}
-                  </label>
-                  <select
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
-                  >
-                    <option value="">Select…</option>
-                    {item.options.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              );
-            })}
-            <div className="min-w-[160px]">
-              <label className="block text-dark-orange font-bold mb-1 text-sm">
-                Date Range
-              </label>
-              <Flatpickr
-                className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
-                data-enable-time
-                options={{ enableSeconds: true, mode: "range" }}
-                value={dateRange}
-                onChange={(date) => setDateRange(date)}
-              />
+                return (
+                  <div key={item.label} className="min-w-[160px]">
+                    <label className="block text-dark-orange font-bold mb-1 text-sm">
+                      {item.label}
+                    </label>
+                    <select
+                      value={value}
+                      onChange={(e) => setValue(e.target.value)}
+                      className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                    >
+                      <option value="">Select…</option>
+                      {item.options.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                );
+              })}
+              <div className="min-w-[160px]">
+                <label className="block text-dark-orange font-bold mb-1 text-sm">
+                  Date Range
+                </label>
+                <Flatpickr
+                  className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                  data-enable-time
+                  options={{ enableSeconds: true, mode: "range" }}
+                  value={dateRange}
+                  onChange={(date) => setDateRange(date)}
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsNotepadVisible((prev) => !prev)}
+                className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
+                aria-label={isNotepadVisible ? "Hide notepad" : "Open notepad"}
+              >
+                {isNotepadVisible ? "−" : "+"}
+              </button>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setIsNotepadVisible((prev) => !prev)}
-              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
-              aria-label={isNotepadVisible ? "Hide notepad" : "Open notepad"}
-            >
-              {isNotepadVisible ? "−" : "+"}
-            </button>
-          </div>
+            <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+              <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-            <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
+              <div className={`${panelClass}`}>
+                <HistoricDataTankBox
+                  tankNumber={1}
+                  variableType={selectedParameter}
+                  dateRange={dateRange}
+                />
 
-            <div className={`${panelClass}`}>
-              <HistoricDataTankBox
-                tankNumber={1}
-                variableType={selectedParameter}
-                dateRange={dateRange}
-              />
-
-              <div className="mt-6 text-sm text-dark-orange/70 text-center italic">
-                Tank 1 houses numerous types of corals, including mushroom
-                corals, button polyps, leather corals, and bubble corals.
+                <div className="mt-6 text-sm text-dark-orange/70 text-center italic">
+                  Tank 1 houses numerous types of corals, including mushroom
+                  corals, button polyps, leather corals, and bubble corals.
+                </div>
               </div>
             </div>
-          </div>
 
-          {isNotepadVisible && (
-            <PredefinedObservationNotepad
-              dateRange={dateRange}
-              tankNumber={selectedTank}
-            ></PredefinedObservationNotepad>
-          )}
+            {isNotepadVisible && (
+              <PredefinedObservationNotepad
+                dateRange={dateRange}
+                tankNumber={selectedTank}
+              ></PredefinedObservationNotepad>
+            )}
+          </div>
         </div>
       </div>
     </div>
