@@ -72,8 +72,9 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
             />
             <YAxis
               domain={["dataMin - 1", "dataMax + 1"]}
-              tickFormatter={(tick) => tick.toString().split(".")[0]}
+              tickFormatter={(tick) => tick.toFixed(1).toString()}
               stroke="#757575"
+              scale="sequential"
               fontSize={12}
             />
             <Tooltip
