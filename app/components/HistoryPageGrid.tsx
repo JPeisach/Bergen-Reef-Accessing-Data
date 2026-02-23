@@ -352,7 +352,7 @@ export default function HistoryPageGrid() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-light-orange/30">
+    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-light-orange/30 h-screen">
       {/* Left Panel: Ag Grid */}
       <div className="w-full lg:w-3/4 flex flex-col">
         <div

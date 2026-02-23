@@ -75,7 +75,8 @@ export default function HistoricDataTankBox({
             />
             <YAxis
               domain={["dataMin - 1", "dataMax + 1"]}
-              tickFormatter={(tick) => tick.toString().split(".")[0]}
+              tickFormatter={(tick) => tick.toFixed(1).toString()}
+              scale="sequential"
               stroke="#757575"
               fontSize={12}
             />
