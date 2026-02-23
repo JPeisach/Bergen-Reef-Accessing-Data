@@ -125,7 +125,11 @@ export default function Page() {
           {/* layout of page*/}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {/* placeholder saved observations */}
-            <ObservationList></ObservationList>
+            <ObservationList
+              observations={observations}
+              onDelete={deleteObservation}
+              onEdit={editObservation}
+            />
 
             {/* notepad */}
             {isNotepadVisible && (

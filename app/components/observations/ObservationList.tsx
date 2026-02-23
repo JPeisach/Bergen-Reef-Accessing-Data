@@ -2,24 +2,33 @@
 
 import { useEffect, useState } from "react";
 
+interface ObservationListProps {
+  observations?: {
+    observationId: number;
+    authorId: number;
+    datetime: Date;
+    tankNumber: number;
+    observationTitle: string | null;
+    observationText: string | null;
+    observationTagsArray: string | null;
+    author: string;
+  }[];
+  onDelete?: (id: number) => void | Promise<void>;
+  onEdit?: (id: number, updates: Partial<any>) => void | Promise<void>;
+}
+
 // TODO: Query specific tank data
-export default function ObservationList({}) {
+
+export default function ObservationList({
+  observations: initialObservations = [],
+  onDelete,
+  onEdit,
+}: ObservationListProps) {
+  const [observations, setObservations] = useState(initialObservations);
   const [searchQuery, setSearchQuery] = useState("");
 
   // TODO: Shared so we don't have to define this twice
-  const [observations, setObservations] = useState<
-    Array<{
-      observationId: number;
-      authorId: number;
-      datetime: Date;
-      observationTitle: string | null;
-      observationText: string | null;
-      observationTagsArray: string | null;
-
-      // Not in DB
-      author: string;
-    }>
-  >([]);
+  
 
   const [isLoadingObservations, setIsLoadingObservations] = useState(true);
 
