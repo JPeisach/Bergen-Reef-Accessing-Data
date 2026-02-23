@@ -58,6 +58,28 @@ export default function ObservationList({
     return titleMatch || textMatch;
   });
 
+  const renderTags = (raw: string | null) => {
+    if (!raw) return null;
+
+    try {
+      const parsed = JSON.parse(raw);
+
+      if (!Array.isArray(parsed)) return null;
+
+      return parsed.map((tag, i) => (
+        <span
+          key={i}
+          className="mr-1 rounded bg-light-orange/30 px-2 py-0.5 text-xs text-dark-orange"
+        >
+          {tag}
+        </span>
+      ));
+    } catch {
+      // malformed JSON → fail silently instead of crashing the page
+      return null;
+    }
+  };
+
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-bold text-dark-orange mb-4">
@@ -117,8 +139,11 @@ export default function ObservationList({
                 )}
                 {obs.observationTagsArray && (
                   <span className="text-xs text-medium-gray/80 mt-1">
-                    {JSON.parse(obs.observationTagsArray, (_, v) => " " + v + " ")}
-                  </span>
+                    {obs.observationTagsArray && (
+                      <div className="mt-1 flex flex-wrap">
+                        {renderTags(obs.observationTagsArray)}
+                      </div>
+                    )}                  </span>
                 )}
               </div>
 
