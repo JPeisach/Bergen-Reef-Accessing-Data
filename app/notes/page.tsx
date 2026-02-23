@@ -117,7 +117,6 @@ export default function Page() {
               type="button"
               onClick={() => setIsNotepadVisible((prev) => !prev)}
               className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
-              aria-label={isNotepadVisible ? "Hide notepad" : "Open notepad"}
             >
               {isNotepadVisible ? "−" : "+"}
             </button>

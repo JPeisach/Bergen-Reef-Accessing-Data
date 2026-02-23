@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 // TODO: Query specific tank data
@@ -70,9 +72,37 @@ export default function ObservationList({}) {
   };
 
   const startEditing = (obs: any) => {
+    setEditingId(obs.observationId);
     setEditTitle(obs.observationTitle || "");
     setEditText(obs.observationText || "");
     setEditTags(parseTags(obs.observationTagsArray).join(", "));
+  };
+
+  const saveEdit = async (id: number) => {
+    await fetch(`/api/observations/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        observationTitle: editTitle,
+        observationText: editText,
+        observationTagsArray: JSON.stringify(
+          editTags
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean)
+        ),
+      }),
+    });
+
+    setEditingId(null);
+    fetchObservations();
+  };
+
+  const deleteObservation = async (id: number) => {
+    await fetch(`/api/observations/${id}`, {
+      method: "DELETE",
+    });
+    fetchObservations();
   };
 
   const filteredObservations = observations.filter((obs) => {
@@ -116,34 +146,81 @@ export default function ObservationList({}) {
             </p>
           </div>
         ) : (
-              >
-                        ? JSON.parse(obs.observationTagsArray, (_, value) => {
-                            return " " + value + "";
-                          })
-                        : ""}
-                    </span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
-                      {obs.author}
-                    </span>
-                    <span className="text-xs text-medium-gray/80 whitespace-nowrap ml-2">
-                      {obs.datetime ? formatDate(obs.datetime) : ""}
-                    </span>
-                  </div>
+          filteredObservations.map((obs) => (
+            <div
+              key={obs.observationId}
+              className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20 overflow-scroll"
+            >
+              <div className="flex justify-between mb-2.5">
+                <div className="flex flex-col w-full">
+                  {editingId === obs.observationId ? (
+                    <>
+                      <input
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                        className="mb-1 rounded p-1 border border-gray-300"
+                      />
+                      <textarea
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        className="rounded p-1 border border-gray-300"
+                        rows={3}
+                      />
+                      <input
+                        value={editTags}
+                        onChange={(e) => setEditTags(e.target.value)}
+                        placeholder="tags, comma, separated"
+                        className="mt-1 rounded p-1 border border-gray-300"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <h3 className="text-base font-semibold text-dark-orange">
+                        {obs.observationTitle}
+                      </h3>
+                      <span className="text-xs text-medium-gray/80">
+                        {parseTags(obs.observationTagsArray).join(" ")}
+                      </span>
+                      {obs.observationText && (
+                        <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
+                          {obs.observationText}
+                        </p>
+                      )}
+                    </>
+                  )}
                 </div>
 
-                {/* FIXME: unnecessary conditional? */}
-                    {obs.observationText}
-                  </p>
+                <div className="flex flex-col items-end ml-2 text-xs text-medium-gray/80 whitespace-nowrap">
+                  <span>{obs.author}</span>
+                  <span>{obs.datetime ? formatDate(obs.datetime) : ""}</span>
+                </div>
+              </div>
+
               <div className="flex justify-end gap-2 mt-2">
                 {editingId === obs.observationId ? (
+                  <button
+                    onClick={() => saveEdit(obs.observationId)}
+                    className="px-3 py-1 bg-green-500 text-white rounded"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => startEditing(obs)}
+                    className="px-3 py-1 bg-yellow-500 text-white rounded"
+                  >
+                    Edit
+                  </button>
                 )}
+                <button
+                  onClick={() => deleteObservation(obs.observationId)}
                   className="px-3 py-1 bg-red-500 text-white rounded"
+                >
+                  Delete
+                </button>
               </div>
-            );
-          })
             </div>
+          ))
         )}
       </div>
     </div>
