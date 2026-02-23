@@ -28,7 +28,7 @@ export default function ObservationList({
   const [searchQuery, setSearchQuery] = useState("");
 
   // TODO: Shared so we don't have to define this twice
-  
+
 
   const [isLoadingObservations, setIsLoadingObservations] = useState(true);
 
@@ -88,30 +88,23 @@ export default function ObservationList({
   };
 
   const saveEdit = async (id: number) => {
-    await fetch(`/api/observations/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        observationTitle: editTitle,
-        observationText: editText,
-        observationTagsArray: JSON.stringify(
-          editTags
-            .split(",")
-            .map((t) => t.trim())
-            .filter(Boolean)
-        ),
-      }),
+  if (onEdit) {
+    await onEdit(id, {
+      observationTitle: editTitle,
+      observationText: editText,
+      observationTagsArray: editTags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean),
     });
+  }
+  setEditingId(null);
+};
 
-    setEditingId(null);
-    fetchObservations();
-  };
-
-  const deleteObservation = async (id: number) => {
-    await fetch(`/api/observations/${id}`, {
-      method: "DELETE",
-    });
-    fetchObservations();
+  const deleteObservationById = async (id: number) => {
+    if (onDelete) {
+      await onDelete(id);
+    }
   };
 
   const filteredObservations = observations.filter((obs) => {
@@ -122,7 +115,7 @@ export default function ObservationList({
   });
 
   return (
-    
+
     <div className="space-y-4">
       <h2 className="text-xl font-bold text-dark-orange mb-4">
         Recent Observations
@@ -222,7 +215,7 @@ export default function ObservationList({
                   </button>
                 )}
                 <button
-                  onClick={() => deleteObservation(obs.observationId)}
+                  onClick={() => deleteObservationById(obs.observationId)}
                   className="px-3 py-1 bg-red-500 text-white rounded"
                 >
                   Delete
