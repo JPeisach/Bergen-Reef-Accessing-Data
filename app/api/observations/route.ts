@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import getObservations from "src/lib/observations/getObservations";
 import insertObservation from "src/lib/observations/insertObservation";
+import deleteObservation from "src/lib/observations/deleteObservation";
+import updateObservation from "src/lib/observations/updateObservation";
 
 interface Observation {
   authorId: string;
@@ -13,6 +15,7 @@ interface Observation {
   tankNumber: number;
 }
 
+/* GET */
 export const GET = async (request: Request) => {
   try {
     const { searchParams } = new URL(request.url);
@@ -20,7 +23,6 @@ export const GET = async (request: Request) => {
     const limitNum = limit ? parseInt(limit, 10) : undefined;
 
     const observations = await getObservations(limitNum);
-
     return NextResponse.json(observations);
   } catch (error) {
     console.log("API: Observations GET error:", error);
@@ -31,44 +33,22 @@ export const GET = async (request: Request) => {
   }
 };
 
+/* POST */
 export const POST = async (request: Request) => {
   try {
     const observation: Observation = await request.json();
 
-    // surely there is a better way to validate this..
-    if (observation.authorId == null) {
-      return NextResponse.json({
-        status: 400,
-        message: "Missing account ID",
-      });
-    }
-
-    if (observation.tankNumber == null) {
-      return NextResponse.json({
-        status: 400,
-        message: "Missing tank number",
-      });
-    }
-
-    if (observation.observationText == null) {
-      return NextResponse.json({
-        status: 400,
-        message: "Missing observation text",
-      });
-    }
-
-    if (observation.observationTitle == null) {
-      return NextResponse.json({
-        status: 400,
-        message: "Invalid observation title (does not exist or is too large)",
-      });
-    }
-
-    if (observation.observationTagsArray == null) {
-      return NextResponse.json({
-        status: 400,
-        message: "Missing observation tags",
-      });
+    if (
+      !observation.authorId ||
+      observation.tankNumber == null ||
+      !observation.observationText ||
+      !observation.observationTitle ||
+      !observation.observationTagsArray
+    ) {
+      return NextResponse.json(
+        { error: "Invalid observation payload" },
+        { status: 400 },
+      );
     }
 
     const result = await insertObservation(observation);
@@ -81,7 +61,62 @@ export const POST = async (request: Request) => {
   } catch (error) {
     console.log("API: Observations POST error:", error);
     return NextResponse.json(
-      { status: 500, error: "Failed to save observation" },
+      { error: "Failed to save observation" },
+      { status: 500 },
+    );
+  }
+};
+
+/* PUT (edit) */
+export const PUT = async (request: Request) => {
+  try {
+    const { id, ...updates } = await request.json();
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Missing observation id" },
+        { status: 400 },
+      );
+    }
+
+    await updateObservation(id, updates);
+
+    return NextResponse.json({
+      status: 200,
+      message: "Observation updated",
+    });
+  } catch (error) {
+    console.log("API: Observations PUT error:", error);
+    return NextResponse.json(
+      { error: "Failed to update observation" },
+      { status: 500 },
+    );
+  }
+};
+
+/* DELETE */
+export const DELETE = async (request: Request) => {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Missing observation id" },
+        { status: 400 },
+      );
+    }
+
+    await deleteObservation(Number(id));
+
+    return NextResponse.json({
+      status: 200,
+      message: "Observation deleted",
+    });
+  } catch (error) {
+    console.log("API: Observations DELETE error:", error);
+    return NextResponse.json(
+      { error: "Failed to delete observation" },
       { status: 500 },
     );
   }
