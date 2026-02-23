@@ -1,10 +1,16 @@
+"use client";
+
 import { useUser } from "@auth0/nextjs-auth0";
 import { Field, Input, Label, Select, Textarea } from "@headlessui/react";
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/confetti.css";
 
-export default function ObservationNotepad({}) {
+interface ObservationNotepadProps {
+  onSave?: () => void | Promise<void>; 
+}
+
+export default function ObservationNotepad({ onSave }: ObservationNotepadProps) {
   const { user } = useUser();
   const [tankNumber, setTankNumber] = useState(1);
   const [title, setTitle] = useState("");
@@ -24,9 +30,7 @@ export default function ObservationNotepad({}) {
     try {
       const response = await fetch("/api/observations", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           authorId: user.sub,
           tankNumber: tankNumber,
@@ -36,7 +40,6 @@ export default function ObservationNotepad({}) {
           observationDatetimeStart: dateRange[0],
           observationDatetimeEnd:
             dateRange.length > 1 ? dateRange[1] : dateRange[0],
-
           observationTagsArray: JSON.stringify(tags),
         }),
       });
@@ -46,11 +49,12 @@ export default function ObservationNotepad({}) {
         throw new Error(errorData.error || "Failed to save observation");
       }
 
-      // Success - reset form and refresh observations
       setStatus("success");
       setNotes("");
       setTitle("");
       setTags([]);
+
+      if (onSave) await onSave();
 
       setTimeout(() => setStatus(""), 3000);
     } catch (error) {
@@ -126,8 +130,9 @@ export default function ObservationNotepad({}) {
             name="tags"
             className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
             placeholder="Enter a list of tags separated by comma..."
-            onChange={(e) => setTags(e.target.value.split(","))}
-          ></Input>
+            value={tags.join(", ")}
+            onChange={(e) => setTags(e.target.value.split(",").map((t) => t.trim()))}
+          />
         </Field>
 
         {/* Notes Textbox */}

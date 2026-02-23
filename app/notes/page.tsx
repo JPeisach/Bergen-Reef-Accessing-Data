@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import "../globals.css";
@@ -8,10 +9,13 @@ import ObservationList from "app/components/observations/ObservationList";
 
 export default function Page() {
   const { user } = useUser();
+
   const [tankNumber, setTankNumber] = useState("");
   const [coralType, setCoralType] = useState("");
   const [observationTime, setObservationTime] = useState("");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
+
+  const [observations, setObservations] = useState([]);
 
   const coralTypes = [
     "Mushroom Coral",
@@ -20,6 +24,30 @@ export default function Page() {
     "Sarah Coral",
     "Josh Coral",
   ];
+
+  const fetchObservations = async () => {
+    const res = await fetch("/api/observations");
+    const data = await res.json();
+    setObservations(data || []);
+  };
+
+  const deleteObservation = async (id: number) => {
+    await fetch(`/api/observations/${id}`, { method: "DELETE" });
+    fetchObservations();
+  };
+
+  const editObservation = async (id: number, updates: any) => {
+    await fetch(`/api/observations/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
+    fetchObservations();
+  };
+
+  useEffect(() => {
+    fetchObservations();
+  }, []);
 
   return (
     <div>
@@ -101,7 +129,9 @@ export default function Page() {
             <ObservationList></ObservationList>
 
             {/* notepad */}
-            {isNotepadVisible && <ObservationNotepad></ObservationNotepad>}
+            {isNotepadVisible && (
+              <ObservationNotepad onSave={fetchObservations} />
+            )}
           </div>
         </div>
       </div>
