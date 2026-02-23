@@ -32,15 +32,15 @@ export default function Page() {
   };
 
   const deleteObservation = async (id: number) => {
-    await fetch(`/api/observations/${id}`, { method: "DELETE" });
+    await fetch(`/api/observations?id=${id}`, { method: "DELETE" });
     fetchObservations();
   };
 
   const editObservation = async (id: number, updates: any) => {
-    await fetch(`/api/observations/${id}`, {
+    await fetch("/api/observations", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updates),
+      body: JSON.stringify({ id, ...updates }),
     });
     fetchObservations();
   };
