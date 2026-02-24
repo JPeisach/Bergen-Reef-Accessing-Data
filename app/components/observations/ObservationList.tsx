@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 // TODO: Query specific tank data
 
-export default function ObservationList({}) {
+export default function ObservationList({ }) {
   // TODO: Shared so we don't have to define this twice
   const [observations, setObservations] = useState<
     Array<{
@@ -92,10 +92,12 @@ export default function ObservationList({}) {
     await editObservation(id, {
       observationTitle: editTitle,
       observationText: editText,
-      observationTagsArray: editTags
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean),
+      observationTagsArray: JSON.stringify(
+        editTags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean)
+      ),
     });
     setEditingId(null);
     fetchObservations();
