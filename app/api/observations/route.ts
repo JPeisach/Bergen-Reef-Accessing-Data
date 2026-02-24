@@ -36,9 +36,6 @@ export const POST = async (request: Request) => {
   try {
     const observation: Observation = await request.json();
 
-
-    // surely there is a better way to validate this..
-
     if (
       !observation.authorId ||
       observation.tankNumber == null ||

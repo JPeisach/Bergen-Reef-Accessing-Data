@@ -6,11 +6,7 @@ import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/confetti.css";
 
-interface ObservationNotepadProps {
-  onSave?: () => void | Promise<void>; 
-}
-
-export default function ObservationNotepad({ onSave }: ObservationNotepadProps) {
+export default function ObservationNotepad({}) {
   const { user } = useUser();
   const [tankNumber, setTankNumber] = useState(1);
   const [title, setTitle] = useState("");
@@ -53,8 +49,6 @@ export default function ObservationNotepad({ onSave }: ObservationNotepadProps) 
       setNotes("");
       setTitle("");
       setTags([]);
-
-      if (onSave) await onSave();
 
       setTimeout(() => setStatus(""), 3000);
     } catch (error) {
@@ -131,7 +125,9 @@ export default function ObservationNotepad({ onSave }: ObservationNotepadProps) 
             className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
             placeholder="Enter a list of tags separated by comma..."
             value={tags.join(", ")}
-            onChange={(e) => setTags(e.target.value.split(",").map((t) => t.trim()))}
+            onChange={(e) =>
+              setTags(e.target.value.split(",").map((t) => t.trim()))
+            }
           />
         </Field>
 

@@ -2,33 +2,24 @@
 
 import { useEffect, useState } from "react";
 
-interface ObservationListProps {
-  observations?: {
-    observationId: number;
-    authorId: number;
-    datetime: Date;
-    tankNumber: number;
-    observationTitle: string | null;
-    observationText: string | null;
-    observationTagsArray: string | null;
-    author: string;
-  }[];
-  onDelete?: (id: number) => void | Promise<void>;
-  onEdit?: (id: number, updates: Partial<any>) => void | Promise<void>;
-}
-
 // TODO: Query specific tank data
 
-export default function ObservationList({
-  observations: initialObservations = [],
-  onDelete,
-  onEdit,
-}: ObservationListProps) {
-  const [observations, setObservations] = useState(initialObservations);
-  const [searchQuery, setSearchQuery] = useState("");
-
+export default function ObservationList({}) {
   // TODO: Shared so we don't have to define this twice
+  const [observations, setObservations] = useState<
+    Array<{
+      observationId: number;
+      authorId: number;
+      datetime: Date;
+      observationTitle: string | null;
+      observationText: string | null;
+      observationTagsArray: string | null;
 
+      // Not in DB
+      author: string;
+    }>
+  >([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [isLoadingObservations, setIsLoadingObservations] = useState(true);
 
@@ -54,10 +45,6 @@ export default function ObservationList({
     }
   };
 
-  useEffect(() => {
-    fetchObservations();
-  }, []);
-
   const formatDate = (date: Date) => {
     // Why is react gaslighting us into thinking these methods don't exist?
     // Why is this..
@@ -80,16 +67,29 @@ export default function ObservationList({
     }
   };
 
-  const startEditing = (obs: any) => {
+  const onDelete = async (id: number) => {
+    await fetch(`/api/observations?id=${id}`, { method: "DELETE" });
+    fetchObservations();
+  };
+
+  const onEdit = (obs: any) => {
     setEditingId(obs.observationId);
     setEditTitle(obs.observationTitle || "");
     setEditText(obs.observationText || "");
     setEditTags(parseTags(obs.observationTagsArray).join(", "));
   };
 
-  const saveEdit = async (id: number) => {
-  if (onEdit) {
-    await onEdit(id, {
+  const editObservation = async (id: number, updates: any) => {
+    await fetch("/api/observations", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, ...updates }),
+    });
+    fetchObservations();
+  };
+
+  const onSave = async (id: number) => {
+    await editObservation(id, {
       observationTitle: editTitle,
       observationText: editText,
       observationTagsArray: editTags
@@ -97,15 +97,14 @@ export default function ObservationList({
         .map((t) => t.trim())
         .filter(Boolean),
     });
-  }
-  setEditingId(null);
-};
-
-  const deleteObservationById = async (id: number) => {
-    if (onDelete) {
-      await onDelete(id);
-    }
+    setEditingId(null);
+    fetchObservations();
   };
+
+  // TODO: wasn't there some smart way to make it refresh automatically for us?
+  useEffect(() => {
+    fetchObservations();
+  }, []);
 
   const filteredObservations = observations.filter((obs) => {
     const query = searchQuery.toLowerCase();
@@ -115,7 +114,6 @@ export default function ObservationList({
   });
 
   return (
-
     <div className="space-y-4">
       <h2 className="text-xl font-bold text-dark-orange mb-4">
         Recent Observations
@@ -201,21 +199,21 @@ export default function ObservationList({
               <div className="flex justify-end gap-2 mt-2">
                 {editingId === obs.observationId ? (
                   <button
-                    onClick={() => saveEdit(obs.observationId)}
+                    onClick={() => onSave(obs.observationId)}
                     className="px-3 py-1 bg-green-500 text-white rounded"
                   >
                     Save
                   </button>
                 ) : (
                   <button
-                    onClick={() => startEditing(obs)}
+                    onClick={() => onEdit(obs)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded"
                   >
                     Edit
                   </button>
                 )}
                 <button
-                  onClick={() => deleteObservationById(obs.observationId)}
+                  onClick={() => onDelete(obs.observationId)}
                   className="px-3 py-1 bg-red-500 text-white rounded"
                 >
                   Delete
