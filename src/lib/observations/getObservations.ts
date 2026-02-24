@@ -22,8 +22,18 @@ export default async function getObservations(limit?: number) {
       const ret = [];
 
       for (const obs of data) {
-        const author = await getUserById(obs.authorId);
-        ret.push({ ...obs, author: author.name });
+        try {
+          const author = await getUserById(obs.authorId);
+
+          ret.push({ ...obs, author: author.name });
+        } catch (error) {
+          console.warn(
+            "Couldn't get the author of the observation with ID:",
+            obs.authorId,
+          );
+          console.warn(error.message);
+          ret.push({ ...obs, author: "Unknown" });
+        }
       }
 
       return ret;
