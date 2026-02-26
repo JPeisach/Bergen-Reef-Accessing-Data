@@ -16,7 +16,7 @@ export default function DashboardPage() {
     <div>
       <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
-      <div className="p-8 bg-light-orange/30 min-h-screen">
+      <div className="p-8 bg-light-orange/30 h-screen overflow-scroll">
         <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">
           Tank Dashboard
         </h1>

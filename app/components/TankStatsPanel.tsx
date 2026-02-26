@@ -1,5 +1,6 @@
 import { fetchLatestData } from "app/services/dataService";
 import { useEffect, useState } from "react";
+import ObservationList from "./observations/ObservationList";
 
 export default function TankStatsPanel({ panelClass }) {
   // TODO: Tank number
@@ -34,23 +35,9 @@ export default function TankStatsPanel({ panelClass }) {
         </ul>
       )}
 
-      {/* TODO: get an actual pinned note */}
-      <div className="mt-4 bg-white p-3 shadow-inner rounded-lg">
-        <h3 className="font-bold text-dark-orange text-sm mb-1">
-          Pinned Notes
-        </h3>
-        <h4 className="font-bold text-dark-orange text-xs mb-1">
-          🙍 Mr. Ramirez
-        </h4>
-        <p className="text-xs text-dark-orange/70 leading-relaxed">
-          Tank 1 has been struggling lately. We suspect that the addition of the
-          new supplement, "GroCoral", has negatively impacted the tank's
-          vitality. Increased algae bloom observed.
-        </p>
-        <p className="font-bold text-dark-orange text-xs mt-2 underline">
-          <a href="/notes">Open in Observations</a>
-        </p>
-      </div>
+      {/* TODO: Pinned notes? */}
+      {/* TODO: Display in some arrow card mode? */}
+      <ObservationList></ObservationList>
     </div>
   );
 }

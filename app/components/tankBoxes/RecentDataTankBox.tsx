@@ -60,7 +60,7 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
       </h2>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData}>
+          <AreaChart data={chartData} margin={{ left: -10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
             <XAxis
               dataKey="datetime"
@@ -72,8 +72,9 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
             />
             <YAxis
               domain={["dataMin - 1", "dataMax + 1"]}
-              tickFormatter={(tick) => tick.toString().split(".")[0]}
+              tickFormatter={(tick) => tick.toFixed(1).toString()}
               stroke="#757575"
+              scale="sequential"
               fontSize={12}
             />
             <Tooltip
