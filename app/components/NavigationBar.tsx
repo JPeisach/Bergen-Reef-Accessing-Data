@@ -191,11 +191,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </MenuItems>
               </Menu>
 
-              <a href="/profile" className="">
-                <div className="flex flex-row flex-wrap">
-                  <UserCircleIcon className={clsx("size-8", "text-orange")} />
-                  {/* FIXME: wrap text neatly with the icon */}
-                  <p className="text-base sm:text-lg md:text-xl text-dark-orange font-semibold px-2 py-0.5 whitespace-pre-wrap">
+              <a href="/profile" className="block w-full px-2 py-2">
+                <div className="flex flex-row items-center gap-1">
+                  <UserCircleIcon className={clsx("size-8 shrink-0", "text-orange")} />
+                  <p className="text-base sm:text-lg text-dark-orange font-semibold break-all min-w-0 flex-1">
                     Welcome {username}!
                   </p>
                 </div>
