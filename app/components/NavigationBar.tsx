@@ -204,21 +204,19 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         </div>
 
         {/* FIXME: This should be in TabGroup */}
-        <div className="mt-auto">
-          <a href="/settings">
-            <button className="tab-item w-full py-5 transition flex items-center justify-bottom gap-2 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">
+        <div className="mt-auto flex w-full flex-col gap-3 px-2 pb-4">
+          <Link href="/settings" className="block w-full">
+            <button className="w-full py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 bg-white drop-shadow-md border border-gray-100 text-gray font-semibold hover:bg-orange hover:text-white hover:shadow-lg hover:-translate-y-1 active:translate-y-0">
               <Cog6ToothIcon className="size-5" />
               Settings
             </button>
-          </a>
-        </div>
-        <div className="mt">
-          <a href="/notifications">
-            <button className="tab-item py-5 transition flex items-center justify-top gap-0 bg-light-gray outline outline-1 outline-medium-gray drop-shadow-xl text-gray font-semibold hover:bg-medium-orange">
+          </Link>
+          <Link href="/notifications" className="block w-full">
+            <button className="w-full py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 bg-white drop-shadow-md border border-gray-100 text-gray font-semibold hover:bg-orange hover:text-white hover:shadow-lg hover:-translate-y-1 active:translate-y-0">
               <BellIcon className="size-5" />
               Notifications
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </>
