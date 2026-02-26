@@ -1,12 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import "../globals.css";
 import NavigationBar from "../components/NavigationBar";
 import ObservationNotepad from "app/components/observations/ObservationNotepad";
+import ObservationList from "app/components/observations/ObservationList";
 
 export default function Page() {
   const { user } = useUser();
+
   const [tankNumber, setTankNumber] = useState("");
   const [coralType, setCoralType] = useState("");
   const [observationTime, setObservationTime] = useState("");
@@ -144,7 +147,6 @@ export default function Page() {
               type="button"
               onClick={() => setIsNotepadVisible((prev) => !prev)}
               className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
-              aria-label={isNotepadVisible ? "Hide notepad" : "Open notepad"}
             >
               {isNotepadVisible ? "−" : "+"}
             </button>
@@ -217,7 +219,7 @@ export default function Page() {
             </div>
 
             {/* notepad */}
-            {isNotepadVisible && <ObservationNotepad></ObservationNotepad>}
+            {isNotepadVisible && <ObservationNotepad />}
           </div>
         </div>
       </div>
