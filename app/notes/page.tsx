@@ -90,7 +90,7 @@ export default function Page() {
             <button
               type="button"
               onClick={() => setIsNotepadVisible((prev) => !prev)}
-              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
+              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-black shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
             >
               {isNotepadVisible ? "−" : "+"}
             </button>
