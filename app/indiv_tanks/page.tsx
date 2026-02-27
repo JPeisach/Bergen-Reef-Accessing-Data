@@ -12,10 +12,13 @@ import PredefinedObservationNotepad from "app/components/observations/Predefined
 export default function Page() {
   const { user } = useUser();
 
-  const [dateRange, setDateRange] = useState([new Date()]);
-  const [selectedTank, setSelectedTank] = useState("");
-  const [selectedParameter, setSelectedParameter] = useState("");
-  const [selectedGraphType, setSelectedGraphType] = useState("");
+  const defaultStartDate = new Date();
+  defaultStartDate.setDate(defaultStartDate.getDate() - 1);
+
+  const [dateRange, setDateRange] = useState([defaultStartDate, new Date()]);
+  const [selectedTank, setSelectedTank] = useState("Tank 1");
+  const [selectedParameter, setSelectedParameter] = useState("pH");
+  const [selectedGraphType, setSelectedGraphType] = useState("Line");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
 
   const panelClass = "bg-light-orange/40 p-5 shadow-lg rounded-xl";
@@ -94,7 +97,6 @@ export default function Page() {
                       onChange={(e) => setValue(e.target.value)}
                       className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
                     >
-                      <option value="">Select…</option>
                       {item.options.map((opt) => (
                         <option key={opt} value={opt}>
                           {opt}
@@ -132,7 +134,7 @@ export default function Page() {
 
               <div className={`${panelClass}`}>
                 <HistoricDataTankBox
-                  tankNumber={1}
+                  tankNumber={Number(selectedTank.substring("Tank".length))}
                   variableType={selectedParameter}
                   dateRange={dateRange}
                 />
