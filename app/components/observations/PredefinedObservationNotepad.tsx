@@ -78,7 +78,7 @@ export default function PredefinedObservationNotepad({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title here..."
-            className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="w-full rounded-xl bg-white p-3 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
           />
         </Field>
 
@@ -92,7 +92,7 @@ export default function PredefinedObservationNotepad({
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
           <Input
             name="tags"
-            className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
             placeholder="Enter a list of tags separated by comma..."
             onChange={(e) => setTags(e.target.value.split(","))}
           ></Input>
@@ -107,7 +107,7 @@ export default function PredefinedObservationNotepad({
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Enter any notes here..."
-            className="h-32 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="h-32 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
           />
         </Field>
 
@@ -125,7 +125,7 @@ export default function PredefinedObservationNotepad({
           )}
           <button
             onClick={handleSave}
-            className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
+            className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
             disabled={
               notes.trim() === "" || title === "" || status === "sending"
             }
