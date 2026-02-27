@@ -16,6 +16,11 @@ export default function ObservationNotepad({}) {
   const [status, setStatus] = useState("");
 
   const handleSave = async () => {
+    if (!user) {
+      alert("You must be logged in to save observations.");
+      return;
+    }
+
     if (notes.trim() === "") return;
 
     setStatus("sending");
