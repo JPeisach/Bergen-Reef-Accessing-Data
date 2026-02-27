@@ -143,15 +143,14 @@ export default function Page() {
                   Tank 1 houses numerous types of corals, including mushroom
                   corals, button polyps, leather corals, and bubble corals.
                 </div>
+                {isNotepadVisible && (
+                  <PredefinedObservationNotepad
+                    dateRange={dateRange}
+                    tankNumber={selectedTank}
+                  ></PredefinedObservationNotepad>
+                )}
               </div>
             </div>
-
-            {isNotepadVisible && (
-              <PredefinedObservationNotepad
-                dateRange={dateRange}
-                tankNumber={selectedTank}
-              ></PredefinedObservationNotepad>
-            )}
           </div>
         </div>
       </div>
