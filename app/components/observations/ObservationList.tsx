@@ -1,9 +1,12 @@
 "use client";
 
+import { useUser } from "@auth0/nextjs-auth0";
 import { useEffect, useState } from "react";
 
 // TODO: Query specific tank data
 export default function ObservationList({}) {
+  const { user } = useUser();
+
   // TODO: Shared so we don't have to define this twice
   const [observations, setObservations] = useState<
     Array<{
@@ -66,18 +69,52 @@ export default function ObservationList({}) {
     }
   };
 
-  const onDelete = async (id: number) => {
-    await fetch(`/api/observations?id=${id}`, { method: "DELETE" });
+  // TODO: fix typing
+  const onDelete = async (obs: any) => {
+    if (!user) {
+      alert(
+        "You must be logged in as the observation author to delete the observation.",
+      );
+      return;
+    }
+
+    // We have to check user exists otherwise we will (probably) end up on an error accessing a property of a null object
+    if (user.sub !== obs.authorId) {
+      alert(
+        "You must be logged in as the observation author to delete the observation.",
+      );
+    } else {
+      await fetch(`/api/observations?id=${obs.observationId}`, {
+        method: "DELETE",
+      });
+    }
     fetchObservations();
   };
 
   const onEdit = (obs: any) => {
-    setEditingId(obs.observationId);
-    setEditTitle(obs.observationTitle || "");
-    setEditText(obs.observationText || "");
-    setEditTags(parseTags(obs.observationTagsArray).join(", "));
+    if (!user) {
+      alert(
+        "You must be logged in as the observation author to edit the observation.",
+      );
+      return;
+    }
+
+    // We have to check user exists otherwise we will (probably) end up on an error accessing a property of a null object
+    if (user.sub !== obs.authorId) {
+      alert(
+        "You must be logged in as the observation author to edit the observation.",
+      );
+    } else {
+      setEditingId(obs.observationId);
+      setEditTitle(obs.observationTitle || "");
+      setEditText(obs.observationText || "");
+      setEditTags(parseTags(obs.observationTagsArray).join(", "));
+    }
   };
 
+  // Only called if user ID matches original author. UI
+  // blocks attempts.
+  // TODO: Backend should probably verify the User ID!!!
   const editObservation = async (id: number, updates: any) => {
     await fetch("/api/observations", {
       method: "PUT",
@@ -87,8 +124,9 @@ export default function ObservationList({}) {
     fetchObservations();
   };
 
-  const onSave = async (id: number) => {
-    await editObservation(id, {
+  // User validation shouldn't be needed, UI blocks users from getting to this point.
+  const onSave = async (obs: any) => {
+    await editObservation(obs.observationId, {
       observationTitle: editTitle,
       observationText: editText,
       observationTagsArray: JSON.stringify(
@@ -200,7 +238,7 @@ export default function ObservationList({}) {
               <div className="flex justify-end gap-2 mt-2">
                 {editingId === obs.observationId ? (
                   <button
-                    onClick={() => onSave(obs.observationId)}
+                    onClick={() => onSave(obs)}
                     className="px-3 py-1 bg-green-500 text-white rounded"
                   >
                     Save
@@ -214,7 +252,7 @@ export default function ObservationList({}) {
                   </button>
                 )}
                 <button
-                  onClick={() => onDelete(obs.observationId)}
+                  onClick={() => onDelete(obs)}
                   className="px-3 py-1 bg-red-500 text-white rounded"
                 >
                   Delete
