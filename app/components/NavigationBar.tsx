@@ -191,10 +191,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </MenuItems>
               </Menu>
 
-              <a href="/profile" className="block w-full px-2 py-2">
-                <div className="flex flex-row items-center gap-1">
-                  <UserCircleIcon className={clsx("size-8 shrink-0", "text-orange")} />
-                  <p className="text-base sm:text-lg text-dark-orange font-semibold break-all min-w-0 flex-1">
+              <a href="/profile" className="">
+                <div className="flex flex-row flex-wrap">
+                  <UserCircleIcon className={clsx("size-8", "text-orange")} />
+                  {/* FIXME: wrap text neatly with the icon */}
+                  <p className="text-base sm:text-lg md:text-xl text-dark-orange font-semibold px-2 py-0.5 whitespace-pre-wrap">
                     Welcome {username}!
                   </p>
                 </div>
@@ -205,13 +206,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
         {/* FIXME: This should be in TabGroup */}
         <div className="mt-auto flex w-full flex-col gap-3 px-2 pb-4">
-          <Link href="/settings" className="block w-full">
+          <a href="/settings" className="block w-full">
             <button className="w-full py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 bg-white drop-shadow-md border border-gray-100 text-gray font-semibold hover:bg-orange hover:text-white hover:shadow-lg hover:-translate-y-1 active:translate-y-0">
               <Cog6ToothIcon className="size-5" />
               Settings
             </button>
-          </Link>
-          <Link href="/notifications" className="block w-full">
+          </a>
+          <a href="/notifications">
             <button className="w-full py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 bg-white drop-shadow-md border border-gray-100 text-gray font-semibold hover:bg-orange hover:text-white hover:shadow-lg hover:-translate-y-1 active:translate-y-0">
               <BellIcon className="size-5" />
               Notifications

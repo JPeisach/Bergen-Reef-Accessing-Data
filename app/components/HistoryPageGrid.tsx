@@ -352,7 +352,7 @@ export default function HistoryPageGrid() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-light-orange/30">
+    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-light-orange/30 h-screen">
       {/* Left Panel: Ag Grid */}
       <div className="w-full lg:w-3/4 flex flex-col">
         <div
@@ -527,10 +527,11 @@ export default function HistoryPageGrid() {
                     <button
                       onClick={handleCreateRow}
                       className={`w-full bg-white text-dark-orange border border-dark-orange font-bold px-4 py-2 rounded-xl shadow-sm transition-all
-                            ${selectedRows.length > 0
-                          ? "opacity-50 cursor-not-allowed"
-                          : "hover:bg-dark-orange hover:text-white"
-                        }`}
+                            ${
+                              selectedRows.length > 0
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-dark-orange hover:text-white"
+                            }`}
                       disabled={selectedRows.length > 0}
                     >
                       Create New Row
@@ -539,10 +540,11 @@ export default function HistoryPageGrid() {
                     <button
                       onClick={handleDeleteSelectedRows}
                       className={`w-full bg-white text-red-500 border border-red-500 font-bold px-4 py-2 rounded-xl shadow-sm transition-all
-                            ${selectedRows.length === 0
-                          ? "opacity-50 cursor-not-allowed"
-                          : "hover:bg-red-500 hover:text-white"
-                        }`}
+                            ${
+                              selectedRows.length === 0
+                                ? "opacity-50 cursor-not-allowed"
+                                : "hover:bg-red-500 hover:text-white"
+                            }`}
                       disabled={selectedRows.length === 0}
                     >
                       Delete Selected
@@ -551,10 +553,11 @@ export default function HistoryPageGrid() {
                     <button
                       onClick={saveChanges}
                       className={`w-full bg-green-500 text-white font-bold px-4 py-2 rounded-xl shadow-md transition-all hover:bg-green-600
-                          ${Object.keys(editedRows).length === 0
-                          ? "opacity-50 cursor-not-allowed"
-                          : ""
-                        }`}
+                          ${
+                            Object.keys(editedRows).length === 0
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
+                          }`}
                       disabled={Object.keys(editedRows).length === 0}
                     >
                       Save Changes
