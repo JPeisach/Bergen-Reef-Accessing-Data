@@ -2,9 +2,11 @@ import { db } from "src/db/drizzle";
 import { coralData } from "src/db/schema";
 
 export default async function insertData(
+  host: string,
   data: Array<Record<string, any>>,
   date: string,
 ) {
+  // This is a bit weird, but for now lets map MakerReef to tank 1
   // Iterate over all pieces of data (nodes) in the array from the JSON
   for (let i = 0; i < data.length; i++) {
     // Check name of the current data node to determine its corresponding name
@@ -48,6 +50,7 @@ export default async function insertData(
     // Construct row of the current data node with all its attributes
     const entry: typeof coralData.$inferInsert = {
       // FIXME: why not pass Date object directly?
+      tankName: host,
       datetime: new Date(date),
       name: name,
       unit: unit,

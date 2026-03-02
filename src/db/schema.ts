@@ -25,6 +25,7 @@ export const coralData = mysqlTable(
     value: decimal({ precision: 6, scale: 2 }).notNull(),
     deleted: boolean().default(true).notNull(),
     updatedAt: datetime("updated_at").notNull(),
+    tankName: varchar("tank_name", { length: 15 }),
   },
   (table) => [index("data_id").on(table.id)],
 );
