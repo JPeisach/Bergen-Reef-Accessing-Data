@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { fetchSingularDataTypeInDateRange } from "app/services/dataService";
 
 export default function HistoricDataTankBox({
-  tankNumber,
+  tankName,
   variableType,
   dateRange,
 }) {
@@ -33,6 +33,7 @@ export default function HistoricDataTankBox({
         dateRange[0],
         dateRange[1],
         variableType,
+        tankName,
       ).then((result) => {
         const filteredData = result.map((item) => {
           const date = new Date(item.datetime);
@@ -59,7 +60,7 @@ export default function HistoricDataTankBox({
       href="/info"
     >
       <h2 className="text-xl font-bold text-dark-orange mb-4 text-center">
-        Tank {tankNumber}
+        Tank {tankName}
       </h2>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
