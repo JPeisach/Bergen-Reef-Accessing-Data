@@ -58,39 +58,39 @@ export default function DashboardPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           <RecentDataTankBox
-            tankNumber={1}
+            tankName="60_1"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={2}
+            tankName="60_2"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={3}
+            tankName="60_3"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={4}
+            tankName="60_4"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={5}
+            tankName="60_5"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={6}
+            tankName="60_6"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={7}
+            tankName="MakerReef"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={8}
+            tankName="ESCReef"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankNumber={9}
+            tankName="380"
             variableType={variableType}
           ></RecentDataTankBox>
         </div>

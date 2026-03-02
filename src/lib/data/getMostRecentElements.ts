@@ -1,8 +1,8 @@
 import { db } from "src/db/drizzle";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 import { coralData } from "src/db/schema";
 
-export default async function getMostRecentElements() {
+export default async function getMostRecentElements(tankName: string) {
   try {
     const elements = [
       "pH",
@@ -18,7 +18,12 @@ export default async function getMostRecentElements() {
       const result = await db
         .select()
         .from(coralData)
-        .where(eq(coralData.name, elements[i]))
+        .where(
+          and(
+            eq(coralData.name, elements[i]),
+            eq(coralData.tankName, tankName),
+          ),
+        )
         .orderBy(desc(coralData.datetime))
         .limit(1);
 

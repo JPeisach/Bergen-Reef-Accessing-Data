@@ -6,6 +6,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const type = searchParams.get("type");
+    const tankName = searchParams.get("tankName");
 
     const typeMapping: { [key: string]: string } = {
       Temperature: "Temperature",
@@ -22,7 +23,7 @@ export async function GET(request: Request) {
 
     //console.log("Fetching most recent values for types:", type);
 
-    const result = await getMostRecentData(type); // Call function
+    const result = await getMostRecentData(type, tankName); // Call function
 
     //console.log("Most recent values:", result);
 

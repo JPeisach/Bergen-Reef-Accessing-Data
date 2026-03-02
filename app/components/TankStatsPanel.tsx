@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ObservationList from "./observations/ObservationList";
 
 export default function TankStatsPanel({ panelClass }) {
-  // TODO: Tank number
+  // TODO: Tank selection
   const [elementData, setElementData] = useState([]);
 
   useEffect(() => {

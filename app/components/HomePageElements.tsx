@@ -15,7 +15,8 @@ export default function HomePageElements({
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("/api/getMostRecentElements");
+        // TODO: View other tanks
+        const response = await fetch("/api/getMostRecentElements?tankName=380");
         const rawData = await response.json();
         const elementData = [];
 

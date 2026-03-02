@@ -11,14 +11,14 @@ import "../../globals.css";
 import DownloadCSVButton from "../buttons/DownloadCSVButton";
 import { useEffect, useState } from "react";
 
-export default function RecentDataTankBox({ tankNumber, variableType }) {
+export default function RecentDataTankBox({ tankName, variableType }) {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/getMostRecentData?type=${variableType}`,
+          `/api/getMostRecentData?type=${variableType}?tankName=${tankName}`,
         );
         const result = await response.json();
 
@@ -56,7 +56,7 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
   return (
     <div className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer">
       <h2 className="text-xl font-bold text-dark-orange mb-4 text-center">
-        Tank {tankNumber}
+        Tank {tankName}
       </h2>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
