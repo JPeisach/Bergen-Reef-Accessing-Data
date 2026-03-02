@@ -217,7 +217,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               <BellIcon className="size-5" />
               Notifications
             </button>
-          </Link>
+          </a>
         </div>
       </div>
     </>
