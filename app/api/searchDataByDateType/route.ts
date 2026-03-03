@@ -9,6 +9,7 @@ export async function GET(request: Request) {
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
     const names = searchParams.get("names")?.split(",");
+    const tankName = searchParams.get("tankName");
 
     if (!startDate || !endDate || !names || names.length === 0) {
       return NextResponse.json(
@@ -42,7 +43,12 @@ export async function GET(request: Request) {
       );
     }
 
-    const result = await searchDataByDateType(startDateObj, endDateObj, names);
+    const result = await searchDataByDateType(
+      startDateObj,
+      endDateObj,
+      names,
+      tankName,
+    );
 
     // console.log("Search result:", result); // for debugging purposes
 

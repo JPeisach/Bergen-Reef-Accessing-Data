@@ -76,8 +76,9 @@ export default function HomePageGraph({
   useEffect(() => {
     async function fetchData() {
       try {
+        // TODO: Other tanks
         const response = await fetch(
-          `/api/getMostRecentData?type=${selectedType}`,
+          `/api/getMostRecentData?type=${selectedType}&tankName=380`,
         );
         const result = await response.json();
 

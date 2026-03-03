@@ -1,6 +1,12 @@
 // Elements
-export async function fetchLatestData() {
-  const response = await fetch("/api/getMostRecentElements");
+export async function fetchLatestData(tankName?: string) {
+  if (!tankName) {
+    tankName = "380";
+  }
+
+  const response = await fetch(
+    `/api/getMostRecentElements?tankName=${tankName}`,
+  );
 
   if (!response.ok) {
     throw new Error(`Failed to get recent elements: ${response.status}`);
@@ -14,9 +20,14 @@ export async function fetchDataInDateRange(
   startDate: Date,
   endDate: Date,
   dataTypes: string[],
+  tankName?: string,
 ) {
+  if (!tankName) {
+    tankName = "380";
+  }
+
   // TODO: "names" is a bad name for this parameter
-  const queryString = `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&names=${dataTypes.join(",")}`;
+  const queryString = `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&names=${dataTypes.join(",")}&tankName=${tankName}`;
 
   const response = await fetch(`/api/searchDataByDateType?${queryString}`);
 
@@ -32,9 +43,14 @@ export async function fetchSingularDataTypeInDateRange(
   startDate: Date,
   endDate: Date,
   data: string,
+  tankName?: string,
 ) {
+  if (!tankName) {
+    tankName = "380";
+  }
+
   // TODO: "names" is a bad name for this parameter
-  const queryString = `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&names=${data}`;
+  const queryString = `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&names=${data}&tankName=${tankName}`;
 
   const response = await fetch(`/api/searchDataByDateType?${queryString}`);
 

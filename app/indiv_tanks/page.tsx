@@ -16,7 +16,7 @@ export default function Page() {
   defaultStartDate.setDate(defaultStartDate.getDate() - 1);
 
   const [dateRange, setDateRange] = useState([defaultStartDate, new Date()]);
-  const [selectedTank, setSelectedTank] = useState("Tank 1");
+  const [selectedTank, setSelectedTank] = useState("Tank 60_1");
   const [selectedParameter, setSelectedParameter] = useState("pH");
   const [selectedGraphType, setSelectedGraphType] = useState("Line");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
@@ -37,15 +37,15 @@ export default function Page() {
                 {
                   label: "Tank",
                   options: [
-                    "Tank 1",
-                    "Tank 2",
-                    "Tank 3",
-                    "Tank 4",
-                    "Tank 5",
-                    "Tank 6",
-                    "Tank 7",
-                    "Tank 8",
-                    "Tank 9",
+                    "Tank 60_1",
+                    "Tank 60_2",
+                    "Tank 60_3",
+                    "Tank 60_4",
+                    "Tank 60_5",
+                    "Tank 60_6",
+                    "Tank MakerReef",
+                    "Tank ESCReef",
+                    "Tank 380",
                   ],
                 },
                 {
@@ -134,7 +134,7 @@ export default function Page() {
 
               <div className={`${panelClass}`}>
                 <HistoricDataTankBox
-                  tankNumber={Number(selectedTank.substring("Tank".length))}
+                  tankName={selectedTank.substring("Tank".length)}
                   variableType={selectedParameter}
                   dateRange={dateRange}
                 />
