@@ -16,7 +16,7 @@ export default function Page() {
   defaultStartDate.setDate(defaultStartDate.getDate() - 1);
 
   const [dateRange, setDateRange] = useState([defaultStartDate, new Date()]);
-  const [selectedTank, setSelectedTank] = useState("Tank 1");
+  const [selectedTank, setSelectedTank] = useState("Tank 60_1");
   const [selectedParameter, setSelectedParameter] = useState("pH");
   const [selectedGraphType, setSelectedGraphType] = useState("Line");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);

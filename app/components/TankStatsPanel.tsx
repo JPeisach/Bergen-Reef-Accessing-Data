@@ -26,11 +26,13 @@ export default function TankStatsPanel({ panelClass }) {
       ) : (
         <ul className="space-y-1.5 text-sm text-dark-orange/80 font-medium">
           {elementData.map((element) => {
-            return (
-              <li key={element.id}>
-                {element.name}: {element.value}
-              </li>
-            );
+            if (element != null) {
+              return (
+                <li key={element.id}>
+                  {element.name}: {element.value}
+                </li>
+              );
+            }
           })}
         </ul>
       )}
