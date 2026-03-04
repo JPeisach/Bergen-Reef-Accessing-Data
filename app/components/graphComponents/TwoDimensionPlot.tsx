@@ -135,7 +135,7 @@ export default function DataLineGraph() {
       adjustedEndDate.setHours(adjustedEndDate.getHours() - 5);
       // TODO: Other tanks
       const response = await fetch(
-        `/api/searchDataByDateType?startDate=${adjustedStartDate.toISOString()}&endDate=${adjustedEndDate.toISOString()}&names=${selectedNames.join(",")}&tankName=380`,
+        `/api/searchDataByDateType?startDate=${adjustedStartDate.toISOString()}&endDate=${adjustedEndDate.toISOString()}&names=${selectedNames.join(",")}&tankName=CoralLab380`,
       );
 
       if (!response.ok) {

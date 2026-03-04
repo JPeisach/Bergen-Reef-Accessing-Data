@@ -78,7 +78,7 @@ export default function HomePageGraph({
       try {
         // TODO: Other tanks
         const response = await fetch(
-          `/api/getMostRecentData?type=${selectedType}&tankName=380`,
+          `/api/getMostRecentData?type=${selectedType}&tankName=CoralLab380`,
         );
         const result = await response.json();
 

@@ -1,7 +1,7 @@
 // Elements
 export async function fetchLatestData(tankName?: string) {
   if (!tankName) {
-    tankName = "380";
+    tankName = "CoralLab380";
   }
 
   const response = await fetch(
@@ -23,7 +23,7 @@ export async function fetchDataInDateRange(
   tankName?: string,
 ) {
   if (!tankName) {
-    tankName = "380";
+    tankName = "CoralLab380";
   }
 
   // TODO: "names" is a bad name for this parameter
@@ -46,7 +46,7 @@ export async function fetchSingularDataTypeInDateRange(
   tankName?: string,
 ) {
   if (!tankName) {
-    tankName = "380";
+    tankName = "CoralLab380";
   }
 
   // TODO: "names" is a bad name for this parameter

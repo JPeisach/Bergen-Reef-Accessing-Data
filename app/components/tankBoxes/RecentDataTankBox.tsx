@@ -18,7 +18,7 @@ export default function RecentDataTankBox({ tankName, variableType }) {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/getMostRecentData?type=${variableType}?tankName=${tankName}`,
+          `/api/getMostRecentData?type=${variableType}&tankName=${tankName}`,
         );
         const result = await response.json();
 

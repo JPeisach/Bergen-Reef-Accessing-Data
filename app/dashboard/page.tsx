@@ -58,27 +58,27 @@ export default function DashboardPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           <RecentDataTankBox
-            tankName="60_1"
+            tankName="CoralLab60_1"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankName="60_2"
+            tankName="CoralLab60_2"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankName="60_3"
+            tankName="CoralLab60_3"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankName="60_4"
+            tankName="CoralLab60_4"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankName="60_5"
+            tankName="CoralLab60_5"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankName="60_6"
+            tankName="CoralLab60_6"
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
@@ -90,7 +90,7 @@ export default function DashboardPage() {
             variableType={variableType}
           ></RecentDataTankBox>
           <RecentDataTankBox
-            tankName="380"
+            tankName="CoralLab380"
             variableType={variableType}
           ></RecentDataTankBox>
         </div>

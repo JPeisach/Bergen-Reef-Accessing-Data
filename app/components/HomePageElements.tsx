@@ -16,7 +16,9 @@ export default function HomePageElements({
     async function fetchData() {
       try {
         // TODO: View other tanks
-        const response = await fetch("/api/getMostRecentElements?tankName=380");
+        const response = await fetch(
+          "/api/getMostRecentElements?tankName=CoralLab380",
+        );
         const rawData = await response.json();
         const elementData = [];
 
