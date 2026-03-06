@@ -50,7 +50,7 @@ const CustomTooltip = ({
     date.setHours(date.getHours() + 6);
 
     return (
-      <div className="bg-white p-2 border border-gray-200 rounded shadow">
+      <div className="bg-white p-2 border border-gray-200 rounded-sm shadow-sm">
         <p className="text-sm">{date.toLocaleString()}</p>
         <p className="text-sm font-semibold">{`${selectedType}: ${payload[0].value}`}</p>
       </div>
@@ -126,7 +126,7 @@ export default function HomePageGraph({
         {/* DROPDOWN MENU */}
         <div className="w-full mb-4">
           <Menu as="div" className="relative inline-block text-left w-full">
-            <MenuButton className="w-full h-10 text-center rounded-md bg-dark-orange md:text-lg text-white font-semibold ring-1 ring-black/5 transition focus:outline-none flex items-center justify-center">
+            <MenuButton className="w-full h-10 text-center rounded-md bg-dark-orange md:text-lg text-white font-semibold ring-1 ring-black/5 transition focus:outline-hidden flex items-center justify-center">
               <span>{selectedType}</span>
               <ChevronDownIcon className="-mr-1 size-6 text-white ml-2" />
             </MenuButton>

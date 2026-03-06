@@ -95,7 +95,7 @@ export default function Page() {
                     <select
                       value={value}
                       onChange={(e) => setValue(e.target.value)}
-                      className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                      className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
                     >
                       {item.options.map((opt) => (
                         <option key={opt} value={opt}>
@@ -111,7 +111,7 @@ export default function Page() {
                   Date Range
                 </label>
                 <Flatpickr
-                  className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                  className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
                   data-enable-time
                   options={{ enableSeconds: true, mode: "range" }}
                   value={dateRange}

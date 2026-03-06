@@ -110,7 +110,7 @@ const UserList = () => {
           {users.map((user) => (
             <li
               key={user.user_id}
-              className="flex justify-between items-center px-2 py-2 bg-white rounded shadow-sm"
+              className="flex justify-between items-center px-2 py-2 bg-white rounded-sm shadow-xs"
             >
               <button
                 onClick={() => {
@@ -142,7 +142,7 @@ const UserList = () => {
                     handleRemoveAdmin(user.user_id);
                   }
                 }}
-                className="ml-10 bg-teal text-white px-2 py-1 rounded"
+                className="ml-10 bg-teal text-white px-2 py-1 rounded-sm"
                 disabled={loading}
               >
                 <option value="admin">Administrator</option>

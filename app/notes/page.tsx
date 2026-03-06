@@ -29,12 +29,12 @@ export default function Page() {
 
       <div className="relative flex">
         <div className="p-8 bg-light-orange/30 min-h-screen min-w-full">
-          <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">
+          <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-xs">
             Observations
           </h1>
 
           {/* TODO: Determine what this will be - a panel to filter observations? */}
-          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-sm">
+          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-xs">
             {/* Tank numnber dropdown menu */}
             <div className="min-w-[160px]">
               <label className="block text-dark-orange font-bold mb-2 text-sm">
@@ -43,7 +43,7 @@ export default function Page() {
               <select
                 value={tankNumber}
                 onChange={(e) => setTankNumber(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
               >
                 <option value="">Select tank...</option>
                 {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
@@ -62,7 +62,7 @@ export default function Page() {
               <select
                 value={coralType}
                 onChange={(e) => setCoralType(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
               >
                 <option value="">Select coral type...</option>
                 {coralTypes.map((type, index) => (
@@ -82,7 +82,7 @@ export default function Page() {
                 type="time"
                 value={observationTime}
                 onChange={(e) => setObservationTime(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
               />
             </div>
 

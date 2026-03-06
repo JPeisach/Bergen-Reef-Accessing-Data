@@ -574,7 +574,7 @@ export default function DataLineGraph() {
         </h1>
         <div className="flex flex-col">
           <Menu as="div" className="relative inline-block text-left m-3">
-            <MenuButton className="inline-flex w-full justify-center outline outline-1 outline-medium-blue rounded-xl bg-light-blue px-3 py-2 text-md font-semibold text-gray-900 shadow-sm ring-1 ring-gray-300 hover:bg-gray-50">
+            <MenuButton className="inline-flex w-full justify-center outline-solid outline-1 outline-medium-blue rounded-xl bg-light-blue px-3 py-2 text-md font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 hover:bg-gray-50">
               <span className="text-blue font-semibold">
                 {selectedName || "Select Name"}
               </span>
@@ -598,7 +598,7 @@ export default function DataLineGraph() {
         <div className="date-constraints-box">
           <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit group relative">
             Date Constraints
-            <div className="absolute left-1/2 top-full z-10 mt-2 w-[290px] -translate-x-1/3 bg-white p-3 rounded-lg self-left shadow-sm text-center text-sm text-medium-teal opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+            <div className="absolute left-1/2 top-full z-10 mt-2 w-[290px] -translate-x-1/3 bg-white p-3 rounded-lg self-left shadow-xs text-center text-sm text-medium-teal opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
               Note: The date range will always be the weeks represented.
             </div>
           </div>

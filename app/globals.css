@@ -1,23 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* dark mode options commented out */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@config '../tailwind.config.js';
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
 }
 
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+@layer utilities {
+  /* dark mode options commented out */
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+    }
+  }
+
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 @layer base {
@@ -97,11 +117,11 @@ h1 {
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-white outline outline-1 outline-medium-gray text-gray font-semibold hover:bg-medium-orange;
+  @apply bg-white outline-solid outline-1 outline-medium-gray text-gray font-semibold hover:bg-medium-orange;
 }
 
 .navbar-tabitem-highlighted {
-  @apply bg-orange outline outline-2 outline-dark-orange text-white font-bold;
+  @apply bg-orange outline-solid outline-2 outline-dark-orange text-white font-bold;
 }
 
 .navbar-graphs-dropdown-button {

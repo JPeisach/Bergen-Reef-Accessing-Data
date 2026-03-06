@@ -26,11 +26,11 @@ export default function SettingsPage() {
       <NavigationBar defaultIndex={-1} username={user ? user.name : "Guest"} />
 
       <div className="p-8 bg-light-orange/30 min-h-screen dark:bg-gray-900 transition-colors duration-300">
-        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm dark:text-orange">
+        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-xs dark:text-orange">
           Settings
         </h1>
 
-        <div className="mx-auto max-w-md rounded-2xl bg-light-orange/40 p-10 shadow-lg backdrop-blur-sm flex flex-col items-center justify-center gap-6 dark:bg-gray-800/50 transition-colors duration-300">
+        <div className="mx-auto max-w-md rounded-2xl bg-light-orange/40 p-10 shadow-lg backdrop-blur-xs flex flex-col items-center justify-center gap-6 dark:bg-gray-800/50 transition-colors duration-300">
           <div
             className={`w-full p-8 rounded-xl transition-all duration-300 flex flex-col items-center justify-center gap-4 ${
               theme === "dark" ? "bg-dark-orange/20" : "bg-white/60"

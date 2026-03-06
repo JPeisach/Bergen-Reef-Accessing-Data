@@ -47,12 +47,12 @@ export default function Page() {
       <div className="relative flex">
         {/* Content */}
         <div className="p-8 bg-light-orange/30 min-h-screen min-w-full">
-          <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">
+          <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-xs">
             Tank Information
           </h1>
 
           {/* Tank Number Dropdown */}
-          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-sm">
+          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-xs">
             <div className="min-w-[200px]">
               <label className="block text-dark-orange font-bold mb-2 text-sm">
                 Tank Number
@@ -60,7 +60,7 @@ export default function Page() {
               <select
                 value={tankNumber}
                 onChange={(e) => setTankNumber(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
               >
                 <option value="">Select tank number...</option>
                 {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
@@ -104,7 +104,7 @@ export default function Page() {
                         <button
                           key={index}
                           onClick={() => setSelectedCoral(coralType)}
-                          className="w-full text-left rounded-lg bg-light-orange/40 px-4 py-3 text-dark-orange font-semibold shadow-sm border border-light-orange/30 hover:bg-light-orange/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
+                          className="w-full text-left rounded-lg bg-light-orange/40 px-4 py-3 text-dark-orange font-semibold shadow-xs border border-light-orange/30 hover:bg-light-orange/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
                         >
                           {coralType}
                         </button>
@@ -145,7 +145,7 @@ export default function Page() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/25 backdrop-blur-sm" />
+            <div className="fixed inset-0 bg-black/25 backdrop-blur-xs" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -177,7 +177,7 @@ export default function Page() {
                   <div className="mt-6 flex justify-end">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-xl bg-light-orange/20 px-4 py-2 text-sm font-bold text-dark-orange hover:bg-light-orange/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 transition-colors"
+                      className="inline-flex justify-center rounded-xl bg-light-orange/20 px-4 py-2 text-sm font-bold text-dark-orange hover:bg-light-orange/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 transition-colors"
                       onClick={() => setSelectedCoral(null)}
                     >
                       Close

@@ -33,7 +33,7 @@ export default function Page() {
       <br></br>
 
       {/* top white box*/}
-      <div className="bg-white rounded shadow-sm p-6 flex justify-between items-center w-3/4 mx-auto">
+      <div className="bg-white rounded-sm shadow-xs p-6 flex justify-between items-center w-3/4 mx-auto">
         <div className="flex items-center gap-4">
           {user ? (
             <>
