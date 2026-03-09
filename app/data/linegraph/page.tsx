@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <div>
       <NavigationBar defaultIndex={6} username={user ? user.name : "Guest"} />
-      <div className="flex-1 overflow-hidden">
+      <div className="bg-light-orange/30 min-h-screen flex-1 overflow-hidden">
         <DataLineGraph />
       </div>
     </div>
