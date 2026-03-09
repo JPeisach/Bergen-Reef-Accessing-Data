@@ -13,7 +13,7 @@ export default function Page() {
   const { user } = useUser();
 
   const defaultStartDate = new Date();
-  defaultStartDate.setDate(defaultStartDate.getDate() - 1);
+  defaultStartDate.setDate(defaultStartDate.getDate() - 10); // hacky fix to show *something*
 
   const [dateRange, setDateRange] = useState([defaultStartDate, new Date()]);
   const [selectedTank, setSelectedTank] = useState("Tank CoralLab60_1");
