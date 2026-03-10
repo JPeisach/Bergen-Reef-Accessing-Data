@@ -122,13 +122,13 @@ const HistoryPageDialog = ({
                 {type === "warning" ? (
                   <div className="grid grid-flow-col grid-rows-1 gap-4">
                     <button
-                      className="bg-teal text-lg text-white mt-4 px-4 py-2 rounded-xl shadow hover:bg-medium-teal"
+                      className="bg-teal text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-medium-teal"
                       onClick={onClose}
                     >
                       Cancel
                     </button>
                     <button
-                      className="bg-orange text-lg text-white mt-4 px-4 py-2 rounded-xl shadow hover:bg-dark-orange"
+                      className="bg-orange text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-dark-orange"
                       onClick={onConfirm}
                     >
                       Delete
@@ -137,7 +137,7 @@ const HistoryPageDialog = ({
                 ) : (
                   <Transition as={Fragment}>
                     <button
-                      className="bg-orange text-lg text-white mt-4 px-4 py-2 rounded-xl shadow hover:bg-dark-orange"
+                      className="bg-orange text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-dark-orange"
                       onClick={onClose}
                     >
                       Close

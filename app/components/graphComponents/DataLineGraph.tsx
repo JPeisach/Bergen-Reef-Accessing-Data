@@ -466,8 +466,8 @@ export default function DataLineGraph() {
               <MenuButton
                 className={
                   index === 0
-                    ? "outline-medium-blue bg-light-blue inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2"
-                    : "outline-medium-red-orange bg-light-red-orange inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2"
+                    ? "outline-medium-blue bg-light-blue inline-flex w-full justify-center outline-solid outline-1 rounded-xl font-semibold px-3 py-2"
+                    : "outline-medium-red-orange bg-light-red-orange inline-flex w-full justify-center outline-solid outline-1 rounded-xl font-semibold px-3 py-2"
                 }
               >
                 <span style={{ color: colorScale(index) }}>
@@ -507,7 +507,7 @@ export default function DataLineGraph() {
           {selectedNames.length < 2 && ( // keep to 2 plots for now
             <button
               onClick={addPlot}
-              className="bg-orange outline outline-1 outline-dark-orange drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-orange"
+              className="bg-orange outline-solid outline-1 outline-dark-orange drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-orange"
             >
               Add Another Plot
             </button>
@@ -515,7 +515,7 @@ export default function DataLineGraph() {
           {selectedNames.length > 1 && (
             <button
               onClick={() => setSelectedNames(selectedNames.slice(0, -1))}
-              className="bg-medium-teal outline outline-1 outline-dark-teal drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-teal"
+              className="bg-medium-teal outline-solid outline-1 outline-dark-teal drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-teal"
             >
               Remove Last Plot
             </button>
@@ -552,7 +552,7 @@ export default function DataLineGraph() {
                   setUseInterpolation(!e.target.checked);
                   setShouldFetch(true);
                 }}
-                className="form-checkbox h-5 w-5 text-teal rounded border-gray-300 focus:ring-teal"
+                className="form-checkbox h-5 w-5 text-teal rounded-sm border-gray-300 focus:ring-teal"
               />
               <span className="text-white font-medium">
                 Display Discrete Points

@@ -24,7 +24,7 @@ export default function Page() {
         {/* CONTAINER HOLDING ELEMENTS AND GRAPH */}
         <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-140px)]">
           {/* LEFT COLUMN: ELEMENTS SELECTION */}
-          <div className="w-full lg:w-5/12 rounded-2xl bg-light-orange/40 p-6 shadow-lg backdrop-blur-sm overflow-hidden flex flex-col">
+          <div className="w-full lg:w-5/12 rounded-2xl bg-light-orange/40 p-6 shadow-lg backdrop-blur-xs overflow-hidden flex flex-col">
             <h2 className="text-xl font-bold text-dark-orange mb-4">
               Select Parameter
             </h2>
@@ -37,7 +37,7 @@ export default function Page() {
           </div>
 
           {/* RIGHT COLUMN: CHART */}
-          <div className="w-full lg:w-7/12 rounded-2xl bg-light-orange/40 p-6 shadow-lg backdrop-blur-sm flex flex-col relative z-0">
+          <div className="w-full lg:w-7/12 rounded-2xl bg-light-orange/40 p-6 shadow-lg backdrop-blur-xs flex flex-col relative z-0">
             <h2 className="text-xl font-bold text-dark-orange mb-4">
               {selectedType} Overview
             </h2>

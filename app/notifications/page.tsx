@@ -49,7 +49,7 @@ export default function NotificationsPage() {
               {tanks.map((tank) => (
                 <tr
                   key={tank.name}
-                  className="bg-[#FAF7F2] oramge rounded-xl shadow-sm"
+                  className="bg-[#FAF7F2] oramge rounded-xl shadow-xs"
                 >
                   <td className="py-4 font-semibold rounded-l-xl">
                     {tank.name}

@@ -165,7 +165,7 @@ export default function ObservationList({}) {
           placeholder="Search observations..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+          className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
         />
       </div>
 
@@ -197,19 +197,19 @@ export default function ObservationList({}) {
                       <input
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
-                        className="mb-1 rounded p-1 border border-gray-300"
+                        className="mb-1 rounded-sm p-1 border border-gray-300"
                       />
                       <textarea
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
-                        className="rounded p-1 border border-gray-300"
+                        className="rounded-sm p-1 border border-gray-300"
                         rows={3}
                       />
                       <input
                         value={editTags}
                         onChange={(e) => setEditTags(e.target.value)}
                         placeholder="tags, comma, separated"
-                        className="mt-1 rounded p-1 border border-gray-300"
+                        className="mt-1 rounded-sm p-1 border border-gray-300"
                       />
                     </>
                   ) : (
@@ -239,21 +239,21 @@ export default function ObservationList({}) {
                 {editingId === obs.observationId ? (
                   <button
                     onClick={() => onSave(obs)}
-                    className="px-3 py-1 bg-green-500 text-white rounded"
+                    className="px-3 py-1 bg-green-500 text-white rounded-sm"
                   >
                     Save
                   </button>
                 ) : (
                   <button
                     onClick={() => onEdit(obs)}
-                    className="px-3 py-1 bg-yellow-500 text-white rounded"
+                    className="px-3 py-1 bg-yellow-500 text-white rounded-sm"
                   >
                     Edit
                   </button>
                 )}
                 <button
                   onClick={() => onDelete(obs)}
-                  className="px-3 py-1 bg-red-500 text-white rounded"
+                  className="px-3 py-1 bg-red-500 text-white rounded-sm"
                 >
                   Delete
                 </button>

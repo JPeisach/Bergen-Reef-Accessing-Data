@@ -17,21 +17,21 @@ export default function DashboardPage() {
       <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
       <div className="p-8 bg-light-orange/30 h-screen overflow-scroll">
-        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-sm">
+        <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-xs">
           Tank Dashboard
         </h1>
 
         <div className="flex flex-col items-center py-5 gap-4">
-          <label className="text-2xl font-bold text-dark-orange text-center drop-shadow-sm">
+          <label className="text-2xl font-bold text-dark-orange text-center drop-shadow-xs">
             Variable
           </label>
           <div className="w-full max-w-xs relative z-10">
             <Menu as="div" className="relative inline-block text-left w-full">
-              <MenuButton className="w-full h-10 text-center rounded-xl bg-dark-orange text-lg text-white font-semibold shadow-md transition-all hover:bg-orange focus:outline-none flex items-center justify-center">
+              <MenuButton className="w-full h-10 text-center rounded-xl bg-dark-orange text-lg text-white font-semibold shadow-md transition-all hover:bg-orange focus:outline-hidden flex items-center justify-center">
                 <span>{variableType}</span>
                 <ChevronDownIcon className="-mr-1 size-6 text-white ml-2" />
               </MenuButton>
-              <MenuItems className="absolute left-0 mt-2 w-full origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+              <MenuItems className="absolute left-0 mt-2 w-full origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden z-50">
                 <div className="px-1 py-1">
                   {[
                     "pH",

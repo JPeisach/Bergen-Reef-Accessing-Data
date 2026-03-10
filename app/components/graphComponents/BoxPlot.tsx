@@ -518,7 +518,7 @@ export default function BoxPlot() {
         </h1>
         <div className="flex flex-col">
           <Menu as="div" className="relative inline-block text-left m-3">
-            <MenuButton className="inline-flex w-full justify-center outline outline-1 outline-medium-blue rounded-xl bg-light-blue px-3 py-2 text-md font-semibold text-gray-900 shadow-sm ring-1 ring-gray-300 hover:bg-gray-50">
+            <MenuButton className="inline-flex w-full justify-center outline-solid outline-1 outline-medium-blue rounded-xl bg-light-blue px-3 py-2 text-md font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 hover:bg-gray-50">
               <span className="text-blue font-semibold">
                 {selectedName || "Select Name"}
               </span>

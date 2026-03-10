@@ -66,7 +66,7 @@ export default function ObservationNotepad({}) {
 
   return (
     <div>
-      <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-sm">
+      <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-xs">
         {/* Tank Number */}
         <Field>
           <Label className="mb-2 text-sm font-bold text-dark-orange">
@@ -101,7 +101,7 @@ export default function ObservationNotepad({}) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title here..."
-            className="w-full rounded-xl bg-white p-3 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="w-full rounded-xl bg-white p-3 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
           />
         </Field>
 
@@ -111,7 +111,7 @@ export default function ObservationNotepad({}) {
             Date Range
           </Label>
           <Flatpickr
-            className="w-full bg-white px-2 py-2 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+            className="w-full bg-white px-2 py-2 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
             data-enable-time
             options={{ enableSeconds: true, mode: "range" }}
             value={dateRange}
@@ -127,7 +127,7 @@ export default function ObservationNotepad({}) {
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
           <Input
             name="tags"
-            className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
             placeholder="Enter a list of tags separated by comma..."
             value={tags.join(", ")}
             onChange={(e) =>
@@ -145,7 +145,7 @@ export default function ObservationNotepad({}) {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Enter any notes here..."
-            className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
           />
         </Field>
 

@@ -57,7 +57,7 @@ export default function HomePageElements({
   };
 
   const panelClasses =
-    "relative w-full h-full aspect-[5/6]] overflow-hidden text-center cursor-pointer transition-all duration-200 ease-in-out hover:scale-[1.02] hover:brightness-110 rounded-lg";
+    "relative w-full h-full aspect-5/6] overflow-hidden text-center cursor-pointer transition-all duration-200 ease-in-out hover:scale-[1.02] hover:brightness-110 rounded-lg";
 
   return (
     <div className="h-screen overflow-hidden p-2">

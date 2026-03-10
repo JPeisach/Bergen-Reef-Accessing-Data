@@ -526,7 +526,7 @@ export default function HistoryPageGrid() {
                     </div>
                     <button
                       onClick={handleCreateRow}
-                      className={`w-full bg-white text-dark-orange border border-dark-orange font-bold px-4 py-2 rounded-xl shadow-sm transition-all
+                      className={`w-full bg-white text-dark-orange border border-dark-orange font-bold px-4 py-2 rounded-xl shadow-xs transition-all
                             ${
                               selectedRows.length > 0
                                 ? "opacity-50 cursor-not-allowed"
@@ -539,7 +539,7 @@ export default function HistoryPageGrid() {
 
                     <button
                       onClick={handleDeleteSelectedRows}
-                      className={`w-full bg-white text-red-500 border border-red-500 font-bold px-4 py-2 rounded-xl shadow-sm transition-all
+                      className={`w-full bg-white text-red-500 border border-red-500 font-bold px-4 py-2 rounded-xl shadow-xs transition-all
                             ${
                               selectedRows.length === 0
                                 ? "opacity-50 cursor-not-allowed"
