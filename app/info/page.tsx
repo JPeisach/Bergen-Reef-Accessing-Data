@@ -9,6 +9,7 @@ export default function Page() {
   const { user } = useUser();
   const [tankNumber, setTankNumber] = useState("");
   const [selectedCoral, setSelectedCoral] = useState<string | null>(null);
+  const [tankImages, setTankImages] = useState<{ [key: string]: string }>({});
 
   const coralDetails: { [key: string]: string } = {
     "Mushroom Coral": "Mushroom coral are",
@@ -25,6 +26,10 @@ export default function Page() {
   };
 
   const getTankImage = (tankNum: string) => {
+    if (tankImages[tankNum]) {
+      return tankImages[tankNum];
+    }
+
     switch (tankNum) {
       case "2":
         return "https://www.thesprucepets.com/thmb/M22UH3-0kR74sgHT91kkUn4wKco=/3100x0/filters:no_upscale():strip_icc()/GettyImages-1413740339-5aea18fdc25b41039fa8dc91d687f527.jpg";
@@ -33,12 +38,23 @@ export default function Page() {
       case "4":
         return "https://i.pinimg.com/474x/f9/31/06/f93106fa1161221adf0d6761b82cca5f.jpg";
       default:
-        // Default image (Tank 1 and others)
         return "https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg";
     }
   };
 
   const tankInfo = getTankInfo(tankNumber);
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || !tankNumber) return;
+
+    const imageUrl = URL.createObjectURL(file);
+
+    setTankImages((prev) => ({
+      ...prev,
+      [tankNumber]: imageUrl,
+    }));
+  };
 
   return (
     <div>
@@ -85,6 +101,21 @@ export default function Page() {
                     src={getTankImage(tankNumber)}
                     alt={`Tank ${tankNumber} coral reef aquarium`}
                     className="w-full h-auto object-cover rounded-xl mb-4"
+                  />
+                  <div className="flex justify-center mt-3">
+                    <label
+                      htmlFor="tankUpload"
+                      className="cursor-pointer bg-dark-orange text-white px-4 py-2 rounded-xl font-semibold shadow-md hover:bg-orange-600 transition"
+                    >
+                      Upload Image
+                    </label>
+                  </div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    id="tankUpload"
+                    className="hidden"
                   />
                   <p className="text-dark-orange font-bold text-lg text-center">
                     2/3/2026
