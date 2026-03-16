@@ -46,15 +46,15 @@ export default function Page() {
 
       <div className="relative flex">
         {/* Content */}
-        <div className="p-8 bg-light-orange/30 min-h-screen min-w-full">
-          <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-xs">
+        <div className="p-8 bg-base-100/30 min-h-screen min-w-full">
+          <h1 className="text-3xl font-bold text-primary-content mb-6 text-center drop-shadow-xs">
             Tank Information
           </h1>
 
           {/* Tank Number Dropdown */}
-          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-xs">
+          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-base-100/40 p-5 shadow-lg backdrop-blur-xs">
             <div className="min-w-[200px]">
-              <label className="block text-dark-orange font-bold mb-2 text-sm">
+              <label className="block text-primary-content font-bold mb-2 text-sm">
                 Tank Number
               </label>
               <select
@@ -77,7 +77,7 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Tank Picture */}
               <div>
-                <h2 className="text-xl font-bold text-dark-orange mb-4">
+                <h2 className="text-xl font-bold text-primary-content mb-4">
                   Tank {tankNumber} Picture
                 </h2>
                 <div className="rounded-2xl bg-white/90 p-4 shadow-xl border border-light-orange/20 flex flex-col items-center justify-center min-h-[300px] overflow-hidden">
@@ -86,7 +86,7 @@ export default function Page() {
                     alt={`Tank ${tankNumber} coral reef aquarium`}
                     className="w-full h-auto object-cover rounded-xl mb-4"
                   />
-                  <p className="text-dark-orange font-bold text-lg text-center">
+                  <p className="text-primary-content font-bold text-lg text-center">
                     2/3/2026
                   </p>
                 </div>
@@ -94,7 +94,7 @@ export default function Page() {
 
               {/* Coral Types Information */}
               <div>
-                <h2 className="text-xl font-bold text-dark-orange mb-4">
+                <h2 className="text-xl font-bold text-primary-content mb-4">
                   Coral Types in Tank {tankNumber}
                 </h2>
                 <div className="rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20">
@@ -104,7 +104,7 @@ export default function Page() {
                         <button
                           key={index}
                           onClick={() => setSelectedCoral(coralType)}
-                          className="w-full text-left rounded-lg bg-light-orange/40 px-4 py-3 text-dark-orange font-semibold shadow-xs border border-light-orange/30 hover:bg-light-orange/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
+                          className="w-full text-left rounded-lg bg-base-100/40 px-4 py-3 text-primary-content font-semibold shadow-xs border border-light-orange/30 hover:bg-base-100/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
                         >
                           {coralType}
                         </button>
@@ -162,7 +162,7 @@ export default function Page() {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all border border-light-orange">
                   <Dialog.Title
                     as="h3"
-                    className="text-2xl font-bold leading-6 text-dark-orange mb-4"
+                    className="text-2xl font-bold leading-6 text-primary-content mb-4"
                   >
                     {selectedCoral}
                   </Dialog.Title>
@@ -177,7 +177,7 @@ export default function Page() {
                   <div className="mt-6 flex justify-end">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-xl bg-light-orange/20 px-4 py-2 text-sm font-bold text-dark-orange hover:bg-light-orange/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 transition-colors"
+                      className="inline-flex justify-center rounded-xl bg-base-100/20 px-4 py-2 text-sm font-bold text-primary-content hover:bg-base-100/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 transition-colors"
                       onClick={() => setSelectedCoral(null)}
                     >
                       Close

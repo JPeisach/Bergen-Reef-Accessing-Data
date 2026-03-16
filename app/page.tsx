@@ -16,9 +16,6 @@ export default function Page() {
   const [selectedType, setSelectedType] = useState("Salinity");
 
   return (
-    // TODO: consider https://github.com/saadeghi/theme-change
-    // Until we properly setup  theme colors, for now hardcode which version you want by adding
-    // "data-theme="theme"" - see https://daisyui.com/docs/themes/
     <div className="bg-base-300">
       <NavigationBar defaultIndex={0} username={user ? user.name : "Guest"} />
 

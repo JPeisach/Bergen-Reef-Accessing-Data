@@ -396,7 +396,7 @@ export default function DataLineGraph() {
           {selectedNames.length < 2 && ( // keep to 2 plots for now
             <button
               onClick={addPlot}
-              className="bg-orange outline-solid outline-1 outline-dark-orange drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-orange"
+              className="bg-primary outline-solid outline-1 outline-dark-orange drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-primary"
             >
               Add Another Plot
             </button>

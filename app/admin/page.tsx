@@ -18,7 +18,7 @@ export default function Page() {
         <div className="flex items-right justify-between">
           <a href="/admin">
             <div className="pt-1.5 pr-8">
-              <UserCircleIcon className="size-8 text-orange" />
+              <UserCircleIcon className="size-8 text-primary-content" />
             </div>
           </a>
           <TabGroup defaultIndex={0}>
@@ -30,8 +30,8 @@ export default function Page() {
                       className={clsx(
                         "tab-item px-6 py-2 rounded-full transition",
                         selected
-                          ? "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange"
-                          : "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange",
+                          ? "bg-base-100 text-dark-teal font-semibold hover:bg-medium-orange"
+                          : "bg-base-100 text-dark-teal font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Home
@@ -46,8 +46,8 @@ export default function Page() {
                       className={clsx(
                         "tab-item px-6 py-2 rounded-full transition",
                         selected
-                          ? "bg-orange text-white font-bold"
-                          : "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange",
+                          ? "bg-primary text-white font-bold"
+                          : "bg-base-100 text-dark-teal font-semibold hover:bg-medium-orange",
                       )}
                     >
                       Data
@@ -62,8 +62,8 @@ export default function Page() {
                       className={clsx(
                         "tab-item px-6 py-2 rounded-full transition",
                         selected
-                          ? "bg-orange text-white font-bold"
-                          : "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange",
+                          ? "bg-primary text-white font-bold"
+                          : "bg-base-100 text-dark-teal font-semibold hover:bg-medium-orange",
                       )}
                     >
                       History
@@ -81,14 +81,14 @@ export default function Page() {
       <div className="flex space-x-4">
         <a
           href="../api/auth/login"
-          className="bg-orange text-white px-6 py-2 rounded-full shadow-lg hover:bg-orange transition"
+          className="bg-primary text-white px-6 py-2 rounded-full shadow-lg hover:bg-primary transition"
         >
           Login
         </a>
 
         <a
           href="../api/auth/logout"
-          className="bg-orange text-white px-6 py-2 rounded-full shadow-lg hover:bg-orange transition"
+          className="bg-primary text-white px-6 py-2 rounded-full shadow-lg hover:bg-primary transition"
         >
           Logout
         </a>

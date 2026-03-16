@@ -18,13 +18,13 @@ export default function TankStatsPanel({ panelClass }) {
 
   return (
     <div className={panelClass}>
-      <h2 className="text-lg font-bold text-dark-orange mb-3">Tank 1</h2>
+      <h2 className="text-lg font-bold text-primary-content mb-3">Tank 1</h2>
 
       {/* TODO: Depending on how we insert observations, we need to  make sure any extra data doesn't show up here */}
       {elementData.length == 0 ? (
-        <p className="text-dark-orange">Fetching data...</p>
+        <p className="text-primary-content">Fetching data...</p>
       ) : (
-        <ul className="space-y-1.5 text-sm text-dark-orange/80 font-medium">
+        <ul className="space-y-1.5 text-sm text-primary-content/80 font-medium">
           {elementData.map((element) => {
             if (element != null) {
               return (

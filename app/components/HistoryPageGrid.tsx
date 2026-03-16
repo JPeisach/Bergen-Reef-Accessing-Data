@@ -352,7 +352,7 @@ export default function HistoryPageGrid() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-light-orange/30 h-screen">
+    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-base-100/30 h-screen">
       {/* Left Panel: Ag Grid */}
       <div className="w-full lg:w-3/4 flex flex-col">
         <div
@@ -504,7 +504,7 @@ export default function HistoryPageGrid() {
 
             <button
               onClick={fetchData}
-              className="flex items-center justify-center w-full bg-orange text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-dark-orange hover:shadow-lg"
+              className="flex items-center justify-center w-full bg-primary text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-primary hover:shadow-lg"
             >
               <ArrowPathIcon className="w-6 h-6 mr-2" />
               Refresh
@@ -526,11 +526,11 @@ export default function HistoryPageGrid() {
                     </div>
                     <button
                       onClick={handleCreateRow}
-                      className={`w-full bg-white text-dark-orange border border-dark-orange font-bold px-4 py-2 rounded-xl shadow-xs transition-all
+                      className={`w-full bg-white text-primary-content border border-dark-orange font-bold px-4 py-2 rounded-xl shadow-xs transition-all
                             ${
                               selectedRows.length > 0
                                 ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-dark-orange hover:text-white"
+                                : "hover:bg-primary hover:text-white"
                             }`}
                       disabled={selectedRows.length > 0}
                     >

@@ -28,16 +28,16 @@ export default function Page() {
       <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
 
       <div className="relative flex">
-        <div className="p-8 bg-light-orange/30 min-h-screen min-w-full">
-          <h1 className="text-3xl font-bold text-dark-orange mb-6 text-center drop-shadow-xs">
+        <div className="p-8 bg-base-100/30 min-h-screen min-w-full">
+          <h1 className="text-3xl font-bold text-primary-content mb-6 text-center drop-shadow-xs">
             Observations
           </h1>
 
           {/* TODO: Determine what this will be - a panel to filter observations? */}
-          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-light-orange/40 p-5 shadow-lg backdrop-blur-xs">
+          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-base-100/40 p-5 shadow-lg backdrop-blur-xs">
             {/* Tank numnber dropdown menu */}
             <div className="min-w-[160px]">
-              <label className="block text-dark-orange font-bold mb-2 text-sm">
+              <label className="block text-primary-content font-bold mb-2 text-sm">
                 Tank
               </label>
               <select
@@ -56,7 +56,7 @@ export default function Page() {
 
             {/* coral dropdown */}
             <div className="min-w-[180px]">
-              <label className="block text-dark-orange font-bold mb-2 text-sm">
+              <label className="block text-primary-content font-bold mb-2 text-sm">
                 Coral Type
               </label>
               <select
@@ -75,7 +75,7 @@ export default function Page() {
 
             {/* time input*/}
             <div className="min-w-[160px]">
-              <label className="block text-dark-orange font-bold mb-2 text-sm">
+              <label className="block text-primary-content font-bold mb-2 text-sm">
                 Time
               </label>
               <input
@@ -90,7 +90,7 @@ export default function Page() {
             <button
               type="button"
               onClick={() => setIsNotepadVisible((prev) => !prev)}
-              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-black shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
+              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-2xl font-bold text-black shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-primary"
             >
               {isNotepadVisible ? "−" : "+"}
             </button>

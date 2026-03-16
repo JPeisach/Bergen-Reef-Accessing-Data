@@ -21,13 +21,13 @@ export default function Page() {
   const [selectedGraphType, setSelectedGraphType] = useState("Line");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
 
-  const panelClass = "bg-light-orange/40 p-5 shadow-lg rounded-xl";
+  const panelClass = "bg-base-100/40 p-5 shadow-lg rounded-xl";
 
   return (
     <div>
       <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
 
-      <div className="bg-light-orange/30 h-screen overflow-scroll">
+      <div className="bg-base-100/30 h-screen overflow-scroll">
         <div className="flex relative">
           <div className="p-8 max-w-7xl mx-auto">
             <div
@@ -89,13 +89,13 @@ export default function Page() {
 
                 return (
                   <div key={item.label} className="min-w-[160px]">
-                    <label className="block text-dark-orange font-bold mb-1 text-sm">
+                    <label className="block text-primary-content font-bold mb-1 text-sm">
                       {item.label}
                     </label>
                     <select
                       value={value}
                       onChange={(e) => setValue(e.target.value)}
-                      className="w-left bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                      className="w-left bg-white px-2 py-2 text-sm font-medium text-primary-content focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
                     >
                       {item.options.map((opt) => (
                         <option key={opt} value={opt}>
@@ -107,11 +107,11 @@ export default function Page() {
                 );
               })}
               <div className="min-w-[160px]">
-                <label className="block text-dark-orange font-bold mb-1 text-sm">
+                <label className="block text-primary-content font-bold mb-1 text-sm">
                   Date Range
                 </label>
                 <Flatpickr
-                  className="w-full bg-white px-2 py-2 text-sm font-medium text-dark-orange focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+                  className="w-full bg-white px-2 py-2 text-sm font-medium text-primary-content focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
                   data-enable-time
                   options={{ enableSeconds: true, mode: "range" }}
                   value={dateRange}
@@ -122,7 +122,7 @@ export default function Page() {
               <button
                 type="button"
                 onClick={() => setIsNotepadVisible((prev) => !prev)}
-                className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-dark-orange text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-orange"
+                className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-2xl font-bold text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-primary"
                 aria-label={isNotepadVisible ? "Hide notepad" : "Open notepad"}
               >
                 {isNotepadVisible ? "−" : "+"}
@@ -139,7 +139,7 @@ export default function Page() {
                   dateRange={dateRange}
                 />
 
-                <div className="mt-6 text-sm text-dark-orange/70 text-center italic">
+                <div className="mt-6 text-sm text-primary-content/70 text-center italic">
                   Tank 1 houses numerous types of corals, including mushroom
                   corals, button polyps, leather corals, and bubble corals.
                 </div>

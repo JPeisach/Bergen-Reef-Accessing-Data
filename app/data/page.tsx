@@ -42,7 +42,7 @@ export default function Page() {
           <div className="flex flex-col gap-4 p-6 w-full items-center">
             <a href="/data/linegraph" className="w-full">
               <button
-                className="bg-orange outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-dark-orange w-full"
+                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
                 style={{
                   padding: "8px 16px",
                   fontSize: "16px",
@@ -58,7 +58,7 @@ export default function Page() {
             </a>
             <a href="/data/twodimgraph" className="w-full">
               <button
-                className="bg-orange outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-dark-orange w-full"
+                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
                 style={{
                   padding: "8px 16px",
                   fontSize: "16px",
@@ -74,7 +74,7 @@ export default function Page() {
             </a>
             <a href="/data/boxplot" className="w-full">
               <button
-                className="bg-orange outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-dark-orange w-full"
+                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
                 style={{
                   padding: "8px 16px",
                   fontSize: "16px",
@@ -90,7 +90,7 @@ export default function Page() {
             </a>
             <a href="/data/heatmap" className="w-full">
               <button
-                className="bg-orange outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-dark-orange w-full"
+                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
                 style={{
                   padding: "8px 16px",
                   fontSize: "16px",
