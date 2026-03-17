@@ -1,9 +1,9 @@
-import "../../css/buttons.css";
+import "../../globals.css";
 import { CSVLink } from "react-csv";
 
 export default function DownloadCSVButton({ data }) {
   return (
-    <div className="csv-button">
+    <div className="btn btn-primary content-end">
       <CSVLink data={data}>Download Data</CSVLink>
     </div>
   );

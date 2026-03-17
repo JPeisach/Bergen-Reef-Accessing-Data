@@ -154,7 +154,7 @@ export default function ObservationList({}) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-primary-content mb-4">
+      <h2 className="text-xl font-bold text-base-content mb-4">
         Recent Observations
       </h2>
 
@@ -214,7 +214,7 @@ export default function ObservationList({}) {
                     </>
                   ) : (
                     <>
-                      <h3 className="text-base font-semibold text-primary-content">
+                      <h3 className="text-base font-semibold text-base-content">
                         {obs.observationTitle}
                       </h3>
                       <span className="text-xs text-medium-gray/80">

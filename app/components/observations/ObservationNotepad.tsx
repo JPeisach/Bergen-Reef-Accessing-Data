@@ -69,7 +69,7 @@ export default function ObservationNotepad({}) {
       <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-xs">
         {/* Tank Number */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-primary-content">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Tank Number:
           </Label>
           <Select
@@ -93,7 +93,7 @@ export default function ObservationNotepad({}) {
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary-content">
+          <Label className="mb-2 block text-sm font-bold text-base-content">
             Observation Title
           </Label>
           <Input
@@ -107,7 +107,7 @@ export default function ObservationNotepad({}) {
 
         {/* Date Range */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-primary-content">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Date Range
           </Label>
           <Flatpickr
@@ -121,7 +121,7 @@ export default function ObservationNotepad({}) {
 
         {/* Tags Display */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-primary-content">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Tags
           </Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}

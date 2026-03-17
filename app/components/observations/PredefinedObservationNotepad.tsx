@@ -75,7 +75,7 @@ export default function PredefinedObservationNotepad({
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary-content">
+          <Label className="mb-2 block text-sm font-bold text-base-content">
             Observation Title
           </Label>
           <Input
@@ -91,7 +91,7 @@ export default function PredefinedObservationNotepad({
 
         {/* Tags Display */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-primary-content">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Tags
           </Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
@@ -105,7 +105,7 @@ export default function PredefinedObservationNotepad({
 
         {/* Notes Textbox */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary-content">
+          <Label className="mb-2 block text-sm font-bold text-base-content">
             Notes
           </Label>
           <Textarea

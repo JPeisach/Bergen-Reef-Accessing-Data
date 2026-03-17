@@ -1,7 +1,5 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: all;
-}
+@plugin "daisyui";
 
 /* TODO: Refer to https://daisyui.com/docs/themes/ as we continue to define things here */
 /* https://daisyui.com/theme-generator/#theme=eJxtlOtu4yAQhV8FWaq0KzUIhoth34bYuLHqmAgctbtV330xThMI_mdmvnPmAvJXM5uzbf400_h2WprXpnOT84fQnWwK98a_x-jhsMWPJtgDJSRm3PvUnX7F7xdEEPn9DEEGabXPsJwR-0zn5sXOy50DGjlMiESgBFZK5IqLH8_G_73DfDXFwBG0LSbAdtiqgGapAFtFgFulclGwEe_zEvJWgiImOGZkH6-r8FQFFGIcMIhCZrouZ9t2ZakARBXFmkLNVv5MJX_JokZhTmWume118WZ6XOLWDBHbTss93eB6AthEcU9KYlY0Nc6De7Sf3Gm8MAZYSvoM1lest96jgrM4d1us9BoHDuHhLpN72yIqGYay9xtcbydtlCSRwprnmg_j53F-u7MqzUmVRopjDnqHrfx5eqSUAuICa1L4W--df7S_kZojyqK7qsh6O9triJdFAZOf3r3px2uID26y3ZL8CRbenvPkMNqpTxl4Th3dZykJ4z9bukGZ2zM7Ot_blaaXzxTo7WU5red0mt0Y1n8KiafeDuY6xakGMwX72ly8HawP6Xezxb7_A3F8TlQ */
@@ -158,13 +156,13 @@ h1 {
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-white outline-solid outline-1 outline-medium-gray text-gray font-semibold hover:bg-medium-orange;
+  @apply bg-base-200 outline-neutral text-base-content font-semibold hover:bg-primary/50;
 }
 
 .navbar-tabitem-highlighted {
-  @apply bg-primary outline-solid outline-2 outline-dark-orange text-white font-bold;
+  @apply bg-primary outline-solid outline-primary text-base-300 font-bold;
 }
 
 .navbar-graphs-dropdown-button {
-  @apply block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange;
+  @apply block w-full py-5 text-base-content outline-primary font-semibold hover:bg-primary/50;
 }

@@ -29,7 +29,7 @@ export default function Page() {
 
       <div className="relative flex">
         <div className="p-8 bg-base-100/30 min-h-screen min-w-full">
-          <h1 className="text-3xl font-bold text-primary-content mb-6 text-center drop-shadow-xs">
+          <h1 className="text-3xl font-bold text-base-content mb-6 text-center drop-shadow-xs">
             Observations
           </h1>
 
@@ -37,7 +37,7 @@ export default function Page() {
           <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-base-100/40 p-5 shadow-lg backdrop-blur-xs">
             {/* Tank numnber dropdown menu */}
             <div className="min-w-[160px]">
-              <label className="block text-primary-content font-bold mb-2 text-sm">
+              <label className="block text-base-content font-bold mb-2 text-sm">
                 Tank
               </label>
               <select
@@ -56,7 +56,7 @@ export default function Page() {
 
             {/* coral dropdown */}
             <div className="min-w-[180px]">
-              <label className="block text-primary-content font-bold mb-2 text-sm">
+              <label className="block text-base-content font-bold mb-2 text-sm">
                 Coral Type
               </label>
               <select
@@ -75,7 +75,7 @@ export default function Page() {
 
             {/* time input*/}
             <div className="min-w-[160px]">
-              <label className="block text-primary-content font-bold mb-2 text-sm">
+              <label className="block text-base-content font-bold mb-2 text-sm">
                 Time
               </label>
               <input
