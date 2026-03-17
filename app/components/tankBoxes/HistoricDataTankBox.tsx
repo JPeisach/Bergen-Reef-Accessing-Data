@@ -91,9 +91,10 @@ export default function HistoricDataTankBox({
             <Area
               type="monotone"
               dataKey="value"
-              stroke="#FEB934"
+              stroke="var(--color-primary)"
               dot={false}
-              fill="#FEB93499"
+              fill="var(--color-primary)"
+              fillOpacity={0.5}
               strokeWidth={2.5}
             />
           </AreaChart>
