@@ -54,10 +54,8 @@ export default function RecentDataTankBox({ tankName, variableType }) {
   }, [variableType]);
 
   return (
-    <div className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer">
-      <h2 className="text-xl font-bold text-base mb-4 text-center">
-        Tank {tankName}
-      </h2>
+    <div className="card bg-base-300 card-border rounded-2xl p-6 border-base-100 shadow-xl">
+      <h2 className="text-xl font-bold mb-4 text-center">Tank {tankName}</h2>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ left: -10 }}>
