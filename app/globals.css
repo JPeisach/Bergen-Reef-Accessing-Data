@@ -156,11 +156,11 @@ h1 {
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-base-200 outline-neutral text-base-content font-semibold hover:bg-primary/50;
+  @apply bg-base-200 outline-neutral outline-0 text-base-content font-semibold hover:bg-primary/50;
 }
 
 .navbar-tabitem-highlighted {
-  @apply bg-primary outline-solid outline-primary text-base-300 font-bold;
+  @apply bg-primary outline-neutral outline-primary text-base-300 font-bold;
 }
 
 .navbar-graphs-dropdown-button {
