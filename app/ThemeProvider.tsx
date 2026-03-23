@@ -18,5 +18,5 @@ export default function ThemeProvider({
     localStorage.setItem("data-theme", theme);
   }, [theme]);
 
-  return <body data-theme={theme}>{children}</body>;
+  return <>{children}</>;
 }
