@@ -2,7 +2,6 @@ import { Tab, TabGroup, TabList } from "@headlessui/react";
 import {
   UserCircleIcon,
   Cog6ToothIcon,
-  BellIcon,
 } from "@heroicons/react/24/solid";
 
 import clsx from "clsx";
@@ -210,12 +209,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <button className="w-full py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 bg-white drop-shadow-md border border-gray-100 text-gray font-semibold hover:bg-orange hover:text-white hover:shadow-lg hover:-translate-y-1 active:translate-y-0">
               <Cog6ToothIcon className="size-5" />
               Settings
-            </button>
-          </a>
-          <a href="/notifications">
-            <button className="w-full py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 bg-white drop-shadow-md border border-gray-100 text-gray font-semibold hover:bg-orange hover:text-white hover:shadow-lg hover:-translate-y-1 active:translate-y-0">
-              <BellIcon className="size-5" />
-              Notifications
             </button>
           </a>
         </div>
