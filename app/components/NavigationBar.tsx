@@ -22,7 +22,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 }) => {
   return (
     <>
-      <div className="flex bg-white">
+      <div className="flex bg-base-200">
         <Link href="/">
           <div className="flex items-center gap-3 min-w-0 py-2">
             <img
@@ -37,7 +37,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         </Link>
       </div>
       <div
-        className="navbar flex flex-col items-center justify-between bg-white p-4 drop-shadow-primary rounded-lg h-screen"
+        className="navbar flex flex-col items-center justify-between bg-base-200 p-4 drop-shadow-primary rounded-lg h-screen"
         style={{ position: "relative", zIndex: 10 }}
       >
         <div className="flex flex-col">
