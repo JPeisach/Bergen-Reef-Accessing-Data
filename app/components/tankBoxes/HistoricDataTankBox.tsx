@@ -55,11 +55,12 @@ export default function HistoricDataTankBox({
 
   return (
     // TODO: Show something if dateRange[1] DNE and needs to be entered.
+    // TODO: Hyperlink clicks to indiv tank tab with default info filled out
     <a
-      className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer"
+      className="card bg-base-300 card-border rounded-2xl p-6 border-base-100 shadow-xl"
       href="/info"
     >
-      <h2 className="text-xl font-bold text-base-content mb-4 text-center">
+      <h2 className="text-base-content text-xl font-bold mb-4 text-center">
         Tank {tankName}
       </h2>
       <div className="h-48">
@@ -83,9 +84,12 @@ export default function HistoricDataTankBox({
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #FCD98C",
+                backgroundColor: "var(--color-base-content)",
+                border: "1px solid var(--color-base-content)",
                 borderRadius: "8px",
+              }}
+              itemStyle={{
+                color: "var(--base-text-content)",
               }}
             />
             <Area
