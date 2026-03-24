@@ -60,6 +60,7 @@ export default function HomePageElements({
     "relative w-full h-full aspect-5/6] overflow-hidden text-center cursor-pointer transition-all duration-200 ease-in-out hover:scale-[1.02] hover:brightness-110 rounded-lg";
 
   return (
+    // TODO: suurely there's a better way to do this.
     <div className="h-screen overflow-hidden p-2">
       <div className="h-full grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 grid-rows-3 gap-3">
         {/* PH */}

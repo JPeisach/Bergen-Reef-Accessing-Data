@@ -32,7 +32,7 @@ export default function NotificationsPage() {
 
       <main className="p-10">
         <div className="bg-white rounded-2xl orange shadow-lg p-8 max-w-6xl mx-auto">
-          <h2 className="text-2xl font-semibold text-orange-500 mb-6 text-center">
+          <h2 className="text-2xl font-semibold text-primary-content-500 mb-6 text-center">
             Tank Notifications
           </h2>
 
@@ -67,7 +67,7 @@ export default function NotificationsPage() {
                     </span>
                   </td>
 
-                  <td className="py-4 text-dark-orange rounded-r-xl">
+                  <td className="py-4 text-primary-content rounded-r-xl">
                     {tank.updated}
                   </td>
                 </tr>

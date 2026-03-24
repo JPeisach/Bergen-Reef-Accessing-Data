@@ -1,6 +1,79 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+/* TODO: Refer to https://daisyui.com/docs/themes/ as we continue to define things here */
+/* https://daisyui.com/theme-generator/#theme=eJxtlOtu4yAQhV8FWaq0KzUIhoth34bYuLHqmAgctbtV330xThMI_mdmvnPmAvJXM5uzbf400_h2WprXpnOT84fQnWwK98a_x-jhsMWPJtgDJSRm3PvUnX7F7xdEEPn9DEEGabXPsJwR-0zn5sXOy50DGjlMiESgBFZK5IqLH8_G_73DfDXFwBG0LSbAdtiqgGapAFtFgFulclGwEe_zEvJWgiImOGZkH6-r8FQFFGIcMIhCZrouZ9t2ZakARBXFmkLNVv5MJX_JokZhTmWume118WZ6XOLWDBHbTss93eB6AthEcU9KYlY0Nc6De7Sf3Gm8MAZYSvoM1lest96jgrM4d1us9BoHDuHhLpN72yIqGYay9xtcbydtlCSRwprnmg_j53F-u7MqzUmVRopjDnqHrfx5eqSUAuICa1L4W--df7S_kZojyqK7qsh6O9triJdFAZOf3r3px2uID26y3ZL8CRbenvPkMNqpTxl4Th3dZykJ4z9bukGZ2zM7Ot_blaaXzxTo7WU5red0mt0Y1n8KiafeDuY6xakGMwX72ly8HawP6Xezxb7_A3F8TlQ */
+
+@plugin "daisyui/theme" {
+  name: "brad";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: #ffdbc1;
+  --color-base-200: #ffffff;
+  --color-base-300: oklch(95% 0 0);
+  --color-base-content: #ed683b;
+  --color-primary: #f37366;
+  --color-primary-content: oklch(93% 0.034 272.788);
+  --color-secondary: oklch(65% 0.241 354.308);
+  --color-secondary-content: oklch(94% 0.028 342.258);
+  --color-accent: oklch(77% 0.152 181.912);
+  --color-accent-content: oklch(38% 0.063 188.416);
+  --color-neutral: oklch(14% 0.005 285.823);
+  --color-neutral-content: oklch(92% 0.004 286.32);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: oklch(76% 0.177 163.223);
+  --color-success-content: oklch(37% 0.077 168.94);
+  --color-warning: oklch(82% 0.189 84.429);
+  --color-warning-content: oklch(41% 0.112 45.904);
+  --color-error: oklch(71% 0.194 13.428);
+  --color-error-content: oklch(27% 0.105 12.094);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "sea-green";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: #f0fbf8;
+  --color-base-200: #ffffff;
+  --color-base-300: oklch(95% 0 0);
+  --color-base-content: #2f9e83;
+  --color-primary: #a5dccc;
+  --color-primary-content: oklch(93% 0.034 272.788);
+  --color-secondary: #2f9e83;
+  --color-secondary-content: oklch(94% 0.028 342.258);
+  --color-accent: oklch(77% 0.152 181.912);
+  --color-accent-content: oklch(38% 0.063 188.416);
+  --color-neutral: oklch(14% 0.005 285.823);
+  --color-neutral-content: oklch(92% 0.004 286.32);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: oklch(76% 0.177 163.223);
+  --color-success-content: oklch(37% 0.077 168.94);
+  --color-warning: oklch(82% 0.189 84.429);
+  --color-warning-content: oklch(41% 0.112 45.904);
+  --color-error: oklch(71% 0.194 13.428);
+  --color-error-content: oklch(27% 0.105 12.094);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
 @config '../tailwind.config.js';
 
 /*
@@ -118,13 +191,13 @@ h1 {
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-white outline-solid outline-1 outline-medium-gray text-gray font-semibold hover:bg-medium-orange;
+  @apply bg-base-200 outline-neutral outline-0 text-base-content font-semibold hover:bg-primary/50;
 }
 
 .navbar-tabitem-highlighted {
-  @apply bg-orange outline-solid outline-2 outline-dark-orange text-white font-bold;
+  @apply bg-primary outline-neutral outline-primary text-base-300 font-bold;
 }
 
 .navbar-graphs-dropdown-button {
-  @apply block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange;
+  @apply block w-full py-5 text-base-content outline-primary font-semibold hover:bg-primary/50;
 }

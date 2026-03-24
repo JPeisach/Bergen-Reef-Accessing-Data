@@ -27,13 +27,13 @@ export default function Page() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="bg-light-orange/40 min-h-screen">
+    <div className="bg-base-100/40 min-h-screen">
       <NavigationBar defaultIndex={-1} username={user ? user.name : "Guest"} />
       <br></br>
       <br></br>
 
       {/* top white box*/}
-      <div className="bg-dark-orange/30 rounded shadow-sm p-6 flex justify-between items-center w-3/4 mx-auto">
+      <div className="bg-primary/30 rounded shadow-sm p-6 flex justify-between items-center w-3/4 mx-auto">
         <div className="flex items-center gap-4">
           {user ? (
             <>
@@ -65,7 +65,7 @@ export default function Page() {
               </div>
               <a
                 href="/auth/login"
-                className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-orange-600 transition text-center"
+                className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-primary-600 transition text-center"
                 style={{
                   padding: "8px 16px",
                   fontSize: "16px",

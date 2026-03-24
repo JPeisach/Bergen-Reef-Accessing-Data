@@ -69,7 +69,7 @@ export default function ObservationNotepad({}) {
       <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-xs">
         {/* Tank Number */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-dark-orange">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Tank Number:
           </Label>
           <Select
@@ -93,7 +93,7 @@ export default function ObservationNotepad({}) {
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-dark-orange">
+          <Label className="mb-2 block text-sm font-bold text-base-content">
             Observation Title
           </Label>
           <Input
@@ -107,7 +107,7 @@ export default function ObservationNotepad({}) {
 
         {/* Date Range */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-dark-orange">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Date Range
           </Label>
           <Flatpickr
@@ -121,7 +121,7 @@ export default function ObservationNotepad({}) {
 
         {/* Tags Display */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-dark-orange">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Tags
           </Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
@@ -138,7 +138,7 @@ export default function ObservationNotepad({}) {
 
         {/* Notes Textbox */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-dark-orange">
+          <Label className="mb-2 block text-sm font-bold text-primary-content">
             Notes
           </Label>
           <Textarea
@@ -166,7 +166,7 @@ export default function ObservationNotepad({}) {
               handleSave();
               window.location.reload();
             }}
-            className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
+            className="rounded-xl bg-primary px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-primary disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
             disabled={
               notes.trim() === "" || title === "" || status === "sending"
             }

@@ -75,7 +75,7 @@ export default function PredefinedObservationNotepad({
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-dark-orange">
+          <Label className="mb-2 block text-sm font-bold text-base-content">
             Observation Title
           </Label>
           <Input
@@ -91,7 +91,7 @@ export default function PredefinedObservationNotepad({
 
         {/* Tags Display */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-dark-orange">
+          <Label className="mb-2 text-sm font-bold text-base-content">
             Tags
           </Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
@@ -105,7 +105,7 @@ export default function PredefinedObservationNotepad({
 
         {/* Notes Textbox */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-dark-orange">
+          <Label className="mb-2 block text-sm font-bold text-base-content">
             Notes
           </Label>
           <Textarea
@@ -130,7 +130,7 @@ export default function PredefinedObservationNotepad({
           )}
           <button
             onClick={handleSave}
-            className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
+            className="rounded-xl bg-primary px-8 py-3 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-lg hover:bg-primary disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
             disabled={
               notes.trim() === "" || title === "" || status === "sending"
             }

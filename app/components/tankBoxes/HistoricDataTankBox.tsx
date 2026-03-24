@@ -59,7 +59,7 @@ export default function HistoricDataTankBox({
       className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer"
       href="/info"
     >
-      <h2 className="text-xl font-bold text-dark-orange mb-4 text-center">
+      <h2 className="text-xl font-bold text-base-content mb-4 text-center">
         Tank {tankName}
       </h2>
       <div className="h-48">
@@ -91,9 +91,10 @@ export default function HistoricDataTankBox({
             <Area
               type="monotone"
               dataKey="value"
-              stroke="#FEB934"
+              stroke="var(--color-primary)"
               dot={false}
-              fill="#FEB93499"
+              fill="var(--color-primary)"
+              fillOpacity={0.5}
               strokeWidth={2.5}
             />
           </AreaChart>

@@ -128,7 +128,7 @@ const HistoryPageDialog = ({
                       Cancel
                     </button>
                     <button
-                      className="bg-orange text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-dark-orange"
+                      className="bg-primary text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-primary"
                       onClick={onConfirm}
                     >
                       Delete
@@ -137,7 +137,7 @@ const HistoryPageDialog = ({
                 ) : (
                   <Transition as={Fragment}>
                     <button
-                      className="bg-orange text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-dark-orange"
+                      className="bg-primary text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-primary"
                       onClick={onClose}
                     >
                       Close

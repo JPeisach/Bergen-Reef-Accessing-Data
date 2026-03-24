@@ -126,7 +126,7 @@ export default function HomePageGraph({
         {/* DROPDOWN MENU */}
         <div className="w-full mb-4">
           <Menu as="div" className="relative inline-block text-left w-full">
-            <MenuButton className="w-full h-10 text-center rounded-md bg-dark-orange md:text-lg text-white font-semibold ring-1 ring-black/5 transition focus:outline-hidden flex items-center justify-center">
+            <MenuButton className="w-full h-10 text-center rounded-md bg-primary md:text-lg text-white font-semibold ring-1 ring-black/5 transition focus:outline-hidden flex items-center justify-center">
               <span>{selectedType}</span>
               <ChevronDownIcon className="-mr-1 size-6 text-white ml-2" />
             </MenuButton>
@@ -134,7 +134,7 @@ export default function HomePageGraph({
               <MenuItem>
                 <button
                   onClick={() => handleChange({ target: { value: "pH" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-primary/20"
                 >
                   PH
                 </button>
@@ -144,7 +144,7 @@ export default function HomePageGraph({
                   onClick={() =>
                     handleChange({ target: { value: "Salinity" } })
                   }
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-primary/20"
                 >
                   Salinity
                 </button>
@@ -154,7 +154,7 @@ export default function HomePageGraph({
                   onClick={() =>
                     handleChange({ target: { value: "Temperature" } })
                   }
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-primary/20"
                 >
                   Temperature
                 </button>
@@ -162,7 +162,7 @@ export default function HomePageGraph({
               <MenuItem>
                 <button
                   onClick={() => handleChange({ target: { value: "ORP" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-primary/20"
                 >
                   Oxidation Reduction Potential (ORP)
                 </button>
@@ -172,7 +172,7 @@ export default function HomePageGraph({
                   onClick={() =>
                     handleChange({ target: { value: "Alkalinity" } })
                   }
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-primary/20"
                 >
                   Alkalinity
                 </button>
@@ -180,7 +180,7 @@ export default function HomePageGraph({
               <MenuItem>
                 <button
                   onClick={() => handleChange({ target: { value: "Calcium" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-primary/20"
                 >
                   Calcium
                 </button>
@@ -220,9 +220,10 @@ export default function HomePageGraph({
                 <Area
                   type="monotone"
                   dataKey="value"
-                  stroke="#feb934"
+                  stroke="var(--color-primary)"
                   dot={false}
-                  fill="#feb93499"
+                  fill="var(--color-primary)"
+                  fillOpacity={0.5}
                   strokeWidth={2.5}
                 />
               </AreaChart>
