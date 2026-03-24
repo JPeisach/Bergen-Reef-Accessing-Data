@@ -55,7 +55,9 @@ export default function RecentDataTankBox({ tankName, variableType }) {
 
   return (
     <div className="card bg-base-300 card-border rounded-2xl p-6 border-base-100 shadow-xl">
-      <h2 className="text-xl font-bold mb-4 text-center">Tank {tankName}</h2>
+      <h2 className="text-base-content text-xl font-bold mb-4 text-center">
+        Tank {tankName}
+      </h2>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ left: -10 }}>
@@ -77,9 +79,12 @@ export default function RecentDataTankBox({ tankName, variableType }) {
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #FCD98C",
+                backgroundColor: "var(--color-base-content)",
+                border: "1px solid var(--color-base-content)",
                 borderRadius: "8px",
+              }}
+              itemStyle={{
+                color: "var(--base-text-content)",
               }}
             />
             <Area
