@@ -64,8 +64,7 @@ export default function SettingsPage() {
             Settings
           </h1>
           <p className="settings-subtext mt-3 text-center text-base">
-            Pick a theme for the dashboard. Your choice updates the whole site
-            instantly.
+            Pick a theme for the dashboard.
           </p>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
