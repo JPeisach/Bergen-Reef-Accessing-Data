@@ -20,7 +20,7 @@ const StepSlider: React.FC<StepSliderProps> = ({ value, onChange }) => {
   };
 
   return (
-    <div className="w-full bg-teal rounded-xl text-white p-2 m-1 mt-2">
+    <div className="w-full bg-accent text-accent-content rounded-xl p-2 m-1 mt-2">
       <div className="ml-4 text-left text-m font-semibold">
         # of Weeks Represented: {sliderValue}
       </div>
@@ -30,7 +30,7 @@ const StepSlider: React.FC<StepSliderProps> = ({ value, onChange }) => {
         max="12"
         value={sliderValue}
         onChange={handleChange}
-        className="ml-4 w-11/12 h-2 bg-gray-400 rounded-lg cursor-pointer accent-dark-orange"
+        className="ml-4 w-11/12 h-2 bg-base-300 rounded-lg cursor-pointer accent-primary"
       />
     </div>
   );

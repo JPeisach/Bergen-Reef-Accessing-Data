@@ -68,14 +68,14 @@ export default function PredefinedObservationNotepad({
   return (
     <div>
       {/* FIXME: HARDCODED STYLING FOR INDIV TANKS TAB (this is stupid!!) */}
-      <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-sm">
+      <div className="w-full space-y-5 rounded-2xl bg-base-100 border border-base-300 p-6 shadow-xl backdrop-blur-sm">
         {/* Tank Number */}
 
         {/* Observation Title */}
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-dark-orange">
+          <Label className="mb-2 block text-sm font-bold text-primary">
             Observation Title
           </Label>
           <Input
@@ -83,7 +83,7 @@ export default function PredefinedObservationNotepad({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title here..."
-            className="w-full rounded-xl bg-white p-3 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="w-full rounded-xl bg-base-100 border border-base-300 p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
           />
         </Field>
 
@@ -91,13 +91,13 @@ export default function PredefinedObservationNotepad({
 
         {/* Tags Display */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-dark-orange">
+          <Label className="mb-2 text-sm font-bold text-primary">
             Tags
           </Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
           <Input
             name="tags"
-            className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="w-full rounded-xl bg-base-100 border border-base-300 resize-none p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
             placeholder="Enter a list of tags separated by comma..."
             onChange={(e) => setTags(e.target.value.split(","))}
           ></Input>
@@ -105,32 +105,32 @@ export default function PredefinedObservationNotepad({
 
         {/* Notes Textbox */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-dark-orange">
+          <Label className="mb-2 block text-sm font-bold text-primary">
             Notes
           </Label>
           <Textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Enter any notes here..."
-            className="h-32 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-light-orange shadow-sm transition-all"
+            className="h-32 w-full resize-none rounded-xl bg-base-100 border border-base-300 p-4 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
           />
         </Field>
 
         {/* Save Button */}
         <div className="flex flex-col items-end gap-2 pt-2">
           {status === "error" && (
-            <p className="text-sm text-red-600 font-medium">
+            <p className="text-sm text-error font-medium">
               Failed to save observation.
             </p>
           )}
           {status === "success" && (
-            <p className="text-sm text-green-600 font-medium">
+            <p className="text-sm text-success font-medium">
               Observation saved successfully!
             </p>
           )}
           <button
             onClick={handleSave}
-            className="rounded-xl bg-dark-orange px-8 py-3 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-lg hover:bg-orange disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
+            className="rounded-xl bg-primary px-8 py-3 text-sm font-bold text-primary-content transition-all hover:scale-105 hover:shadow-lg hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-base-300 disabled:text-base-content/50 disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
             disabled={
               notes.trim() === "" || title === "" || status === "sending"
             }

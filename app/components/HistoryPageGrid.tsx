@@ -352,11 +352,11 @@ export default function HistoryPageGrid() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-light-orange/30 h-screen">
+    <div className="flex flex-col lg:flex-row gap-6 p-6 min-h-[calc(100vh-100px)] bg-base-200 h-screen">
       {/* Left Panel: Ag Grid */}
       <div className="w-full lg:w-3/4 flex flex-col">
         <div
-          className="ag-theme-quartz w-full shadow-lg rounded-xl overflow-hidden border border-light-orange/20 bg-white"
+          className="ag-theme-quartz w-full shadow-lg rounded-xl overflow-hidden border border-base-300 bg-base-100"
           style={{ height: "70vh" }}
         >
           <AgGridReact
@@ -479,9 +479,9 @@ export default function HistoryPageGrid() {
 
       {/* Right Panel: Actions */}
       <div className="w-full lg:w-1/4 flex flex-col gap-6">
-        <div className="bg-white rounded-2xl shadow-xl p-6 border border-light-orange/20 sticky top-6">
-          <div className="bg-teal rounded-xl p-4 mb-6 shadow-md">
-            <h2 className="text-xl text-white font-bold text-center">
+        <div className="bg-base-100 rounded-2xl shadow-xl p-6 border border-base-300 sticky top-6">
+          <div className="bg-accent text-accent-content rounded-xl p-4 mb-6 shadow-md">
+            <h2 className="text-xl font-bold text-center">
               Actions
             </h2>
           </div>
@@ -489,7 +489,7 @@ export default function HistoryPageGrid() {
           <div className="flex flex-col gap-4">
             <button
               onClick={handleGuideClick}
-              className="flex items-center justify-center w-full bg-medium-teal text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-dark-teal hover:shadow-lg"
+              className="flex items-center justify-center w-full bg-secondary text-secondary-content font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:brightness-110 hover:shadow-lg"
             >
               <QuestionMarkCircleIcon className="w-6 h-6 mr-2" />
               How to Use
@@ -497,40 +497,40 @@ export default function HistoryPageGrid() {
 
             <button
               onClick={() => gridApiRef.current?.setFilterModel(null)}
-              className="w-full bg-light-gray text-gray font-semibold px-4 py-3 rounded-xl shadow-md border border-medium-gray/30 transition-all hover:bg-medium-gray hover:text-white"
+              className="w-full bg-base-200 text-base-content font-semibold px-4 py-3 rounded-xl shadow-md border border-base-300 transition-all hover:bg-base-300"
             >
               Clear Filters
             </button>
 
             <button
               onClick={fetchData}
-              className="flex items-center justify-center w-full bg-orange text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-dark-orange hover:shadow-lg"
+              className="flex items-center justify-center w-full bg-primary text-primary-content font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-primary/90 hover:shadow-lg"
             >
               <ArrowPathIcon className="w-6 h-6 mr-2" />
               Refresh
             </button>
 
             {isAdmin && (
-              <div className="w-full flex flex-col gap-4 mt-4 pt-4 border-t border-gray/20">
+              <div className="w-full flex flex-col gap-4 mt-4 pt-4 border-t border-base-300">
                 <button
                   onClick={() => setIsEditing((prev) => !prev)}
-                  className="w-full bg-neutral-600 text-white font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:bg-neutral-700"
+                  className="w-full bg-neutral text-neutral-content font-semibold px-4 py-3 rounded-xl shadow-md transition-all hover:brightness-110"
                 >
                   {isEditing ? "Exit Edit Mode" : "Enter Edit Mode"}
                 </button>
 
                 {isEditing && (
-                  <div className="w-full flex flex-col gap-3 bg-light-teal/20 p-4 rounded-xl border border-teal/20">
-                    <div className="text-teal font-bold text-center mb-2 uppercase text-sm tracking-wider">
+                  <div className="w-full flex flex-col gap-3 bg-accent/10 p-4 rounded-xl border border-accent/30">
+                    <div className="text-accent font-bold text-center mb-2 uppercase text-sm tracking-wider">
                       Edit Controls
                     </div>
                     <button
                       onClick={handleCreateRow}
-                      className={`w-full bg-white text-dark-orange border border-dark-orange font-bold px-4 py-2 rounded-xl shadow-sm transition-all
+                      className={`w-full bg-base-100 text-primary border border-primary font-bold px-4 py-2 rounded-xl shadow-sm transition-all
                             ${
                               selectedRows.length > 0
                                 ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-dark-orange hover:text-white"
+                                : "hover:bg-primary hover:text-primary-content"
                             }`}
                       disabled={selectedRows.length > 0}
                     >
@@ -539,11 +539,11 @@ export default function HistoryPageGrid() {
 
                     <button
                       onClick={handleDeleteSelectedRows}
-                      className={`w-full bg-white text-red-500 border border-red-500 font-bold px-4 py-2 rounded-xl shadow-sm transition-all
+                      className={`w-full bg-base-100 text-error border border-error font-bold px-4 py-2 rounded-xl shadow-sm transition-all
                             ${
                               selectedRows.length === 0
                                 ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-red-500 hover:text-white"
+                                : "hover:bg-error hover:text-error-content"
                             }`}
                       disabled={selectedRows.length === 0}
                     >
@@ -552,7 +552,7 @@ export default function HistoryPageGrid() {
 
                     <button
                       onClick={saveChanges}
-                      className={`w-full bg-green-500 text-white font-bold px-4 py-2 rounded-xl shadow-md transition-all hover:bg-green-600
+                      className={`w-full bg-success text-success-content font-bold px-4 py-2 rounded-xl shadow-md transition-all hover:brightness-110
                           ${
                             Object.keys(editedRows).length === 0
                               ? "opacity-50 cursor-not-allowed"

@@ -2,5 +2,14 @@
 
 .csv-button {
   text-align: center;
-  color: #feb934;
+  color: hsl(var(--p) / 1);
+}
+
+.csv-button a {
+  color: inherit;
+  font-weight: 600;
+}
+
+.csv-button a:hover {
+  opacity: 0.9;
 }

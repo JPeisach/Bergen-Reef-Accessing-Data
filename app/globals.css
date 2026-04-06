@@ -2,84 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* dark mode options commented out */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --settings-page-bg: #fff7e2;
-  --settings-panel-bg: #ffffff;
-  --settings-border: #ffe0a5;
-  --settings-title: #ffa900;
-  --settings-subtext: #8a6d3b;
-  --theme-chip-bg: #fff2d0;
-  --theme-chip-border: #ffd37a;
-  --theme-chip-active: #ffb93a;
-  --theme-chip-active-text: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --settings-page-bg: #111827;
-  --settings-panel-bg: #1f2937;
-  --settings-border: #374151;
-  --settings-title: #f9b24a;
-  --settings-subtext: #d1d5db;
-  --theme-chip-bg: #111827;
-  --theme-chip-border: #4b5563;
-  --theme-chip-active: #f59e0b;
-  --theme-chip-active-text: #111827;
-}
-
-.coral-pink {
-  --background: #fff4f6;
-  --foreground: #4a2f34;
-  --settings-page-bg: #ffecef;
-  --settings-panel-bg: #fff8f9;
-  --settings-border: #ffc1cc;
-  --settings-title: #e86a84;
-  --settings-subtext: #8b4b58;
-  --theme-chip-bg: #ffe6ec;
-  --theme-chip-border: #f6a8b7;
-  --theme-chip-active: #eb718d;
-  --theme-chip-active-text: #ffffff;
-}
-
-.sea-green {
-  --background: #f0fbf8;
-  --foreground: #153c34;
-  --settings-page-bg: #e4f7f1;
-  --settings-panel-bg: #f7fdfb;
-  --settings-border: #a5dccc;
-  --settings-title: #2f9e83;
-  --settings-subtext: #356f61;
-  --theme-chip-bg: #e5f7f1;
-  --theme-chip-border: #9fd7c6;
-  --theme-chip-active: #2f9e83;
-  --theme-chip-active-text: #ffffff;
-}
-
-.light-blue {
-  --background: #eef7ff;
-  --foreground: #1f3550;
-  --settings-page-bg: #e0f0ff;
-  --settings-panel-bg: #f6fbff;
-  --settings-border: #a7cfff;
-  --settings-title: #3b82f6;
-  --settings-subtext: #3f648d;
-  --theme-chip-bg: #e8f2ff;
-  --theme-chip-border: #9ec7f8;
-  --theme-chip-active: #3b82f6;
-  --theme-chip-active-text: #ffffff;
-}
-
 @layer base {
   @font-face {
     font-family: "Montserrat";
@@ -88,40 +10,6 @@
     font-display: swap;
     src: url(../public/fonts/Montserrat-VariableFont_wght.ttf) format("tff");
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
-.settings-page-bg {
-  background: var(--settings-page-bg);
-}
-
-.settings-panel-bg {
-  background: var(--settings-panel-bg);
-  border-color: var(--settings-border);
-}
-
-.settings-title {
-  color: var(--settings-title);
-}
-
-.settings-subtext {
-  color: var(--settings-subtext);
-}
-
-.theme-chip {
-  background: var(--theme-chip-bg);
-  border-color: var(--theme-chip-border);
-  color: var(--foreground);
-}
-
-.theme-chip-active {
-  background: var(--theme-chip-active);
-  border-color: var(--theme-chip-active);
-  color: var(--theme-chip-active-text);
 }
 
 h1 {
@@ -134,7 +22,7 @@ h1 {
 }
 
 .ag-paging-panel > span {
-  color: black !important;
+  color: hsl(var(--bc) / 1) !important;
 }
 
 .ag-root-wrapper {
@@ -186,13 +74,13 @@ h1 {
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-white outline outline-1 outline-medium-gray text-gray font-semibold hover:bg-medium-orange;
+  @apply bg-base-100 outline outline-1 outline-base-300 text-base-content font-semibold hover:bg-base-200;
 }
 
 .navbar-tabitem-highlighted {
-  @apply bg-orange outline outline-2 outline-dark-orange text-white font-bold;
+  @apply bg-primary outline outline-2 outline-primary text-primary-content font-bold;
 }
 
 .navbar-graphs-dropdown-button {
-  @apply block w-full py-5 text-base text-gray font-semibold hover:bg-medium-orange;
+  @apply block w-full py-5 text-base text-base-content font-semibold hover:bg-base-200;
 }

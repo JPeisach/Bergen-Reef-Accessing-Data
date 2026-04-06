@@ -103,14 +103,14 @@ const UserList = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-bold mb-4 text-orange">Users</h2>
+    <div className="bg-base-100 border border-base-300 rounded-lg shadow-lg p-6">
+      <h2 className="text-xl font-bold mb-4 text-primary">Users</h2>
       <div className="h-72 overflow-y-auto pr-2">
         <ul>
           {users.map((user) => (
             <li
               key={user.user_id}
-              className="flex justify-between items-center px-2 py-2 bg-white rounded shadow-sm"
+              className="flex justify-between items-center px-2 py-2 bg-base-200 rounded shadow-sm border border-base-300"
             >
               <button
                 onClick={() => {
@@ -142,7 +142,7 @@ const UserList = () => {
                     handleRemoveAdmin(user.user_id);
                   }
                 }}
-                className="ml-10 bg-teal text-white px-2 py-1 rounded"
+                className="ml-10 bg-secondary text-secondary-content px-2 py-1 rounded border border-base-300"
                 disabled={loading}
               >
                 <option value="admin">Administrator</option>

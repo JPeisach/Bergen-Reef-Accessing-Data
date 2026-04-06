@@ -50,7 +50,7 @@ const CustomTooltip = ({
     date.setHours(date.getHours() + 6);
 
     return (
-      <div className="bg-white p-2 border border-gray-200 rounded shadow">
+      <div className="bg-base-100 p-2 border border-base-300 rounded shadow text-base-content">
         <p className="text-sm">{date.toLocaleString()}</p>
         <p className="text-sm font-semibold">{`${selectedType}: ${payload[0].value}`}</p>
       </div>
@@ -125,15 +125,15 @@ export default function HomePageGraph({
         {/* DROPDOWN MENU */}
         <div className="w-full mb-4">
           <Menu as="div" className="relative inline-block text-left w-full">
-            <MenuButton className="w-full h-10 text-center rounded-md bg-dark-orange md:text-lg text-white font-semibold ring-1 ring-black/5 transition focus:outline-none flex items-center justify-center">
+            <MenuButton className="w-full h-10 text-center rounded-md bg-primary md:text-lg text-primary-content font-semibold ring-1 ring-base-300 transition focus:outline-none flex items-center justify-center">
               <span>{selectedType}</span>
-              <ChevronDownIcon className="-mr-1 size-6 text-white ml-2" />
+              <ChevronDownIcon className="-mr-1 size-6 text-primary-content ml-2" />
             </MenuButton>
-            <MenuItems className="absolute left-1/2 -translate-x-1/2 mt-2 w-full bg-white rounded-xl shadow-lg ring-1 ring-black/5 z-50">
+            <MenuItems className="absolute left-1/2 -translate-x-1/2 mt-2 w-full bg-base-100 rounded-xl shadow-lg ring-1 ring-base-300 z-50">
               <MenuItem>
                 <button
                   onClick={() => handleChange({ target: { value: "pH" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                 >
                   PH
                 </button>
@@ -143,7 +143,7 @@ export default function HomePageGraph({
                   onClick={() =>
                     handleChange({ target: { value: "Salinity" } })
                   }
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                 >
                   Salinity
                 </button>
@@ -153,7 +153,7 @@ export default function HomePageGraph({
                   onClick={() =>
                     handleChange({ target: { value: "Temperature" } })
                   }
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                 >
                   Temperature
                 </button>
@@ -161,7 +161,7 @@ export default function HomePageGraph({
               <MenuItem>
                 <button
                   onClick={() => handleChange({ target: { value: "ORP" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                 >
                   Oxidation Reduction Potential (ORP)
                 </button>
@@ -171,7 +171,7 @@ export default function HomePageGraph({
                   onClick={() =>
                     handleChange({ target: { value: "Alkalinity" } })
                   }
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                 >
                   Alkalinity
                 </button>
@@ -179,7 +179,7 @@ export default function HomePageGraph({
               <MenuItem>
                 <button
                   onClick={() => handleChange({ target: { value: "Calcium" } })}
-                  className="text-dark-orange block w-full px-4 py-2 text-md font-semibold hover:bg-light-orange"
+                  className="text-primary block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                 >
                   Calcium
                 </button>
@@ -189,7 +189,7 @@ export default function HomePageGraph({
         </div>
 
         {/* GRAPH CONTAINER */}
-        <div className="w-full h-[65vh] 2xl:h-[73vh] bg-white rounded-lg p-3 overflow-hidden">
+        <div className="w-full h-[65vh] 2xl:h-[73vh] bg-base-100 border border-base-300 rounded-lg p-3 overflow-hidden">
           <div className="w-full h-full">
             {/* stupid height = 90 so it stays in the box*/}
             <ResponsiveContainer width="100%" height="90%">
@@ -219,9 +219,9 @@ export default function HomePageGraph({
                 <Area
                   type="monotone"
                   dataKey="value"
-                  stroke="#feb934"
+                  stroke="hsl(var(--p) / 1)"
                   dot={false}
-                  fill="#feb93499"
+                  fill="hsl(var(--p) / 0.45)"
                   strokeWidth={2.5}
                 />
               </AreaChart>
@@ -230,7 +230,7 @@ export default function HomePageGraph({
         </div>
 
         {/* TEXT AREA */}
-        <div className="mt-4 w-full p-4 bg-white drop-shadow-orange rounded-lg text-base md:text-lg">
+        <div className="mt-4 w-full p-4 bg-base-100 border border-base-300 shadow-md rounded-lg text-base md:text-lg text-base-content">
           {selectedInfo}
         </div>
       </div>

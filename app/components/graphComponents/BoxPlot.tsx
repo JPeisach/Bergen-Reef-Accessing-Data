@@ -497,7 +497,7 @@ export default function BoxPlot() {
   return (
     <div className="grid grid-cols-3 gap-7 h-full p-5">
       <div
-        className="col-span-2 bg-white ml-8 pr-8 pt-3 pb-3 rounded-lg flex justify-center items-center"
+        className="col-span-2 bg-base-100 border border-base-300 ml-8 pr-8 pt-3 pb-3 rounded-lg flex justify-center items-center"
         style={{ height: `${availableHeight}px` }}
       >
         <div className="w-full h-full relative overflow-hidden">
@@ -513,23 +513,23 @@ export default function BoxPlot() {
         className="graph-settings-panel"
         style={{ height: `${availableHeight}px` }}
       >
-        <h1 className="text-xl bg-teal drop-shadow-xl text-white text-center font-semibold rounded-lg p-4">
+        <h1 className="text-xl bg-accent text-accent-content drop-shadow-xl text-center font-semibold rounded-lg p-4">
           Box Plot
         </h1>
         <div className="flex flex-col">
           <Menu as="div" className="relative inline-block text-left m-3">
-            <MenuButton className="inline-flex w-full justify-center outline outline-1 outline-medium-blue rounded-xl bg-light-blue px-3 py-2 text-md font-semibold text-gray-900 shadow-sm ring-1 ring-gray-300 hover:bg-gray-50">
-              <span className="text-blue font-semibold">
+            <MenuButton className="inline-flex w-full justify-center outline outline-1 outline-base-300 rounded-xl bg-base-200 px-3 py-2 text-md font-semibold text-base-content shadow-sm ring-1 ring-base-300 hover:bg-base-300">
+              <span className="text-info font-semibold">
                 {selectedName || "Select Name"}
               </span>
-              <ChevronDownIcon className="-mr-1 size-6 text-blue" />
+              <ChevronDownIcon className="-mr-1 size-6 text-info" />
             </MenuButton>
-            <MenuItems className="w-full z-50 right-1/2 transform mt-2 bg-light-blue rounded-xl shadow-lg ring-1 ring-black/5">
+            <MenuItems className="w-full z-50 right-1/2 transform mt-2 bg-base-100 border border-base-300 rounded-xl shadow-lg ring-1 ring-base-300">
               {availableNames.map((name) => (
                 <MenuItem key={name}>
                   <button
                     onClick={() => handleNameSelect(name)}
-                    className="block w-full px-4 py-2 text-md text-blue font-semibold hover:bg-medium-orange"
+                    className="block w-full px-4 py-2 text-md text-info font-semibold hover:bg-base-200"
                   >
                     {name}
                   </button>

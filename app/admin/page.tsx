@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Page() {
   return (
     <div>
-      <div className="flex items-center justify-between bg-teal p-4 shadow-lg rounded-lg">
+      <div className="flex items-center justify-between bg-accent text-accent-content p-4 shadow-lg rounded-lg border border-base-300">
         <Link href="/">
           <div className="text-3xl">
             {" "}
@@ -18,7 +18,7 @@ export default function Page() {
         <div className="flex items-right justify-between">
           <a href="/admin">
             <div className="pt-1.5 pr-8">
-              <UserCircleIcon className="size-8 text-orange" />
+              <UserCircleIcon className="size-8 text-accent-content" />
             </div>
           </a>
           <TabGroup defaultIndex={0}>
@@ -30,8 +30,8 @@ export default function Page() {
                       className={clsx(
                         "tab-item px-6 py-2 rounded-full transition",
                         selected
-                          ? "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange"
-                          : "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange",
+                          ? "bg-base-200 text-base-content font-semibold hover:bg-base-300"
+                          : "bg-base-200 text-base-content font-semibold hover:bg-base-300",
                       )}
                     >
                       Home
@@ -46,8 +46,8 @@ export default function Page() {
                       className={clsx(
                         "tab-item px-6 py-2 rounded-full transition",
                         selected
-                          ? "bg-orange text-white font-bold"
-                          : "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange",
+                          ? "bg-primary text-primary-content font-bold"
+                          : "bg-base-200 text-base-content font-semibold hover:bg-base-300",
                       )}
                     >
                       Data
@@ -62,8 +62,8 @@ export default function Page() {
                       className={clsx(
                         "tab-item px-6 py-2 rounded-full transition",
                         selected
-                          ? "bg-orange text-white font-bold"
-                          : "bg-light-orange text-dark-teal font-semibold hover:bg-medium-orange",
+                          ? "bg-primary text-primary-content font-bold"
+                          : "bg-base-200 text-base-content font-semibold hover:bg-base-300",
                       )}
                     >
                       History
@@ -81,14 +81,14 @@ export default function Page() {
       <div className="flex space-x-4">
         <a
           href="../api/auth/login"
-          className="bg-orange text-white px-6 py-2 rounded-full shadow-lg hover:bg-orange transition"
+          className="bg-primary text-primary-content px-6 py-2 rounded-full shadow-lg hover:bg-primary/90 transition"
         >
           Login
         </a>
 
         <a
           href="../api/auth/logout"
-          className="bg-orange text-white px-6 py-2 rounded-full shadow-lg hover:bg-orange transition"
+          className="bg-primary text-primary-content px-6 py-2 rounded-full shadow-lg hover:bg-primary/90 transition"
         >
           Logout
         </a>

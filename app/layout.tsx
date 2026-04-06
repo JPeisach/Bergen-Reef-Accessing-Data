@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <Auth0Provider>
         <Providers>
-          <body>{children}</body>
+          <body className="min-h-screen antialiased">{children}</body>
         </Providers>
       </Auth0Provider>
     </html>

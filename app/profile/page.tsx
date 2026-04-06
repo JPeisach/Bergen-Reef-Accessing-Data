@@ -33,7 +33,7 @@ export default function Page() {
       <br></br>
 
       {/* top white box*/}
-      <div className="bg-white rounded shadow-sm p-6 flex justify-between items-center w-3/4 mx-auto">
+      <div className="bg-base-100 border border-base-300 rounded shadow-sm p-6 flex justify-between items-center w-3/4 mx-auto text-base-content">
         <div className="flex items-center gap-4">
           {user ? (
             <>
@@ -43,16 +43,7 @@ export default function Page() {
               </div>
               <a
                 href="/auth/logout"
-                className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-medium-teal transition"
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "16px",
-                  color: "white",
-                  border: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                className="bg-secondary text-secondary-content px-6 py-2 rounded-xl shadow-lg hover:brightness-110 transition flex items-center justify-center text-base font-medium"
               >
                 Logout
               </a>
@@ -65,16 +56,7 @@ export default function Page() {
               </div>
               <a
                 href="/auth/login"
-                className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-orange-600 transition text-center"
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "16px",
-                  color: "white",
-                  border: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                className="bg-primary text-primary-content px-6 py-2 rounded-xl shadow-lg hover:bg-primary/90 transition text-center flex items-center justify-center text-base font-medium"
               >
                 Login
               </a>
@@ -85,10 +67,10 @@ export default function Page() {
         <a
           target="_blank"
           href="https://docs.google.com/spreadsheets/d/1BF5JBYV3v2brBQQaRBo6X_J-uPCdDtzE4UUCDKtLPJA/edit?usp=sharing"
-          className="bg-teal text-white px-6 py-2 rounded-xl shadow-lg hover:bg-medium-teal transition"
+          className="bg-accent text-accent-content px-6 py-2 rounded-xl shadow-lg hover:brightness-110 transition inline-flex items-center"
         >
           View Data Backup Spreadsheet{" "}
-          <ArrowUpRightIcon className="inline w-4 h-4 text-white ml-1 align-text-bottom" />
+          <ArrowUpRightIcon className="inline w-4 h-4 text-accent-content ml-1 align-text-bottom" />
         </a>
       </div>
 
@@ -97,7 +79,7 @@ export default function Page() {
       {isAdmin && (
         <div className="flex justify-center">
           <div
-            className="rounded-md justify-content-center w-1/2 bg-gray-100 p-4"
+            className="rounded-md justify-content-center w-1/2 bg-base-200 border border-base-300 p-4"
             style={{ height: 400 }}
           >
             <ResponsiveContainer>

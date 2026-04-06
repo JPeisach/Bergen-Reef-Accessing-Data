@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+const daisyuiThemes = require("./daisyui-themes");
+
 module.exports = {
   darkMode: "class",
   content: [
-    "./app/**/**/*.{js,ts,jsx,tsx,mdx}", // Note the addition of the `app` directory.
+    "./app/**/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -36,6 +38,14 @@ module.exports = {
         orange: "0 5px 5px #ffb734",
       },
     },
-    plugins: [],
+  },
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: daisyuiThemes,
+    darkTheme: false,
+    base: true,
+    styled: true,
+    utils: true,
+    logs: false,
   },
 };

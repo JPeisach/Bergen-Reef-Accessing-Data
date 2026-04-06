@@ -325,7 +325,7 @@ export default function DataLineGraph() {
   return (
     <div className="grid grid-cols-3 gap-7 h-full p-5">
       <div
-        className="col-span-2 bg-white ml-8 pr-8 pt-3 pb-3 rounded-lg flex justify-center items-center"
+        className="col-span-2 bg-base-100 border border-base-300 ml-8 pr-8 pt-3 pb-3 rounded-lg flex justify-center items-center"
         style={{ height: `${availableHeight}px` }}
       >
         <div className="w-full h-full relative overflow-hidden">
@@ -341,7 +341,7 @@ export default function DataLineGraph() {
         className="graph-settings-panel"
         style={{ height: `${availableHeight}px` }}
       >
-        <h1 className="text-xl bg-teal drop-shadow-xl text-white text-center font-semibold rounded-lg p-4">
+        <h1 className="text-xl bg-accent text-accent-content drop-shadow-xl text-center font-semibold rounded-lg p-4">
           Two Dimensional Plot
         </h1>
         <div className="flex flex-col">
@@ -369,8 +369,8 @@ export default function DataLineGraph() {
               <MenuItems
                 className={
                   index === 0
-                    ? "absolute left-1/2 -translate-x-1/2 bg-light-blue w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-black/5"
-                    : "absolute left-1/2 -translate-x-1/2 bg-light-red-orange w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-black/5"
+                    ? "absolute left-1/2 -translate-x-1/2 bg-base-100 w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-base-300 border border-base-300"
+                    : "absolute left-1/2 -translate-x-1/2 bg-base-100 w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-base-300 border border-base-300"
                 }
               >
                 {availableNames
@@ -381,8 +381,8 @@ export default function DataLineGraph() {
                         onClick={() => handleNameSelect(index, n)}
                         className={
                           index === 0
-                            ? "text-blue block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"
-                            : "text-red-orange block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"
+                            ? "text-info block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
+                            : "text-error block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                         }
                       >
                         {n}
@@ -395,7 +395,7 @@ export default function DataLineGraph() {
           {selectedNames.length < 2 && ( // keep to 2 plots for now
             <button
               onClick={addPlot}
-              className="bg-orange outline outline-1 outline-dark-orange drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-orange"
+              className="bg-primary outline outline-1 outline-primary drop-shadow-xl text-primary-content font-medium px-4 py-2 m-3 rounded-xl hover:bg-primary/90"
             >
               Add Another Plot
             </button>
@@ -403,7 +403,7 @@ export default function DataLineGraph() {
           {selectedNames.length > 1 && (
             <button
               onClick={() => setSelectedNames(selectedNames.slice(0, -1))}
-              className="bg-medium-teal outline outline-1 outline-dark-teal drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-teal"
+              className="bg-secondary outline outline-1 outline-secondary drop-shadow-xl text-secondary-content font-medium px-4 py-2 m-3 rounded-xl hover:brightness-110"
             >
               Remove Last Plot
             </button>
@@ -411,19 +411,19 @@ export default function DataLineGraph() {
         </div>
 
         <div className="date-constraints-box">
-          <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
+          <div className="bg-accent text-accent-content font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
             Date Constraints
           </div>
           <div
-            className={`flex items-center flex-col justify-center rounded-lg pt-2 m-3 mt-1 text-lg text-neutral-700`}
+            className={`flex items-center flex-col justify-center rounded-lg pt-2 m-3 mt-1 text-lg text-base-content/80`}
           >
             <DateBoundElement
               value={startDate}
               onChange={handleStartDateChange}
             />
 
-            <div className="bg-teal p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
-              <span className="text-white font-semibold text-center">to</span>
+            <div className="bg-accent text-accent-content p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
+              <span className="text-accent-content font-semibold text-center">to</span>
             </div>
 
             <DateBoundElement value={endDate} onChange={handleEndDateChange} />

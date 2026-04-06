@@ -69,13 +69,13 @@ export default function HomePageElements({
             src="/images/coral-panel-1.png"
             className="w-full h-full object-cover object-contain rounded-lg"
           />
-          <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">
+          <div className="w-full absolute top-[5%] left-0 text-center text-primary-content drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] text-[0.7em] font-semibold">
             PH
           </div>
-          <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">
+          <div className="w-full absolute top-[30%] left-0 text-center text-primary drop-shadow-sm text-[1.7em] font-semibold">
             {elementData[0]}
           </div>
-          <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">
+          <div className="w-full absolute top-[60%] left-0 text-center text-primary drop-shadow-sm font-semibold text-[1.1em]">
             pH
           </div>
         </div>
@@ -90,13 +90,13 @@ export default function HomePageElements({
             src="/images/basic-panel.png"
             className="w-full h-full object-cover object-contain rounded-lg"
           />
-          <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">
+          <div className="w-full absolute top-[5%] left-0 text-center text-primary-content drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] text-[0.7em] font-semibold">
             SALINITY
           </div>
-          <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">
+          <div className="w-full absolute top-[30%] left-0 text-center text-primary drop-shadow-sm text-[1.7em] font-semibold">
             {elementData[1]}
           </div>
-          <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">
+          <div className="w-full absolute top-[60%] left-0 text-center text-primary drop-shadow-sm font-semibold text-[1.1em]">
             ppt
           </div>
         </div>
@@ -111,13 +111,13 @@ export default function HomePageElements({
             src="/images/coral-panel-2.png"
             className="w-full h-full object-cover object-contain rounded-lg"
           />
-          <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">
+          <div className="w-full absolute top-[5%] left-0 text-center text-primary-content drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] text-[0.7em] font-semibold">
             TEMPERATURE
           </div>
-          <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">
+          <div className="w-full absolute top-[30%] left-0 text-center text-primary drop-shadow-sm text-[1.7em] font-semibold">
             {elementData[2]}
           </div>
-          <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">
+          <div className="w-full absolute top-[60%] left-0 text-center text-primary drop-shadow-sm font-semibold text-[1.1em]">
             ºF
           </div>
         </div>
@@ -132,13 +132,13 @@ export default function HomePageElements({
             src="/images/basic-panel.png"
             className="w-full h-full object-cover object-contain rounded-lg"
           />
-          <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">
+          <div className="w-full absolute top-[5%] left-0 text-center text-primary-content drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] text-[0.7em] font-semibold">
             ORP
           </div>
-          <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">
+          <div className="w-full absolute top-[30%] left-0 text-center text-primary drop-shadow-sm text-[1.7em] font-semibold">
             {elementData[3]}
           </div>
-          <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">
+          <div className="w-full absolute top-[60%] left-0 text-center text-primary drop-shadow-sm font-semibold text-[1.1em]">
             mV
           </div>
         </div>
@@ -153,13 +153,13 @@ export default function HomePageElements({
             src="/images/coral-panel-3.png"
             className="w-full h-full object-cover object-contain rounded-lg"
           />
-          <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">
+          <div className="w-full absolute top-[5%] left-0 text-center text-primary-content drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] text-[0.7em] font-semibold">
             ALKALINITY
           </div>
-          <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">
+          <div className="w-full absolute top-[30%] left-0 text-center text-primary drop-shadow-sm text-[1.7em] font-semibold">
             {elementData[4]}
           </div>
-          <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">
+          <div className="w-full absolute top-[60%] left-0 text-center text-primary drop-shadow-sm font-semibold text-[1.1em]">
             dkH
           </div>
         </div>
@@ -174,13 +174,13 @@ export default function HomePageElements({
             src="/images/basic-panel.png"
             className="w-full h-full object-cover object-contain rounded-lg"
           />
-          <div className="w-full absolute top-[5%] left-0 text-center text-white text-[0.7em] font-semibold">
+          <div className="w-full absolute top-[5%] left-0 text-center text-primary-content drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] text-[0.7em] font-semibold">
             CALCIUM
           </div>
-          <div className="w-full absolute top-[30%] left-0 text-center text-dark-gray text-[1.7em] font-semibold">
+          <div className="w-full absolute top-[30%] left-0 text-center text-primary drop-shadow-sm text-[1.7em] font-semibold">
             {elementData[5]}
           </div>
-          <div className="w-full absolute top-[60%] left-0 text-center text-dark-gray font-semibold text-[1.1em]">
+          <div className="w-full absolute top-[60%] left-0 text-center text-primary drop-shadow-sm font-semibold text-[1.1em]">
             ppm
           </div>
         </div>

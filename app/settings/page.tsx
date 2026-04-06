@@ -58,50 +58,58 @@ export default function SettingsPage() {
     <div>
       <NavigationBar defaultIndex={-1} username={user ? user.name : "Guest"} />
 
-      <div className="settings-page-bg min-h-screen p-6 sm:p-8 md:p-10 transition-colors duration-300">
-        <div className="mx-auto max-w-4xl rounded-3xl border settings-panel-bg p-8 shadow-xl transition-colors duration-300">
-          <h1 className="settings-title text-3xl font-bold drop-shadow-sm">
-            Settings
-          </h1>
-          <p className="settings-subtext mt-3 text-center text-base">
-            Pick a theme for the dashboard.
-          </p>
+      <div className="min-h-screen bg-base-200 p-6 transition-colors duration-300 sm:p-8 md:p-10">
+        <div className="card mx-auto max-w-4xl border border-base-300 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h1 className="text-3xl font-bold text-primary drop-shadow-sm">
+              Settings
+            </h1>
+            <p className="mt-2 text-center text-base text-base-content/80">
+              Choose a DaisyUI theme. It is saved in your browser and applies on
+              every page after refresh.
+            </p>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {themeOptions.map((option) => {
-              const isActive = theme === option.id;
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {themeOptions.map((option) => {
+                const isActive = theme === option.id;
 
-              return (
-                <button
-                  key={option.id}
-                  onClick={() => setTheme(option.id)}
-                  className={`theme-chip rounded-2xl border p-5 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
-                    isActive ? "theme-chip-active shadow-md" : ""
-                  }`}
-                >
-                  <div className="mb-3 flex items-center justify-between">
-                    <h2 className="text-lg font-semibold">{option.name}</h2>
-                    {isActive && (
-                      <span className="rounded-full bg-white/30 px-2.5 py-1 text-xs font-semibold">
-                        Active
-                      </span>
-                    )}
-                  </div>
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => setTheme(option.id)}
+                    className={`card card-body border-2 bg-base-100 p-5 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
+                      isActive
+                        ? "border-primary ring-2 ring-primary ring-offset-2 ring-offset-base-200"
+                        : "border-base-300"
+                    }`}
+                  >
+                    <div className="mb-3 flex items-center justify-between gap-2">
+                      <h2 className="card-title text-lg">{option.name}</h2>
+                      {isActive && (
+                        <span className="badge badge-primary badge-sm">
+                          Active
+                        </span>
+                      )}
+                    </div>
 
-                  <p className="text-sm opacity-90">{option.description}</p>
+                    <p className="text-sm text-base-content/80">
+                      {option.description}
+                    </p>
 
-                  <div className="mt-4 flex gap-2">
-                    {option.swatches.map((swatch) => (
-                      <span
-                        key={swatch}
-                        className="h-6 w-6 rounded-full border border-black/10"
-                        style={{ backgroundColor: swatch }}
-                      />
-                    ))}
-                  </div>
-                </button>
-              );
-            })}
+                    <div className="mt-4 flex gap-2">
+                      {option.swatches.map((swatch) => (
+                        <span
+                          key={swatch}
+                          className="h-6 w-6 rounded-full border border-base-300"
+                          style={{ backgroundColor: swatch }}
+                        />
+                      ))}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

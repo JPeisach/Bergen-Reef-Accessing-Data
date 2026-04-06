@@ -13,25 +13,25 @@ export default function DateConstraintsBox({
   const now = new Date();
   return (
     <div className="date-constraints-box">
-      <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
+      <div className="bg-accent text-accent-content font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
         Date Constraints
       </div>
       <div className="flex items-center justify-center space-x-2 px-3">
         <button
           onClick={() => adjustDateRange("backward")}
-          className="bg-white p-2 rounded-lg hover:bg-medium-teal disabled:opacity-50"
+          className="bg-base-100 border border-base-300 p-2 rounded-lg hover:bg-base-200 disabled:opacity-50"
         >
-          <ChevronLeftIcon className="h-5 w-5 text-teal hover:text-white" />
+          <ChevronLeftIcon className="h-5 w-5 text-accent hover:text-accent-content" />
         </button>
         <div
-          className={`flex items-center flex-col justify-center rounded-lg pt-2 m-3 mt-1 text-lg text-neutral-700`}
+          className={`flex items-center flex-col justify-center rounded-lg pt-2 m-3 mt-1 text-lg text-base-content/80`}
         >
           <DateBoundElement
             value={startDate || new Date()}
             onChange={handleStartDateChange}
           />
 
-          <div className="bg-teal p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
+          <div className="bg-accent text-accent-content p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
             <span className="text-white font-semibold text-center">to</span>
           </div>
 
@@ -42,10 +42,10 @@ export default function DateConstraintsBox({
         </div>
         <button
           onClick={() => adjustDateRange("forward")}
-          className="bg-white p-2 rounded-lg hover:bg-medium-teal disabled:opacity-50"
+          className="bg-base-100 border border-base-300 p-2 rounded-lg hover:bg-base-200 disabled:opacity-50"
           disabled={now && endDate && endDate >= now}
         >
-          <ChevronRightIcon className="h-5 w-5 text-teal hover:text-white" />
+          <ChevronRightIcon className="h-5 w-5 text-accent hover:text-accent-content" />
         </button>
       </div>
 

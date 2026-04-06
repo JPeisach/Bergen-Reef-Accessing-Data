@@ -54,8 +54,8 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
   }, [variableType]);
 
   return (
-    <div className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer">
-      <h2 className="text-xl font-bold text-dark-orange mb-4 text-center">
+    <div className="block rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300 cursor-pointer">
+      <h2 className="text-xl font-bold text-primary mb-4 text-center">
         Tank {tankNumber}
       </h2>
       <div className="h-48">
