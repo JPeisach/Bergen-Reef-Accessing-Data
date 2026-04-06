@@ -3,7 +3,6 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import NavigationBar from "../components/NavigationBar";
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 
 const themeOptions = [
   {
@@ -40,8 +39,8 @@ const themeOptions = [
 
 export default function SettingsPage() {
   const { user, isLoading } = useUser();
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  let theme = document.documentElement.getAttribute("data-theme");
 
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
@@ -53,6 +52,11 @@ export default function SettingsPage() {
   }
 
   if (isLoading) return <div>Loading...</div>;
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    console.log(theme);
+    localStorage.setItem("data-theme", theme);
+  };
 
   return (
     <div>

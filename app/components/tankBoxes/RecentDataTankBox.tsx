@@ -11,14 +11,14 @@ import "../../globals.css";
 import DownloadCSVButton from "../buttons/DownloadCSVButton";
 import { useEffect, useState } from "react";
 
-export default function RecentDataTankBox({ tankNumber, variableType }) {
+export default function RecentDataTankBox({ tankName, variableType }) {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `/api/getMostRecentData?type=${variableType}`,
+          `/api/getMostRecentData?type=${variableType}&tankName=${tankName}`,
         );
         const result = await response.json();
 
@@ -56,7 +56,7 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
   return (
     <div className="block rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300 cursor-pointer">
       <h2 className="text-xl font-bold text-primary mb-4 text-center">
-        Tank {tankNumber}
+        Tank {tankName}
       </h2>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
@@ -79,17 +79,21 @@ export default function RecentDataTankBox({ tankNumber, variableType }) {
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #FCD98C",
+                backgroundColor: "var(--color-base-content)",
+                border: "1px solid var(--color-base-content)",
                 borderRadius: "8px",
+              }}
+              itemStyle={{
+                color: "var(--base-text-content)",
               }}
             />
             <Area
               type="monotone"
               dataKey="value"
-              stroke="#FEB934"
+              stroke="var(--color-primary)"
               dot={false}
-              fill="#FEB93499"
+              fill="var(--color-primary)"
+              fillOpacity={0.5}
               strokeWidth={2.5}
             />
           </AreaChart>

@@ -13,10 +13,10 @@ export default function Page() {
   const { user } = useUser();
 
   const defaultStartDate = new Date();
-  defaultStartDate.setDate(defaultStartDate.getDate() - 1);
+  defaultStartDate.setDate(defaultStartDate.getDate() - 10); // hacky fix to show *something*
 
   const [dateRange, setDateRange] = useState([defaultStartDate, new Date()]);
-  const [selectedTank, setSelectedTank] = useState("Tank 1");
+  const [selectedTank, setSelectedTank] = useState("Tank CoralLab60_1");
   const [selectedParameter, setSelectedParameter] = useState("pH");
   const [selectedGraphType, setSelectedGraphType] = useState("Line");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
@@ -38,15 +38,15 @@ export default function Page() {
                 {
                   label: "Tank",
                   options: [
-                    "Tank 1",
-                    "Tank 2",
-                    "Tank 3",
-                    "Tank 4",
-                    "Tank 5",
-                    "Tank 6",
-                    "Tank 7",
-                    "Tank 8",
-                    "Tank 9",
+                    "Tank CoralLab60_1",
+                    "Tank CoralLab60_2",
+                    "Tank CoralLab60_3",
+                    "Tank CoralLab60_4",
+                    "Tank CoralLab60_5",
+                    "Tank CoralLab60_6",
+                    "Tank MakerReef",
+                    "Tank ESCReef",
+                    "Tank CoralLab380",
                   ],
                 },
                 {
@@ -111,6 +111,7 @@ export default function Page() {
                 <label className="block text-primary font-bold mb-1 text-sm">
                   Date Range
                 </label>
+                {/* FIXME: THEME */}
                 <Flatpickr
                   className="w-full bg-base-100 px-2 py-2 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-inner rounded-lg border border-base-300"
                   data-enable-time
@@ -135,7 +136,7 @@ export default function Page() {
 
               <div className={`${panelClass}`}>
                 <HistoricDataTankBox
-                  tankNumber={Number(selectedTank.substring("Tank".length))}
+                  tankName={selectedTank.substring("Tank ".length)}
                   variableType={selectedParameter}
                   dateRange={dateRange}
                 />

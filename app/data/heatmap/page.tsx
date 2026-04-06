@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <div>
       <NavigationBar defaultIndex={6} username={user ? user.name : "Guest"} />
-      <div className="flex-1 overflow-hidden">
+      <div className="bg-base-100/30 min-h-scren flex-1 overflow-hidden">
         <HeatMap />
       </div>
     </div>

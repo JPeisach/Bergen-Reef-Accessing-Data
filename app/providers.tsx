@@ -1,17 +1,13 @@
-"use strict";
+"use client";
 
-import { ThemeProvider } from "next-themes";
+import dynamic from "next/dynamic";
+
+const ThemeProvider = dynamic(() => import("./ThemeProvider"), { ssr: false });
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider
-      attribute="data-theme"
-      defaultTheme="light"
-      enableSystem={false}
-      storageKey="bergen-reef-theme"
-      themes={["light", "dark", "coral-pink", "sea-green", "light-blue"]}
-    >
-      {children}
-    </ThemeProvider>
+    <body>
+      <ThemeProvider>{children}</ThemeProvider>
+    </body>
   );
 }

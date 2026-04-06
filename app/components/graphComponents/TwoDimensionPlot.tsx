@@ -423,7 +423,9 @@ export default function DataLineGraph() {
             />
 
             <div className="bg-accent text-accent-content p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
-              <span className="text-accent-content font-semibold text-center">to</span>
+              <span className="text-accent-content font-semibold text-center">
+                to
+              </span>
             </div>
 
             <DateBoundElement value={endDate} onChange={handleEndDateChange} />

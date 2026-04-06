@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ObservationList from "./observations/ObservationList";
 
 export default function TankStatsPanel({ panelClass }) {
-  // TODO: Tank number
+  // TODO: Tank selection
   const [elementData, setElementData] = useState([]);
 
   useEffect(() => {
@@ -26,11 +26,13 @@ export default function TankStatsPanel({ panelClass }) {
       ) : (
         <ul className="space-y-1.5 text-sm text-primary/80 font-medium">
           {elementData.map((element) => {
-            return (
-              <li key={element.id}>
-                {element.name}: {element.value}
-              </li>
-            );
+            if (element != null) {
+              return (
+                <li key={element.id}>
+                  {element.name}: {element.value}
+                </li>
+              );
+            }
           })}
         </ul>
       )}

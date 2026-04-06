@@ -11,11 +11,18 @@ export async function POST(request: Request) {
     const parser = new xml2js.Parser({ explicitArray: false });
     const parsed_xml = await parser.parseStringPromise(raw_xml);
 
+    const host = parsed_xml.status.hostname;
+
     // Pass JSON to database helper function
-    await insertData(parsed_xml.status.probes.probe, parsed_xml.status.date);
+    await insertData(
+      host,
+      parsed_xml.status.probes.probe,
+      parsed_xml.status.date,
+    );
 
     return NextResponse.json({ status: 200 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: 400 });
   }
 }

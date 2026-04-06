@@ -2,7 +2,7 @@
 
 .csv-button {
   text-align: center;
-  color: hsl(var(--p) / 1);
+  color: oklch(var(--p) / 1);
 }
 
 .csv-button a {

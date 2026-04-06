@@ -76,8 +76,9 @@ export default function HomePageGraph({
   useEffect(() => {
     async function fetchData() {
       try {
+        // TODO: Other tanks
         const response = await fetch(
-          `/api/getMostRecentData?type=${selectedType}`,
+          `/api/getMostRecentData?type=${selectedType}&tankName=CoralLab380`,
         );
         const result = await response.json();
 
@@ -219,9 +220,9 @@ export default function HomePageGraph({
                 <Area
                   type="monotone"
                   dataKey="value"
-                  stroke="hsl(var(--p) / 1)"
+                  stroke="var(--color-primary)"
                   dot={false}
-                  fill="hsl(var(--p) / 0.45)"
+                  fill="var(--color-primary)"
                   strokeWidth={2.5}
                 />
               </AreaChart>

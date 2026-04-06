@@ -3,7 +3,10 @@ import getMostRecentElements from "src/lib/data/getMostRecentElements";
 
 export async function GET(request: Request) {
   try {
-    const data = await getMostRecentElements();
+    const { searchParams } = new URL(request.url);
+    const tankName = searchParams.get("tankName");
+
+    const data = await getMostRecentElements(tankName);
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching data:", error);

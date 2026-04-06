@@ -1,8 +1,5 @@
 import { Tab, TabGroup, TabList } from "@headlessui/react";
-import {
-  UserCircleIcon,
-  Cog6ToothIcon,
-} from "@heroicons/react/24/solid";
+import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
 
 import clsx from "clsx";
 import { Fragment } from "react";

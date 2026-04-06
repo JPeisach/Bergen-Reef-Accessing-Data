@@ -19,6 +19,7 @@ export default function Page() {
     <div className="bg-base-200">
       <NavigationBar defaultIndex={0} username={user ? user.name : "Guest"} />
 
+      {/* TODO: use daisyUI classes, especially rounded! */}
       {/* FIXME: Consider where we put the "open notes/observations" panel */}
       <main className="relative flex p-8 h-screen overflow-hidden">
         {/* CONTAINER HOLDING ELEMENTS AND GRAPH */}

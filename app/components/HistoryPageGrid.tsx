@@ -481,9 +481,7 @@ export default function HistoryPageGrid() {
       <div className="w-full lg:w-1/4 flex flex-col gap-6">
         <div className="bg-base-100 rounded-2xl shadow-xl p-6 border border-base-300 sticky top-6">
           <div className="bg-accent text-accent-content rounded-xl p-4 mb-6 shadow-md">
-            <h2 className="text-xl font-bold text-center">
-              Actions
-            </h2>
+            <h2 className="text-xl font-bold text-center">Actions</h2>
           </div>
 
           <div className="flex flex-col gap-4">

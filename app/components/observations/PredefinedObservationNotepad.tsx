@@ -91,9 +91,7 @@ export default function PredefinedObservationNotepad({
 
         {/* Tags Display */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-primary">
-            Tags
-          </Label>
+          <Label className="mb-2 text-sm font-bold text-primary">Tags</Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
           <Input
             name="tags"

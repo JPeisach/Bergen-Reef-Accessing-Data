@@ -1,11 +1,12 @@
 import { db } from "src/db/drizzle";
-import { and, between, inArray } from "drizzle-orm";
+import { and, between, eq, inArray } from "drizzle-orm";
 import { coralData } from "src/db/schema";
 
 export default async function searchDataByDateType(
   datetimeStart: Date,
   datetimeEnd: Date,
   types: string[],
+  tankName: string,
 ) {
   try {
     const result = await db
@@ -16,6 +17,7 @@ export default async function searchDataByDateType(
           between(coralData.datetime, datetimeStart, datetimeEnd),
           // dataTable.name has the more accurate types to filter by (multiple different names can have the same type of data)
           inArray(coralData.name, types),
+          eq(coralData.tankName, tankName),
         ),
       )
       .orderBy(coralData.datetime); // Order by datetime
