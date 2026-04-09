@@ -9,7 +9,21 @@ import ZoomSlider from "../ZoomSlider";
 import StepSlider from "../StepSlider";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { fetchDataInDateRange } from "app/services/dataService";
+import {
+  fetchDataInDateRange,
+  fetchSingularDataTypeInDateRange,
+} from "app/services/dataService";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 interface DataPoint {
   id: number;
@@ -30,7 +44,7 @@ const units = {
 export default function DataLineGraph() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [data, setData] = useState<DataPoint[]>([]);
+  const [data, setData] = useState([]);
   const [selectedNames, setSelectedNames] = useState<string[]>([]);
   const [zoom, setZoom] = useState(50);
   const [step, setStep] = useState(50);
@@ -54,38 +68,6 @@ export default function DataLineGraph() {
   ];
 
   const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 1220);
-      if (data.length > 0 && svgRef.current) {
-        drawChart();
-      }
-    };
-
-    // Initial resize
-    handleResize();
-
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Add ResizeObserver to handle container size changes
-    const resizeObserver = new ResizeObserver(() => {
-      if (data.length > 0 && svgRef.current) {
-        drawChart();
-      }
-    });
-
-    if (svgRef.current) {
-      resizeObserver.observe(svgRef.current.parentElement!);
-    }
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      resizeObserver.disconnect();
-    };
-  }, [data]);
-
   useEffect(() => {
     if (!lastFetchedRange) {
       setShouldFetch(true);
@@ -103,19 +85,23 @@ export default function DataLineGraph() {
   }, [startDate, endDate]);
 
   useEffect(() => {
-    if (shouldFetch) {
-      fetchDataInDateRange(startDate, endDate, selectedNames).then((result) =>
-        setData([...result]),
-      );
-      setShouldFetch(false);
-    }
-  }, [shouldFetch, startDate, endDate, selectedNames]);
+    if (!shouldFetch) return;
 
-  useEffect(() => {
-    if (data.length > 0 && svgRef.current) {
-      drawChart();
-    }
-  }, [data, selectedNames, startDate, endDate, useInterpolation]);
+    const fetchAll = async () => {
+      setData([]);
+      const results = await Promise.all(
+        // stupid
+        selectedNames.map((name) =>
+          fetchSingularDataTypeInDateRange(startDate, endDate, name),
+        ),
+      );
+
+      setData(results);
+      setShouldFetch(false);
+    };
+
+    fetchAll();
+  }, [shouldFetch, startDate, endDate, selectedNames]);
 
   useEffect(() => {
     const today = new Date();
@@ -139,277 +125,8 @@ export default function DataLineGraph() {
 
   const availableHeight = windowHeight - 120;
 
-  const drawChart = () => {
-    if (selectedNames.length < 1) return;
-
-    const svg = d3.select(svgRef.current);
-    svg.selectAll("*").remove();
-
-    // Get the current dimensions of the container
-    const containerWidth = parseInt(
-      d3.select(svgRef.current.parentElement).style("width"),
-      10,
-    );
-    const containerHeight = parseInt(
-      d3.select(svgRef.current.parentElement).style("height"),
-      10,
-    );
-
-    // Set the SVG dimensions to match the container independently
-    svg
-      .attr("width", containerWidth)
-      .attr("height", containerHeight)
-      .attr("viewBox", `0 0 ${containerWidth} ${containerHeight}`)
-      .attr("preserveAspectRatio", "none"); // Remove aspect ratio constraint
-
-    // Calculate margins based on whether we have one or two series
-    const rightMargin = selectedNames.length > 1 ? 90 : 60;
-    const margin = { top: 20, right: rightMargin, bottom: 60, left: 90 };
-    const width = containerWidth - margin.left - margin.right;
-    const height = containerHeight - margin.top - margin.bottom;
-
-    // Center the graph group within the SVG
-    const g = svg
-      .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
-
-    // Use raw start and end dates for axis and plotting
-    const x = d3.scaleTime().domain([startDate, endDate]).range([0, width]);
-
-    // Calculate y-axis for the first selected name
-    const yDomain = d3.extent(
-      data.filter((d) => d.name === selectedNames[0]),
-      (d) => +d.value,
-    ) as [number, number];
-    const y = d3.scaleLinear().domain(yDomain).nice().range([height, 0]);
-
-    // Calculate yRight-axis for the second selected name if it exists
-    const yRight = selectedNames[1]
-      ? d3
-          .scaleLinear()
-          .domain(
-            d3.extent(
-              data.filter((d) => d.name === selectedNames[1]),
-              (d) => +d.value,
-            ) as [number, number],
-          )
-          .nice()
-          .range([height, 0])
-      : null;
-
-    const dayCount = Math.ceil(
-      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
-    );
-
-    // Calculate tick values with a staggered approach
-    const tickValues = [];
-    for (let i = 0; i < dayCount; i++) {
-      const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
-      if (i % 2 === 0) {
-        // Stagger: only add every other day
-        tickValues.push(date);
-      }
-    }
-
-    // Calculate number of ticks based on data range
-    const timeRange = endDate.getTime() - startDate.getTime();
-    const threeWeeksInMs = 21 * 24 * 60 * 60 * 1000; // 3 weeks in milliseconds
-    const minTickCount = 12;
-    const tickInterval = timeRange / (minTickCount - 1);
-    const tickDates = [];
-
-    // Only apply 10+ ticks for ranges longer than 3 weeks
-    if (timeRange > threeWeeksInMs) {
-      for (let i = 0; i < minTickCount; i++) {
-        tickDates.push(new Date(startDate.getTime() + i * tickInterval));
-      }
-    }
-
-    // Create a function to format dates and handle duplicates
-    const formatDate = (() => {
-      const seen = new Set();
-      return (date: Date) => {
-        const formatted = d3.timeFormat("%m-%d")(date);
-        if (seen.has(formatted)) {
-          // If we've seen this date format before, add the year
-          return d3.timeFormat("%m-%d-%y")(date);
-        }
-        seen.add(formatted);
-        return formatted;
-      };
-    })();
-
-    // Use either the calculated tick dates (if we want 10 or more) or default to 5 ticks
-    const xAxis = d3
-      .axisBottom(x)
-      .tickValues(tickDates.length >= 10 ? tickDates : undefined)
-      .ticks(tickDates.length >= 10 ? undefined : 5)
-      .tickFormat((d: Date) => formatDate(d)); // Use our custom formatter
-
-    g.append("g")
-      .attr("transform", `translate(0,${height})`)
-      .call(xAxis)
-      .selectAll("text")
-      .style("font-size", "18px")
-      .attr("text-anchor", "middle"); // Center align the text
-
-    // Add x-axis label
-    g.append("text")
-      .attr("fill", "black")
-      .attr("x", width / 2)
-      .attr("y", height + 45)
-      .attr("text-anchor", "middle")
-      .style("font-size", "24px")
-      .style("font-weight", "bold")
-      .text("Time");
-
-    const tickCount = Math.min(5, Math.ceil(yDomain[1] - yDomain[0])); // Dynamically set ticks based on range
-
-    g.append("g")
-      .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".2f")))
-      .selectAll("text")
-      .style("font-size", "18px");
-
-    // Update font size and weight for labels
-    g.append("text")
-      .attr("fill", d3.schemeCategory10[0])
-      .attr("transform", "rotate(-90)")
-      .attr("x", -height / 2)
-      .attr("y", -margin.left + 20)
-      .attr("text-anchor", "middle")
-      .style("font-size", "24px")
-      .style("font-weight", "bold")
-      .text(`${selectedNames[0]} (${units[selectedNames[0]]})`);
-
-    // Add right y-axis
-    if (yRight) {
-      const yRightAxis = g
-        .append("g")
-        .attr("transform", `translate(${width},0)`)
-        .call(d3.axisRight(yRight).ticks(5).tickFormat(d3.format(".2f")))
-        .selectAll("text")
-        .style("font-size", "18px");
-
-      const yRightLabel = g
-        .append("text")
-        .attr("fill", d3.schemeCategory10[1])
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 2)
-        .attr("y", width + margin.right - 10)
-        .attr("text-anchor", "middle")
-        .style("font-size", "24px")
-        .style("font-weight", "bold")
-        .text(`${selectedNames[1]} (${units[selectedNames[1]]})`);
-    }
-
-    // Create line generators
-    const createLine = (useRightAxis = false) => {
-      const yScale = useRightAxis ? yRight : y;
-      if (useInterpolation) {
-        return d3
-          .line<DataPoint>()
-          .defined((d) => !isNaN(d.value) && d.value !== null)
-          .x((d) => x(new Date(d.datetime)))
-          .y((d) => yScale!(d.value))
-          .curve(d3.curveBasis); // Use basis interpolation for smooth curves
-      } else {
-        return d3
-          .line<DataPoint>()
-          .defined((d) => !isNaN(d.value) && d.value !== null)
-          .x((d) => x(new Date(d.datetime)))
-          .y((d) => yScale!(d.value));
-      }
-    };
-
-    // Add tooltip div
-    const tooltip = d3
-      .select("body")
-      .append("div")
-      .attr("class", "tooltip")
-      .style("position", "absolute")
-      .style("visibility", "hidden")
-      .style("background", "rgba(255, 255, 255, 0.8)")
-      .style("border", "1px solid #ccc")
-      .style("padding", "10px")
-      .style("border-radius", "4px")
-      .style("box-shadow", "0 0 5px rgba(0, 0, 0, 0.3)");
-
-    // Add lines and points for each data series
-    selectedNames.forEach((name, index) => {
-      const nameData = data.filter((d) => d.name === name);
-      const lineFunction = createLine(index === 1);
-
-      // Draw the main data line
-      g.append("path")
-        .datum(nameData)
-        .attr("fill", "none")
-        .attr("stroke", d3.schemeCategory10[index])
-        .attr("stroke-width", 1.5)
-        .attr("d", lineFunction);
-
-      // Draw dotted line for gaps in data
-      const gapsLineFunction = createLine(index === 1).defined((d) => true);
-      g.append("path")
-        .datum(nameData)
-        .attr("fill", "none")
-        .attr("stroke", "#999") // gray color
-        .attr("stroke-width", 1)
-        .attr("stroke-dasharray", "3,3") // creates dotted line
-        .attr("d", gapsLineFunction)
-        .attr("opacity", 0.5)
-        .style("display", (d) => {
-          // Only show if there are gaps in the data
-          const hasGaps = d.some((_, i) => {
-            if (i === 0) return false;
-            const curr = new Date(d[i].datetime);
-            const prev = new Date(d[i - 1].datetime);
-            const diffHours =
-              (curr.getTime() - prev.getTime()) / (1000 * 60 * 60);
-            return diffHours > 2; // Consider gaps larger than 2 hours
-          });
-          return hasGaps ? null : "none";
-        });
-
-      // Only add points if not using interpolation
-      if (!useInterpolation) {
-        const pointsGroup = g.append("g");
-        pointsGroup
-          .selectAll(`circle.series-${index}`)
-          .data(nameData)
-          .enter()
-          .append("circle")
-          .attr("class", `series-${index}`)
-          .attr("cx", (d) => x(new Date(d.datetime)))
-          .attr("cy", (d) =>
-            index === 0 ? y(d.value) : yRight ? yRight(d.value) : y(d.value),
-          )
-          .attr("r", 4)
-          .attr("fill", d3.schemeCategory10[index])
-          .on("mouseover", (event, d) => {
-            // Tooltip can show shifted time if desired
-            const displayDate = new Date(d.datetime);
-            displayDate.setHours(displayDate.getHours() + 5); // Only for display
-            tooltip
-              .style("visibility", "visible")
-              .html(
-                `ID: ${d.id}<br>Date: ${d3.timeFormat("%Y-%m-%d %H:%M")(
-                  displayDate,
-                )}<br>Name: ${d.name}<br>Unit: ${d.unit}<br>Value: ${d.value}`,
-              );
-          })
-          .on("mousemove", (event) => {
-            tooltip
-              .style("top", `${event.pageY - 10}px`)
-              .style("left", `${event.pageX + 10}px`);
-          })
-          .on("mouseout", () => {
-            tooltip.style("visibility", "hidden");
-          });
-      }
-    });
-  };
-
   const handleNameSelect = (index: number, name: string) => {
+    setData([]);
     const newSelectedNames = [...selectedNames];
     newSelectedNames[index] = name;
     setSelectedNames(newSelectedNames);
@@ -417,6 +134,7 @@ export default function DataLineGraph() {
   };
 
   const addPlot = () => {
+    setData([]);
     if (selectedNames.length < 5) {
       setSelectedNames([...selectedNames, ""]);
       setShouldFetch(true);
@@ -438,15 +156,63 @@ export default function DataLineGraph() {
     setShouldFetch(true);
   };
 
+  const allValues = data.flat().map((p) => p.value);
+  const min = Math.min(...allValues);
+  const max = Math.max(...allValues);
   return (
     <div className="grid grid-cols-4 gap-4 p-4 h-full">
       <div
         className="col-span-3 bg-white ml-8 pr-8 pt-3 pb-3 rounded-lg justify-center items-center"
         style={{ height: `${availableHeight}px` }}
       >
-        <div className="w-full h-full relative">
-          <svg ref={svgRef} style={{ width: "100%", height: "100%" }}></svg>
-        </div>
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart>
+            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+            <XAxis
+              // domain={["dataMin - 1", "dataMax + 1"]}
+              dataKey="datetime"
+              tickFormatter={(tick) => tick.split("/")[0]}
+              stroke="#757575"
+              fontSize={12}
+              allowDuplicatedCategory={false}
+            />
+            {/*<YAxis
+              domain={[min - 1, max + 1]}
+              tickFormatter={(tick) => tick.toFixed(1).toString()}
+              scale="linear"
+              stroke="#757575"
+              fontSize={12}
+            />*/}
+            <YAxis />
+            <YAxis />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "var(--color-base-content)",
+                border: "1px solid var(--color-base-content)",
+                borderRadius: "8px",
+              }}
+              itemStyle={{
+                color: "var(--base-text-content)",
+              }}
+            />
+            {data.map((line) => {
+              return (
+                <Line
+                  type="monotone"
+                  key={line[0]?.name}
+                  data={line}
+                  dataKey="value"
+                  name={line[0] ? line[0].name : ""}
+                  stroke="var(--color-primary)"
+                  dot={false}
+                  fill="var(--color-primary)"
+                  fillOpacity={0.5}
+                  strokeWidth={2.5}
+                />
+              );
+            })}
+          </LineChart>
+        </ResponsiveContainer>
       </div>
 
       <div

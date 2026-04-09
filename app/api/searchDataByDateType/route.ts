@@ -3,7 +3,6 @@ import searchDataByDateType from "src/lib/data/searchDataByDateType";
 
 export async function GET(request: Request) {
   console.log("THIS IS HISTORY REQUEST");
-  console.log(request);
   try {
     const { searchParams } = new URL(request.url);
     const startDate = searchParams.get("startDate");
