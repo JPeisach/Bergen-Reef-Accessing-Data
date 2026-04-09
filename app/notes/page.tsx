@@ -23,6 +23,17 @@ export default function Page() {
     "Josh Coral",
   ];
 
+  const tankNames = [
+    "Tank CoralLab60_1",
+    "Tank CoralLab60_2",
+    "Tank CoralLab60_3",
+    "Tank CoralLab60_4",
+    "Tank CoralLab60_5",
+    "Tank CoralLab60_6",
+    "Tank ESCReef",
+    "Tank CoralLab380"
+  ];
+
   return (
     <div>
       <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
@@ -46,9 +57,9 @@ export default function Page() {
                 className="w-full rounded-xl bg-base-100 p-2.5 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all border border-base-300"
               >
                 <option value="">Select tank...</option>
-                {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
-                  <option key={num} value={num}>
-                    {num}
+                {tankNames.map((type, index) => (
+                  <option key={`${type}-${index}`} value={type}>
+                    {type}
                   </option>
                 ))}
               </select>
