@@ -1,0 +1,15 @@
+@import "../globals.css";
+
+.csv-button {
+  text-align: center;
+  color: oklch(var(--p) / 1);
+}
+
+.csv-button a {
+  color: inherit;
+  font-weight: 600;
+}
+
+.csv-button a:hover {
+  opacity: 0.9;
+}

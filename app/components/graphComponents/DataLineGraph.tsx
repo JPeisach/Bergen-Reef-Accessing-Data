@@ -441,7 +441,7 @@ export default function DataLineGraph() {
   return (
     <div className="grid grid-cols-4 gap-4 p-4 h-full">
       <div
-        className="col-span-3 bg-white ml-8 pr-8 pt-3 pb-3 rounded-lg justify-center items-center"
+        className="col-span-3 bg-base-100 border border-base-300 ml-8 pr-8 pt-3 pb-3 rounded-lg justify-center items-center"
         style={{ height: `${availableHeight}px` }}
       >
         <div className="w-full h-full relative">
@@ -453,7 +453,7 @@ export default function DataLineGraph() {
         className="graph-settings-panel"
         style={{ maxHeight: `${availableHeight}px` }}
       >
-        <h1 className="text-xl bg-teal drop-shadow-xl text-white text-center font-semibold rounded-lg p-4">
+        <h1 className="text-xl bg-accent text-accent-content drop-shadow-xl text-center font-semibold rounded-lg p-4">
           Line Plot
         </h1>
         <div className="flex flex-col">
@@ -466,8 +466,8 @@ export default function DataLineGraph() {
               <MenuButton
                 className={
                   index === 0
-                    ? "outline-medium-blue bg-light-blue inline-flex w-full justify-center outline-solid outline-1 rounded-xl font-semibold px-3 py-2"
-                    : "outline-medium-red-orange bg-light-red-orange inline-flex w-full justify-center outline-solid outline-1 rounded-xl font-semibold px-3 py-2"
+                    ? "outline-info/40 bg-info/10 inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2 border border-base-300"
+                    : "outline-error/40 bg-error/10 inline-flex w-full justify-center outline outline-1 rounded-xl font-semibold px-3 py-2 border border-base-300"
                 }
               >
                 <span style={{ color: colorScale(index) }}>
@@ -481,8 +481,8 @@ export default function DataLineGraph() {
               <MenuItems
                 className={
                   index === 0
-                    ? "absolute left-1/2 -translate-x-1/2 bg-light-blue w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-black/5"
-                    : "absolute left-1/2 -translate-x-1/2 bg-light-red-orange w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-black/5"
+                    ? "absolute left-1/2 -translate-x-1/2 bg-base-100 w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-base-300 border border-base-300"
+                    : "absolute left-1/2 -translate-x-1/2 bg-base-100 w-full z-50 right-1/2 transform mt-2 rounded-xl shadow-lg ring-1 ring-base-300 border border-base-300"
                 }
               >
                 {availableNames
@@ -493,8 +493,8 @@ export default function DataLineGraph() {
                         onClick={() => handleNameSelect(index, n)}
                         className={
                           index === 0
-                            ? "text-blue block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"
-                            : "text-red-orange block w-full px-4 py-2 text-md font-semibold hover:bg-medium-orange"
+                            ? "text-info block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
+                            : "text-error block w-full px-4 py-2 text-md font-semibold hover:bg-base-200"
                         }
                       >
                         {n}
@@ -507,7 +507,7 @@ export default function DataLineGraph() {
           {selectedNames.length < 2 && ( // keep to 2 plots for now
             <button
               onClick={addPlot}
-              className="bg-primary outline-solid outline-1 outline-dark-orange drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-primary"
+              className="bg-primary outline outline-1 outline-primary drop-shadow-xl text-primary-content font-medium px-4 py-2 m-3 rounded-xl hover:bg-primary/90"
             >
               Add Another Plot
             </button>
@@ -515,7 +515,7 @@ export default function DataLineGraph() {
           {selectedNames.length > 1 && (
             <button
               onClick={() => setSelectedNames(selectedNames.slice(0, -1))}
-              className="bg-medium-teal outline-solid outline-1 outline-dark-teal drop-shadow-xl text-white font-medium px-4 py-2 m-3 rounded-xl hover:bg-dark-teal"
+              className="bg-secondary outline outline-1 outline-secondary drop-shadow-xl text-secondary-content font-medium px-4 py-2 m-3 rounded-xl hover:brightness-110"
             >
               Remove Last Plot
             </button>
@@ -523,28 +523,30 @@ export default function DataLineGraph() {
         </div>
 
         <div className="date-constraints-box">
-          <div className="bg-teal text-white font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
+          <div className="bg-accent text-accent-content font-semibold text-center p-2 m-4 mb-2 rounded-xl self-center mx-auto w-fit">
             Date Constraints
           </div>
           <div
             className={`flex items-center ${
               true ? "flex-col" : "space-x-4" // Can change this to make it horizontal using isSmallScreen
-            } justify-center rounded-lg pt-2 m-3 mt-1 text-lg text-neutral-700`}
+            } justify-center rounded-lg pt-2 m-3 mt-1 text-lg text-base-content/80`}
           >
             <DateBoundElement
               value={startDate}
               onChange={handleStartDateChange}
             />
 
-            <div className="bg-teal p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
-              <span className="text-white font-semibold text-center">to</span>
+            <div className="bg-accent text-accent-content p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
+              <span className="text-accent-content font-semibold text-center">
+                to
+              </span>
             </div>
 
             <DateBoundElement value={endDate} onChange={handleEndDateChange} />
           </div>
 
           <div className="flex items-center justify-center mt-4 mx-3">
-            <label className="flex items-center bg-teal rounded-lg m-1 p-3 space-x-2 cursor-pointer">
+            <label className="flex items-center bg-accent text-accent-content rounded-lg m-1 p-3 space-x-2 cursor-pointer">
               <input
                 type="checkbox"
                 checked={!useInterpolation}
@@ -552,9 +554,9 @@ export default function DataLineGraph() {
                   setUseInterpolation(!e.target.checked);
                   setShouldFetch(true);
                 }}
-                className="form-checkbox h-5 w-5 text-teal rounded-sm border-gray-300 focus:ring-teal"
+                className="form-checkbox h-5 w-5 text-primary rounded border-base-300 focus:ring-primary"
               />
-              <span className="text-white font-medium">
+              <span className="text-accent-content font-medium">
                 Display Discrete Points
               </span>
             </label>

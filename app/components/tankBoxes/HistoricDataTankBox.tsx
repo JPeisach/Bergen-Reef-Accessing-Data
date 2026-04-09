@@ -56,10 +56,10 @@ export default function HistoricDataTankBox({
   return (
     // TODO: Show something if dateRange[1] DNE and needs to be entered.
     <a
-      className="block rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20 cursor-pointer"
+      className="block rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300 cursor-pointer"
       href="/info"
     >
-      <h2 className="text-xl font-bold text-base-content mb-4 text-center">
+      <h2 className="text-xl font-bold text-primary mb-4 text-center">
         Tank {tankName}
       </h2>
       <div className="h-48">

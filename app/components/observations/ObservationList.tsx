@@ -154,7 +154,7 @@ export default function ObservationList({}) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-base-content mb-4">
+      <h2 className="text-xl font-bold text-primary mb-4">
         Recent Observations
       </h2>
 
@@ -165,20 +165,20 @@ export default function ObservationList({}) {
           placeholder="Search observations..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-xl bg-white p-3 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+          className="w-full rounded-xl bg-base-100 border border-base-300 p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
         />
       </div>
 
       <div className="space-y-4">
         {isLoadingObservations ? (
-          <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
-            <p className="text-sm text-gray/90 text-center py-4">
+          <div className="rounded-lg bg-base-100/90 p-3.5 shadow-lg border border-base-300">
+            <p className="text-sm text-base-content/80 text-center py-4">
               Loading observations...
             </p>
           </div>
         ) : filteredObservations.length === 0 ? (
-          <div className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20">
-            <p className="text-sm text-gray/90 text-center py-4">
+          <div className="rounded-lg bg-base-100/90 p-3.5 shadow-lg border border-base-300">
+            <p className="text-sm text-base-content/80 text-center py-4">
               {searchQuery
                 ? "No observations found matching your search."
                 : "No observations yet. Create your first observation using the notepad!"}
@@ -188,7 +188,7 @@ export default function ObservationList({}) {
           filteredObservations.map((obs) => (
             <div
               key={obs.observationId}
-              className="rounded-lg bg-white/90 p-3.5 shadow-lg border border-light-orange/20 overflow-scroll"
+              className="rounded-lg bg-base-100/90 p-3.5 shadow-lg border border-base-300 overflow-scroll"
             >
               <div className="flex justify-between mb-2.5">
                 <div className="flex flex-col w-full">
@@ -197,31 +197,31 @@ export default function ObservationList({}) {
                       <input
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
-                        className="mb-1 rounded-sm p-1 border border-gray-300"
+                        className="mb-1 rounded p-1 border border-base-300 bg-base-100"
                       />
                       <textarea
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
-                        className="rounded-sm p-1 border border-gray-300"
+                        className="rounded p-1 border border-base-300 bg-base-100"
                         rows={3}
                       />
                       <input
                         value={editTags}
                         onChange={(e) => setEditTags(e.target.value)}
                         placeholder="tags, comma, separated"
-                        className="mt-1 rounded-sm p-1 border border-gray-300"
+                        className="mt-1 rounded p-1 border border-base-300 bg-base-100"
                       />
                     </>
                   ) : (
                     <>
-                      <h3 className="text-base font-semibold text-base-content">
+                      <h3 className="text-base font-semibold text-primary">
                         {obs.observationTitle}
                       </h3>
-                      <span className="text-xs text-medium-gray/80">
+                      <span className="text-xs text-base-content/60">
                         {parseTags(obs.observationTagsArray).join(" ")}
                       </span>
                       {obs.observationText && (
-                        <p className="text-sm text-gray/90 mt-2 line-clamp-3 leading-relaxed">
+                        <p className="text-sm text-base-content/80 mt-2 line-clamp-3 leading-relaxed">
                           {obs.observationText}
                         </p>
                       )}
@@ -229,7 +229,7 @@ export default function ObservationList({}) {
                   )}
                 </div>
 
-                <div className="flex flex-col items-end ml-2 text-xs text-medium-gray/80 whitespace-nowrap">
+                <div className="flex flex-col items-end ml-2 text-xs text-base-content/60 whitespace-nowrap">
                   <span>{obs.author}</span>
                   <span>{obs.datetime ? formatDate(obs.datetime) : ""}</span>
                 </div>
@@ -239,21 +239,21 @@ export default function ObservationList({}) {
                 {editingId === obs.observationId ? (
                   <button
                     onClick={() => onSave(obs)}
-                    className="px-3 py-1 bg-green-500 text-white rounded-sm"
+                    className="px-3 py-1 bg-success text-success-content rounded"
                   >
                     Save
                   </button>
                 ) : (
                   <button
                     onClick={() => onEdit(obs)}
-                    className="px-3 py-1 bg-yellow-500 text-white rounded-sm"
+                    className="px-3 py-1 bg-yellow-500 text-white rounded"
                   >
                     Edit
                   </button>
                 )}
                 <button
                   onClick={() => onDelete(obs)}
-                  className="px-3 py-1 bg-red-500 text-white rounded-sm"
+                  className="px-3 py-1 bg-error text-error-content rounded"
                 >
                   Delete
                 </button>

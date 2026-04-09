@@ -46,21 +46,21 @@ export default function Page() {
 
       <div className="relative flex">
         {/* Content */}
-        <div className="p-8 bg-base-100/30 min-h-screen min-w-full">
-          <h1 className="text-3xl font-bold text-base-content mb-6 text-center drop-shadow-xs">
+        <div className="p-8 bg-base-200 min-h-screen min-w-full">
+          <h1 className="text-3xl font-bold text-primary mb-6 text-center drop-shadow-sm">
             Tank Information
           </h1>
 
           {/* Tank Number Dropdown */}
-          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-base-100/40 p-5 shadow-lg backdrop-blur-xs">
+          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-base-100 border border-base-300 p-5 shadow-lg backdrop-blur-sm">
             <div className="min-w-[200px]">
-              <label className="block text-base-content font-bold mb-2 text-sm">
+              <label className="block text-primary font-bold mb-2 text-sm">
                 Tank Number
               </label>
               <select
                 value={tankNumber}
                 onChange={(e) => setTankNumber(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+                className="w-full rounded-xl bg-base-100 p-2.5 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all border border-base-300"
               >
                 <option value="">Select tank number...</option>
                 {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
@@ -77,16 +77,16 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Tank Picture */}
               <div>
-                <h2 className="text-xl font-bold text-base-content mb-4">
+                <h2 className="text-xl font-bold text-primary mb-4">
                   Tank {tankNumber} Picture
                 </h2>
-                <div className="rounded-2xl bg-white/90 p-4 shadow-xl border border-light-orange/20 flex flex-col items-center justify-center min-h-[300px] overflow-hidden">
+                <div className="rounded-2xl bg-base-100/90 p-4 shadow-xl border border-base-300 flex flex-col items-center justify-center min-h-[300px] overflow-hidden">
                   <img
                     src={getTankImage(tankNumber)}
                     alt={`Tank ${tankNumber} coral reef aquarium`}
                     className="w-full h-auto object-cover rounded-xl mb-4"
                   />
-                  <p className="text-base-content font-bold text-lg text-center">
+                  <p className="text-primary font-bold text-lg text-center">
                     2/3/2026
                   </p>
                 </div>
@@ -94,24 +94,24 @@ export default function Page() {
 
               {/* Coral Types Information */}
               <div>
-                <h2 className="text-xl font-bold text-base-content mb-4">
+                <h2 className="text-xl font-bold text-primary mb-4">
                   Coral Types in Tank {tankNumber}
                 </h2>
-                <div className="rounded-2xl bg-white/90 p-6 shadow-xl border border-light-orange/20">
+                <div className="rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300">
                   {tankInfo && tankInfo.coralTypes.length > 0 ? (
                     <div className="space-y-3">
                       {tankInfo.coralTypes.map((coralType, index) => (
                         <button
                           key={index}
                           onClick={() => setSelectedCoral(coralType)}
-                          className="w-full text-left rounded-lg bg-base-100/40 px-4 py-3 text-base-content font-semibold shadow-xs border border-light-orange/30 hover:bg-base-100/60 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
+                          className="w-full text-left rounded-lg bg-base-200 px-4 py-3 text-primary font-semibold shadow-sm border border-base-300 hover:bg-base-300 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
                         >
                           {coralType}
                         </button>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-gray font-medium text-center py-4">
+                    <p className="text-base-content/80 font-medium text-center py-4">
                       No coral types available
                     </p>
                   )}
@@ -122,8 +122,8 @@ export default function Page() {
 
           {/* Placeholder message when no tank is selected */}
           {!tankNumber && (
-            <div className="rounded-2xl bg-white/90 p-8 text-center shadow-xl border border-light-orange/20">
-              <p className="text-gray font-medium text-lg">
+            <div className="rounded-2xl bg-base-100/90 p-8 text-center shadow-xl border border-base-300">
+              <p className="text-base-content/80 font-medium text-lg">
                 Select tank number to view information.
               </p>
             </div>
@@ -159,15 +159,15 @@ export default function Page() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all border border-light-orange">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all border border-base-300">
                   <Dialog.Title
                     as="h3"
-                    className="text-2xl font-bold leading-6 text-primary-content mb-4"
+                    className="text-2xl font-bold leading-6 text-primary mb-4"
                   >
                     {selectedCoral}
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-gray-600">
+                    <p className="text-base-content/70">
                       {selectedCoral && coralDetails[selectedCoral]
                         ? coralDetails[selectedCoral]
                         : "Information about this coral type is currently unavailable."}
@@ -177,7 +177,7 @@ export default function Page() {
                   <div className="mt-6 flex justify-end">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-xl bg-base-100/20 px-4 py-2 text-sm font-bold text-primary-content hover:bg-base-100/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 transition-colors"
+                      className="inline-flex justify-center rounded-xl bg-base-200 px-4 py-2 text-sm font-bold text-primary hover:bg-base-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100 transition-colors"
                       onClick={() => setSelectedCoral(null)}
                     >
                       Close

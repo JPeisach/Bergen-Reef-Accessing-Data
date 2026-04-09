@@ -50,28 +50,28 @@ const HistoryPageDialog = ({
             <div
               className={
                 type === "guide"
-                  ? "bg-white rounded-lg shadow-lg max-w-3xl w-full"
-                  : "bg-white rounded-lg shadow-lg max-w-md w-full"
+                  ? "bg-base-100 border border-base-300 rounded-lg shadow-lg max-w-3xl w-full"
+                  : "bg-base-100 border border-base-300 rounded-lg shadow-lg max-w-md w-full"
               }
             >
-              <div className="grid grid-flow-col grid-rows-1 place-content-center gap-2 bg-teal drop-shadow-gray drop-shadow-lg rounded-lg p-4">
-                <h2 className="text-xl text-white font-semibold">{title}</h2>
+              <div className="grid grid-flow-col grid-rows-1 place-content-center gap-2 bg-accent text-accent-content drop-shadow-lg rounded-lg p-4">
+                <h2 className="text-xl font-semibold">{title}</h2>
                 {type === "guide" && (
-                  <QuestionMarkCircleIcon className="w-6 h-6 text-white mt-1/2" />
+                  <QuestionMarkCircleIcon className="w-6 h-6 text-accent-content mt-1/2" />
                 )}
                 {(type === "warning" || type === "notice") && (
-                  <ExclamationTriangleIcon className="w-6 h-6 text-white mt-1/2" />
+                  <ExclamationTriangleIcon className="w-6 h-6 text-accent-content mt-1/2" />
                 )}
                 {type === "success" && (
-                  <CheckCircleIcon className="w-6 h-6 text-white mt-1/2" />
+                  <CheckCircleIcon className="w-6 h-6 text-accent-content mt-1/2" />
                 )}
                 {type === "error" && (
-                  <XCircleIcon className="w-6 h-6 text-white mt-1/2" />
+                  <XCircleIcon className="w-6 h-6 text-accent-content mt-1/2" />
                 )}
               </div>
               <div className="flex flex-col gap-4 p-6">
                 {type === "guide" && (
-                  <div className="text-lg mt-2">
+                  <div className="text-lg mt-2 text-base-content">
                     <p className="mb-3">
                       To sort or reorder (ascending{" "}
                       <ArrowUpIcon className="inline w-4 h-4 text-gray-500 ml-1 align-text-bottom" />
@@ -82,7 +82,7 @@ const HistoryPageDialog = ({
                     </p>
                     <p className="mb-3">
                       To filter, click on the 3 horizontal lines icon
-                      <Bars3Icon className="inline w-5 h-5 text-gray-500 ml-1 align-text-bottom" />
+                      <Bars3Icon className="inline w-5 h-5 text-base-content/60 ml-1 align-text-bottom" />
                       <b> next to the desired column name.</b>
                     </p>
                     <p className="mb-3">
@@ -122,13 +122,13 @@ const HistoryPageDialog = ({
                 {type === "warning" ? (
                   <div className="grid grid-flow-col grid-rows-1 gap-4">
                     <button
-                      className="bg-teal text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-medium-teal"
+                      className="bg-secondary text-secondary-content text-lg mt-4 px-4 py-2 rounded-xl shadow hover:brightness-110"
                       onClick={onClose}
                     >
                       Cancel
                     </button>
                     <button
-                      className="bg-primary text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-primary"
+                      className="bg-primary text-primary-content text-lg mt-4 px-4 py-2 rounded-xl shadow hover:bg-primary/90"
                       onClick={onConfirm}
                     >
                       Delete
@@ -137,7 +137,7 @@ const HistoryPageDialog = ({
                 ) : (
                   <Transition as={Fragment}>
                     <button
-                      className="bg-primary text-lg text-white mt-4 px-4 py-2 rounded-xl shadow-sm hover:bg-primary"
+                      className="bg-primary text-primary-content text-lg mt-4 px-4 py-2 rounded-xl shadow hover:bg-primary/90"
                       onClick={onClose}
                     >
                       Close

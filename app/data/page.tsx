@@ -20,86 +20,41 @@ export default function Page() {
           overflowY: "auto",
         }}
       >
-        <div
-          className="flex flex-col bg-white rounded-lg"
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "16px",
-            padding: "24px",
-            backgroundColor: "white",
-            border: "1px solid #E5E7EB",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div className="bg-teal rounded-lg p-4 w-full">
-            <h2 className="flex justify-center text-xl text-white font-semibold">
+        <div className="flex h-full w-full flex-col items-center rounded-2xl border border-base-300 bg-base-100 p-6">
+          <div className="bg-accent text-accent-content rounded-lg p-4 w-full">
+            <h2 className="flex justify-center text-xl font-semibold">
               Graphs
             </h2>
           </div>
           <div className="flex flex-col gap-4 p-6 w-full items-center">
             <a href="/data/linegraph" className="w-full">
               <button
-                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "16px",
-                  color: "white",
-                  border: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                type="button"
+                className="bg-primary text-primary-content outline outline-1 outline-primary font-medium px-4 py-2 rounded-xl hover:bg-primary/90 w-full flex items-center justify-center text-base"
               >
                 Simple Line Graph
               </button>
             </a>
             <a href="/data/twodimgraph" className="w-full">
               <button
-                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "16px",
-                  color: "white",
-                  border: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                type="button"
+                className="bg-primary text-primary-content outline outline-1 outline-primary font-medium px-4 py-2 rounded-xl hover:bg-primary/90 w-full flex items-center justify-center text-base"
               >
                 Two Dimensional Scatter Plot
               </button>
             </a>
             <a href="/data/boxplot" className="w-full">
               <button
-                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "16px",
-                  color: "white",
-                  border: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                type="button"
+                className="bg-primary text-primary-content outline outline-1 outline-primary font-medium px-4 py-2 rounded-xl hover:bg-primary/90 w-full flex items-center justify-center text-base"
               >
                 Box Plot
               </button>
             </a>
             <a href="/data/heatmap" className="w-full">
               <button
-                className="bg-primary outline-solid outline-1 outline-dark-orange text-white font-medium px-4 py-2 rounded-xl hover:bg-primary w-full"
-                style={{
-                  padding: "8px 16px",
-                  fontSize: "16px",
-                  color: "white",
-                  border: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                type="button"
+                className="bg-primary text-primary-content outline outline-1 outline-primary font-medium px-4 py-2 rounded-xl hover:bg-primary/90 w-full flex items-center justify-center text-base"
               >
                 Heat Map
               </button>

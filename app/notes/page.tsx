@@ -28,22 +28,22 @@ export default function Page() {
       <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
 
       <div className="relative flex">
-        <div className="p-8 bg-base-100/30 min-h-screen min-w-full">
-          <h1 className="text-3xl font-bold text-base-content mb-6 text-center drop-shadow-xs">
+        <div className="p-8 bg-base-200 min-h-screen min-w-full">
+          <h1 className="text-3xl font-bold text-primary mb-6 text-center drop-shadow-sm">
             Observations
           </h1>
 
           {/* TODO: Determine what this will be - a panel to filter observations? */}
-          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-base-100/40 p-5 shadow-lg backdrop-blur-xs">
+          <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl bg-base-100 border border-base-300 p-5 shadow-lg backdrop-blur-sm">
             {/* Tank numnber dropdown menu */}
             <div className="min-w-[160px]">
-              <label className="block text-base-content font-bold mb-2 text-sm">
+              <label className="block text-primary font-bold mb-2 text-sm">
                 Tank
               </label>
               <select
                 value={tankNumber}
                 onChange={(e) => setTankNumber(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+                className="w-full rounded-xl bg-base-100 p-2.5 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all border border-base-300"
               >
                 <option value="">Select tank...</option>
                 {Array.from({ length: 9 }, (_, i) => i + 1).map((num) => (
@@ -56,13 +56,13 @@ export default function Page() {
 
             {/* coral dropdown */}
             <div className="min-w-[180px]">
-              <label className="block text-base-content font-bold mb-2 text-sm">
+              <label className="block text-primary font-bold mb-2 text-sm">
                 Coral Type
               </label>
               <select
                 value={coralType}
                 onChange={(e) => setCoralType(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+                className="w-full rounded-xl bg-base-100 p-2.5 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all border border-base-300"
               >
                 <option value="">Select coral type...</option>
                 {coralTypes.map((type, index) => (
@@ -75,14 +75,14 @@ export default function Page() {
 
             {/* time input*/}
             <div className="min-w-[160px]">
-              <label className="block text-base-content font-bold mb-2 text-sm">
+              <label className="block text-primary font-bold mb-2 text-sm">
                 Time
               </label>
               <input
                 type="time"
                 value={observationTime}
                 onChange={(e) => setObservationTime(e.target.value)}
-                className="w-full rounded-xl bg-white p-2.5 text-sm font-medium text-gray focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+                className="w-full rounded-xl bg-base-100 p-2.5 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all border border-base-300"
               />
             </div>
 
@@ -90,7 +90,7 @@ export default function Page() {
             <button
               type="button"
               onClick={() => setIsNotepadVisible((prev) => !prev)}
-              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-2xl font-bold text-black shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-primary"
+              className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-content shadow-lg transition-all hover:scale-110 hover:shadow-xl hover:bg-primary/90"
             >
               {isNotepadVisible ? "−" : "+"}
             </button>

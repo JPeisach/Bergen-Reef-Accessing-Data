@@ -1,117 +1,103 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* TODO: Refer to https://daisyui.com/docs/themes/ as we continue to define things here */
-/* https://daisyui.com/theme-generator/#theme=eJxtlOtu4yAQhV8FWaq0KzUIhoth34bYuLHqmAgctbtV330xThMI_mdmvnPmAvJXM5uzbf400_h2WprXpnOT84fQnWwK98a_x-jhsMWPJtgDJSRm3PvUnX7F7xdEEPn9DEEGabXPsJwR-0zn5sXOy50DGjlMiESgBFZK5IqLH8_G_73DfDXFwBG0LSbAdtiqgGapAFtFgFulclGwEe_zEvJWgiImOGZkH6-r8FQFFGIcMIhCZrouZ9t2ZakARBXFmkLNVv5MJX_JokZhTmWume118WZ6XOLWDBHbTss93eB6AthEcU9KYlY0Nc6De7Sf3Gm8MAZYSvoM1lest96jgrM4d1us9BoHDuHhLpN72yIqGYay9xtcbydtlCSRwprnmg_j53F-u7MqzUmVRopjDnqHrfx5eqSUAuICa1L4W--df7S_kZojyqK7qsh6O9triJdFAZOf3r3px2uID26y3ZL8CRbenvPkMNqpTxl4Th3dZykJ4z9bukGZ2zM7Ot_blaaXzxTo7WU5red0mt0Y1n8KiafeDuY6xakGMwX72ly8HawP6Xezxb7_A3F8TlQ */
-
+/* light */
 @plugin "daisyui/theme" {
-  name: "brad";
-  default: false;
+  name: "light";
+  default: true;
   prefersdark: false;
-  color-scheme: "dark";
-  --color-base-100: #ffdbc1;
-  --color-base-200: #ffffff;
-  --color-base-300: oklch(95% 0 0);
-  --color-base-content: #ed683b;
-  --color-primary: #f37366;
-  --color-primary-content: oklch(93% 0.034 272.788);
-  --color-secondary: oklch(65% 0.241 354.308);
-  --color-secondary-content: oklch(94% 0.028 342.258);
-  --color-accent: oklch(77% 0.152 181.912);
-  --color-accent-content: oklch(38% 0.063 188.416);
-  --color-neutral: oklch(14% 0.005 285.823);
-  --color-neutral-content: oklch(92% 0.004 286.32);
-  --color-info: oklch(74% 0.16 232.661);
-  --color-info-content: oklch(29% 0.066 243.157);
-  --color-success: oklch(76% 0.177 163.223);
-  --color-success-content: oklch(37% 0.077 168.94);
-  --color-warning: oklch(82% 0.189 84.429);
-  --color-warning-content: oklch(41% 0.112 45.904);
-  --color-error: oklch(71% 0.194 13.428);
-  --color-error-content: oklch(27% 0.105 12.094);
-  --radius-selector: 0.5rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 1;
-  --noise: 0;
+  color-scheme: light;
+
+  --color-primary: #ffa900;
+  --color-primary-content: #1f2937;
+  --color-secondary: #feb934;
+  --color-secondary-content: #1f2937;
+  --color-accent: #68bfc6;
+  --color-accent-content: #0f172a;
+  --color-neutral: #2b3440;
+  --color-neutral-content: #d7dde4;
+  --color-base-100: #fffdfb;
+  --color-base-200: #fef3d6;
+  --color-base-300: #fde4a8;
+  --color-base-content: #3f3f46;
 }
 
+/* dark */
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-primary: #f59e0b;
+  --color-primary-content: #1f2937;
+  --color-secondary: #fbbf24;
+  --color-secondary-content: #1f2937;
+  --color-accent: #34d399;
+  --color-accent-content: #052e16;
+  --color-neutral: #2a323c;
+  --color-neutral-content: #a6adbb;
+  --color-base-100: #1d232a;
+  --color-base-200: #191e24;
+  --color-base-300: #15191e;
+  --color-base-content: #e5e7eb;
+}
+
+/* coral-pink */
+@plugin "daisyui/theme" {
+  name: "coral-pink";
+  color-scheme: light;
+
+  --color-primary: #eb718d;
+  --color-primary-content: #ffffff;
+  --color-secondary: #f6a8b7;
+  --color-secondary-content: #4a2f34;
+  --color-accent: #e86a84;
+  --color-accent-content: #ffffff;
+  --color-neutral: #4a2f34;
+  --color-neutral-content: #fce8ec;
+  --color-base-100: #fff4f6;
+  --color-base-200: #ffecef;
+  --color-base-300: #ffc1cc;
+  --color-base-content: #4a2f34;
+}
+
+/* sea-green */
 @plugin "daisyui/theme" {
   name: "sea-green";
-  default: false;
-  prefersdark: false;
-  color-scheme: "dark";
+  color-scheme: light;
+
+  --color-primary: #2f9e83;
+  --color-primary-content: #ffffff;
+  --color-secondary: #5eb39c;
+  --color-secondary-content: #153c34;
+  --color-accent: #a5dccc;
+  --color-accent-content: #153c34;
+  --color-neutral: #153c34;
+  --color-neutral-content: #e8f7f3;
   --color-base-100: #f0fbf8;
-  --color-base-200: #ffffff;
-  --color-base-300: oklch(95% 0 0);
-  --color-base-content: #2f9e83;
-  --color-primary: #a5dccc;
-  --color-primary-content: oklch(93% 0.034 272.788);
-  --color-secondary: #2f9e83;
-  --color-secondary-content: oklch(94% 0.028 342.258);
-  --color-accent: oklch(77% 0.152 181.912);
-  --color-accent-content: oklch(38% 0.063 188.416);
-  --color-neutral: oklch(14% 0.005 285.823);
-  --color-neutral-content: oklch(92% 0.004 286.32);
-  --color-info: oklch(74% 0.16 232.661);
-  --color-info-content: oklch(29% 0.066 243.157);
-  --color-success: oklch(76% 0.177 163.223);
-  --color-success-content: oklch(37% 0.077 168.94);
-  --color-warning: oklch(82% 0.189 84.429);
-  --color-warning-content: oklch(41% 0.112 45.904);
-  --color-error: oklch(71% 0.194 13.428);
-  --color-error-content: oklch(27% 0.105 12.094);
-  --radius-selector: 0.5rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 1;
-  --noise: 0;
+  --color-base-200: #e4f7f1;
+  --color-base-300: #c5ebe0;
+  --color-base-content: #153c34;
 }
 
-@config '../tailwind.config.js';
+/* light-blue */
+@plugin "daisyui/theme" {
+  name: "light-blue";
+  color-scheme: light;
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
-
-@layer utilities {
-  /* dark mode options commented out */
-  :root {
-    --background: #ffffff;
-    --foreground: #171717;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #0a0a0a;
-      --foreground: #ededed;
-    }
-  }
-
-  .dark {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: #3b82f6;
+  --color-primary-content: #ffffff;
+  --color-secondary: #60a5fa;
+  --color-secondary-content: #1f3550;
+  --color-accent: #93c5fd;
+  --color-accent-content: #1f3550;
+  --color-neutral: #1f3550;
+  --color-neutral-content: #e8f1fc;
+  --color-base-100: #eef7ff;
+  --color-base-200: #e0f0ff;
+  --color-base-300: #c7e0ff;
+  --color-base-content: #1f3550;
 }
 
 @layer base {
@@ -124,11 +110,6 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
 h1 {
   text-align: center;
 }
@@ -139,7 +120,7 @@ h1 {
 }
 
 .ag-paging-panel > span {
-  color: black !important;
+  color: oklch(var(--bc) / 1) !important;
 }
 
 .ag-root-wrapper {
@@ -191,13 +172,13 @@ h1 {
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-base-200 outline-neutral outline-0 text-base-content font-semibold hover:bg-primary/50;
+  @apply bg-base-100 outline outline-1 outline-base-300 text-base-content font-semibold hover:bg-base-200;
 }
 
 .navbar-tabitem-highlighted {
-  @apply bg-primary outline-neutral outline-primary text-base-300 font-bold;
+  @apply bg-primary outline outline-2 outline-primary text-primary-content font-bold;
 }
 
 .navbar-graphs-dropdown-button {
-  @apply block w-full py-5 text-base-content outline-primary font-semibold hover:bg-primary/50;
+  @apply block w-full py-5 text-base text-base-content font-semibold hover:bg-base-200;
 }

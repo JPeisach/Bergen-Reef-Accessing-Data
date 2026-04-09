@@ -54,8 +54,8 @@ export default function RecentDataTankBox({ tankName, variableType }) {
   }, [variableType]);
 
   return (
-    <div className="card bg-base-300 card-border rounded-2xl p-6 border-base-100 shadow-xl">
-      <h2 className="text-base-content text-xl font-bold mb-4 text-center">
+    <div className="block rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300 cursor-pointer">
+      <h2 className="text-xl font-bold text-primary mb-4 text-center">
         Tank {tankName}
       </h2>
       <div className="h-48">

@@ -66,15 +66,15 @@ export default function ObservationNotepad({}) {
 
   return (
     <div>
-      <div className="w-full space-y-5 rounded-2xl bg-white p-6 shadow-xl backdrop-blur-xs">
+      <div className="w-full space-y-5 rounded-2xl bg-base-100 border border-base-300 p-6 shadow-xl backdrop-blur-sm">
         {/* Tank Number */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-base-content">
+          <Label className="mb-2 text-sm font-bold text-primary">
             Tank Number:
           </Label>
           <Select
             name="tankNumber"
-            className="text-sm text-black"
+            className="text-sm text-base-content rounded-lg border border-base-300 bg-base-100 px-2 py-1"
             onChange={(e) => setTankNumber(Number(e.target.value))}
           >
             <option value={1}>1</option>
@@ -93,7 +93,7 @@ export default function ObservationNotepad({}) {
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-base-content">
+          <Label className="mb-2 block text-sm font-bold text-primary">
             Observation Title
           </Label>
           <Input
@@ -101,17 +101,17 @@ export default function ObservationNotepad({}) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title here..."
-            className="w-full rounded-xl bg-white p-3 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+            className="w-full rounded-xl bg-base-100 border border-base-300 p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
           />
         </Field>
 
         {/* Date Range */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-base-content">
+          <Label className="mb-2 text-sm font-bold text-primary">
             Date Range
           </Label>
           <Flatpickr
-            className="w-full bg-white px-2 py-2 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-inner rounded-lg"
+            className="w-full bg-base-100 px-2 py-2 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-inner rounded-lg border border-base-300"
             data-enable-time
             options={{ enableSeconds: true, mode: "range" }}
             value={dateRange}
@@ -121,13 +121,11 @@ export default function ObservationNotepad({}) {
 
         {/* Tags Display */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-base-content">
-            Tags
-          </Label>
+          <Label className="mb-2 text-sm font-bold text-primary">Tags</Label>
           {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
           <Input
             name="tags"
-            className="w-full rounded-xl bg-white resize-none p-3 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+            className="w-full rounded-xl bg-base-100 border border-base-300 resize-none p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
             placeholder="Enter a list of tags separated by comma..."
             value={tags.join(", ")}
             onChange={(e) =>
@@ -138,35 +136,32 @@ export default function ObservationNotepad({}) {
 
         {/* Notes Textbox */}
         <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary-content">
+          <Label className="mb-2 block text-sm font-bold text-primary">
             Notes
           </Label>
           <Textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Enter any notes here..."
-            className="h-64 w-full resize-none rounded-xl bg-white p-4 text-sm font-medium text-black focus:outline-hidden focus:ring-2 focus:ring-light-orange shadow-xs transition-all"
+            className="h-64 w-full resize-none rounded-xl bg-base-100 border border-base-300 p-4 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
           />
         </Field>
 
         {/* Save Button */}
         <div className="flex flex-col items-end gap-2 pt-2">
           {status === "error" && (
-            <p className="text-sm text-red-600 font-medium">
+            <p className="text-sm text-error font-medium">
               Failed to save observation.
             </p>
           )}
           {status === "success" && (
-            <p className="text-sm text-green-600 font-medium">
+            <p className="text-sm text-success font-medium">
               Observation saved successfully!
             </p>
           )}
           <button
-            onClick={() => {
-              handleSave();
-              window.location.reload();
-            }}
-            className="rounded-xl bg-primary px-8 py-3 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:bg-primary disabled:cursor-not-allowed disabled:bg-medium-gray disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
+            onClick={handleSave}
+            className="rounded-xl bg-primary px-8 py-3 text-sm font-bold text-primary-content transition-all hover:scale-105 hover:shadow-lg hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-base-300 disabled:text-base-content/50 disabled:hover:scale-100 disabled:hover:shadow-none shadow-md"
             disabled={
               notes.trim() === "" || title === "" || status === "sending"
             }

@@ -16,22 +16,22 @@ export default function DashboardPage() {
     <div>
       <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
-      <div className="p-8 bg-base-100/30 h-screen overflow-scroll">
-        <h1 className="text-3xl font-bold text-primary mb-6 text-center drop-shadow-xs">
+      <div className="p-8 bg-base-200 h-screen overflow-scroll">
+        <h1 className="text-3xl font-bold text-primary mb-6 text-center drop-shadow-sm">
           Tank Dashboard
         </h1>
 
         <div className="flex flex-col items-center py-5 gap-4">
-          <label className="text-2xl font-bold text-primary text-center drop-shadow-xs">
+          <label className="text-2xl font-bold text-primary text-center drop-shadow-sm">
             Variable
           </label>
           <div className="w-full max-w-xs relative z-10">
             <Menu as="div" className="relative inline-block text-left w-full">
-              <MenuButton className="w-full h-10 text-center rounded-xl bg-primary text-lg text-white font-semibold shadow-md transition-all hover:bg-primary focus:outline-hidden flex items-center justify-center">
+              <MenuButton className="w-full h-10 text-center rounded-xl bg-primary text-lg text-primary-content font-semibold shadow-md transition-all hover:bg-primary/90 focus:outline-none flex items-center justify-center">
                 <span>{variableType}</span>
-                <ChevronDownIcon className="-mr-1 size-6 text-white ml-2" />
+                <ChevronDownIcon className="-mr-1 size-6 text-primary-content ml-2" />
               </MenuButton>
-              <MenuItems className="absolute left-0 mt-2 w-full origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden z-50">
+              <MenuItems className="absolute left-0 mt-2 w-full origin-top-right divide-y divide-base-300 rounded-xl bg-base-100 shadow-lg ring-1 ring-base-300 focus:outline-none z-50">
                 <div className="px-1 py-1">
                   {[
                     "pH",
@@ -44,7 +44,7 @@ export default function DashboardPage() {
                     <MenuItem key={type}>
                       <button
                         onClick={() => setVariableType(type)}
-                        className="group flex w-full items-center rounded-lg px-2 py-2 text-sm font-semibold text-primary hover:bg-primary/20"
+                        className="group flex w-full items-center rounded-lg px-2 py-2 text-sm font-semibold text-primary hover:bg-base-200"
                       >
                         {type}
                       </button>
