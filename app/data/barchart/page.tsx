@@ -15,7 +15,7 @@ export default function Page() {
       <div className="bg-base-100/30 min-h-screen flex-1 overflow-hidden">
         {/* TODO: Selectable tanks, variables */}
         <BarChartGraph
-          tankNames={["CoralLab60_1"]}
+          tankNames={["CoralLab60_1", "CoralLab60_2"]}
           variableType={"pH"}
           dateRange={[dateA, new Date()]}
         />

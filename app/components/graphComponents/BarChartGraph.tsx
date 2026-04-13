@@ -1,34 +1,35 @@
 import {
-  Area,
-  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
-  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 import "../../globals.css";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchSingularDataTypeInDateRange } from "app/services/dataService";
 
 // start of AI code
 type DataPoint = {
   value: number;
   datetime: string;
+  name: string;
 };
 
 function averageByDay(filteredData: DataPoint[]): DataPoint[] {
-  const grouped: Record<string, { total: number; count: number }> = {};
+  const grouped: Record<
+    string,
+    { total: number; count: number; name: string }
+  > = {};
 
   for (const item of filteredData) {
     const date = new Date(item.datetime);
     const dayKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
 
     if (!grouped[dayKey]) {
-      grouped[dayKey] = { total: 0, count: 0 };
+      grouped[dayKey] = { total: 0, count: 0, name: item.name };
     }
 
     grouped[dayKey].total += Number(item.value);
@@ -38,6 +39,7 @@ function averageByDay(filteredData: DataPoint[]): DataPoint[] {
   return Object.entries(grouped)
     .map(([date, stats]) => ({
       datetime: date,
+      name: stats.name,
       value: stats.total / stats.count,
     }))
     .sort(
@@ -48,7 +50,7 @@ function averageByDay(filteredData: DataPoint[]): DataPoint[] {
 // end of AI code
 
 export default function BarChartGraph({ tankNames, variableType, dateRange }) {
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState<DataPoint[]>([]);
 
   useEffect(() => {
     // Ensure we have our data
@@ -58,7 +60,7 @@ export default function BarChartGraph({ tankNames, variableType, dateRange }) {
 
     // FIXME: stupid fix to ensure that we reload quickly for when we are waiting for valid params, but once we have data going through we aren't spamming the API
     // Honestly, we should figure out how to handle being given invalid or incomplete params and where we want to handle it.
-    let delay = 1000;
+    const delay = 1000;
 
     const interval = setInterval(() => {
       for (const tankName of tankNames) {
@@ -72,6 +74,7 @@ export default function BarChartGraph({ tankNames, variableType, dateRange }) {
             const date = new Date(item.datetime);
 
             return {
+              name: variableType,
               value: item.value,
               datetime: date.toLocaleString(),
             };
@@ -80,6 +83,8 @@ export default function BarChartGraph({ tankNames, variableType, dateRange }) {
           // start of AI code
           const dailyAverageData = averageByDay(filteredData);
 
+          // We need to know which tank is which
+          // @ts-expect-error 2345
           setChartData((prev) => ({
             ...prev,
             [tankName]: dailyAverageData,
@@ -97,46 +102,50 @@ export default function BarChartGraph({ tankNames, variableType, dateRange }) {
       className="block rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300 cursor-pointer"
       href="/info"
     >
-      {tankNames.map((tankName) => {
-        return (
-          <>
-            <h2 className="text-xl font-bold text-primary mb-4 text-center">
-              Tank {tankName}
-            </h2>
-            <div className="h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData[tankName]}>
-                  <CartesianGrid />
-                  <XAxis
-                    // start AI code
-                    dataKey="datetime"
-                    tickFormatter={(tick) => {
-                      const date = new Date(tick);
-                      return `${date.getMonth() + 1}/${date.getDate()}`;
-                    }}
-                    stroke="#757575"
-                    fontSize={12}
-                    // end AI code
-                  />
-                  <YAxis
-                    domain={["dataMin", "dataMax"]}
-                    tickFormatter={(tick) => tick.toFixed(2).toString()}
-                    scale={"sequential"}
-                    stroke="#757575"
-                    fontSize={12}
-                  />
-                  <Tooltip />
+      <>
+        <h2 className="text-xl font-bold text-primary mb-4 text-center">
+          Tank
+        </h2>
+        <div className="h-48">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData}>
+              <CartesianGrid />
+              <XAxis
+                allowDuplicatedCategory={false}
+                // start AI code
+                dataKey="datetime"
+                tickFormatter={(tick) => {
+                  const date = new Date(tick);
+                  return `${date.getMonth() + 1}/${date.getDate()}`;
+                }}
+                stroke="#757575"
+                fontSize={12}
+                // end AI code
+              />
+              <YAxis
+                domain={["dataMin", "dataMax"]}
+                tickFormatter={(tick) => tick.toFixed(2).toString()}
+                scale={"sequential"}
+                stroke="#757575"
+                fontSize={12}
+              />
+              <Tooltip />
+              {tankNames.map((tankName) => {
+                return (
                   <Bar
+                    key={tankName}
+                    // @ts-expect-error 2769
+                    data={chartData[tankName]}
                     dataKey="value"
                     fill="var(--color-primary)"
                     stroke="var(--color-primary)"
                   />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </>
-        );
-      })}
+                );
+              })}
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </>
     </a>
   );
 }
