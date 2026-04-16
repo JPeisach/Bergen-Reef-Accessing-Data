@@ -2,6 +2,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -46,7 +47,9 @@ function averageByDay(filteredData: DataPoint[]) {
       const row: Record<string, any> = { datetime };
 
       for (const varName in vars) {
-        row[varName] = vars[varName].total / vars[varName].count;
+        row[varName] = Number(
+          vars[varName].total / vars[varName].count,
+        ).toFixed(2);
       }
 
       return row;
@@ -108,6 +111,7 @@ export default function BarChartGraph({ tankNames, variableTypes, dateRange }) {
         <div className="h-48">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData}>
+              <Legend />
               <CartesianGrid />
               <XAxis
                 allowDuplicatedCategory={false}
@@ -146,15 +150,28 @@ export default function BarChartGraph({ tankNames, variableTypes, dateRange }) {
               <Tooltip />
               {tankNames.map((tankName) => {
                 return variableTypes.map((variableType) => {
-                  return (
+                  // TODO: It would be great if we could ensure tanks get unique colors
+                  return variableTypes[0] === variableType ? (
                     <Bar
                       key={tankName + variableType}
                       yAxisId={variableType}
                       // @ts-expect-error 2769
                       data={chartData[tankName]}
                       dataKey={variableType}
+                      name={tankName + " " + variableType}
                       fill="var(--color-primary)"
                       stroke="var(--color-primary)"
+                    />
+                  ) : (
+                    <Bar
+                      key={tankName + variableType}
+                      yAxisId={variableType}
+                      // @ts-expect-error 2769
+                      data={chartData[tankName]}
+                      dataKey={variableType}
+                      name={tankName + " " + variableType}
+                      fill="var(--color-secondary)"
+                      stroke="var(--color-secondary)"
                     />
                   );
                 });
