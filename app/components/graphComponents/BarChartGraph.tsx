@@ -106,7 +106,7 @@ export default function BarChartGraph({ tankNames, variableTypes, dateRange }) {
     >
       <>
         <h2 className="text-xl font-bold text-primary mb-4 text-center">
-          Tank
+          Bar Chart
         </h2>
         <div className="h-48">
           <ResponsiveContainer width="100%" height="100%">
