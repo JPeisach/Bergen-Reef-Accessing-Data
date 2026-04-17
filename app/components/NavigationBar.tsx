@@ -184,6 +184,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                       </button>
                     </a>
                   </MenuItem>
+                  <MenuItem>
+                    <a href="/data/barchart">
+                      <button className="navbar-graphs-dropdown-button">
+                        Bar Chart
+                      </button>
+                    </a>
+                  </MenuItem>
                 </MenuItems>
               </Menu>
 
