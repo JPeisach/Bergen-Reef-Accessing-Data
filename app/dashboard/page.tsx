@@ -40,6 +40,7 @@ export default function DashboardPage() {
                     "ORP",
                     "Temperature",
                     "Salinity",
+                    "LLS",
                   ].map((type) => (
                     <MenuItem key={type}>
                       <button

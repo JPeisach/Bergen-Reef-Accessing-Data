@@ -61,6 +61,7 @@ export default function Page() {
                     "Nitrate",
                     "Nitrite",
                     "Phosphate",
+                    "LLS",
                   ],
                 },
                 {

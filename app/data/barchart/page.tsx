@@ -37,6 +37,7 @@ export default function Page() {
     "Temperature",
     "Alkalinity",
     "Calcium",
+    "LLS",
   ];
 
   const toggleTank = (item: string) => {
