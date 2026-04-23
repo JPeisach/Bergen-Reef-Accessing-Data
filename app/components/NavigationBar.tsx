@@ -36,9 +36,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         className="navbar flex flex-col items-center justify-between bg-base-100 p-4 shadow-md rounded-lg h-screen border border-base-300"
         style={{ position: "relative", zIndex: 10 }}
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <TabGroup vertical defaultIndex={defaultIndex}>
-            <TabList className="flex flex-col">
+            <TabList className="flex flex-col w-full">
               <Link href="/">
                 <Tab as={Fragment}>
                   {() => (

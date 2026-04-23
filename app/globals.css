@@ -163,16 +163,16 @@ h1 {
   margin-top: auto;
   position: inline;
   padding: 0;
-  width: 200px;
+  width: 10dvw;
   float: left;
 }
 
 .navbar-tabitem {
-  @apply w-full py-5 transition;
+  @apply py-5 transition w-full;
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-base-100 outline outline-1 outline-base-300 text-base-content font-semibold hover:bg-base-200;
+  @apply bg-base-100 w-full outline outline-1 outline-base-300 text-base-content font-semibold hover:bg-base-200;
 }
 
 .navbar-tabitem-highlighted {

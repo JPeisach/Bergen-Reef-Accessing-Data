@@ -58,7 +58,8 @@ export default function RecentDataTankBox({ tankName, variableType }) {
       <h2 className="text-xl font-bold text-primary mb-4 text-center">
         Tank {tankName}
       </h2>
-      <div className="h-48">
+      {/* FIXME: we can't use dvh, needs to be precalculated. */}
+      <div className="h-48 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ left: -10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
