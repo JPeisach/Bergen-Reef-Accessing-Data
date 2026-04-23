@@ -9,6 +9,23 @@ import Flatpickr from "react-flatpickr";
 import TankStatsPanel from "app/components/TankStatsPanel";
 import PredefinedObservationNotepad from "app/components/observations/PredefinedObservationNotepad";
 
+
+const tank_options = [
+  "Tank CoralLab60_1",
+  "Tank CoralLab60_2",
+  "Tank CoralLab60_3",
+  "Tank CoralLab60_4",
+  "Tank CoralLab60_5",
+  "Tank CoralLab60_6",
+  "Tank MakerReef",
+  "Tank ESCReef",
+  "Tank CoralLab380",
+];
+
+
+const tankNameOnly = (tank: string) => tank.substring("Tank ".length);
+
+
 export default function Page() {
   const { user } = useUser();
 
@@ -132,7 +149,10 @@ export default function Page() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-              <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
+              <TankStatsPanel
+                tankName={tankNameOnly(selectedTank)}
+                panelClass={panelClass}
+              />
 
               <div className={`${panelClass}`}>
                 <HistoricDataTankBox
