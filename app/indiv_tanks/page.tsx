@@ -32,7 +32,7 @@ export default function Page() {
 
       <div className="bg-base-200 h-screen overflow-scroll">
         <div className="flex relative">
-          <div className="p-8 max-w-7xl mx-auto">
+          <div className="p-8 mx-auto">
             <div
               className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}
             >
@@ -92,7 +92,7 @@ export default function Page() {
                 }
 
                 return (
-                  <div key={item.label} className="min-w-[160px]">
+                  <div key={item.label} className="w-[20dvw]">
                     <label className="block text-primary font-bold mb-1 text-sm">
                       {item.label}
                     </label>
@@ -110,7 +110,7 @@ export default function Page() {
                   </div>
                 );
               })}
-              <div className="min-w-[160px]">
+              <div>
                 <label className="block text-primary font-bold mb-1 text-sm">
                   Date Range
                 </label>

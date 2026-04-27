@@ -31,7 +31,7 @@ export default function Page() {
     "Tank CoralLab60_5",
     "Tank CoralLab60_6",
     "Tank ESCReef",
-    "Tank CoralLab380"
+    "Tank CoralLab380",
   ];
 
   return (
