@@ -69,9 +69,7 @@ export default function ObservationNotepad({}) {
       <div className="w-full space-y-5 rounded-2xl bg-base-100 border border-base-300 p-6 shadow-xl backdrop-blur-sm">
         {/* Tank Number */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-primary">
-            Tank:
-          </Label>
+          <Label className="mb-2 text-sm font-bold text-primary">Tank:</Label>
           <Select
             name="tankNumber"
             className="text-sm text-base-content rounded-lg border border-base-300 bg-base-100 px-2 py-1"
