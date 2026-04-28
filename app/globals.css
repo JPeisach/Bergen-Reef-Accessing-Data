@@ -8,17 +8,17 @@
   prefersdark: false;
   color-scheme: light;
 
-  --color-primary: #ffa900;
-  --color-primary-content: #1f2937;
-  --color-secondary: #feb934;
-  --color-secondary-content: #1f2937;
-  --color-accent: #68bfc6;
-  --color-accent-content: #0f172a;
-  --color-neutral: #2b3440;
-  --color-neutral-content: #d7dde4;
-  --color-base-100: #fffdfb;
-  --color-base-200: #fef3d6;
-  --color-base-300: #fde4a8;
+  --color-primary: #f495c1;
+  --color-primary-content: #ffffff;
+  --color-secondary: #a3c9ff;
+  --color-secondary-content: #ffffff;
+  --color-accent: #b5ead7;
+  --color-accent-content: #ffffff;
+  --color-neutral: #6b7280;
+  --color-neutral-content: #f8fafc;
+  --color-base-100: #fff8fc;
+  --color-base-200: #fff1f8;
+  --color-base-300: #fce7f3;
   --color-base-content: #3f3f46;
 }
 
@@ -29,18 +29,18 @@
   prefersdark: true;
   color-scheme: dark;
 
-  --color-primary: #f59e0b;
-  --color-primary-content: #1f2937;
-  --color-secondary: #fbbf24;
-  --color-secondary-content: #1f2937;
-  --color-accent: #34d399;
-  --color-accent-content: #052e16;
-  --color-neutral: #2a323c;
-  --color-neutral-content: #a6adbb;
-  --color-base-100: #1d232a;
-  --color-base-200: #191e24;
-  --color-base-300: #15191e;
-  --color-base-content: #e5e7eb;
+  --color-primary: #f4a9d8;
+  --color-primary-content: #ffffff;
+  --color-secondary: #89b4fa;
+  --color-secondary-content: #ffffff;
+  --color-accent: #9fe6cf;
+  --color-accent-content: #ffffff;
+  --color-neutral: #303446;
+  --color-neutral-content: #d7dae2;
+  --color-base-100: #1f2230;
+  --color-base-200: #191c28;
+  --color-base-300: #141722;
+  --color-base-content: #eceef5;
 }
 
 /* coral-pink */
@@ -48,17 +48,17 @@
   name: "coral-pink";
   color-scheme: light;
 
-  --color-primary: #eb718d;
+  --color-primary: #ef7ea4;
   --color-primary-content: #ffffff;
-  --color-secondary: #f6a8b7;
-  --color-secondary-content: #4a2f34;
-  --color-accent: #e86a84;
+  --color-secondary: #f8b8ca;
+  --color-secondary-content: #ffffff;
+  --color-accent: #ffd9e4;
   --color-accent-content: #ffffff;
   --color-neutral: #4a2f34;
   --color-neutral-content: #fce8ec;
-  --color-base-100: #fff4f6;
-  --color-base-200: #ffecef;
-  --color-base-300: #ffc1cc;
+  --color-base-100: #fff7fa;
+  --color-base-200: #fff0f5;
+  --color-base-300: #ffd9e4;
   --color-base-content: #4a2f34;
 }
 
@@ -67,17 +67,17 @@
   name: "sea-green";
   color-scheme: light;
 
-  --color-primary: #2f9e83;
+  --color-primary: #4cbfa3;
   --color-primary-content: #ffffff;
-  --color-secondary: #5eb39c;
-  --color-secondary-content: #153c34;
-  --color-accent: #a5dccc;
-  --color-accent-content: #153c34;
+  --color-secondary: #8ed8c4;
+  --color-secondary-content: #ffffff;
+  --color-accent: #d2f3e9;
+  --color-accent-content: #ffffff;
   --color-neutral: #153c34;
   --color-neutral-content: #e8f7f3;
-  --color-base-100: #f0fbf8;
-  --color-base-200: #e4f7f1;
-  --color-base-300: #c5ebe0;
+  --color-base-100: #f5fdfb;
+  --color-base-200: #e9faf4;
+  --color-base-300: #d2f3e9;
   --color-base-content: #153c34;
 }
 
@@ -86,17 +86,17 @@
   name: "light-blue";
   color-scheme: light;
 
-  --color-primary: #3b82f6;
+  --color-primary: #7aaef7;
   --color-primary-content: #ffffff;
-  --color-secondary: #60a5fa;
-  --color-secondary-content: #1f3550;
-  --color-accent: #93c5fd;
-  --color-accent-content: #1f3550;
+  --color-secondary: #a6c9fb;
+  --color-secondary-content: #ffffff;
+  --color-accent: #dcecff;
+  --color-accent-content: #ffffff;
   --color-neutral: #1f3550;
   --color-neutral-content: #e8f1fc;
-  --color-base-100: #eef7ff;
-  --color-base-200: #e0f0ff;
-  --color-base-300: #c7e0ff;
+  --color-base-100: #f5f9ff;
+  --color-base-200: #edf4ff;
+  --color-base-300: #dcecff;
   --color-base-content: #1f3550;
 }
 
@@ -112,6 +112,38 @@
 
 h1 {
   text-align: center;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+body {
+  background: linear-gradient(
+    180deg,
+    oklch(99% 0.01 320) 0%,
+    oklch(97% 0.02 290) 100%
+  );
+  color: oklch(var(--bc) / 1);
+}
+
+.card,
+.modal-box,
+.dropdown-content,
+.menu {
+  border-radius: 1rem;
+  border: 1px solid oklch(var(--b3) / 0.75);
+  box-shadow: 0 10px 25px -20px oklch(var(--n) / 0.45);
+}
+
+.btn {
+  border-radius: 0.8rem;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+.input,
+.select,
+.textarea {
+  border-radius: 0.75rem;
 }
 
 .ag-theme-balham {
@@ -171,7 +203,7 @@ h1 {
   margin-top: auto;
   position: relative;
   padding: 0;
-  width: 12dvw;
+  width: 200px;
   float: left;
   border-radius: 0.9rem;
   overflow: hidden;
@@ -182,17 +214,17 @@ h1 {
 }
 
 .navbar-tabitem {
-  @apply py-5 transition w-full;
+  @apply w-full py-4 transition;
 }
 
 .navbar-tabitem-unhighlighted {
-  @apply bg-base-100 w-full outline outline-1 outline-base-300 text-base-content font-semibold hover:bg-base-200;
+  @apply bg-base-100 text-base-content font-semibold hover:bg-base-200;
 }
 
 .navbar-tabitem-highlighted {
-  @apply bg-primary outline outline-2 outline-primary text-primary-content font-bold;
+  @apply bg-primary text-primary-content font-bold;
 }
 
 .navbar-graphs-dropdown-button {
-  @apply block w-full py-5 text-base text-base-content font-semibold hover:bg-base-200;
+  @apply block w-full py-4 text-base text-base-content font-semibold hover:bg-base-200;
 }
