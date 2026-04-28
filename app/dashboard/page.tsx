@@ -13,7 +13,7 @@ export default function DashboardPage() {
   const [variableType, setVariableType] = useState("pH");
 
   return (
-    <div>
+    <div className="bg-base-200">
       <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
       <div className="p-8 bg-base-200 h-dvh overflow-scroll">

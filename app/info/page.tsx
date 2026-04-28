@@ -41,7 +41,7 @@ export default function Page() {
   const tankInfo = getTankInfo(tankNumber);
 
   return (
-    <div>
+    <div className="bg-base-200">
       <NavigationBar defaultIndex={4} username={user ? user.name : "Guest"} />
 
       <div className="relative flex">

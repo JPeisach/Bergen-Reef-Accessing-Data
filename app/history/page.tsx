@@ -8,7 +8,7 @@ export default function Page() {
   const { user } = useUser();
 
   return (
-    <div>
+    <div className="bg-base-200">
       <NavigationBar defaultIndex={5} username={user ? user.name : "Guest"} />
 
       {/* Content */}

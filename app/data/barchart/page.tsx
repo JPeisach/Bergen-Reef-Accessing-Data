@@ -67,7 +67,7 @@ export default function Page() {
   // FIXME: Most of this was written by AI, primarily the selection boxes,
   // but they are misplaced in UI location.
   return (
-    <div>
+    <div className="bg-base-200">
       <NavigationBar defaultIndex={6} username={user ? user.name : "Guest"} />
       <div className="bg-base-100/30 min-h-screen overflow-hidden">
         <div className="justify-center items-center flex-2 bg-base-200 border-base-300">

@@ -27,10 +27,10 @@ export default function Page() {
     "bg-base-100 border border-base-300 p-5 shadow-lg rounded-xl";
 
   return (
-    <div>
+    <div className="bg-base-200">
       <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
 
-      <div className="bg-base-200 h-screen overflow-scroll">
+      <div className="h-screen overflow-scroll">
         <div className="flex relative">
           <div className="p-8 mx-auto">
             <div
