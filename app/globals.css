@@ -9,11 +9,11 @@
   color-scheme: light;
 
   --color-primary: #f495c1;
-  --color-primary-content: #402339;
+  --color-primary-content: #ffffff;
   --color-secondary: #a3c9ff;
-  --color-secondary-content: #1f3550;
+  --color-secondary-content: #ffffff;
   --color-accent: #b5ead7;
-  --color-accent-content: #1b4332;
+  --color-accent-content: #ffffff;
   --color-neutral: #6b7280;
   --color-neutral-content: #f8fafc;
   --color-base-100: #fff8fc;
@@ -30,11 +30,11 @@
   color-scheme: dark;
 
   --color-primary: #f4a9d8;
-  --color-primary-content: #2b1222;
+  --color-primary-content: #ffffff;
   --color-secondary: #89b4fa;
-  --color-secondary-content: #0f1c2f;
+  --color-secondary-content: #ffffff;
   --color-accent: #9fe6cf;
-  --color-accent-content: #06291f;
+  --color-accent-content: #ffffff;
   --color-neutral: #303446;
   --color-neutral-content: #d7dae2;
   --color-base-100: #1f2230;
@@ -49,11 +49,11 @@
   color-scheme: light;
 
   --color-primary: #ef7ea4;
-  --color-primary-content: #3f2130;
+  --color-primary-content: #ffffff;
   --color-secondary: #f8b8ca;
-  --color-secondary-content: #4a2f34;
+  --color-secondary-content: #ffffff;
   --color-accent: #ffd9e4;
-  --color-accent-content: #5a3441;
+  --color-accent-content: #ffffff;
   --color-neutral: #4a2f34;
   --color-neutral-content: #fce8ec;
   --color-base-100: #fff7fa;
@@ -68,11 +68,11 @@
   color-scheme: light;
 
   --color-primary: #4cbfa3;
-  --color-primary-content: #103a31;
+  --color-primary-content: #ffffff;
   --color-secondary: #8ed8c4;
-  --color-secondary-content: #153c34;
+  --color-secondary-content: #ffffff;
   --color-accent: #d2f3e9;
-  --color-accent-content: #153c34;
+  --color-accent-content: #ffffff;
   --color-neutral: #153c34;
   --color-neutral-content: #e8f7f3;
   --color-base-100: #f5fdfb;
@@ -87,11 +87,11 @@
   color-scheme: light;
 
   --color-primary: #7aaef7;
-  --color-primary-content: #182c45;
+  --color-primary-content: #ffffff;
   --color-secondary: #a6c9fb;
-  --color-secondary-content: #1f3550;
+  --color-secondary-content: #ffffff;
   --color-accent: #dcecff;
-  --color-accent-content: #1f3550;
+  --color-accent-content: #ffffff;
   --color-neutral: #1f3550;
   --color-neutral-content: #e8f1fc;
   --color-base-100: #f5f9ff;
