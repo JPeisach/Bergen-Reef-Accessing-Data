@@ -96,7 +96,7 @@ def upload_pending_files():
             # Wait before retrying
             print(f"Retrying upload of {file_name} in {backoff} seconds...")
             time.sleep(backoff)
-            backoff = min(backoff * 2)  # Exponential backoff
+            backoff = backoff * 2  # Exponential backoff
 
 
 # MAIN LOOP

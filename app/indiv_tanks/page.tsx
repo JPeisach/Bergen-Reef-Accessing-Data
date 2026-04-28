@@ -9,6 +9,8 @@ import Flatpickr from "react-flatpickr";
 import TankStatsPanel from "app/components/TankStatsPanel";
 import PredefinedObservationNotepad from "app/components/observations/PredefinedObservationNotepad";
 
+const tankNameOnly = (tank: string) => tank.substring("Tank ".length);
+
 export default function Page() {
   const { user } = useUser();
 
@@ -30,7 +32,7 @@ export default function Page() {
 
       <div className="bg-base-200 h-screen overflow-scroll">
         <div className="flex relative">
-          <div className="p-8 max-w-7xl mx-auto">
+          <div className="p-8 mx-auto">
             <div
               className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}
             >
@@ -61,6 +63,7 @@ export default function Page() {
                     "Nitrate",
                     "Nitrite",
                     "Phosphate",
+                    "LLS",
                   ],
                 },
                 {
@@ -89,7 +92,7 @@ export default function Page() {
                 }
 
                 return (
-                  <div key={item.label} className="min-w-[160px]">
+                  <div key={item.label} className="w-[20dvw]">
                     <label className="block text-primary font-bold mb-1 text-sm">
                       {item.label}
                     </label>
@@ -107,7 +110,7 @@ export default function Page() {
                   </div>
                 );
               })}
-              <div className="min-w-[160px]">
+              <div>
                 <label className="block text-primary font-bold mb-1 text-sm">
                   Date Range
                 </label>
@@ -132,11 +135,14 @@ export default function Page() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-              <TankStatsPanel panelClass={panelClass}></TankStatsPanel>
+              <TankStatsPanel
+                tankName={tankNameOnly(selectedTank)}
+                panelClass={panelClass}
+              />
 
               <div className={`${panelClass}`}>
                 <HistoricDataTankBox
-                  tankName={selectedTank.substring("Tank ".length)}
+                  tankName={tankNameOnly(selectedTank)}
                   variableType={selectedParameter}
                   dateRange={dateRange}
                 />

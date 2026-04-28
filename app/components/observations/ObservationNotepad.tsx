@@ -69,23 +69,20 @@ export default function ObservationNotepad({}) {
       <div className="w-full space-y-5 rounded-2xl bg-base-100 border border-base-300 p-6 shadow-xl backdrop-blur-sm">
         {/* Tank Number */}
         <Field>
-          <Label className="mb-2 text-sm font-bold text-primary">
-            Tank Number:
-          </Label>
+          <Label className="mb-2 text-sm font-bold text-primary">Tank:</Label>
           <Select
             name="tankNumber"
             className="text-sm text-base-content rounded-lg border border-base-300 bg-base-100 px-2 py-1"
             onChange={(e) => setTankNumber(Number(e.target.value))}
           >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-            <option value={6}>6</option>
-            <option value={7}>7</option>
-            <option value={8}>8</option>
-            <option value={9}>9</option>
+            <option value={1}>Tank CoralLab60_1</option>
+            <option value={2}>Tank CoralLab60_2</option>
+            <option value={3}>Tank CoralLab60_3</option>
+            <option value={4}>Tank CoralLab60_4</option>
+            <option value={5}>Tank CoralLab60_5</option>
+            <option value={6}>Tank CoralLab60_6</option>
+            <option value={7}>Tank ESCReef</option>
+            <option value={8}>Tank CoralLab380</option>
           </Select>
         </Field>
 

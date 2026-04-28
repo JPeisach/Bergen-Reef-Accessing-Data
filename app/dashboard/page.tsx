@@ -16,7 +16,7 @@ export default function DashboardPage() {
     <div>
       <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
-      <div className="p-8 bg-base-200 h-screen overflow-scroll">
+      <div className="p-8 bg-base-200 h-dvh overflow-scroll">
         <h1 className="text-3xl font-bold text-primary mb-6 text-center drop-shadow-sm">
           Tank Dashboard
         </h1>
@@ -40,6 +40,7 @@ export default function DashboardPage() {
                     "ORP",
                     "Temperature",
                     "Salinity",
+                    "LLS",
                   ].map((type) => (
                     <MenuItem key={type}>
                       <button
@@ -56,7 +57,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-3 grid-rows-3 gap-6">
           <RecentDataTankBox
             tankName="CoralLab60_1"
             variableType={variableType}
