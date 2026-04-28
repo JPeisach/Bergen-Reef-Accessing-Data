@@ -42,7 +42,7 @@ export default function Page() {
 
   return (
     <div className="bg-base-200">
-      <NavigationBar defaultIndex={4} username={user ? user.name : "Guest"} />
+      <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
 
       <div className="relative flex">
         {/* Content */}

@@ -28,7 +28,7 @@ export default function Page() {
 
   return (
     <div className="bg-base-200">
-      <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
+      <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
       <div className="h-screen overflow-scroll">
         <div className="flex relative">

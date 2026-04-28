@@ -56,30 +56,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </Tab>
               </Link>
 
-              <a href="/dashboard">
-                <Tab as={Fragment}>
-                  {() => (
-                    <button
-                      className={clsx(
-                        "navbar-tabitem",
-                        defaultIndex === 1
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
-                      )}
-                    >
-                      Dashboard
-                    </button>
-                  )}
-                </Tab>
-              </a>
-
               <a href="/indiv_tanks">
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
                       className={clsx(
                         "navbar-tabitem",
-                        defaultIndex === 2
+                        defaultIndex === 1
                           ? "navbar-tabitem-highlighted"
                           : "navbar-tabitem-unhighlighted",
                       )}
@@ -96,7 +79,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     <button
                       className={clsx(
                         "navbar-tabitem",
-                        defaultIndex === 3
+                        defaultIndex === 2
                           ? "navbar-tabitem-highlighted"
                           : "navbar-tabitem-unhighlighted",
                       )}
@@ -112,7 +95,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     <button
                       className={clsx(
                         "navbar-tabitem",
-                        defaultIndex === 4
+                        defaultIndex === 3
                           ? "navbar-tabitem-highlighted"
                           : "navbar-tabitem-unhighlighted",
                       )}
@@ -129,7 +112,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     <button
                       className={clsx(
                         "navbar-tabitem",
-                        defaultIndex === 5
+                        defaultIndex === 4
                           ? "navbar-tabitem-highlighted"
                           : "navbar-tabitem-unhighlighted",
                       )}
@@ -144,7 +127,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <MenuButton
                   className={clsx(
                     "navbar-tabitem flex items-center justify-center",
-                    defaultIndex === 6
+                    defaultIndex === 5
                       ? "navbar-tabitem-highlighted"
                       : "navbar-tabitem-unhighlighted",
                   )}

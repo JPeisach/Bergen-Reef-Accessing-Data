@@ -68,7 +68,7 @@ export default function Page() {
   // but they are misplaced in UI location.
   return (
     <div className="bg-base-200">
-      <NavigationBar defaultIndex={6} username={user ? user.name : "Guest"} />
+      <NavigationBar defaultIndex={5} username={user ? user.name : "Guest"} />
       <div className="bg-base-100/30 min-h-screen overflow-hidden">
         <div className="justify-center items-center flex-2 bg-base-200 border-base-300">
           <fieldset className="fieldset bg-base-200 rounded-box w-xs p-4 flex">

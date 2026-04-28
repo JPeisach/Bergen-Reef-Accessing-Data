@@ -9,7 +9,7 @@ export default function Page() {
 
   return (
     <div className="bg-base-200">
-      <NavigationBar defaultIndex={5} username={user ? user.name : "Guest"} />
+      <NavigationBar defaultIndex={4} username={user ? user.name : "Guest"} />
 
       {/* Content */}
       <HistoryPageGrid />
