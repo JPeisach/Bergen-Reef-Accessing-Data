@@ -65,7 +65,7 @@ export default function RecentDataTankBox({ tankName, variableType }) {
         Tank {tankName}
       </h2>
       {chartData.length != 0 ? (
-        <div className="h-[80%] w-full">
+        <div className="h-[75%] w-full">
           {isDataOld() ? (
             <p className="text-xs font-bold text-warning text-center w-full">
               Warning: Recent data is older than one week. This tank may be
