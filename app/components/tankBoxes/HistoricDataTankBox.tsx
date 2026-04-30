@@ -10,6 +10,7 @@ import {
 import "../../globals.css";
 import { useEffect, useState } from "react";
 import { fetchSingularDataTypeInDateRange } from "app/services/dataService";
+import DownloadCSVButton from "../buttons/DownloadCSVButton";
 
 export default function HistoricDataTankBox({
   tankName,
@@ -51,7 +52,7 @@ export default function HistoricDataTankBox({
       });
     }, delay);
     return () => clearInterval(interval);
-  }, [dateRange, variableType]);
+  }, [tankName, dateRange, variableType]);
 
   return (
     // TODO: Show something if dateRange[1] DNE and needs to be entered.
@@ -62,43 +63,53 @@ export default function HistoricDataTankBox({
       <h2 className="text-xl font-bold text-primary mb-4 text-center">
         Tank {tankName}
       </h2>
-      <div className="h-48">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-            <XAxis
-              dataKey="datetime"
-              tickFormatter={(tick) =>
-                tick.split("/")[0] + "/" + tick.split("/")[1]
-              }
-              stroke="var(--color-base-content)"
-              fontSize={12}
-            />
-            <YAxis
-              domain={["dataMin - 1", "dataMax + 1"]}
-              tickFormatter={(tick) => tick.toFixed(1).toString()}
-              scale="sequential"
-              stroke="var(--color-base-content)"
-              fontSize={12}
-            />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "var(--color-base-100)",
-                border: "1px solid var(--color-base-300)",
-                borderRadius: "8px",
-              }}
-            />
-            <Area
-              type="monotone"
-              dataKey="value"
-              stroke="var(--color-primary)"
-              dot={false}
-              fill="var(--color-primary)"
-              fillOpacity={0.5}
-              strokeWidth={2.5}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+      {/* stupid height has to be constant otherwise things dont show up */}
+      <div className="h-64 w-full">
+        {chartData.length != 0 ? (
+          <div className="h-[80%]">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData} margin={{ left: -10 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <XAxis
+                  dataKey="datetime"
+                  tickFormatter={(tick) =>
+                    tick.split("/")[0] + "/" + tick.split("/")[1]
+                  }
+                  stroke="var(--color-base-content)"
+                  fontSize={12}
+                />
+                <YAxis
+                  domain={["dataMin - 1", "dataMax + 1"]}
+                  tickFormatter={(tick) => tick.toFixed(1).toString()}
+                  stroke="var(--color-base-content)"
+                  scale="sequential"
+                  fontSize={12}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "var(--color-base-100)",
+                    border: "1px solid var(--color-base-300)",
+                    borderRadius: "8px",
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="var(--color-primary)"
+                  dot={false}
+                  fill="var(--color-primary)"
+                  fillOpacity={0.5}
+                  strokeWidth={2.5}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+            <DownloadCSVButton data={chartData}></DownloadCSVButton>
+          </div>
+        ) : (
+          <p className="mt-[20%] text-xl font-bold text-error text-center">
+            No data.
+          </p>
+        )}
       </div>
     </a>
   );
