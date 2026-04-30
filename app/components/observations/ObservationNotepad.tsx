@@ -1,7 +1,6 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0";
-import { Field, Input, Label, Select, Textarea } from "@headlessui/react";
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/confetti.css";
@@ -68,81 +67,67 @@ export default function ObservationNotepad({}) {
     <div>
       <div className="w-full space-y-5 rounded-2xl bg-base-100 border border-base-300 p-6 shadow-xl backdrop-blur-sm">
         {/* Tank Number */}
-        <Field>
-          <Label className="mb-2 text-sm font-bold text-primary">Tank:</Label>
-          <Select
-            name="tankNumber"
-            className="text-sm text-base-content rounded-lg border border-base-300 bg-base-100 px-2 py-1"
-            onChange={(e) => setTankNumber(Number(e.target.value))}
-          >
-            <option value={1}>Tank CoralLab60_1</option>
-            <option value={2}>Tank CoralLab60_2</option>
-            <option value={3}>Tank CoralLab60_3</option>
-            <option value={4}>Tank CoralLab60_4</option>
-            <option value={5}>Tank CoralLab60_5</option>
-            <option value={6}>Tank CoralLab60_6</option>
-            <option value={7}>Tank ESCReef</option>
-            <option value={8}>Tank CoralLab380</option>
-          </Select>
-        </Field>
+        <select
+          name="tankNumber"
+          className="text-sm text-base-content rounded-lg border border-base-300 bg-base-100 px-2 py-1 select"
+          onChange={(e) => setTankNumber(Number(e.target.value))}
+        >
+          <option value={1}>Tank CoralLab60_1</option>
+          <option value={2}>Tank CoralLab60_2</option>
+          <option value={3}>Tank CoralLab60_3</option>
+          <option value={4}>Tank CoralLab60_4</option>
+          <option value={5}>Tank CoralLab60_5</option>
+          <option value={6}>Tank CoralLab60_6</option>
+          <option value={7}>Tank ESCReef</option>
+          <option value={8}>Tank CoralLab380</option>
+        </select>
 
         {/* Observation Title */}
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
-        <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary">
-            Observation Title
-          </Label>
-          <Input
-            type="Enter text here..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter title here..."
-            className="w-full rounded-xl bg-base-100 border border-base-300 p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
-          />
-        </Field>
+        <p className="mb-2 block text-sm font-bold text-primary">
+          Observation Title
+        </p>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter title here..."
+          className="w-full rounded-xl bg-base-100 border border-base-300 p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all input"
+        />
 
         {/* Date Range */}
-        <Field>
-          <Label className="mb-2 text-sm font-bold text-primary">
-            Date Range
-          </Label>
-          <Flatpickr
-            className="w-full bg-base-100 px-2 py-2 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-inner rounded-lg border border-base-300"
-            data-enable-time
-            options={{ enableSeconds: true, mode: "range" }}
-            value={dateRange}
-            onChange={(date) => setDateRange(date)}
-          />
-        </Field>
+        <p className="mb-2 text-sm font-bold text-primary">Date Range</p>
+        <Flatpickr
+          className="w-full bg-base-100 px-2 py-2 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-inner rounded-lg border border-base-300"
+          data-enable-time
+          options={{ enableSeconds: true, mode: "range" }}
+          value={dateRange}
+          onChange={(date) => setDateRange(date)}
+        />
 
         {/* Tags Display */}
-        <Field>
-          <Label className="mb-2 text-sm font-bold text-primary">Tags</Label>
-          {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
-          <Input
-            name="tags"
-            className="w-full rounded-xl bg-base-100 border border-base-300 resize-none p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
-            placeholder="Enter a list of tags separated by comma..."
-            value={tags.join(", ")}
-            onChange={(e) =>
-              setTags(e.target.value.split(",").map((t) => t.trim()))
-            }
-          />
-        </Field>
+        <p className="mb-2 text-sm font-bold text-primary">Tags</p>
+        {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
+        <input
+          type="text"
+          name="tags"
+          className="w-full rounded-xl bg-base-100 border border-base-300 resize-none p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all input"
+          placeholder="Enter a list of tags separated by comma..."
+          value={tags.join(", ")}
+          onChange={(e) =>
+            setTags(e.target.value.split(",").map((t) => t.trim()))
+          }
+        />
 
         {/* Notes Textbox */}
-        <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary">
-            Notes
-          </Label>
-          <Textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Enter any notes here..."
-            className="h-64 w-full resize-none rounded-xl bg-base-100 border border-base-300 p-4 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
-          />
-        </Field>
+        <p className="mb-2 block text-sm font-bold text-primary">Notes</p>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Enter any notes here..."
+          className="h-64 w-full resize-none rounded-xl bg-base-100 border border-base-300 p-4 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all textarea"
+        />
 
         {/* Save Button */}
         <div className="flex flex-col items-end gap-2 pt-2">

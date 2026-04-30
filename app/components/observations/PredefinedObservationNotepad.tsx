@@ -1,5 +1,4 @@
 import { useUser } from "@auth0/nextjs-auth0";
-import { Field, Input, Label, Select, Textarea } from "@headlessui/react";
 import { useState } from "react";
 
 export default function PredefinedObservationNotepad({
@@ -74,45 +73,38 @@ export default function PredefinedObservationNotepad({
         {/* Observation Title */}
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
-        <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary">
-            Observation Title
-          </Label>
-          <Input
-            type="Enter text here..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter title here..."
-            className="w-full rounded-xl bg-base-100 border border-base-300 p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
-          />
-        </Field>
+        <p className="mb-2 block text-sm font-bold text-primary">
+          Observation Title
+        </p>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter title here..."
+          className="w-full rounded-xl bg-base-100 border border-base-300 p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all input"
+        />
 
         {/* Date Range */}
 
         {/* Tags Display */}
-        <Field>
-          <Label className="mb-2 text-sm font-bold text-primary">Tags</Label>
-          {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
-          <Input
-            name="tags"
-            className="w-full rounded-xl bg-base-100 border border-base-300 resize-none p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
-            placeholder="Enter a list of tags separated by comma..."
-            onChange={(e) => setTags(e.target.value.split(","))}
-          ></Input>
-        </Field>
+        <p className="mb-2 text-sm font-bold text-primary">Tags</p>
+        {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
+        <input
+          type="text"
+          name="tags"
+          className="w-full rounded-xl bg-base-100 border border-base-300 resize-none p-3 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all input"
+          placeholder="Enter a list of tags separated by comma..."
+          onChange={(e) => setTags(e.target.value.split(","))}
+        ></input>
 
         {/* Notes Textbox */}
-        <Field>
-          <Label className="mb-2 block text-sm font-bold text-primary">
-            Notes
-          </Label>
-          <Textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Enter any notes here..."
-            className="h-32 w-full resize-none rounded-xl bg-base-100 border border-base-300 p-4 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
-          />
-        </Field>
+        <p className="mb-2 block text-sm font-bold text-primary">Notes</p>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Enter any notes here..."
+          className="h-32 w-full resize-none rounded-xl bg-base-100 border border-base-300 p-4 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all textarea"
+        />
 
         {/* Save Button */}
         <div className="flex flex-col items-end gap-2 pt-2">
