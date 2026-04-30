@@ -80,24 +80,21 @@ export default function RecentDataTankBox({ tankName, variableType }) {
                 tickFormatter={(tick) =>
                   tick.split("/")[0] + "/" + tick.split("/")[1]
                 }
-                stroke="#757575"
+                stroke="var(--color-base-content)"
                 fontSize={12}
               />
               <YAxis
                 domain={["dataMin - 1", "dataMax + 1"]}
                 tickFormatter={(tick) => tick.toFixed(1).toString()}
-                stroke="#757575"
+                stroke="var(--color-base-content)"
                 scale="sequential"
                 fontSize={12}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "var(--color-base-content)",
-                  border: "1px solid var(--color-base-content)",
+                  backgroundColor: "var(--color-base-100)",
+                  border: "1px solid var(--color-base-300)",
                   borderRadius: "8px",
-                }}
-                itemStyle={{
-                  color: "var(--base-text-content)",
                 }}
               />
               <Area

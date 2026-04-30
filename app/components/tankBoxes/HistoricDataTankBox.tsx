@@ -71,20 +71,20 @@ export default function HistoricDataTankBox({
               tickFormatter={(tick) =>
                 tick.split("/")[0] + "/" + tick.split("/")[1]
               }
-              stroke="#757575"
+              stroke="var(--color-base-content)"
               fontSize={12}
             />
             <YAxis
               domain={["dataMin - 1", "dataMax + 1"]}
               tickFormatter={(tick) => tick.toFixed(1).toString()}
               scale="sequential"
-              stroke="#757575"
+              stroke="var(--color-base-content)"
               fontSize={12}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #FCD98C",
+                backgroundColor: "var(--color-base-100)",
+                border: "1px solid var(--color-base-300)",
                 borderRadius: "8px",
               }}
             />
