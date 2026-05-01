@@ -84,7 +84,7 @@ export default function Page() {
     <div className="bg-base-200">
       <NavigationBar defaultIndex={5} username={user ? user.name : "Guest"} />
       <div className="bg-base-100/30 min-h-screen overflow-hidden">
-        <div className="justify-center items-center flex-2 bg-base-200 border-base-300">
+        <div className="justify-center items-center flex-2 bg-base-200 border-base-300 graph-settings-panel">
           <fieldset className="fieldset bg-base-200 rounded-box w-xs p-4 flex">
             <legend className="fieldset-legend">Select Tanks</legend>
 

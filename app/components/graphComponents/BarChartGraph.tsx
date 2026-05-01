@@ -12,14 +12,18 @@ import "../../globals.css";
 import { useEffect, useState } from "react";
 import { fetchDataInDateRange } from "app/services/dataService";
 
-// start of AI code
-type DataPoint = {
+// Input shape from the API
+type InputDataPoint = {
   value: number;
-  datetime: string;
+  datetime: number | string;
   name: string; // variable type (pH, temp, etc.)
 };
 
-function averageByDay(filteredData: DataPoint[]) {
+// Output row for the chart: { datetime: number, "Tank__Var": number, ... }
+type ChartRow = Record<string, any> & { datetime: number };
+
+// Group by day and variable, return numeric averages with numeric datetime (ms)
+function averageByDayNumeric(filteredData: InputDataPoint[]) {
   const grouped: Record<
     string,
     Record<string, { total: number; count: number }>
@@ -27,79 +31,106 @@ function averageByDay(filteredData: DataPoint[]) {
 
   for (const item of filteredData) {
     const date = new Date(item.datetime);
+    // Use the UTC YYYY-MM-DD day key so data for the same day merges consistently
     const dayKey = date.toISOString().split("T")[0];
     const varName = item.name;
 
-    if (!grouped[dayKey]) {
-      grouped[dayKey] = {};
-    }
-
-    if (!grouped[dayKey][varName]) {
+    if (!grouped[dayKey]) grouped[dayKey] = {};
+    if (!grouped[dayKey][varName])
       grouped[dayKey][varName] = { total: 0, count: 0 };
-    }
 
     grouped[dayKey][varName].total += Number(item.value);
     grouped[dayKey][varName].count += 1;
   }
 
   return Object.entries(grouped)
-    .map(([datetime, vars]) => {
-      const row: Record<string, any> = { datetime };
-
-      for (const varName in vars) {
-        row[varName] = Number(
-          vars[varName].total / vars[varName].count,
-        ).toFixed(2);
+    .map(([day, vars]) => {
+      const ts = new Date(day).getTime(); // midnight UTC for that day
+      const row: Record<string, any> = { datetime: ts };
+      for (const vn in vars) {
+        row[vn] = (vars[vn].total / vars[vn].count).toFixed(2);
       }
-
-      return row;
+      return row as ChartRow;
     })
-    .sort(
-      (a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime(),
-    );
+    .sort((a, b) => a.datetime - b.datetime);
 }
 
-// end of AI code
+// Utility to create a stable key for a tank-variable pair
+const keyFor = (tank: string, variable: string) => `${tank}__${variable}`;
 
-// Currently supports up to two variable types
-export default function BarChartGraph({ tankNames, variableTypes, dateRange }) {
-  const [chartData, setChartData] = useState<DataPoint[]>([]);
+// Currently supports multiple tanks and up to two variable types (for two Y axes)
+export default function BarChartGraph({
+  tankNames,
+  variableTypes,
+  dateRange,
+}: any) {
+  const [chartData, setChartData] = useState<ChartRow[]>([]);
 
-  // FIXME: stupid fix to ensure that we reload quickly for when we are waiting for valid params, but once we have data going through we aren't spamming the API
-  // Honestly, we should figure out how to handle being given invalid or incomplete params and where we want to handle it.
+  // Polling interval (ms) - retained from original behavior
   const delay = 1000;
+
   useEffect(() => {
-    // Ensure we have our data
-    if (!variableTypes || dateRange.length < 2) {
+    if (!variableTypes || !tankNames || !dateRange || dateRange.length < 2)
       return;
-    }
 
-    const interval = setInterval(() => {
-      for (const tankName of tankNames) {
-        fetchDataInDateRange(
-          dateRange[0],
-          dateRange[1],
-          variableTypes,
-          tankName,
-        ).then((result) => {
-          // start of AI code
-          const dailyAverageData = averageByDay(result);
+    let mounted = true;
 
-          // We need to know which tank is which
-          // @ts-expect-error 2345
-          setChartData((prev) => ({
-            ...prev,
-            [tankName]: dailyAverageData,
-          }));
-          // end of AI code
-        });
-      }
-    }, delay);
-    return () => clearInterval(interval);
+    const fetchAll = async () => {
+      // Map datetime(ms) -> merged row
+      const merged: Record<number, ChartRow> = {};
+
+      await Promise.all(
+        tankNames.map(async (tankName: string) => {
+          try {
+            const result: InputDataPoint[] = await fetchDataInDateRange(
+              dateRange[0],
+              dateRange[1],
+              variableTypes,
+              tankName,
+            );
+
+            // Average by day for this tank
+            const daily = averageByDayNumeric(result);
+
+            // Merge each day row into the merged map
+            for (const row of daily) {
+              const ts = row.datetime;
+              if (!merged[ts]) merged[ts] = { datetime: ts } as ChartRow;
+
+              // For every variable name in this row, create a tank-specific key
+              for (const varName of Object.keys(row)) {
+                if (varName === "datetime") continue;
+                const mergedKey = keyFor(tankName, varName);
+                merged[ts][mergedKey] = Number(row[varName]);
+              }
+            }
+          } catch (err) {
+            console.error("Error fetching data for", tankName, err);
+          }
+        }),
+      );
+
+      const mergedArray = Object.values(merged).sort(
+        (a, b) => a.datetime - b.datetime,
+      );
+      if (mounted) setChartData(mergedArray);
+    };
+
+    // initial fetch + polling
+    fetchAll();
+    const interval = setInterval(fetchAll, delay);
+
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
   }, [dateRange, variableTypes, tankNames]);
 
+  // Simple color selection (alternate)
+  const colorFor = (index: number) =>
+    index % 2 === 0 ? "var(--color-primary)" : "var(--color-secondary)";
+
   return (
-    // TODO: Show something if dateRange[1] DNE and needs to be entered.
     <a
       className="block rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300 cursor-pointer"
       href="/info"
@@ -112,70 +143,73 @@ export default function BarChartGraph({ tankNames, variableTypes, dateRange }) {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData}>
               <Legend />
+
               <CartesianGrid />
               <XAxis
-                allowDuplicatedCategory={false}
-                // start AI code
                 dataKey="datetime"
+                type="number"
+                scale="time"
                 tickFormatter={(tick) => {
                   const date = new Date(tick);
                   return `${date.getMonth() + 1}/${date.getDate()}`;
                 }}
                 stroke="#757575"
                 fontSize={12}
-                // end AI code
+                domain={["auto", "auto"]}
+                // Contrary to the obvious.. you would think this DISABLES overflow..
+                allowDataOverflow={true}
               />
 
-              {/* Hardcoded: Max 2 variable types */}
-              {variableTypes.length >= 1 && (
+              {/* Y axes: one per variable type (if provided) */}
+              {variableTypes?.length >= 1 && (
                 <YAxis
                   orientation="left"
                   yAxisId={variableTypes[0]}
                   domain={["auto", "auto"]}
-                  tickFormatter={(tick) => tick.toFixed(2).toString()}
+                  tickFormatter={(tick: number) => tick.toFixed(2).toString()}
                   stroke="#757575"
                   fontSize={12}
+                  allowDataOverflow={false}
                 />
               )}
-              {variableTypes.length == 2 && (
+
+              {variableTypes?.length >= 2 && (
                 <YAxis
+                  allowDataOverflow={false}
                   orientation="right"
                   yAxisId={variableTypes[1]}
                   domain={["auto", "auto"]}
-                  tickFormatter={(tick) => tick.toFixed(2).toString()}
+                  tickFormatter={(tick: number) => tick.toFixed(2).toString()}
                   stroke="#757575"
                   fontSize={12}
                 />
               )}
-              <Tooltip />
-              {tankNames.map((tankName) => {
-                return variableTypes.map((variableType) => {
-                  // TODO: It would be great if we could ensure tanks get unique colors
-                  return variableTypes[0] === variableType ? (
+
+              <Tooltip
+                labelFormatter={(label) => {
+                  const d = new Date(label as number);
+                  return d.toLocaleString();
+                }}
+              />
+
+              {/* Render a Bar for each tank-variable pair. Bars read from the BarChart's `data`. */}
+              {tankNames.map((tankName: string, tankIndex: number) =>
+                variableTypes.map((variableType: string, varIndex: number) => {
+                  const barKey = keyFor(tankName, variableType);
+                  const color = colorFor(tankIndex + varIndex);
+
+                  return (
                     <Bar
-                      key={tankName + variableType}
+                      key={barKey}
                       yAxisId={variableType}
-                      // @ts-expect-error 2769
-                      data={chartData[tankName]}
-                      dataKey={variableType}
-                      name={tankName + " " + variableType}
-                      fill="var(--color-primary)"
-                      stroke="var(--color-primary)"
-                    />
-                  ) : (
-                    <Bar
-                      key={tankName + variableType}
-                      yAxisId={variableType}
-                      // @ts-expect-error 2769
-                      data={chartData[tankName]}
-                      dataKey={variableType}
-                      name={tankName + " " + variableType}
-                      fill="var(--color-secondary)"
-                      stroke="var(--color-secondary)"
+                      dataKey={barKey}
+                      name={`${tankName} ${variableType}`}
+                      fill={color}
+                      stroke={color}
                     />
                   );
-                });
-              })}
+                }),
+              )}
             </BarChart>
           </ResponsiveContainer>
         </div>
