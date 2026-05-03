@@ -36,15 +36,18 @@ export default function RecentDataTankBox({ tankName, variableType }) {
         }
 
         // Filter and format data
-        const filteredData = result.map((item) => {
-          const date = new Date(item.datetime);
-          date.setHours(date.getHours() - 2);
+        const filteredData = result
+          .map((item) => {
+            if (item.value === "0.00") return {};
+            const date = new Date(item.datetime);
+            date.setHours(date.getHours() - 2);
 
-          return {
-            ...item,
-            datetime: date.toLocaleString(),
-          };
-        });
+            return {
+              ...item,
+              datetime: date.toLocaleString(),
+            };
+          })
+          .filter((item) => Object.keys(item).length !== 0);
 
         console.log("Filtered data:", filteredData);
         const reversedData = filteredData.reverse();
@@ -84,10 +87,9 @@ export default function RecentDataTankBox({ tankName, variableType }) {
                 fontSize={12}
               />
               <YAxis
-                domain={["dataMin - 1", "dataMax + 1"]}
-                tickFormatter={(tick) => tick.toFixed(1).toString()}
+                tickFormatter={(tick) => tick.toFixed(2).toString()}
                 stroke="var(--color-base-content)"
-                scale="sequential"
+                scale="auto" // Seems to be consistent now..
                 fontSize={12}
               />
               <Tooltip
@@ -112,7 +114,7 @@ export default function RecentDataTankBox({ tankName, variableType }) {
         </div>
       ) : (
         <p className="mt-[25%] text-xl font-bold text-error text-center">
-          This tank has no data. It may be offline.
+          This tank has no data for this sensor. It may be offline.
         </p>
       )}
     </div>
