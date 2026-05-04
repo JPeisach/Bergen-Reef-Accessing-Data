@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const themeOptions = [
   {
-    id: "light",
+    id: "brad",
     name: "Light",
     description: "Clean neutral default style",
     swatches: ["#ffffff", "#FCD98C", "#FFA900"],
@@ -40,10 +40,15 @@ const themeOptions = [
 export default function SettingsPage() {
   const { user, isLoading } = useUser();
   const [mounted, setMounted] = useState(false);
-  let theme = document.documentElement.getAttribute("data-theme");
+  const [currentTheme, setCurrentTheme] = useState<string | null>(null);
 
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
+    const theme = localStorage.getItem("data-theme");
+    if (theme) {
+      setCurrentTheme(theme);
+    }
+
     setMounted(true);
   }, []);
 
@@ -54,8 +59,8 @@ export default function SettingsPage() {
   if (isLoading) return <div>Loading...</div>;
   const setTheme = (theme) => {
     document.documentElement.setAttribute("data-theme", theme);
-    console.log(theme);
     localStorage.setItem("data-theme", theme);
+    setCurrentTheme(theme);
   };
 
   return (
@@ -75,7 +80,7 @@ export default function SettingsPage() {
 
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {themeOptions.map((option) => {
-                const isActive = theme === option.id;
+                const isActive = currentTheme === option.id;
 
                 return (
                   <button
