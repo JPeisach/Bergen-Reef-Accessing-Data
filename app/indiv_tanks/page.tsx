@@ -8,6 +8,7 @@ import "flatpickr/dist/themes/confetti.css";
 import Flatpickr from "react-flatpickr";
 import TankStatsPanel from "app/components/TankStatsPanel";
 import PredefinedObservationNotepad from "app/components/observations/PredefinedObservationNotepad";
+import BarChartGraph from "app/components/graphComponents/BarChartGraph";
 
 const tankNameOnly = (tank: string) => tank.substring("Tank ".length);
 
@@ -141,11 +142,19 @@ export default function Page() {
               />
 
               <div className={`${panelClass}`}>
-                <HistoricDataTankBox
-                  tankName={tankNameOnly(selectedTank)}
-                  variableType={selectedParameter}
-                  dateRange={dateRange}
-                />
+                {selectedGraphType === "Line" ? (
+                  <HistoricDataTankBox
+                    tankName={tankNameOnly(selectedTank)}
+                    variableType={selectedParameter}
+                    dateRange={dateRange}
+                  />
+                ) : (
+                  <BarChartGraph
+                    tankNames={[tankNameOnly(selectedTank)]}
+                    variableTypes={[selectedParameter]}
+                    dateRange={dateRange}
+                  />
+                )}
 
                 <div className="mt-6 text-sm text-primary/70 text-center italic">
                   Tank 1 houses numerous types of corals, including mushroom
