@@ -77,7 +77,10 @@ export default function RecentDataTankBox({ tankName, variableType }) {
           ) : null}
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData} margin={{ left: -10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="var(--color-neutral-400)"
+              />
               <XAxis
                 dataKey="datetime"
                 tickFormatter={(tick) =>
