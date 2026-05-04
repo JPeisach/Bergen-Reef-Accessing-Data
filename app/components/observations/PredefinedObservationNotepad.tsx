@@ -1,10 +1,7 @@
 import { useUser } from "@auth0/nextjs-auth0";
 import { useState } from "react";
 
-export default function PredefinedObservationNotepad({
-  dateRange,
-  tankNumber,
-}) {
+export default function PredefinedObservationNotepad({ dateRange, tankName }) {
   const { user } = useUser();
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
@@ -32,7 +29,7 @@ export default function PredefinedObservationNotepad({
         },
         body: JSON.stringify({
           authorId: user.sub,
-          tankNumber: tankNumber,
+          tankName: tankName,
           datetime: date,
           observationText: notes.trim(),
           observationTitle: title.trim(),
@@ -68,8 +65,6 @@ export default function PredefinedObservationNotepad({
     <div>
       {/* FIXME: HARDCODED STYLING FOR INDIV TANKS TAB (this is stupid!!) */}
       <div className="w-full space-y-5 rounded-2xl bg-base-100 border border-base-300 p-6 shadow-xl backdrop-blur-sm">
-        {/* Tank Number */}
-
         {/* Observation Title */}
 
         {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}

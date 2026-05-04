@@ -154,7 +154,7 @@ export default function Page() {
                 {isNotepadVisible && (
                   <PredefinedObservationNotepad
                     dateRange={dateRange}
-                    tankNumber={selectedTank}
+                    tankName={selectedTank}
                   ></PredefinedObservationNotepad>
                 )}
               </div>

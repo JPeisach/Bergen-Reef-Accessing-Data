@@ -8,7 +8,7 @@ export default async function updateObservation(
     observationText: string;
     observationTitle: string;
     observationTagsArray: string[];
-    tankNumber: number;
+    tankName: string;
   }>,
 ) {
   try {

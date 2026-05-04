@@ -12,7 +12,7 @@ interface Observation {
   observationTagsArray: string[];
   observationText: string;
   observationTitle: string;
-  tankNumber: number;
+  tankName: string;
 }
 
 export const GET = async (request: Request) => {
@@ -38,7 +38,7 @@ export const POST = async (request: Request) => {
 
     if (
       !observation.authorId ||
-      observation.tankNumber == null ||
+      observation.tankName == null ||
       !observation.observationText ||
       !observation.observationTitle ||
       !observation.observationTagsArray

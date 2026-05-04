@@ -7,7 +7,7 @@ import "flatpickr/dist/themes/confetti.css";
 
 export default function ObservationNotepad({}) {
   const { user } = useUser();
-  const [tankNumber, setTankNumber] = useState(1);
+  const [tankName, setTankName] = useState("Tank CoralLab60_1");
   const [title, setTitle] = useState("");
   const [dateRange, setDateRange] = useState([new Date()]);
   const [tags, setTags] = useState<string[]>([]);
@@ -33,7 +33,7 @@ export default function ObservationNotepad({}) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           authorId: user.sub,
-          tankNumber: tankNumber,
+          tankName: tankName,
           datetime: date,
           observationText: notes.trim(),
           observationTitle: title.trim(),
@@ -66,20 +66,20 @@ export default function ObservationNotepad({}) {
   return (
     <div>
       <div className="w-full space-y-5 rounded-2xl bg-base-100 border border-base-300 p-6 shadow-xl backdrop-blur-sm">
-        {/* Tank Number */}
+        {/* Tank Name */}
         <select
-          name="tankNumber"
+          name="tankName"
           className="text-sm text-base-content rounded-lg border border-base-300 bg-base-100 px-2 py-1 select"
-          onChange={(e) => setTankNumber(Number(e.target.value))}
+          onChange={(e) => setTankName(e.target.value)}
         >
-          <option value={1}>Tank CoralLab60_1</option>
-          <option value={2}>Tank CoralLab60_2</option>
-          <option value={3}>Tank CoralLab60_3</option>
-          <option value={4}>Tank CoralLab60_4</option>
-          <option value={5}>Tank CoralLab60_5</option>
-          <option value={6}>Tank CoralLab60_6</option>
-          <option value={7}>Tank ESCReef</option>
-          <option value={8}>Tank CoralLab380</option>
+          <option value={"Tank CoralLab60_1"}>Tank CoralLab60_1</option>
+          <option value={"Tank CoralLab60_2"}>Tank CoralLab60_2</option>
+          <option value={"Tank CoralLab60_3"}>Tank CoralLab60_3</option>
+          <option value={"Tank CoralLab60_4"}>Tank CoralLab60_4</option>
+          <option value={"Tank CoralLab60_5"}>Tank CoralLab60_5</option>
+          <option value={"Tank CoralLab60_6"}>Tank CoralLab60_6</option>
+          <option value={"Tank ESCReef"}>Tank ESCReef</option>
+          <option value={"Tank CoralLab380"}>Tank CoralLab380</option>
         </select>
 
         {/* Observation Title */}

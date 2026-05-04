@@ -12,7 +12,7 @@ interface Observation {
   observationTagsArray: string[];
   observationText: string;
   observationTitle: string;
-  tankNumber: number;
+  tankName: string;
 }
 
 export default async function insertObservation(observation: Observation) {
@@ -24,7 +24,7 @@ export default async function insertObservation(observation: Observation) {
 
     const observation_object: NewObservation = {
       authorId: authorId,
-      tankNumber: observation.tankNumber,
+      tankName: observation.tankName,
       datetime: observation.datetime,
       observationDatetimeStart: observation.observationDatetimeStart,
       observationDatetimeEnd: observation.observationDatetimeEnd,
