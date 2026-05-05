@@ -133,8 +133,10 @@ export default function DataLineGraph() {
       const adjustedEndDate = new Date(endDate);
       adjustedStartDate.setHours(adjustedStartDate.getHours() - 5);
       adjustedEndDate.setHours(adjustedEndDate.getHours() - 5);
+
+      // FIXME: allow selecting other tanks
       const response = await fetch(
-        `/api/searchDataByDateType?startDate=${adjustedStartDate.toISOString()}&endDate=${adjustedEndDate.toISOString()}&names=${selectedNames.join(",")}`,
+        `/api/searchDataByDateType?startDate=${adjustedStartDate.toISOString()}&endDate=${adjustedEndDate.toISOString()}&names=${selectedNames.join(",")}&tankName=CoralLab60_4`,
       );
 
       if (!response.ok) {
@@ -174,6 +176,7 @@ export default function DataLineGraph() {
     } catch (error) {
       console.error("Error searching for data: ", error);
     }
+    console.log(data);
   }
 
   const drawChart = () => {
@@ -236,10 +239,10 @@ export default function DataLineGraph() {
       .attr("class", "tooltip")
       .style("position", "absolute")
       .style("visibility", "hidden")
-      .style("background", "rgba(255, 255, 255, 0.8)")
-      .style("border", "1px solid #ccc")
+      .style("background", "var(--color-base-100)")
+      .style("border", "1px solid var(--color-base-300)")
       .style("padding", "10px")
-      .style("border-radius", "4px")
+      .style("border-radius", "8px")
       .style("box-shadow", "0 0 5px rgba(0, 0, 0, 0.3)");
 
     // Plot points with tooltip interaction
@@ -271,7 +274,7 @@ export default function DataLineGraph() {
 
     // X axis label
     g.append("text")
-      .attr("fill", "black")
+      .attr("fill", "var(--color-base-content)")
       .attr("x", width / 2)
       .attr("y", height + 35)
       .attr("text-anchor", "middle")
@@ -281,7 +284,7 @@ export default function DataLineGraph() {
 
     // Y axis label
     g.append("text")
-      .attr("fill", "black")
+      .attr("fill", "var(--color-base-content)")
       .attr("transform", "rotate(-90)")
       .attr("x", -height / 2)
       .attr("y", -margin.left + 15)

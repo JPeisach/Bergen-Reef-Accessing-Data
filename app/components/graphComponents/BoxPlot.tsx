@@ -218,10 +218,10 @@ export default function BoxPlot() {
       .attr("class", "tooltip")
       .style("position", "absolute")
       .style("visibility", "hidden")
-      .style("background", "rgba(255, 255, 255, 0.8)")
-      .style("border", "1px solid #ccc")
+      .style("background", "var(--color-base-100)")
+      .style("border", "1px solid var(--color-base-300)")
       .style("padding", "10px")
-      .style("border-radius", "4px")
+      .style("border-radius", "8px")
       .style("box-shadow", "0 0 5px rgba(0, 0, 0, 0.3)");
 
     const g = svg
@@ -252,8 +252,8 @@ export default function BoxPlot() {
       .attr("y", y(boxPlotData.q3))
       .attr("width", boxWidth)
       .attr("height", y(boxPlotData.q1) - y(boxPlotData.q3))
-      .attr("fill", "white")
-      .attr("stroke", "black")
+      .attr("fill", "var(--color-primary)")
+      .attr("stroke", "var(--color-secondary)")
       .attr("stroke-width", 1)
       .on("mouseover", (event) => {
         tooltip
@@ -281,7 +281,7 @@ export default function BoxPlot() {
       .attr("x2", centerX + boxWidth / 2)
       .attr("y1", y(boxPlotData.median))
       .attr("y2", y(boxPlotData.median))
-      .attr("stroke", "black")
+      .attr("stroke", "var(--color-base-300)")
       .attr("stroke-width", 2)
       .style("cursor", "pointer")
       .on("mouseover", (event) => {
@@ -305,7 +305,7 @@ export default function BoxPlot() {
         .attr("x2", centerX)
         .attr("y1", y(y1))
         .attr("y2", y(y2))
-        .attr("stroke", "black")
+        .attr("stroke", "var(--color-base-content)")
         .attr("stroke-width", 1)
         .style("cursor", "pointer")
         .on("mouseover", (event) => {
@@ -332,7 +332,7 @@ export default function BoxPlot() {
       .attr("x2", centerX + boxWidth / 2)
       .attr("y1", y(boxPlotData.max))
       .attr("y2", y(boxPlotData.max))
-      .attr("stroke", "black")
+      .attr("stroke", "var(--color-base-content)")
       .attr("stroke-width", 1);
 
     g.append("line")
@@ -340,7 +340,7 @@ export default function BoxPlot() {
       .attr("x2", centerX + boxWidth / 2)
       .attr("y1", y(boxPlotData.min))
       .attr("y2", y(boxPlotData.min))
-      .attr("stroke", "black")
+      .attr("stroke", "var(--color-base-content)")
       .attr("stroke-width", 1);
 
     // Draw outliers
@@ -349,7 +349,7 @@ export default function BoxPlot() {
         .attr("cx", centerX)
         .attr("cy", y(outlier))
         .attr("r", 3)
-        .attr("fill", "red")
+        .attr("fill", "var(--color-secondary)")
         .attr("stroke", "none")
         .style("cursor", "pointer")
         .on("mouseover", (event) => {
@@ -385,7 +385,7 @@ export default function BoxPlot() {
 
     // Add y-axis label
     g.append("text")
-      .attr("fill", "black")
+      .attr("fill", "var(--color-base-content)")
       .attr("transform", "rotate(-90)")
       .attr("x", -height / 2)
       .attr("y", -margin.left + 20)
@@ -401,7 +401,7 @@ export default function BoxPlot() {
     )} - ${formatDateTime(endDate || new Date())}`;
 
     g.append("text")
-      .attr("fill", "black")
+      .attr("fill", "var(--color-base-content)")
       .attr("x", width / 2 + margin.left / 2) // Adjust x position to match box plot centering
       .attr("y", height + margin.bottom - 5)
       .attr("text-anchor", "middle")

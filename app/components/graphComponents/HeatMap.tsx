@@ -234,8 +234,8 @@ export default function DataLineGraph() {
       .attr("class", "tooltip")
       .style("opacity", 0)
       .style("position", "absolute")
-      .style("background-color", "white")
-      .style("border", "1px solid #ddd")
+      .style("background", "var(--color-base-100)")
+      .style("border", "1px solid var(--color-base-300)")
       .style("border-radius", "4px")
       .style("padding", "8px")
       .style("pointer-events", "none")
@@ -394,6 +394,7 @@ export default function DataLineGraph() {
       .data(filteredWeekLabels)
       .enter()
       .append("text")
+      .attr("fill", "var(--color-base-content)")
       .attr("class", "week-label")
       .attr("x", (d, i) => {
         const weekIndex = isSmallScreen && numWeeks > 7 ? i * 2 : i;
@@ -409,6 +410,7 @@ export default function DataLineGraph() {
       .data(yAxisDays)
       .enter()
       .append("text")
+      .attr("fill", "var(--color-base-content)")
       .attr("class", "day-label")
       .attr("x", -5)
       .attr("y", (d, i) => i * cellHeight + cellHeight / 2)
@@ -449,10 +451,12 @@ export default function DataLineGraph() {
       .attr("text-anchor", "middle")
       .style("font-size", "24px")
       .style("font-weight", "bold")
+      .attr("fill", "var(--color-base-content)")
       .text(selectedName === "Temperature" ? "Temp" : selectedName);
 
     // Add units below
     g.append("text")
+      .attr("fill", "var(--color-base-content)")
       .attr("x", legendX)
       .attr("y", legendY - 35)
       .attr("text-anchor", "middle")
@@ -461,6 +465,7 @@ export default function DataLineGraph() {
       .text(`Median`);
 
     g.append("text")
+      .attr("fill", "var(--color-base-content)")
       .attr("x", legendX)
       .attr("y", legendY - 5)
       .attr("text-anchor", "middle")
