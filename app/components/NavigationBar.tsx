@@ -1,10 +1,6 @@
-import { Tab, TabGroup, TabList } from "@headlessui/react";
 import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
 
 import clsx from "clsx";
-import { Fragment } from "react";
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 interface NavigationBarProps {
@@ -12,7 +8,7 @@ interface NavigationBarProps {
   username: string;
 }
 
-// WARNING: AI CODE (mostly in styling and className), and use of aside.
+// WARNING: AI CODE (mostly in styling and className)
 const NavigationBar: React.FC<NavigationBarProps> = ({
   defaultIndex,
   username,
@@ -45,153 +41,110 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         </Link>
 
         {/* Navigation list - scrolls if needed and takes remaining height */}
-        <div className="flex-1 mt-4 w-full overflow-hidden">
-          <TabGroup vertical defaultIndex={defaultIndex}>
-            <TabList className="flex flex-col w-full h-full overflow-auto pr-2">
-              <Link href="/">
-                <Tab as={Fragment}>
-                  {() => (
-                    <button
-                      className={clsx(
-                        "navbar-tabitem w-full text-left",
-                        defaultIndex === 0
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
-                      )}
-                    >
-                      Home
-                    </button>
-                  )}
-                </Tab>
-              </Link>
+        <ul className="menu flex-1 mt-4 w-full overflow-hidden">
+          <Link href="/">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 0
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Home
+            </button>
+          </Link>
 
-              <a href="/indiv_tanks">
-                <Tab as={Fragment}>
-                  {() => (
-                    <button
-                      className={clsx(
-                        "navbar-tabitem w-full text-left",
-                        defaultIndex === 1
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
-                      )}
-                    >
-                      Individual Tanks
-                    </button>
-                  )}
-                </Tab>
-              </a>
+          <a href="/indiv_tanks">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 1
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Individual Tanks
+            </button>
+          </a>
 
-              <a href="/notes">
-                <Tab as={Fragment}>
-                  {() => (
-                    <button
-                      className={clsx(
-                        "navbar-tabitem w-full text-left",
-                        defaultIndex === 2
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
-                      )}
-                    >
-                      Observations
-                    </button>
-                  )}
-                </Tab>
-              </a>
+          <a href="/notes">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 2
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Observations
+            </button>
+          </a>
 
-              <a href="/info">
-                <Tab as={Fragment}>
-                  {() => (
-                    <button
-                      className={clsx(
-                        "navbar-tabitem w-full text-left",
-                        defaultIndex === 3
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
-                      )}
-                    >
-                      Info
-                    </button>
-                  )}
-                </Tab>
-              </a>
+          <a href="/info">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 3
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Info
+            </button>
+          </a>
 
-              <a href="/history">
-                <Tab as={Fragment}>
-                  {() => (
-                    <button
-                      className={clsx(
-                        "navbar-tabitem w-full text-left",
-                        defaultIndex === 4
-                          ? "navbar-tabitem-highlighted"
-                          : "navbar-tabitem-unhighlighted",
-                      )}
-                    >
-                      History
-                    </button>
-                  )}
-                </Tab>
-              </a>
+          <a href="/history">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 4
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              History
+            </button>
+          </a>
 
-              <Menu as="div" className="relative inline-block w-full">
-                <MenuButton
-                  className={clsx(
-                    "navbar-tabitem flex items-center justify-between w-full",
-                    defaultIndex === 5
-                      ? "navbar-tabitem-highlighted"
-                      : "navbar-tabitem-unhighlighted",
-                  )}
-                >
-                  <span>Graphs</span>
-                  <ChevronDownIcon className="-mr-1 size-5 text-base-content/50" />
-                </MenuButton>
-                <MenuItems
-                  className="absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-base-100 shadow-lg ring-1 ring-base-300 z-50"
-                  style={{ zIndex: 40 }}
-                >
-                  <MenuItem>
-                    <a href="/data/linegraph">
-                      <button className="navbar-graphs-dropdown-button">
-                        Line Graph
-                      </button>
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a href="/data/twodimgraph">
-                      <button className="navbar-graphs-dropdown-button">
-                        Two Dimension Plot
-                      </button>
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a href="/data/boxplot">
-                      <button className="navbar-graphs-dropdown-button">
-                        Box Plot
-                      </button>
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a href="/data/heatmap">
-                      <button className="navbar-graphs-dropdown-button">
-                        Heat Map
-                      </button>
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a href="/data/barchart">
-                      <button className="navbar-graphs-dropdown-button">
-                        Bar Chart
-                      </button>
-                    </a>
-                  </MenuItem>
-                </MenuItems>
-              </Menu>
+          <div className="menu py-4 text-base text-base-content relative inline-block w-full">
+            <details open>
+              <summary className="navbar-tabitem flex menu-dropdown-toggle hover:bg-base-200 text-base-content font-bold">
+                Graphs
+              </summary>
+              <ul className="menu-dropdown" style={{ zIndex: 40 }}>
+                <a href="/data/linegraph">
+                  <button className="navbar-graphs-dropdown-button">
+                    Line Graph
+                  </button>
+                </a>
+                <a href="/data/twodimgraph">
+                  <button className="navbar-graphs-dropdown-button">
+                    Two Dimension Plot
+                  </button>
+                </a>
+                <a href="/data/boxplot">
+                  <button className="navbar-graphs-dropdown-button">
+                    Box Plot
+                  </button>
+                </a>
+                <a href="/data/heatmap">
+                  <button className="navbar-graphs-dropdown-button">
+                    Heat Map
+                  </button>
+                </a>
+                <a href="/data/barchart">
+                  <button className="navbar-graphs-dropdown-button">
+                    Bar Chart
+                  </button>
+                </a>
+              </ul>
+            </details>
+          </div>
 
-              {/* spacer to create a visual gap before bottom area when content is short */}
-              <div className="h-6" />
-            </TabList>
-          </TabGroup>
-        </div>
+          {/* spacer to create a visual gap before bottom area when content is short */}
+          <div className="h-6" />
+        </ul>
 
         {/* Bottom area: profile and settings sit at the bottom */}
         <div className="mt-4 w-full">
