@@ -228,3 +228,29 @@ body {
 .navbar-graphs-dropdown-button {
   @apply block w-full py-4 text-base text-base-content font-semibold hover:bg-base-200;
 }
+
+/* AI INSERTION BELOW */
+
+/* Make room for the fixed sidebar on larger screens so page content doesn't sit underneath it */
+@layer base {
+  @screen sm {
+    body {
+      padding-left: 14rem; /* matches sm:w-56 */
+    }
+  }
+  @screen md {
+    body {
+      padding-left: 16rem; /* matches md:w-64 */
+    }
+  }
+  @screen lg {
+    body {
+      padding-left: 18rem; /* matches lg:w-72 */
+    }
+  }
+  @screen xl {
+    body {
+      padding-left: 20rem; /* matches xl:w-80 */
+    }
+  }
+}
