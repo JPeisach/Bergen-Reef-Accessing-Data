@@ -5,7 +5,12 @@ import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/confetti.css";
 
-export default function ObservationNotepad({}) {
+// AI code: Did the submitCallback
+export default function ObservationNotepad({
+  submitCallback,
+}: {
+  submitCallback?: () => void;
+}) {
   const { user } = useUser();
   const [tankName, setTankName] = useState("Tank CoralLab60_1");
   const [title, setTitle] = useState("");
@@ -25,7 +30,6 @@ export default function ObservationNotepad({}) {
     setStatus("sending");
 
     const date = new Date();
-    // TODO: set date/time info of what the observation is talking about.
 
     try {
       const response = await fetch("/api/observations", {
@@ -54,12 +58,16 @@ export default function ObservationNotepad({}) {
       setTitle("");
       setTags([]);
 
+      // AI code: Callback, timeout message/reset
+      // Notify parent to refresh the list
+      submitCallback?.();
+
+      // Keep the success message visible briefly
       setTimeout(() => setStatus(""), 3000);
     } catch (error) {
       console.error("Error saving observation:", error);
       setStatus("error");
-    } finally {
-      setStatus("");
+      setTimeout(() => setStatus(""), 3000);
     }
   };
 
@@ -70,6 +78,7 @@ export default function ObservationNotepad({}) {
         <select
           name="tankName"
           className="text-sm text-base-content rounded-lg border border-base-300 bg-base-100 px-2 py-1 select"
+          value={tankName}
           onChange={(e) => setTankName(e.target.value)}
         >
           <option value={"Tank CoralLab60_1"}>Tank CoralLab60_1</option>
@@ -83,8 +92,6 @@ export default function ObservationNotepad({}) {
         </select>
 
         {/* Observation Title */}
-
-        {/* FIXME: For these inputs, Headless UI doc recommends defining the "name" prop. Should we do this? */}
         <p className="mb-2 block text-sm font-bold text-primary">
           Observation Title
         </p>
@@ -108,7 +115,6 @@ export default function ObservationNotepad({}) {
 
         {/* Tags Display */}
         <p className="mb-2 text-sm font-bold text-primary">Tags</p>
-        {/* TODO: Store these tags in DB, add a way to drop down/select/create tags */}
         <input
           type="text"
           name="tags"
@@ -118,7 +124,7 @@ export default function ObservationNotepad({}) {
           onChange={(e) =>
             setTags(e.target.value.split(",").map((t) => t.trim()))
           }
-        />
+        ></input>
 
         {/* Notes Textbox */}
         <p className="mb-2 block text-sm font-bold text-primary">Notes</p>
