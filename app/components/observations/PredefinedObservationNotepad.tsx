@@ -1,7 +1,16 @@
-import { useUser } from "@auth0/nextjs-auth0";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState } from "react";
 
-export default function PredefinedObservationNotepad({ dateRange, tankName }) {
+// AI CODE: Added the submitCallback.
+export default function PredefinedObservationNotepad({
+  dateRange,
+  tankName,
+  submitCallback,
+}: {
+  dateRange: any;
+  tankName: string;
+  submitCallback: () => void;
+}) {
   const { user } = useUser();
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
@@ -36,7 +45,6 @@ export default function PredefinedObservationNotepad({ dateRange, tankName }) {
           observationDatetimeStart: dateRange[0],
           observationDatetimeEnd:
             dateRange.length > 1 ? dateRange[1] : dateRange[0],
-
           observationTagsArray: JSON.stringify(tags),
         }),
       });
@@ -52,12 +60,19 @@ export default function PredefinedObservationNotepad({ dateRange, tankName }) {
       setTitle("");
       setTags([]);
 
+      // (AI CODE):
+      // Notify parent (page) so it can refresh the TankStatsPanel
+      submitCallback?.();
+
+      // Keep the success message for a short time so user sees it
       setTimeout(() => setStatus(""), 3000);
     } catch (error) {
       console.error("Error saving observation:", error);
       setStatus("error");
-    } finally {
-      setStatus("");
+
+      // (AI CODE):
+      // Keep the error message visible briefly
+      setTimeout(() => setStatus(""), 3000);
     }
   };
 

@@ -24,8 +24,20 @@ export default function Page() {
   const [selectedGraphType, setSelectedGraphType] = useState("Line");
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
 
+  // AI CODE:
+  // New: refresh key for TankStatsPanel. Increment to force a remount / refetch
+  const [statsRefreshKey, setStatsRefreshKey] = useState(0);
+
   const panelClass =
     "bg-base-100 border border-base-300 p-5 shadow-lg rounded-xl";
+
+  // TODO: This is the fault of bad state and component management. StackOverflow forms suggest this thing about keys, so I let AI apply it. -Josh
+
+  // AI CODE:
+  // Replaces the previous hacky toggle; called by the notepad on successful submit
+  const handleObservationSubmit = () => {
+    setStatsRefreshKey((k) => k + 1);
+  };
 
   return (
     <div className="bg-base-200">
@@ -136,7 +148,10 @@ export default function Page() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+              {/* AI CODE INSERTION: */}
+              {/* give TankStatsPanel a key that changes when observations are submitted */}
               <TankStatsPanel
+                key={`${tankNameOnly(selectedTank)}-${statsRefreshKey}`}
                 tankName={tankNameOnly(selectedTank)}
                 panelClass={panelClass}
               />
@@ -156,14 +171,11 @@ export default function Page() {
                   />
                 )}
 
-                <div className="mt-6 text-sm text-primary/70 text-center italic">
-                  Tank 1 houses numerous types of corals, including mushroom
-                  corals, button polyps, leather corals, and bubble corals.
-                </div>
                 {isNotepadVisible && (
                   <PredefinedObservationNotepad
                     dateRange={dateRange}
                     tankName={selectedTank}
+                    submitCallback={handleObservationSubmit}
                   ></PredefinedObservationNotepad>
                 )}
               </div>
