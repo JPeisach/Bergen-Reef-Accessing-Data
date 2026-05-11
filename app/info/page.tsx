@@ -16,7 +16,7 @@ export default function Page() {
     "Jolene Coral": "Jolene corals are",
   };
 
-  // actual info will replace this later
+  // FIXME: actual info will replace this later
   const getTankInfo = (tankNum: string) => {
     if (!tankNum) return null;
     return {
@@ -24,17 +24,25 @@ export default function Page() {
     };
   };
 
+  // TODO: Tanks by name, not number
+  // // FIXME: Images are guesses - basing off of when EXIF says they were taken
   const getTankImage = (tankNum: string) => {
     switch (tankNum) {
       case "2":
-        return "https://www.thesprucepets.com/thmb/M22UH3-0kR74sgHT91kkUn4wKco=/3100x0/filters:no_upscale():strip_icc()/GettyImages-1413740339-5aea18fdc25b41039fa8dc91d687f527.jpg";
+        return "/tank_pictures/IMG_5944.jpeg";
       case "3":
-        return "https://cdn11.bigcommerce.com/s-15h88fcyw7/product_images/uploaded_images/fishtanksdirect-136796-were-they-made-blogbanner1.jpg";
+        return "/tank_pictures/IMG_5954.jpeg";
       case "4":
-        return "https://i.pinimg.com/474x/f9/31/06/f93106fa1161221adf0d6761b82cca5f.jpg";
+        return "/tank_pictures/IMG_5963.jpeg";
+      case "5":
+        return "/tank_pictures/IMG_5966.jpeg";
+      case "6":
+        return "/tank_pictures/IMG_5975.jpeg";
+      case "7":
+        return "/tank_pictures/IMG_5980.jpeg";
       default:
         // Default image (Tank 1 and others)
-        return "https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg";
+        return "/tank_pictures/IMG_3925.jpg";
     }
   };
 
