@@ -109,7 +109,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
           <div className="menu py-4 text-base text-base-content relative inline-block w-full">
             <details open>
-              <summary className="navbar-tabitem flex menu-dropdown-toggle hover:bg-base-200 text-base-content font-bold">
+              <summary className="navbar-tabitem flex justify-center menu-dropdown-toggle hover:bg-base-200 text-base-content font-bold">
                 Graphs
               </summary>
               <ul className="menu-dropdown" style={{ zIndex: 40 }}>
