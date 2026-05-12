@@ -18,10 +18,21 @@ export default function Page() {
   const defaultStartDate = new Date();
   defaultStartDate.setDate(defaultStartDate.getDate() - 10); // hacky fix to show *something*
 
-  const [dateRange, setDateRange] = useState([defaultStartDate, new Date()]);
-  const [selectedTank, setSelectedTank] = useState("Tank CoralLab60_1");
-  const [selectedParameter, setSelectedParameter] = useState("pH");
-  const [selectedGraphType, setSelectedGraphType] = useState("Line");
+  const [dateRange, setDateRange] = useState(
+    localStorage.getItem("indivtanks-daterange") ?? [
+      defaultStartDate,
+      new Date(),
+    ],
+  );
+  const [selectedTank, setSelectedTank] = useState(
+    localStorage.getItem("indivtanks-tank") ?? "Tank CoralLab60_1",
+  );
+  const [selectedParameter, setSelectedParameter] = useState(
+    localStorage.getItem("indivtanks-parameter") ?? "pH",
+  );
+  const [selectedGraphType, setSelectedGraphType] = useState(
+    localStorage.getItem("indivtanks-graphtype") ?? "Line",
+  );
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
 
   // AI CODE:
@@ -37,6 +48,26 @@ export default function Page() {
   // Replaces the previous hacky toggle; called by the notepad on successful submit
   const handleObservationSubmit = () => {
     setStatsRefreshKey((k) => k + 1);
+  };
+
+  const onSetDateRange = (date) => {
+    setDateRange(date);
+    localStorage.setItem("indivtanks-daterange", JSON.stringify(date));
+  };
+
+  const onSetSelectedTank = (tank) => {
+    setSelectedTank(tank);
+    localStorage.setItem("indivtanks-tank", tank);
+  };
+
+  const onSetSelectedParameter = (parameter) => {
+    setSelectedParameter(parameter);
+    localStorage.setItem("indivtanks-parameter", parameter);
+  };
+
+  const onSetSelectedGraphType = (graphType) => {
+    setSelectedGraphType(graphType);
+    localStorage.setItem("indivtanks-graphtype", graphType);
   };
 
   return (
@@ -73,15 +104,12 @@ export default function Page() {
                     "ORP",
                     "Alkalinity",
                     "Calcium",
-                    "Nitrate",
-                    "Nitrite",
-                    "Phosphate",
                     "LLS",
                   ],
                 },
                 {
                   label: "Graph Type",
-                  options: ["Line", "Bar", "Sankey", "Other"],
+                  options: ["Line", "Bar"],
                 },
               ].map((item) => {
                 let value, setValue;
@@ -89,15 +117,15 @@ export default function Page() {
                 switch (item.label) {
                   case "Tank":
                     value = selectedTank;
-                    setValue = setSelectedTank;
+                    setValue = onSetSelectedTank;
                     break;
                   case "Parameters":
                     value = selectedParameter;
-                    setValue = setSelectedParameter;
+                    setValue = onSetSelectedParameter;
                     break;
                   case "Graph Type":
                     value = selectedGraphType;
-                    setValue = setSelectedGraphType;
+                    setValue = onSetSelectedGraphType;
                     break;
                   default:
                     value = "";
@@ -133,7 +161,7 @@ export default function Page() {
                   data-enable-time
                   options={{ enableSeconds: true, mode: "range" }}
                   value={dateRange}
-                  onChange={(date) => setDateRange(date)}
+                  onChange={(date) => onSetDateRange(date)}
                 />
               </div>
 
