@@ -41,7 +41,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         </Link>
 
         {/* Navigation list - scrolls if needed and takes remaining height */}
-        <ul className="menu flex-1 mt-4 w-full overflow-hidden">
+        <ul className="menu flex-1 flex-nowrap mt-4 w-full overflow-hidden">
           <Link href="/">
             <button
               className={clsx(
