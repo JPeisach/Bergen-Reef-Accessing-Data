@@ -60,6 +60,7 @@ This was initially written by Joshua Peisach. Feel free to add/remove info as ne
 - Proper authentication checks
   - The UI won't let you edit/delete observations that aren't your own, but you may still be able to send the request and it might work anyway. Check this.
 - Make history page show tank names - have better sorting
+- Stop using outline: none (see: https://outlinenone.com)
 
 ## React
 
@@ -90,7 +91,6 @@ BRAD suffers from some technical debt, to say the least.
 ### Routing
 
 - Is this supposed to be a single page application?
-- See if there are ways we can cleanup the navigation
 
 ### Component Cleanup
 
@@ -103,10 +103,6 @@ BRAD suffers from some technical debt, to say the least.
 - Proper rerendering/remounting/updates when needed
   - I also couldn't figure this out. Ensure that data is refreshed and reloaded when necessary. For example, if I select to view another type of tank, the other component showing the stats should update and instantly check for new data. I shouldn't need to have a timer that is short enough to make the wait time "not as bad".
   - AI recommended "using keys to force remounts" (autocomplete put that in, but that is basically what it did), in PredefinedObservationNotepad and indiv_tanks page.
-- Cleanup/refactor the navigation bar/sidebar
-  - I don't even know how it works, but I know that there is something weird about it.
-  - It works, sure? But it's also floating?
-  - DaisyUI's equivalent of a navigation menu (a "[drawer](https://daisyui.com/components/drawer/)") kind of has the pages run have its content inside the drawer-content block (I think). Basically, it will take time for every page to work with the new solution.
 - There is both HistoricDataTankBox and RecentDataTankBox - maybe they should be merged together
   - Also, the HistoricDataTankBox's use on the individual tanks page shows old data, but really the "tank box" can be different kinds of graphs. So the tank box just being a line graph makes no sense.
 - Date elements - work smarter, not harter
