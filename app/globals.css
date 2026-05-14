@@ -214,7 +214,7 @@ body {
 }
 
 .navbar-tabitem {
-  @apply w-full py-4 transition;
+  @apply w-full py-4 transition font-bold;
 }
 
 .navbar-tabitem-unhighlighted {

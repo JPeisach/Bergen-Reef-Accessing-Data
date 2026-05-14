@@ -107,44 +107,72 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             </button>
           </a>
 
-          <div className="menu py-4 text-base text-base-content relative inline-block w-full">
-            <details open>
-              <summary className="navbar-tabitem flex justify-center menu-dropdown-toggle hover:bg-base-200 text-base-content font-bold">
-                Graphs
-              </summary>
-              <ul className="menu-dropdown" style={{ zIndex: 40 }}>
-                <a href="/data/linegraph">
-                  <button className="navbar-graphs-dropdown-button">
-                    Line Graph
-                  </button>
-                </a>
-                <a href="/data/twodimgraph">
-                  <button className="navbar-graphs-dropdown-button">
-                    Two Dimension Plot
-                  </button>
-                </a>
-                <a href="/data/boxplot">
-                  <button className="navbar-graphs-dropdown-button">
-                    Box Plot
-                  </button>
-                </a>
-                <a href="/data/heatmap">
-                  <button className="navbar-graphs-dropdown-button">
-                    Heat Map
-                  </button>
-                </a>
-                <a href="/data/barchart">
-                  <button className="navbar-graphs-dropdown-button">
-                    Bar Chart
-                  </button>
-                </a>
-              </ul>
-            </details>
-          </div>
+          <div className="divider"></div>
 
-          {/* spacer to create a visual gap before bottom area when content is short */}
-          <div className="h-6" />
+          <a href="/data/linegraph">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 5
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Line Graph
+            </button>
+          </a>
+          <a href="/data/twodimgraph">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 6
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Two Dimension Plot
+            </button>
+          </a>
+          <a href="/data/boxplot">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 7
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Box Plot
+            </button>
+          </a>
+          <a href="/data/heatmap">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 8
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Heat Map
+            </button>
+          </a>
+          <a href="/data/barchart">
+            <button
+              className={clsx(
+                "navbar-tabitem w-full",
+                defaultIndex === 9
+                  ? "navbar-tabitem-highlighted"
+                  : "navbar-tabitem-unhighlighted",
+              )}
+            >
+              Bar Chart
+            </button>
+          </a>
         </ul>
+
+        {/* spacer to create a visual gap before bottom area when content is short */}
+        <div className="h-6" />
 
         {/* Bottom area: profile and settings sit at the bottom */}
         <div className="mt-4 w-full">
