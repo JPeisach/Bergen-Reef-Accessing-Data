@@ -14,7 +14,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   username,
 }) => {
   // Sidebar width classes used both for the fixed aside and for the placeholder
-  const widthClasses = "w-20 sm:w-56 md:w-64 lg:w-72 xl:w-80";
+  const widthClasses = "w-20 sm:w-56 md:w-64 lg:w-72 xl:w-72";
 
   return (
     <>
