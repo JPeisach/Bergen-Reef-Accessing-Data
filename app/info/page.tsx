@@ -10,13 +10,32 @@ export default function Page() {
   const [tankNumber, setTankNumber] = useState("");
   const [selectedCoral, setSelectedCoral] = useState<string | null>(null);
 
-  const coralDetails: { [key: string]: string } = {
-    "Mushroom Coral": "Mushroom coral are",
-    "Brain Coral": "Brain corals are",
-    "Jolene Coral": "Jolene corals are",
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleUpload = async () => {
+    if (!selectedFile || !tankNumber) return;
+
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    formData.append("tankNumber", tankNumber);
+
+    const res = await fetch("/api/upload-image", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      alert("Image uploaded!");
+      window.location.reload();
+    }
   };
 
-  // actual info will replace this later
+  const coralDetails: { [key: string]: string } = {
+    "Mushroom Coral": "Mushroom corals are hardy and make ideal corals for the beginner reef aquarist. Mushrooms that have long tentacles are aggressive toward other types of corals, so provide these corals with adequate space.",
+    "Brain Coral": "Brain corals get their common name from the grooves and channels on their surfaces that look like the folds of the human brain.",
+    "Jolene Coral": "Jolene corals are...",
+  };
+
   const getTankInfo = (tankNum: string) => {
     if (!tankNum) return null;
     return {
@@ -25,17 +44,7 @@ export default function Page() {
   };
 
   const getTankImage = (tankNum: string) => {
-    switch (tankNum) {
-      case "2":
-        return "https://www.thesprucepets.com/thmb/M22UH3-0kR74sgHT91kkUn4wKco=/3100x0/filters:no_upscale():strip_icc()/GettyImages-1413740339-5aea18fdc25b41039fa8dc91d687f527.jpg";
-      case "3":
-        return "https://cdn11.bigcommerce.com/s-15h88fcyw7/product_images/uploaded_images/fishtanksdirect-136796-were-they-made-blogbanner1.jpg";
-      case "4":
-        return "https://i.pinimg.com/474x/f9/31/06/f93106fa1161221adf0d6761b82cca5f.jpg";
-      default:
-        // Default image (Tank 1 and others)
-        return "https://www.hepper.com/wp-content/uploads/2022/09/saltwater-tank-clownfish-tropical-fish-coral_Vojce_Shutterstock.jpg";
-    }
+    return `/api/tank-image/${tankNum}`;
   };
 
   const tankInfo = getTankInfo(tankNumber);
@@ -77,19 +86,33 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Tank Picture */}
               <div>
-                <h2 className="text-xl font-bold text-primary mb-4">
-                  Tank {tankNumber} Picture
-                </h2>
-                <div className="rounded-2xl bg-base-100/90 p-4 shadow-xl border border-base-300 flex flex-col items-center justify-center min-h-[300px] overflow-hidden">
-                  <img
-                    src={getTankImage(tankNumber)}
-                    alt={`Tank ${tankNumber} coral reef aquarium`}
-                    className="w-full h-auto object-cover rounded-xl mb-4"
-                  />
-                  <p className="text-primary font-bold text-lg text-center">
-                    2/3/2026
-                  </p>
-                </div>
+                <img
+                  src={getTankImage(tankNumber)}
+                  alt={`Tank ${tankNumber} coral reef aquarium`}
+                  className="w-full h-auto object-cover rounded-xl mb-4"
+                />
+
+                <p className="text-primary font-bold text-lg text-center">
+                  2/3/2026
+                </p>
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files?.[0]) {
+                      setSelectedFile(e.target.files[0]);
+                    }
+                  }}
+                  className="mt-4"
+                />
+
+                <button
+                  onClick={handleUpload}
+                  className="mt-2 rounded bg-blue-500 px-4 py-2 text-white"
+                >
+                  Upload Image
+                </button>
               </div>
 
               {/* Coral Types Information */}

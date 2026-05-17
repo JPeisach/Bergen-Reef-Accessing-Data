@@ -55,3 +55,13 @@ export const observations = mysqlTable(
   },
   (table) => [index("account_id_key").on(table.authorId)],
 );
+
+export const infoPageImages = mysqlTable(
+  "info_page_images",
+  {
+    id: int().autoincrement().primaryKey(),
+    tankNumber: int("tank_number").notNull(),
+    images: blob("images", {mode:"buffer",}).notNull(),
+    mimeType: varchar("mime_type", {length: 50,}).notNull(),
+    updatedAt: datetime("updated_at").defaultNow().notNull(),}
+);
