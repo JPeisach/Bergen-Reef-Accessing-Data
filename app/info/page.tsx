@@ -88,36 +88,42 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Tank Picture */}
               <div>
-                <img
-                  src={getTankImage(tankNumber)}
-                  alt={`Tank ${tankNumber} coral reef aquarium`}
-                  className="w-full h-auto object-cover rounded-xl mb-4"
-                />
+                <div className="rounded-2xl bg-base-100/90 p-4 shadow-xl border border-base-300 flex flex-col items-center">
 
-                <p className="text-primary font-bold text-lg text-center">
-                  2/3/2026
-                </p>
+                  <img
+                    src={getTankImage(tankNumber)}
+                    alt={`Tank ${tankNumber} coral reef aquarium`}
+                    className="w-full h-auto object-cover rounded-xl mb-4"
+                  />
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    if (e.target.files?.[0]) {
-                      setSelectedFile(e.target.files[0]);
-                    }
-                  }}
-                  className="mt-4"
-                />
+                  <p className="text-primary font-bold text-lg text-center">
+                    2/3/2026
+                  </p>
 
-                <button
-                  type="button"
-                  onClick={handleUpload}
-                  className="mt-2 rounded bg-blue-500 px-4 py-2 text-white"
-                >
-                  Upload Image
-                </button>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      if (e.target.files?.[0]) {
+                        setSelectedFile(e.target.files[0]);
+                      }
+                    }}
+                    className="mt-4"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      console.log("button clicked");
+                      handleUpload();
+                    }}
+                    className="mt-2 rounded bg-blue-500 px-4 py-2 text-white cursor-pointer"
+                  >
+                    Upload Image
+                  </button>
+
+                </div>
               </div>
-
               {/* Coral Types Information */}
               <div>
                 <h2 className="text-xl font-bold text-primary mb-4">
