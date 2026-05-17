@@ -14,10 +14,26 @@ export default function Page() {
   const dateA = new Date();
   dateA.setDate(dateA.getDay() - 5);
 
-  const [startDate, setStartDate] = useState(dateA);
-  const [endDate, setEndDate] = useState(new Date());
-  const [tanks, setTanks] = useState([]);
-  const [variables, setVariables] = useState([]);
+  const [startDate, setStartDate] = useState(
+    localStorage.getItem("barchart-startDate")
+      ? new Date(localStorage.getItem("barchart-startDate"))
+      : dateA,
+  );
+  const [endDate, setEndDate] = useState(
+    localStorage.getItem("barchart-endDate")
+      ? new Date(localStorage.getItem("barchart-endDate"))
+      : new Date(),
+  );
+  const [tanks, setTanks] = useState(
+    localStorage.getItem("barchart-tanks")
+      ? JSON.parse(localStorage.getItem("barchart-tanks"))
+      : [],
+  );
+  const [variables, setVariables] = useState(
+    localStorage.getItem("barchart-variables")
+      ? JSON.parse(localStorage.getItem("barchart-variables"))
+      : [],
+  );
 
   const tankNames = [
     "CoralLab60_1",
@@ -41,24 +57,22 @@ export default function Page() {
   ];
 
   const toggleTank = (item: string) => {
-    setTanks((prev) =>
-      prev.includes(item) ? prev.filter((x) => x !== item) : [...prev, item],
-    );
+    const newTanks = tanks.includes(item)
+      ? tanks.filter((x) => x !== item)
+      : [...tanks, item];
+    setTanks(newTanks);
+    localStorage.setItem("barchart-tanks", JSON.stringify(newTanks));
   };
 
   // start AI code
   const toggleVariable = (item: string) => {
-    setVariables((prev) => {
-      if (prev.includes(item)) {
-        return prev.filter((x) => x !== item); // deselect
-      }
-
-      if (prev.length >= 2) {
-        return prev; // block selecting more than 2
-      }
-
-      return [...prev, item];
-    });
+    const newVars = variables.includes(item)
+      ? variables.filter((x) => x !== item) // deselect
+      : variables.length >= 2
+        ? variables // block selecting more than 2
+        : [...variables, item];
+    setVariables(newVars);
+    localStorage.setItem("barchart-variables", JSON.stringify(newVars));
   };
 
   const isDisabled = (item: string) =>
@@ -67,10 +81,10 @@ export default function Page() {
   // FIXME: Most of this was written by AI, primarily the selection boxes,
   // but they are misplaced in UI location.
   return (
-    <div>
-      <NavigationBar defaultIndex={6} username={user ? user.name : "Guest"} />
+    <div className="bg-base-200">
+      <NavigationBar defaultIndex={9} username={user ? user.name : "Guest"} />
       <div className="bg-base-100/30 min-h-screen overflow-hidden">
-        <div className="justify-center items-center flex-2 bg-base-200 border-base-300">
+        <div className="justify-center items-center flex-2 bg-base-200 border-base-300 graph-settings-panel">
           <fieldset className="fieldset bg-base-200 rounded-box w-xs p-4 flex">
             <legend className="fieldset-legend">Select Tanks</legend>
 
@@ -120,7 +134,13 @@ export default function Page() {
             {/* FIXME: For now, trying out this way of date picking */}
             <DateBoundElement
               value={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => {
+                localStorage.setItem(
+                  "barchart-startDate",
+                  date?.toISOString() ?? "",
+                );
+                return setStartDate(date);
+              }}
             />
 
             <div className="bg-accent text-accent-content p-1 pl-2 pr-2 mt-3 mb-3 rounded-lg">
@@ -131,7 +151,13 @@ export default function Page() {
 
             <DateBoundElement
               value={endDate}
-              onChange={(date) => setEndDate(date)}
+              onChange={(date) => {
+                localStorage.setItem(
+                  "barchart-endDate",
+                  date?.toISOString() ?? "",
+                );
+                return setEndDate(date);
+              }}
             />
           </div>
         </div>

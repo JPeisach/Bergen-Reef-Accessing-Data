@@ -13,7 +13,7 @@ export default async function insertData(
     let name = "";
     if (data[i].name === "Salt") {
       name = "Salinity";
-    } else if (data[i].name === "Tmp") {
+    } else if (data[i].name === "Tmp" || data[i].name === "Tmpx") {
       name = "Temperature";
     } else if (data[i].name.startsWith("Alkx")) {
       name = "Alkalinity";

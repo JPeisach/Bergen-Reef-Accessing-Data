@@ -255,7 +255,7 @@ export default function DataLineGraph() {
 
     // Add x-axis label
     g.append("text")
-      .attr("fill", "black")
+      .attr("fill", "var(--color-base-content)")
       .attr("x", width / 2)
       .attr("y", height + 45)
       .attr("text-anchor", "middle")

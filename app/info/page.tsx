@@ -43,6 +43,8 @@ export default function Page() {
     };
   };
 
+  // TODO: Tanks by name, not number
+  // // FIXME: Images are guesses - basing off of when EXIF says they were taken
   const getTankImage = (tankNum: string) => {
     return `/api/tank-image/${tankNum}`;
   };
@@ -50,8 +52,8 @@ export default function Page() {
   const tankInfo = getTankInfo(tankNumber);
 
   return (
-    <div>
-      <NavigationBar defaultIndex={4} username={user ? user.name : "Guest"} />
+    <div className="bg-base-200">
+      <NavigationBar defaultIndex={3} username={user ? user.name : "Guest"} />
 
       <div className="relative flex">
         {/* Content */}

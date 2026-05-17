@@ -8,6 +8,7 @@ import "flatpickr/dist/themes/confetti.css";
 import Flatpickr from "react-flatpickr";
 import TankStatsPanel from "app/components/TankStatsPanel";
 import PredefinedObservationNotepad from "app/components/observations/PredefinedObservationNotepad";
+import BarChartGraph from "app/components/graphComponents/BarChartGraph";
 
 const tankNameOnly = (tank: string) => tank.substring("Tank ".length);
 
@@ -17,22 +18,65 @@ export default function Page() {
   const defaultStartDate = new Date();
   defaultStartDate.setDate(defaultStartDate.getDate() - 10); // hacky fix to show *something*
 
-  const [dateRange, setDateRange] = useState([defaultStartDate, new Date()]);
-  const [selectedTank, setSelectedTank] = useState("Tank CoralLab60_1");
-  const [selectedParameter, setSelectedParameter] = useState("pH");
-  const [selectedGraphType, setSelectedGraphType] = useState("Line");
+  const [dateRange, setDateRange] = useState(
+    localStorage.getItem("indivtanks-daterange") ?? [
+      defaultStartDate,
+      new Date(),
+    ],
+  );
+  const [selectedTank, setSelectedTank] = useState(
+    localStorage.getItem("indivtanks-tank") ?? "Tank CoralLab60_1",
+  );
+  const [selectedParameter, setSelectedParameter] = useState(
+    localStorage.getItem("indivtanks-parameter") ?? "pH",
+  );
+  const [selectedGraphType, setSelectedGraphType] = useState(
+    localStorage.getItem("indivtanks-graphtype") ?? "Line",
+  );
   const [isNotepadVisible, setIsNotepadVisible] = useState(false);
+
+  // AI CODE:
+  // New: refresh key for TankStatsPanel. Increment to force a remount / refetch
+  const [statsRefreshKey, setStatsRefreshKey] = useState(0);
 
   const panelClass =
     "bg-base-100 border border-base-300 p-5 shadow-lg rounded-xl";
 
-  return (
-    <div>
-      <NavigationBar defaultIndex={2} username={user ? user.name : "Guest"} />
+  // TODO: This is the fault of bad state and component management. StackOverflow forms suggest this thing about keys, so I let AI apply it. -Josh
 
-      <div className="bg-base-200 h-screen overflow-scroll">
+  // AI CODE:
+  // Replaces the previous hacky toggle; called by the notepad on successful submit
+  const handleObservationSubmit = () => {
+    setStatsRefreshKey((k) => k + 1);
+  };
+
+  const onSetDateRange = (date) => {
+    setDateRange(date);
+    localStorage.setItem("indivtanks-daterange", JSON.stringify(date));
+  };
+
+  const onSetSelectedTank = (tank) => {
+    setSelectedTank(tank);
+    localStorage.setItem("indivtanks-tank", tank);
+  };
+
+  const onSetSelectedParameter = (parameter) => {
+    setSelectedParameter(parameter);
+    localStorage.setItem("indivtanks-parameter", parameter);
+  };
+
+  const onSetSelectedGraphType = (graphType) => {
+    setSelectedGraphType(graphType);
+    localStorage.setItem("indivtanks-graphtype", graphType);
+  };
+
+  return (
+    <div className="bg-base-200">
+      <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
+
+      <div className="h-screen overflow-scroll">
         <div className="flex relative">
-          <div className="p-8 max-w-7xl mx-auto">
+          <div className="p-8 mx-auto">
             <div
               className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}
             >
@@ -60,15 +104,12 @@ export default function Page() {
                     "ORP",
                     "Alkalinity",
                     "Calcium",
-                    "Nitrate",
-                    "Nitrite",
-                    "Phosphate",
                     "LLS",
                   ],
                 },
                 {
                   label: "Graph Type",
-                  options: ["Line", "Bar", "Sankey", "Other"],
+                  options: ["Line", "Bar"],
                 },
               ].map((item) => {
                 let value, setValue;
@@ -76,15 +117,15 @@ export default function Page() {
                 switch (item.label) {
                   case "Tank":
                     value = selectedTank;
-                    setValue = setSelectedTank;
+                    setValue = onSetSelectedTank;
                     break;
                   case "Parameters":
                     value = selectedParameter;
-                    setValue = setSelectedParameter;
+                    setValue = onSetSelectedParameter;
                     break;
                   case "Graph Type":
                     value = selectedGraphType;
-                    setValue = setSelectedGraphType;
+                    setValue = onSetSelectedGraphType;
                     break;
                   default:
                     value = "";
@@ -92,7 +133,7 @@ export default function Page() {
                 }
 
                 return (
-                  <div key={item.label} className="min-w-[160px]">
+                  <div key={item.label} className="w-[20dvw]">
                     <label className="block text-primary font-bold mb-1 text-sm">
                       {item.label}
                     </label>
@@ -110,7 +151,7 @@ export default function Page() {
                   </div>
                 );
               })}
-              <div className="min-w-[160px]">
+              <div>
                 <label className="block text-primary font-bold mb-1 text-sm">
                   Date Range
                 </label>
@@ -120,7 +161,7 @@ export default function Page() {
                   data-enable-time
                   options={{ enableSeconds: true, mode: "range" }}
                   value={dateRange}
-                  onChange={(date) => setDateRange(date)}
+                  onChange={(date) => onSetDateRange(date)}
                 />
               </div>
 
@@ -135,26 +176,34 @@ export default function Page() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+              {/* AI CODE INSERTION: */}
+              {/* give TankStatsPanel a key that changes when observations are submitted */}
               <TankStatsPanel
+                key={`${tankNameOnly(selectedTank)}-${statsRefreshKey}`}
                 tankName={tankNameOnly(selectedTank)}
                 panelClass={panelClass}
               />
 
               <div className={`${panelClass}`}>
-                <HistoricDataTankBox
-                  tankName={tankNameOnly(selectedTank)}
-                  variableType={selectedParameter}
-                  dateRange={dateRange}
-                />
+                {selectedGraphType === "Line" ? (
+                  <HistoricDataTankBox
+                    tankName={tankNameOnly(selectedTank)}
+                    variableType={selectedParameter}
+                    dateRange={dateRange}
+                  />
+                ) : (
+                  <BarChartGraph
+                    tankNames={[tankNameOnly(selectedTank)]}
+                    variableTypes={[selectedParameter]}
+                    dateRange={dateRange}
+                  />
+                )}
 
-                <div className="mt-6 text-sm text-primary/70 text-center italic">
-                  Tank 1 houses numerous types of corals, including mushroom
-                  corals, button polyps, leather corals, and bubble corals.
-                </div>
                 {isNotepadVisible && (
                   <PredefinedObservationNotepad
                     dateRange={dateRange}
-                    tankNumber={selectedTank}
+                    tankName={selectedTank}
+                    submitCallback={handleObservationSubmit}
                   ></PredefinedObservationNotepad>
                 )}
               </div>
