@@ -46,7 +46,7 @@ export default function Page() {
   // TODO: Tanks by name, not number
   // // FIXME: Images are guesses - basing off of when EXIF says they were taken
   const getTankImage = (tankNum: string) => {
-    return `/api/tank-image/${tankNum}`;
+    return `/api/tankImage/${tankNum}`;
   };
 
   const tankInfo = getTankInfo(tankNumber);

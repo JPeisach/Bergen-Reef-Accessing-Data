@@ -1,25 +1,25 @@
-export const runtime = "nodejs";
 import getImage from "src/lib/infoPageImages/getImage";
+import { NextRequest } from "next/server";
 
 export async function GET(
-    req: Request,
-    {
-        params,
-    }: {
-        params: {
-            tankNumber: string;
-        };
-    }
+  req: NextRequest,
+  context: {
+    params: Promise<{
+      tankNumber: string;
+    }>;
+  }
 ) {
-    const image = await getImage(
-        Number(params.tankNumber)
-    );
+  const params = await context.params;
 
-    if (!image) {
-        return new Response("No image found", {
-            status: 404,
-        });
-    }
+  const image = await getImage(
+    Number(params.tankNumber)
+  );
+
+  if (!image) {
+    return new Response("No image found", {
+      status: 404,
+    });
+  }
 
     const buffer = Buffer.isBuffer(image.images)
       ? image.images
