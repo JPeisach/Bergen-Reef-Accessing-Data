@@ -1,7 +1,7 @@
 import { db } from "src/db/drizzle";
 import { infoPageImages } from "src/db/schema";
 import { eq } from "drizzle-orm";
-import { datetime } from "drizzle-orm/mysql-core";
+export const runtime = "nodejs";
 
 export default async function uploadImage(
   tankNumber: number,

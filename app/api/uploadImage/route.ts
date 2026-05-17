@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import uploadImage from "src/lib/infoPageImages/uploadImage";
+export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   try {
