@@ -21,9 +21,13 @@ export async function GET(
         });
     }
 
-    return new Response(new Uint8Array(image.images), {
-        headers: {
-            "Content-Type": image.mimeType,
-        },
-    });
+    const buffer = Buffer.isBuffer(image.images)
+      ? image.images
+      : Buffer.from(image.images as any);
+
+return new Response(buffer, {
+  headers: {
+    "Content-Type": image.mimeType,
+  },
+});
 }
