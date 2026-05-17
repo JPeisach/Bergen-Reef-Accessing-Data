@@ -7,9 +7,9 @@ import {
   varchar,
   decimal,
   boolean,
+  blob,
   text,
   json,
-  blob,
   primaryKey,
   index,
 } from "drizzle-orm/mysql-core";
@@ -44,7 +44,7 @@ export const observations = mysqlTable(
   {
     observationId: int("observation_id").autoincrement().primaryKey(),
     authorId: varchar({ length: 64 }).notNull(),
-    tankNumber: int().default(1).notNull(),
+    tankName: varchar({ length: 20 }).default("1").notNull(),
     observationTitle: varchar({ length: 100 }),
     datetime: datetime().notNull(),
     observationText: text("observation_text"),

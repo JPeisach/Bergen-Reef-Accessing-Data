@@ -11,6 +11,7 @@ export default async function getMostRecentElements(tankName: string) {
       "ORP",
       "Alkalinity",
       "Calcium",
+      "LLS",
     ];
     const values = [];
 

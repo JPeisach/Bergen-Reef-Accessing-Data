@@ -27,7 +27,7 @@ export default function Page() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="bg-base-100/40 min-h-screen">
+    <div className="bg-base-200 min-h-screen">
       <NavigationBar defaultIndex={-1} username={user ? user.name : "Guest"} />
       <br></br>
       <br></br>
