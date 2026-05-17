@@ -19,7 +19,7 @@ export default function Page() {
     formData.append("image", selectedFile);
     formData.append("tankNumber", tankNumber);
 
-    const res = await fetch("/api/upload-image", {
+    const res = await fetch("/api/uploadImage", {
       method: "POST",
       body: formData,
     });
@@ -110,6 +110,7 @@ export default function Page() {
                 />
 
                 <button
+                  type="button"
                   onClick={handleUpload}
                   className="mt-2 rounded bg-blue-500 px-4 py-2 text-white"
                 >
