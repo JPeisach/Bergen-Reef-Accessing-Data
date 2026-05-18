@@ -41,13 +41,25 @@ export default function Page() {
     "Brain Coral":
       "Brain corals get their common name from the grooves and channels on their surfaces that look like the folds of the human brain.",
     "Jolene Coral": "Jolene corals are...",
+    Empty: "This tank is currently empty.",
+    "N/A": "To be filled out by administrator.",
   };
 
   const getTankInfo = (tankNum: string) => {
     if (!tankNum) return null;
-    return {
-      coralTypes: ["Mushroom Coral", "Brain Coral", "Jolene Coral"],
-    };
+    switch (tankNum) {
+      case "1":
+      case "7":
+      case "8":
+      case "9":
+        return {
+          coralTypes: ["Empty"],
+        };
+      default:
+        return {
+          coralTypes: ["N/A"],
+        };
+    }
   };
 
   // TODO: Tanks by name, not number
