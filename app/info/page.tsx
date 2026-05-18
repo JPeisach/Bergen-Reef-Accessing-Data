@@ -15,6 +15,11 @@ export default function Page() {
   const handleUpload = async () => {
     if (!selectedFile || !tankNumber) return;
 
+    if (!user) {
+      alert("You must be logged in to submit pictures.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("image", selectedFile);
     formData.append("tankNumber", tankNumber);
@@ -116,7 +121,6 @@ export default function Page() {
                   <button
                     type="button"
                     onClick={() => {
-                      console.log("button clicked");
                       handleUpload();
                     }}
                     className={
