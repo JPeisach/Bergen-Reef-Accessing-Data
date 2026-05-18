@@ -8,26 +8,17 @@ export async function POST(req: Request) {
 
     const file = formData.get("image") as File;
 
-    const tankNumber = Number(
-      formData.get("tankNumber")
-    );
+    const tankNumber = Number(formData.get("tankNumber"));
 
     if (!file || !tankNumber) {
-      return NextResponse.json(
-        { error: "Missing data" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Missing data" }, { status: 400 });
     }
 
     const bytes = await file.arrayBuffer();
 
     const buffer = Buffer.from(bytes);
 
-    await uploadImage(
-      tankNumber,
-      buffer,
-      file.type
-    );
+    await uploadImage(tankNumber, buffer, file.type);
 
     return NextResponse.json({
       success: true,
@@ -35,9 +26,6 @@ export async function POST(req: Request) {
   } catch (error) {
     console.log(error);
 
-    return NextResponse.json(
-      { error: "Upload failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 }

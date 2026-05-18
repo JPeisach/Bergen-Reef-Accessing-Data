@@ -7,13 +7,11 @@ export async function GET(
     params: Promise<{
       tankNumber: string;
     }>;
-  }
+  },
 ) {
   const params = await context.params;
 
-  const image = await getImage(
-    Number(params.tankNumber)
-  );
+  const image = await getImage(Number(params.tankNumber));
 
   if (!image) {
     return new Response("No image found", {
@@ -21,13 +19,13 @@ export async function GET(
     });
   }
 
-    const buffer = Buffer.isBuffer(image.images)
-      ? image.images
-      : Buffer.from(image.images as any);
+  const buffer = Buffer.isBuffer(image.images)
+    ? image.images
+    : Buffer.from(image.images as any);
 
-return new Response(buffer, {
-  headers: {
-    "Content-Type": image.mimeType,
-  },
-});
+  return new Response(buffer, {
+    headers: {
+      "Content-Type": image.mimeType,
+    },
+  });
 }

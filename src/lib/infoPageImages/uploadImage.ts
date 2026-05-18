@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export default async function uploadImage(
   tankNumber: number,
   imageBuffer: Buffer,
-  mimeType: string
+  mimeType: string,
 ) {
   try {
     const existing = await db

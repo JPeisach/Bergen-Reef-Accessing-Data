@@ -31,8 +31,10 @@ export default function Page() {
   };
 
   const coralDetails: { [key: string]: string } = {
-    "Mushroom Coral": "Mushroom corals are hardy and make ideal corals for the beginner reef aquarist. Mushrooms that have long tentacles are aggressive toward other types of corals, so provide these corals with adequate space.",
-    "Brain Coral": "Brain corals get their common name from the grooves and channels on their surfaces that look like the folds of the human brain.",
+    "Mushroom Coral":
+      "Mushroom corals are hardy and make ideal corals for the beginner reef aquarist. Mushrooms that have long tentacles are aggressive toward other types of corals, so provide these corals with adequate space.",
+    "Brain Coral":
+      "Brain corals get their common name from the grooves and channels on their surfaces that look like the folds of the human brain.",
     "Jolene Coral": "Jolene corals are...",
   };
 
@@ -89,13 +91,13 @@ export default function Page() {
               {/* Tank Picture */}
               <div>
                 <div className="rounded-2xl bg-base-100/90 p-4 shadow-xl border border-base-300 flex flex-col items-center">
-
                   <img
                     src={getTankImage(tankNumber)}
                     alt={`Tank ${tankNumber} coral reef aquarium`}
                     className="w-full h-auto object-cover rounded-xl mb-4"
                   />
 
+                  {/* TODO: show image date of uploaded image */}
                   <p className="text-primary font-bold text-lg text-center">
                     2/3/2026
                   </p>
@@ -108,7 +110,7 @@ export default function Page() {
                         setSelectedFile(e.target.files[0]);
                       }
                     }}
-                    className="mt-4"
+                    className="file-input file-input-primary mt-4 mb-4 "
                   />
 
                   <button
@@ -117,11 +119,14 @@ export default function Page() {
                       console.log("button clicked");
                       handleUpload();
                     }}
-                    className="mt-2 rounded bg-blue-500 px-4 py-2 text-white cursor-pointer"
+                    className={
+                      selectedFile !== null
+                        ? "mt-4 rounded btn btn-info px-4 py-2 cursor-pointer"
+                        : "mt-4 rounded btn btn-info btn-disabled px-4 py-2 cursor-pointer"
+                    }
                   >
                     Upload Image
                   </button>
-
                 </div>
               </div>
               {/* Coral Types Information */}
