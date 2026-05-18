@@ -10,13 +10,39 @@ export default function Page() {
   const [tankNumber, setTankNumber] = useState("");
   const [selectedCoral, setSelectedCoral] = useState<string | null>(null);
 
-  const coralDetails: { [key: string]: string } = {
-    "Mushroom Coral": "Mushroom coral are",
-    "Brain Coral": "Brain corals are",
-    "Jolene Coral": "Jolene corals are",
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleUpload = async () => {
+    if (!selectedFile || !tankNumber) return;
+
+    if (!user) {
+      alert("You must be logged in to submit pictures.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    formData.append("tankNumber", tankNumber);
+
+    const res = await fetch("/api/uploadImage", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      alert("Image uploaded!");
+      window.location.reload();
+    }
   };
 
-  // FIXME: actual info will replace this later
+  const coralDetails: { [key: string]: string } = {
+    "Mushroom Coral":
+      "Mushroom corals are hardy and make ideal corals for the beginner reef aquarist. Mushrooms that have long tentacles are aggressive toward other types of corals, so provide these corals with adequate space.",
+    "Brain Coral":
+      "Brain corals get their common name from the grooves and channels on their surfaces that look like the folds of the human brain.",
+    "Jolene Coral": "Jolene corals are...",
+  };
+
   const getTankInfo = (tankNum: string) => {
     if (!tankNum) return null;
     return {
@@ -27,23 +53,7 @@ export default function Page() {
   // TODO: Tanks by name, not number
   // // FIXME: Images are guesses - basing off of when EXIF says they were taken
   const getTankImage = (tankNum: string) => {
-    switch (tankNum) {
-      case "2":
-        return "/tank_pictures/IMG_5944.jpeg";
-      case "3":
-        return "/tank_pictures/IMG_5954.jpeg";
-      case "4":
-        return "/tank_pictures/IMG_5963.jpeg";
-      case "5":
-        return "/tank_pictures/IMG_5966.jpeg";
-      case "6":
-        return "/tank_pictures/IMG_5975.jpeg";
-      case "7":
-        return "/tank_pictures/IMG_5980.jpeg";
-      default:
-        // Default image (Tank 1 and others)
-        return "/tank_pictures/IMG_3925.jpg";
-    }
+    return `/api/tankImage/${tankNum}`;
   };
 
   const tankInfo = getTankInfo(tankNumber);
@@ -85,21 +95,44 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Tank Picture */}
               <div>
-                <h2 className="text-xl font-bold text-primary mb-4">
-                  Tank {tankNumber} Picture
-                </h2>
-                <div className="rounded-2xl bg-base-100/90 p-4 shadow-xl border border-base-300 flex flex-col items-center justify-center min-h-[300px] overflow-hidden">
+                <div className="rounded-2xl bg-base-100/90 p-4 shadow-xl border border-base-300 flex flex-col items-center">
                   <img
                     src={getTankImage(tankNumber)}
                     alt={`Tank ${tankNumber} coral reef aquarium`}
                     className="w-full h-auto object-cover rounded-xl mb-4"
                   />
+
+                  {/* TODO: show image date of uploaded image */}
                   <p className="text-primary font-bold text-lg text-center">
                     2/3/2026
                   </p>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      if (e.target.files?.[0]) {
+                        setSelectedFile(e.target.files[0]);
+                      }
+                    }}
+                    className="file-input file-input-primary mt-4 mb-4 "
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleUpload();
+                    }}
+                    className={
+                      selectedFile !== null
+                        ? "mt-4 rounded btn btn-info px-4 py-2 cursor-pointer"
+                        : "mt-4 rounded btn btn-info btn-disabled px-4 py-2 cursor-pointer"
+                    }
+                  >
+                    Upload Image
+                  </button>
                 </div>
               </div>
-
               {/* Coral Types Information */}
               <div>
                 <h2 className="text-xl font-bold text-primary mb-4">
