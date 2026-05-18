@@ -75,11 +75,9 @@ export default function Page() {
       <NavigationBar defaultIndex={1} username={user ? user.name : "Guest"} />
 
       <div className="h-screen overflow-scroll">
-        <div className="flex relative">
+        <div className="inline relative">
           <div className="p-8 mx-auto">
-            <div
-              className={`mb-6 flex flex-wrap items-end gap-4 ${panelClass}`}
-            >
+            <div className={`mb-6 flex flex-wrap items-end ${panelClass}`}>
               {[
                 {
                   label: "Tank",
@@ -157,11 +155,11 @@ export default function Page() {
                 </label>
                 {/* FIXME: THEME */}
                 <Flatpickr
-                  className="w-full bg-base-100 px-2 py-2 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-inner rounded-lg border border-base-300"
+                  className="w-full bg-base-100 px-2 block py-2 text-sm font-medium text-base-content focus:outline-none focus:ring-2 focus:ring-primary shadow-inner rounded-lg border border-base-300"
                   data-enable-time
                   options={{ enableSeconds: true, mode: "range" }}
                   value={dateRange}
-                  onChange={(date) => onSetDateRange(date)}
+                  onClose={(date) => onSetDateRange(date)}
                 />
               </div>
 

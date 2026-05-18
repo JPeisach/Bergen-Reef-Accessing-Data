@@ -110,7 +110,7 @@ export default function ObservationNotepad({
           data-enable-time
           options={{ enableSeconds: true, mode: "range" }}
           value={dateRange}
-          onChange={(date) => setDateRange(date)}
+          onClose={(date) => setDateRange(date)}
         />
 
         {/* Tags Display */}
