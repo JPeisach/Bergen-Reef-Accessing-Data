@@ -132,7 +132,7 @@ export default function BarChartGraph({
 
   return (
     <a
-      className="block rounded-2xl bg-base-100/90 p-6 shadow-xl border border-base-300 cursor-pointer"
+      className="rounded-2xl bg-base-100/90 shadow-xl border-base-300 cursor-pointer"
       href="/info"
     >
       <>
@@ -140,82 +140,78 @@ export default function BarChartGraph({
           Bar Chart
         </h2>
         {chartData.length != 0 ? (
-          <div className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData}>
-                <Legend />
+          <ResponsiveContainer width="100%" height="40%">
+            <BarChart data={chartData}>
+              <Legend />
 
-                <CartesianGrid />
-                <XAxis
-                  dataKey="datetime"
-                  type="number"
-                  scale="time"
-                  tickFormatter={(tick) => {
-                    const date = new Date(tick);
-                    return `${date.getMonth() + 1}/${date.getDate()}`;
-                  }}
+              <CartesianGrid />
+              <XAxis
+                dataKey="datetime"
+                type="number"
+                scale="time"
+                tickFormatter={(tick) => {
+                  const date = new Date(tick);
+                  return `${date.getMonth() + 1}/${date.getDate()}`;
+                }}
+                stroke="#757575"
+                fontSize={12}
+                domain={["auto", "auto"]}
+                // Contrary to the obvious.. you would think this DISABLES overflow..
+                allowDataOverflow={true}
+              />
+
+              {/* Y axes: one per variable type (if provided) */}
+              {variableTypes?.length >= 1 && (
+                <YAxis
+                  orientation="left"
+                  yAxisId={variableTypes[0]}
+                  domain={["auto", "auto"]}
+                  tickFormatter={(tick: number) => tick.toFixed(2).toString()}
                   stroke="#757575"
                   fontSize={12}
+                  allowDataOverflow={false}
+                />
+              )}
+
+              {variableTypes?.length >= 2 && (
+                <YAxis
+                  allowDataOverflow={false}
+                  orientation="right"
+                  yAxisId={variableTypes[1]}
                   domain={["auto", "auto"]}
-                  // Contrary to the obvious.. you would think this DISABLES overflow..
-                  allowDataOverflow={true}
+                  tickFormatter={(tick: number) => tick.toFixed(2).toString()}
+                  stroke="#757575"
+                  fontSize={12}
                 />
+              )}
 
-                {/* Y axes: one per variable type (if provided) */}
-                {variableTypes?.length >= 1 && (
-                  <YAxis
-                    orientation="left"
-                    yAxisId={variableTypes[0]}
-                    domain={["auto", "auto"]}
-                    tickFormatter={(tick: number) => tick.toFixed(2).toString()}
-                    stroke="#757575"
-                    fontSize={12}
-                    allowDataOverflow={false}
-                  />
-                )}
+              <Tooltip
+                labelFormatter={(label) => {
+                  const d = new Date(label as number);
+                  return d.toLocaleString();
+                }}
+              />
 
-                {variableTypes?.length >= 2 && (
-                  <YAxis
-                    allowDataOverflow={false}
-                    orientation="right"
-                    yAxisId={variableTypes[1]}
-                    domain={["auto", "auto"]}
-                    tickFormatter={(tick: number) => tick.toFixed(2).toString()}
-                    stroke="#757575"
-                    fontSize={12}
-                  />
-                )}
+              {/* Render a Bar for each tank-variable pair. Bars read from the BarChart's `data`. */}
+              {tankNames.map((tankName: string, tankIndex: number) =>
+                variableTypes.map((variableType: string, varIndex: number) => {
+                  const barKey = keyFor(tankName, variableType);
+                  const color = colorFor(tankIndex + varIndex);
 
-                <Tooltip
-                  labelFormatter={(label) => {
-                    const d = new Date(label as number);
-                    return d.toLocaleString();
-                  }}
-                />
-
-                {/* Render a Bar for each tank-variable pair. Bars read from the BarChart's `data`. */}
-                {tankNames.map((tankName: string, tankIndex: number) =>
-                  variableTypes.map(
-                    (variableType: string, varIndex: number) => {
-                      const barKey = keyFor(tankName, variableType);
-                      const color = colorFor(tankIndex + varIndex);
-
-                      return (
-                        <Bar
-                          key={barKey}
-                          yAxisId={variableType}
-                          dataKey={barKey}
-                          name={`${tankName} ${variableType}`}
-                          fill={color}
-                          stroke={color}
-                        />
-                      );
-                    },
-                  ),
-                )}
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+                  return (
+                    <Bar
+                      key={barKey}
+                      yAxisId={variableType}
+                      dataKey={barKey}
+                      name={`${tankName} ${variableType}`}
+                      fill={color}
+                      stroke={color}
+                    />
+                  );
+                }),
+              )}
+            </BarChart>
+          </ResponsiveContainer>
         ) : (
           <p className="text-xl font-bold text-error text-center">No data.</p>
         )}
