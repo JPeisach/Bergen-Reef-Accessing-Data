@@ -113,7 +113,9 @@ export default function RecentDataTankBox({ tankName, variableType }) {
               />
             </AreaChart>
           </ResponsiveContainer>
-          <DownloadCSVButton data={chartData}></DownloadCSVButton>
+          <div className="flex flex-row justify-center align-items-center items-center">
+            <DownloadCSVButton data={chartData}></DownloadCSVButton>
+          </div>
         </div>
       ) : (
         <p className="mt-[25%] text-xl font-bold text-error text-center">

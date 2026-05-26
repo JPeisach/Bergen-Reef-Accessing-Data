@@ -57,7 +57,7 @@ export default function HistoricDataTankBox({
   return (
     // TODO: Show something if dateRange[1] DNE and needs to be entered.
     <a
-      className="rounded-2xl bg-base-100/90 p-6 shadow-xl border-base-300 cursor-pointer"
+      className="rounded-2xl bg-base-100/90 shadow-xl border-base-300 cursor-pointer"
       href="/info"
     >
       <h2 className="text-xl font-bold text-primary mb-4 text-center">
@@ -104,7 +104,9 @@ export default function HistoricDataTankBox({
               />
             </AreaChart>
           </ResponsiveContainer>
-          <DownloadCSVButton data={chartData}></DownloadCSVButton>
+          <div className="flex flex-row justify-center align-items-center items-center">
+            <DownloadCSVButton data={chartData}></DownloadCSVButton>
+          </div>
         </>
       ) : (
         <p className="mt-[20%] text-xl font-bold text-error text-center">
