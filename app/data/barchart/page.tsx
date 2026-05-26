@@ -88,7 +88,7 @@ export default function Page() {
       <NavigationBar defaultIndex={9} username={user ? user.name : "Guest"} />
       <div className="grid grid-cols-4 gap-4 p-4 min-h-screen">
         <div className="col-span-3 h-full ml-8 pr-8 pt-3 pb-3 rounded-lg justify-center items-center">
-          <div className="w-full h-full relative">
+          <div className="pt-8 bg-base-100 w-full h-full relative border border-base-300 drop-shadow-md rounded-lg">
             <BarChartGraph
               tankNames={tanks}
               variableTypes={variables}
@@ -99,7 +99,7 @@ export default function Page() {
 
         {/* Right settings column: single panel (use graph-settings-panel class) */}
         <div className="col-span-1 h-full ml-8">
-          <div className="graph-settings-panel">
+          <div className="graph-settings-panel h-full">
             <h1 className="text-xl bg-accent text-accent-content drop-shadow-xl text-center font-semibold rounded-lg p-4">
               Bar Chart
             </h1>
