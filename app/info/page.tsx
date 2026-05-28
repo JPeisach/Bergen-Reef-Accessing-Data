@@ -116,7 +116,7 @@ export default function Page() {
 
                   {/* TODO: show image date of uploaded image */}
                   <p className="text-primary font-bold text-lg text-center">
-                    2/3/2026
+                    5/14/2026
                   </p>
 
                   <input
