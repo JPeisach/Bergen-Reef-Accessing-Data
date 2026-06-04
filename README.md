@@ -19,8 +19,11 @@ An [interactive web application](https://youtu.be/zMg2eBdIiAI?si=2iS7eD4Ko_oFpAu
 - [HTML/JS/CSS](https://developer.mozilla.org/en-US/docs/Web/HTML) with [Tailwind CSS](https://tailwindcss.com/) framework
   The languages and framework used for visuals and styling within the UI
 
-- [Headless UI](https://headlessui.dev/)
+- [Headless UI (currently migrating away)](https://headlessui.dev/)
   A library used for building accessible menu components – works seamlessly with Tailwind CSS
+
+- [daisyUI](https://daisyui.com)
+  Library for common components. In progress of being used to replace Headless UI.
 
 - [Heroicons](https://heroicons.com/)
   SVG icons that work well with Tailwind CSS
@@ -44,6 +47,9 @@ An [interactive web application](https://youtu.be/zMg2eBdIiAI?si=2iS7eD4Ko_oFpAu
 - [Axios](https://www.npmjs.com/package/axios)
   A promise-based HTTP client that simplifies making API requests in React application
 
+### Previously Used
+These were used in the 2025 Capstone project, but we're not focused on in the 2026 continuation.
+
 - [Google Sheets](https://workspace.google.com/products/sheets/)
   Used for the database backup, with tabs to keep track of recenty backed-up data and soft-deleted data
 
@@ -55,28 +61,16 @@ An [interactive web application](https://youtu.be/zMg2eBdIiAI?si=2iS7eD4Ko_oFpAu
 ### Prerequisites
 
 - Node.js (v18 or higher)
-<!-- - MySQL Server  --> could be outdated
+- A MySQL server
 - Python 3.x (for Raspberry Pi scripts)
 - Apex Fusion account with access to locally hosted (in the Bergen County Acadmies Makerspace) XML files
 - Auth0 account and application setup
 
 ### Database Setup
 
-The following is an example database setup readme ...
+You can use drizzle-kit's [tools](https://orm.drizzle.team/docs/kit-overview), which should be able to create SQL scripts for the schema and upload it to the database. Make sure you supply the DATABASE_URL env variable when running commands with drizzle-kit.
 
-<!-- The project uses a MySQL database. Since the school-issued MySQL databases will be taken down, you'll need to:
-
-1. Export the database schema and data:
-   - The database schema can be found in `/database/schema.sql`
-   - Use MySQL Workbench or command line to export the DDL:
-   ```bash
-   mysqldump -u [username] -p [database_name] > database_backup.sql
-   ```
-
-2. Import to your local MySQL server:
-   ```bash
-   mysql -u [username] -p [database_name] < database_backup.sql
-   ``` -->
+As for hosting: You can use Docker if self-hosting. On actual deployed instances, the DB needs to be publicly accessible.
 
 ### Environment Configuration
 
@@ -87,16 +81,11 @@ Create a `.env.local` file in the root directory with the following variables (w
 DATABASE_URL=mysql://user:password@localhost:3306/coral_reef_db
 
 # Auth0 Configuration
-AUTH0_SECRET='your-auth0-secret'
-AUTH0_BASE_URL='http://localhost:3000'
-AUTH0_ISSUER_BASE_URL='your-auth0-domain'
+APP_BASE_URL='http://localhost:3000'
 AUTH0_CLIENT_ID='your-auth0-client-id'
 AUTH0_CLIENT_SECRET='your-auth0-client-secret'
-
-# Apex Fusion Configuration
-APEX_FUSION_USERNAME='your-apex-username'
-APEX_FUSION_PASSWORD='your-apex-password'
-APEX_FUSION_URL='your-apex-fusion-url'
+AUTH0_DOMAIN='your-auth0-domain'
+AUTH0_SECRET='your-auth0-secret'
 ```
 
 ### Installation Steps
@@ -104,8 +93,8 @@ APEX_FUSION_URL='your-apex-fusion-url'
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/Coral-Reef-Capstone.git
-   cd Coral-Reef-Capstone
+   git clone https://github.com/jpeisach/Bergen-Reef-Accessing-Data.git
+   cd Bergen-Reef-Accessing-Data
    ```
 
 2. Install dependencies:
@@ -115,11 +104,11 @@ APEX_FUSION_URL='your-apex-fusion-url'
    ```
 
 3. Set up the Raspberry Pi data collection:
-   - Clone the data collection repository:
+   - On the Raspberry Pi, clone the collection repository and enter the "raspi" directory:
      ```bash
-     git clone https://github.com/vrigue/Coral-Reef-Data-Collection.git
+     git clone https://github.com/jpeisach/Bergen-Reef-Accessing-Data.git
+     cd Bergen-Reef-Accessing-Data/raspi
      ```
-   - Follow the setup instructions in the repository's README
    - Configure the cron job to run the data collection script at regular intervals
 
 4. Start the development server:
@@ -129,8 +118,7 @@ APEX_FUSION_URL='your-apex-fusion-url'
 
 ### Additional Resources
 
-- The Python scripts for data collection using the Raspberry Pis are maintained in a separate repository: [Coral-Reef-Data-Collection](https://github.com/vrigue/Coral-Reef-Data-Collection)
-- Database schema and models are located in `/database/`
+- Database schema and models are located in `/src/db`
 - Package dependencies are managed through `package.json`
 
 ### Deployment
@@ -150,12 +138,11 @@ The application is deployed on Vercel @ [https://bergen-reef-accessing-data-cora
    - Python scripts handle data collection and transformation
 
 3. **Vercel**
-   - TBA
+   - Environment variables needed for database, Auth0
 
 ### Requirements Documentation
 
 - Node.js dependencies are managed through `package.json`
-- Python dependencies for the Raspberry Pi scripts are listed in the [Coral-Reef-Data-Collection](https://github.com/vrigue/Coral-Reef-Data-Collection) repository
 
 ### Configuration Files
 
@@ -170,3 +157,4 @@ The application is deployed on Vercel @ [https://bergen-reef-accessing-data-cora
 - The Raspberry Pi must be configured with the correct network access to reach both Apex Fusion and the database server
 - Database backups occur separately from the data pushed to the base
 - The application is designed to be displayed on TVs in the Makerspace
+- There is a TODO list of tasks for future improvements in TODO.md.
