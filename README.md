@@ -61,7 +61,7 @@ These were used in the 2025 Capstone project, but we're not focused on in the 20
 ### Prerequisites
 
 - Node.js (v18 or higher)
-- A MySQL server
+- A MySQL server (reasonably new)
 - Python 3.x (for Raspberry Pi scripts)
 - Apex Fusion account with access to locally hosted (in the Bergen County Acadmies Makerspace) XML files
 - Auth0 account and application setup
@@ -118,12 +118,12 @@ AUTH0_SECRET='your-auth0-secret'
 
 ### Additional Resources
 
-- Database schema and models are located in `/src/db`
+- Database schema and models are located in `src/db`
 - Package dependencies are managed through `package.json`
 
 ### Deployment
 
-The application is deployed on Vercel @ [https://bergen-reef-accessing-data-coral-reef-capstone.vercel.app/](https://bergen-reef-accessing-data-coral-reef-capstone.vercel.app/)
+The application is deployed on Vercel @ [https://bergen-reef-accessing-data.vercel.app/](https://bergen-reef-accessing-data.vercel.app/)
 
 ### Third-Party Services
 
